@@ -1,0 +1,10 @@
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: auto;
+}
+
+.project-links .text-link {
+  margin-top: 0;
+}

@@ -1,0 +1,193 @@
+.app-header {
+  background: color-mix(in srgb, var(--theme-header) 92%, transparent);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 14%);
+}
+
+.app-header__nav {
+  gap: 0.35rem;
+}
+
+.app-header__nav-link {
+  flex: 0 0 auto;
+  min-height: 2.8rem;
+  border-radius: 0.75rem;
+  padding-inline: 0.85rem;
+}
+
+.app-header__nav-link.is-active {
+  color: var(--theme-text);
+  background: color-mix(in srgb, var(--theme-accent) 11%, transparent);
+  box-shadow: inset 0 -2px var(--theme-accent);
+}
+
+.experience-zen {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(27rem, 62vh, 42rem);
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--theme-accent) 12%, transparent), transparent 48%),
+    color-mix(in srgb, var(--theme-page) 95%, white 3%);
+}
+
+.experience-zen::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 49.95%, color-mix(in srgb, var(--theme-border) 35%, transparent) 50%, transparent 50.05%),
+    linear-gradient(0deg, transparent 49.95%, color-mix(in srgb, var(--theme-border) 22%, transparent) 50%, transparent 50.05%);
+  content: "";
+  opacity: 0.35;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black, transparent 68%);
+}
+
+.experience-zen__meta,
+.experience-zen__focus,
+.experience-zen__navigation {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-zen__meta {
+  align-items: center;
+}
+
+.experience-zen__meta span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.experience-zen__meta span:first-child::before {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--theme-accent);
+  box-shadow: 0 0 0 0.28rem var(--theme-accent-soft);
+  content: "";
+}
+
+.experience-zen__focus {
+  padding-block: clamp(2.25rem, 5vw, 4rem);
+}
+
+.experience-zen__eyebrow {
+  display: inline-block;
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  padding: 0.38rem 0.7rem;
+  background: color-mix(in srgb, var(--theme-page) 64%, transparent);
+}
+
+.experience-zen__focus h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: -0.065em;
+}
+
+.experience-zen__summary {
+  max-width: 34rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+}
+
+.experience-zen__actions button,
+.experience-zen__actions a {
+  min-height: 2.8rem;
+  border-radius: 0.75rem;
+  padding-inline: 1.1rem;
+}
+
+.experience-zen__actions a {
+  border-color: var(--theme-accent);
+  color: var(--theme-page);
+  background: var(--theme-accent);
+}
+
+.experience-zen__actions a:hover {
+  filter: brightness(1.08);
+}
+
+.experience-zen__navigation {
+  padding-top: 1rem;
+}
+
+.experience-zen__navigation > button {
+  min-height: 2.5rem;
+  border-radius: 0.65rem;
+  padding-inline: 0.6rem;
+}
+
+.experience-zen__navigation > div button {
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
+.experience-zen__navigation > div button[aria-current="step"] {
+  width: 1.45rem;
+}
+
+.neural-journey {
+  border-radius: 1.6rem;
+}
+
+.neural-journey__content {
+  align-items: center;
+}
+
+:where(.app-header__nav-link, .experience-zen button, .experience-zen a):focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .app-header__nav {
+    gap: 0.15rem;
+    padding-block: 0.35rem 0.45rem;
+  }
+
+  .app-header__nav-link {
+    min-height: 2.55rem;
+    padding-inline: 0.68rem;
+  }
+
+  .experience-zen {
+    min-height: 27rem;
+    border-radius: 1.2rem;
+    padding: 1.1rem;
+  }
+
+  .experience-zen__meta {
+    font-size: 0.46rem;
+  }
+
+  .experience-zen__focus {
+    padding-block: 2.5rem;
+  }
+
+  .experience-zen__focus h1 {
+    font-size: clamp(3rem, 13vw, 4.2rem);
+  }
+
+  .experience-zen__navigation {
+    gap: 0.35rem;
+  }
+
+  .experience-zen__navigation > button {
+    gap: 0.2rem;
+    font-size: 0.62rem;
+  }
+
+  .neural-journey {
+    border-radius: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header__nav-link,
+  .experience-zen__actions button,
+  .experience-zen__actions a {
+    transition: none;
+  }
+}
