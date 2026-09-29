@@ -2433,3 +2433,111 @@ body {
     transition: none;
   }
 }
+
+:root {
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-display: "Sora", "Avenir Next", sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Mono", monospace;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+  font-optical-sizing: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero h1,
+.section-heading h2,
+.vision-content h2,
+.about h2,
+.contact h2,
+.brand,
+.button,
+.text-link,
+.contact-email,
+.now-label,
+.now-copy p,
+.capability h3,
+.hero-principles strong,
+.project h3,
+.studio-orb,
+.logistics-brandmark,
+.logistics-wordmark,
+.logistics-greeting b,
+.logistics-shipment-id {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.eyebrow,
+.availability,
+.ticker-track,
+.hero-aside-label,
+.hero-aside-footer,
+.hero-principles li > span,
+.capability-number,
+.skill-tags,
+.visual-label,
+.project-meta,
+.project-question > span,
+.facts,
+.contact-address,
+.socials,
+.footer,
+.logistics-live,
+.logistics-greeting > span,
+.logistics-shipment-label,
+.logistics-activity-heading,
+.logistics-status,
+.logistics-stops,
+.logistics-event time {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero h1,
+.section-heading h2,
+.vision-content h2,
+.about h2,
+.contact h2 {
+  font-weight: 600;
+  letter-spacing: -.065em;
+}
+
+.project h3,
+.capability h3 {
+  font-weight: 600;
+  letter-spacing: -.045em;
+}
+
+.lede,
+.section-intro,
+.capability-copy p,
+.project-body > p,
+.about-copy p,
+.contact-copy,
+.skill-tags li,
+.facts strong,
+.visual-caption,
+.logistics-destination,
+.logistics-event b,
+.logistics-event small,
+.logistics-cta,
+.socials a {
+  letter-spacing: -.012em;
+  font-family: var(--font-body);
+}
+
+.nav nav a {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
