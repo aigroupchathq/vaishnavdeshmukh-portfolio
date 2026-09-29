@@ -2593,7 +2593,7 @@ h6,
 .hero-actions .button {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
   align-items: center;
   justify-items: start;
@@ -2605,6 +2605,8 @@ h6,
   border: 1px solid transparent;
   border-radius: 12px;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   text-align: left;
   text-decoration: none;
   transition:
@@ -2618,19 +2620,6 @@ h6,
   border-color: #17221e;
   background: linear-gradient(145deg, #253a32, #17221e 76%);
   box-shadow: 0 10px 22px #17221e21;
-}
-
-.hero-actions .button-primary::before {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  width: 56px;
-  aspect-ratio: 1;
-  border: 1px solid #a7e8d52e;
-  border-radius: 50%;
-  box-shadow: 0 0 0 9px #a7e8d50a, 0 0 0 19px #a7e8d507;
-  content: "";
-  pointer-events: none;
 }
 
 .hero-actions .action-index {
@@ -2661,32 +2650,11 @@ h6,
   color: #d4ddd5;
 }
 
-.hero-actions .action-arrow {
-  display: grid;
-  grid-column: 2;
-  grid-row: 2;
-  width: 34px;
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid #ffffff27;
-  border-radius: 50%;
-  background: #ffffff0d;
-  color: var(--aqua);
-  font: 17px/1 var(--font-display);
-  transition: transform .22s ease, background-color .22s ease;
-}
-
 .hero-actions .button-quiet {
   border-color: #d2d9d4;
   background: #fffefa;
   box-shadow: 0 8px 18px #17221e09;
   color: var(--ink);
-}
-
-.hero-actions .button-quiet .action-arrow {
-  border-color: #2844bc28;
-  background: #dce7ed80;
-  color: #2844bc;
 }
 
 .hero-actions .button:hover {
@@ -2718,8 +2686,19 @@ h6,
   color: #59636a;
 }
 
-.hero-actions .button:hover .action-arrow {
-  transform: translate(2px, 2px);
+.hero-actions .button:active {
+  transform: translateY(1px) scale(.985);
+  transition-duration: .08s;
+}
+
+.hero-actions .button-primary:active {
+  background: #111a16;
+  box-shadow: 0 3px 8px #17221e2b;
+}
+
+.hero-actions .button-quiet:active {
+  background: #e9efed;
+  box-shadow: 0 3px 8px #2844bc12;
 }
 
 .hero-actions .button-primary:focus-visible,
@@ -2745,16 +2724,10 @@ h6,
     min-height: 108px;
     padding: 13px 15px;
   }
-
-  .hero-actions .button-primary::before {
-    top: 8px;
-    right: 12px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-actions .button,
-  .hero-actions .action-arrow {
+  .hero-actions .button {
     transition: none;
   }
 }
