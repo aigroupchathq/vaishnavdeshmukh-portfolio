@@ -98,6 +98,42 @@
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
         animation: splash-shimmer-sweep 2.4s infinite;
       }
+      @keyframes hold-core-pulse {
+        0%, 100% {
+          box-shadow: 0 0 25px rgba(255, 51, 88, 0.35), inset 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+        50% {
+          box-shadow: 0 0 50px rgba(47, 129, 247, 0.55), inset 0 0 25px rgba(255, 51, 88, 0.3);
+        }
+      }
+      .hold-core-idle {
+        animation: hold-core-pulse 2s ease-in-out infinite;
+      }
+      @keyframes screen-shake-intense {
+        0% { transform: translate(0, 0) scale(1); }
+        20% { transform: translate(-4px, 3px) scale(0.995); }
+        40% { transform: translate(4px, -3px) scale(1.005); }
+        60% { transform: translate(-3px, -2px) scale(0.998); }
+        80% { transform: translate(3px, 2px) scale(1.002); }
+        100% { transform: translate(0, 0) scale(1); }
+      }
+      .screen-shake {
+        animation: screen-shake-intense 0.35s ease-out;
+      }
+      @keyframes flash-burst {
+        0% { opacity: 0; transform: scale(0.7); }
+        50% { opacity: 0.85; transform: scale(1.4); }
+        100% { opacity: 0; transform: scale(2.6); }
+      }
+      .flash-expand {
+        animation: flash-burst 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .prevent-callout {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        touch-action: none;
+      }
       @media print {
         #splashOverlay, #splashCanvas, .fixed, nav, footer, #caseStudyModalBackdrop, #profileModalBackdrop {
           display: none !important;
@@ -182,27 +218,72 @@
           <span class="text-zinc-400">Greater London, UK</span>
         </p>
 
-        <!-- Interactive Progress Matrix -->
-        <div class="max-w-md mx-auto mb-8">
-          <div class="flex justify-between font-mono text-[11px] text-zinc-300 mb-2">
-            <span id="loadingStepLabel" class="text-zinc-300 truncate pr-2">Exploring clinical ward logistics and spatial tools...</span>
-            <span id="loadingPercent" class="text-canvas-accent font-bold tracking-wider">0%</span>
-          </div>
-          <div class="h-2 w-full bg-zinc-950/90 rounded-full overflow-hidden border border-white/15 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9)] relative p-[1px]">
-            <div id="loadingBarFill" class="h-full bg-gradient-to-r from-canvas-blue via-rose-500 to-canvas-accent w-0 rounded-full transition-all duration-300 shadow-[0_0_16px_rgba(255,51,88,0.9),0_0_28px_rgba(47,129,247,0.5)] splash-shimmer-bar relative"></div>
-          </div>
-        </div>
+        <!-- Interactive Biometric Compression Gate (2.0s Hold Ignition) -->
+        <div id="holdTriggerPad" 
+             tabindex="0"
+             role="button"
+             aria-label="Press and hold for 2 seconds to enter portfolio"
+             class="group relative max-w-sm mx-auto my-4 p-5 rounded-3xl bg-zinc-950/70 border border-white/10 hover:border-canvas-accent/60 transition-all duration-300 cursor-pointer select-none prevent-callout shadow-[0_15px_40px_rgba(0,0,0,0.8)] focus:outline-none focus:ring-2 focus:ring-canvas-accent/60">
+          
+          <!-- Radial Ambient Plasma Glow -->
+          <div id="holdAmbientPlasma" class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-canvas-accent/15 via-purple-600/10 to-canvas-blue/20 blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
-        <!-- Giant Launch CTA Button -->
-        <div class="flex flex-col items-center gap-3">
-          <button id="enterWorkspaceBtn" class="group relative inline-flex items-center gap-3.5 px-9 py-4 rounded-xl bg-gradient-to-r from-canvas-accent via-[#ff224a] to-canvas-accent text-white font-mono font-bold text-sm sm:text-base hover:shadow-[0_0_40px_rgba(255,51,88,0.7),0_0_80px_rgba(47,129,247,0.35)] transition-all duration-300 transform hover:scale-[1.03] shadow-[0_0_30px_rgba(255,51,88,0.5)] focus:outline-none focus:ring-4 focus:ring-canvas-accent/50 cursor-pointer overflow-hidden border border-white/25">
-            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
-            <span class="tracking-wide relative z-10">Explore the work</span>
-            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200 relative z-10"></i>
-          </button>
-          <span class="font-mono text-[11px] text-zinc-400 tracking-wide">
-            Click anywhere or press Spacebar to enter
-          </span>
+          <!-- Expanding Shockwave Flare (triggered at 2.0s) -->
+          <div id="holdShockwaveFlare" class="absolute inset-0 rounded-full bg-gradient-to-r from-canvas-accent via-white to-canvas-blue pointer-events-none opacity-0"></div>
+
+          <!-- Circular High-Precision Compression Gauge -->
+          <div class="relative w-40 h-40 sm:w-44 sm:h-44 mx-auto flex items-center justify-center">
+            <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 180 180">
+              <!-- Outer Track & Calibrated Tick Marks -->
+              <circle cx="90" cy="90" r="78" class="stroke-white/10" stroke-width="2" fill="none" stroke-dasharray="3 7" />
+              <circle cx="90" cy="90" r="72" class="stroke-white/15" stroke-width="1.5" fill="none" stroke-dasharray="1 11.5" />
+              <!-- Dual Energy Ring Fill -->
+              <circle id="holdProgressRing" 
+                      cx="90" cy="90" r="78" 
+                      class="stroke-canvas-accent transition-none" 
+                      stroke-width="5" 
+                      stroke-linecap="round" 
+                      fill="none" 
+                      stroke-dasharray="490.08" 
+                      stroke-dashoffset="490.08" 
+                      style="filter: drop-shadow(0 0 8px rgba(255, 51, 88, 0.85)) drop-shadow(0 0 20px rgba(47, 129, 247, 0.5));" />
+            </svg>
+
+            <!-- Center Dynamic Biometric Core Pad -->
+            <div id="holdCoreCenter" class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-b from-zinc-900 to-black border border-white/20 hold-core-idle flex flex-col items-center justify-center relative overflow-hidden transition-transform duration-150 shadow-[inset_0_2px_15px_rgba(0,0,0,0.95)]">
+              <!-- Magnetic Press Flare -->
+              <div id="holdCoreGlow" class="absolute inset-0 bg-gradient-to-t from-canvas-accent/40 via-purple-500/20 to-canvas-blue/30 opacity-20 transition-opacity duration-150"></div>
+
+              <!-- Biometric Fingerprint / Pulse Icon -->
+              <div id="holdCoreIcon" class="relative z-10 transition-transform duration-200">
+                <svg class="w-9 h-9 sm:w-10 sm:h-10 text-zinc-300 group-hover:text-canvas-accent transition-colors duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+                  <path d="M14 13.12c0 2.38 0 6.38-1 8.88"/>
+                  <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/>
+                  <path d="M2 12a10 10 0 0 1 18-6"/>
+                  <path d="M2 16h.01"/>
+                  <path d="M21.8 16c.2-2 .131-5.354 0-6"/>
+                  <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/>
+                  <path d="M8.65 22c.21-.66.45-1.32.57-2"/>
+                  <path d="M9 6.8a6 6 0 0 1 9 5.2v2"/>
+                </svg>
+              </div>
+
+              <!-- Real-Time Countdown Readout -->
+              <span id="holdCountdownLabel" class="relative z-10 font-mono text-xs sm:text-sm font-bold text-zinc-200 tracking-wider mt-1 drop-shadow-sm">2.0s</span>
+            </div>
+          </div>
+
+          <!-- Live Dynamic Feedback Bar -->
+          <div class="mt-3 flex flex-col items-center gap-1.5">
+            <div id="holdStatusBadge" class="font-mono text-xs sm:text-sm font-semibold tracking-wide text-zinc-100 flex items-center gap-2">
+              <span id="holdStatusDot" class="w-2 h-2 rounded-full bg-canvas-accent shadow-[0_0_8px_#ff3358] animate-pulse"></span>
+              <span id="holdStatusText">PRESS &amp; HOLD FOR 2 SECONDS</span>
+            </div>
+            <div id="holdSubText" class="font-mono text-[11px] text-zinc-400 tracking-wider">
+              Hold mouse / touch or [Spacebar] to synchronize
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2819,15 +2900,22 @@
         // =====================================================================
         const splashOverlay = document.getElementById("splashOverlay");
         const splashCanvas = document.getElementById("splashCanvas");
-        const enterWorkspaceBtn = document.getElementById("enterWorkspaceBtn");
+        const holdTriggerPad = document.getElementById("holdTriggerPad");
+        const holdProgressRing = document.getElementById("holdProgressRing");
+        const holdCoreCenter = document.getElementById("holdCoreCenter");
+        const holdCoreGlow = document.getElementById("holdCoreGlow");
+        const holdCoreIcon = document.getElementById("holdCoreIcon");
+        const holdCountdownLabel = document.getElementById("holdCountdownLabel");
+        const holdStatusBadge = document.getElementById("holdStatusBadge");
+        const holdStatusDot = document.getElementById("holdStatusDot");
+        const holdStatusText = document.getElementById("holdStatusText");
+        const holdSubText = document.getElementById("holdSubText");
+        const holdShockwaveFlare = document.getElementById("holdShockwaveFlare");
         const skipSplashBtn = document.getElementById("skipSplashBtn");
         const replayIntroBtn = document.getElementById("replayIntroBtn");
         const scrambleName = document.getElementById("scrambleName");
         const scrambleRole = document.getElementById("scrambleRole");
         const scrambleStatus = document.getElementById("scrambleStatus");
-        const loadingBarFill = document.getElementById("loadingBarFill");
-        const loadingPercent = document.getElementById("loadingPercent");
-        const loadingStepLabel = document.getElementById("loadingStepLabel");
 
         let canvasCtx = null;
         let animationFrameId = null;
@@ -2838,31 +2926,178 @@
         let warpProgress = 0;
         let rotX = 0;
         let rotY = 0;
+        let holdCompressionLevel = 0; // Exposes 0.0 -> 1.0 pressure to 3D canvas physics
+        let accessUnlocked = false;
 
-        // Web Audio API Sci-Fi Synthesizer Sound Engine
-        function playSciFiChime(type) {
+        // Dedicated Web Audio API Interactive Sound Synthesizer
+        let audioCtx = null;
+        let holdSubOsc = null;
+        let holdDroneOsc = null;
+        let holdNoiseNode = null;
+        let holdFilterNode = null;
+        let holdGainNode = null;
+
+        function getAudioContext() {
           try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (!AudioCtx) return;
-            const ctx = new AudioCtx();
-            if (ctx.state === "suspended") ctx.resume();
+            if (!audioCtx) {
+              const AudioClass = window.AudioContext || window.webkitAudioContext;
+              if (AudioClass) audioCtx = new AudioClass();
+            }
+            if (audioCtx && audioCtx.state === "suspended") {
+              audioCtx.resume();
+            }
+            return audioCtx;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function startChargingAudio() {
+          try {
+            const ctx = getAudioContext();
+            if (!ctx) return;
             const now = ctx.currentTime;
 
+            // 1. Sub Bass Core (52Hz sweeps upward)
+            holdSubOsc = ctx.createOscillator();
+            holdSubOsc.type = "sine";
+            holdSubOsc.frequency.setValueAtTime(52, now);
+
+            // 2. Harmonics Drone (Triangle at 104Hz)
+            holdDroneOsc = ctx.createOscillator();
+            holdDroneOsc.type = "triangle";
+            holdDroneOsc.frequency.setValueAtTime(104, now);
+
+            // 3. Ionizing Shimmer (Filtered Noise)
+            const bufferSize = ctx.sampleRate;
+            const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+              output[i] = Math.random() * 2 - 1;
+            }
+            holdNoiseNode = ctx.createBufferSource();
+            holdNoiseNode.buffer = noiseBuffer;
+            holdNoiseNode.loop = true;
+
+            holdFilterNode = ctx.createBiquadFilter();
+            holdFilterNode.type = "bandpass";
+            holdFilterNode.frequency.setValueAtTime(320, now);
+            holdFilterNode.Q.setValueAtTime(6.0, now);
+
+            holdGainNode = ctx.createGain();
+            holdGainNode.gain.setValueAtTime(0.001, now);
+            holdGainNode.gain.linearRampToValueAtTime(0.09, now + 0.12);
+
+            holdSubOsc.connect(holdGainNode);
+            holdDroneOsc.connect(holdGainNode);
+            holdNoiseNode.connect(holdFilterNode);
+            holdFilterNode.connect(holdGainNode);
+            holdGainNode.connect(ctx.destination);
+
+            holdSubOsc.start(now);
+            holdDroneOsc.start(now);
+            holdNoiseNode.start(now);
+          } catch (e) {}
+        }
+
+        function updateChargingAudio(progress) {
+          try {
+            if (!audioCtx || !holdSubOsc || !holdDroneOsc || !holdFilterNode || !holdGainNode) return;
+            const now = audioCtx.currentTime;
+            const currentSubFreq = 52 + (progress * progress) * 320;
+            holdSubOsc.frequency.setTargetAtTime(currentSubFreq, now, 0.04);
+            holdDroneOsc.frequency.setTargetAtTime(currentSubFreq * 2, now, 0.04);
+            holdFilterNode.frequency.setTargetAtTime(320 + progress * 2200, now, 0.04);
+            holdGainNode.gain.setTargetAtTime(0.04 + progress * 0.12, now, 0.04);
+          } catch (e) {}
+        }
+
+        function stopChargingAudio(aborted) {
+          try {
+            if (!audioCtx || !holdGainNode) return;
+            const now = audioCtx.currentTime;
+
+            if (aborted) {
+              if (holdSubOsc) holdSubOsc.frequency.setTargetAtTime(38, now, 0.08);
+              if (holdFilterNode) holdFilterNode.frequency.setTargetAtTime(160, now, 0.08);
+              holdGainNode.gain.setTargetAtTime(0.0001, now, 0.09);
+              setTimeout(() => {
+                try {
+                  if (holdSubOsc) holdSubOsc.stop();
+                  if (holdDroneOsc) holdDroneOsc.stop();
+                  if (holdNoiseNode) holdNoiseNode.stop();
+                } catch (e) {}
+                holdSubOsc = null; holdDroneOsc = null; holdNoiseNode = null; holdFilterNode = null; holdGainNode = null;
+              }, 180);
+            } else {
+              holdGainNode.gain.setValueAtTime(0.0001, now);
+              try {
+                if (holdSubOsc) holdSubOsc.stop();
+                if (holdDroneOsc) holdDroneOsc.stop();
+                if (holdNoiseNode) holdNoiseNode.stop();
+              } catch (e) {}
+              holdSubOsc = null; holdDroneOsc = null; holdNoiseNode = null; holdFilterNode = null; holdGainNode = null;
+            }
+          } catch (e) {}
+        }
+
+        function playAccessGrantedAudio() {
+          try {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+
+            // Deep Sub Impact Blast
+            const sub = ctx.createOscillator();
+            const subGain = ctx.createGain();
+            sub.type = "sine";
+            sub.frequency.setValueAtTime(90, now);
+            sub.frequency.exponentialRampToValueAtTime(26, now + 0.6);
+            subGain.gain.setValueAtTime(0.3, now);
+            subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.65);
+            sub.connect(subGain);
+            subGain.connect(ctx.destination);
+            sub.start(now);
+            sub.stop(now + 0.7);
+
+            // Polyphonic Ascending Resonance Chords (C Major Overtones)
+            const freqs = [261.63, 329.63, 392.00, 523.25, 659.25, 1046.50];
+            freqs.forEach((freq, idx) => {
+              const osc = ctx.createOscillator();
+              const gain = ctx.createGain();
+              osc.type = idx % 2 === 0 ? "sine" : "triangle";
+              osc.frequency.setValueAtTime(freq, now + idx * 0.035);
+              osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + 0.8);
+              gain.gain.setValueAtTime(0.07, now + idx * 0.035);
+              gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
+              osc.connect(gain);
+              gain.connect(ctx.destination);
+              osc.start(now + idx * 0.035);
+              osc.stop(now + 1.2);
+            });
+          } catch (e) {}
+        }
+
+        // Haptic Vibration Driver
+        function triggerHaptic(type) {
+          try {
+            if (!navigator.vibrate) return;
+            if (type === "tick-1") navigator.vibrate(12);
+            else if (type === "tick-2") navigator.vibrate([16, 40, 16]);
+            else if (type === "tick-3") navigator.vibrate([22, 30, 22]);
+            else if (type === "tick-4") navigator.vibrate([35, 20, 35, 20, 45]);
+            else if (type === "abort") navigator.vibrate(28);
+            else if (type === "granted") navigator.vibrate([110, 40, 180]);
+          } catch (e) {}
+        }
+
+        function playSciFiChime(type) {
+          try {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
             if (type === "warp") {
-              const freqs = [130.81, 196.00, 261.63, 329.63, 523.25, 659.25];
-              freqs.forEach((f, idx) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = idx % 2 === 0 ? "sine" : "triangle";
-                osc.frequency.setValueAtTime(f, now);
-                osc.frequency.exponentialRampToValueAtTime(f * 2.5, now + 0.6);
-                gain.gain.setValueAtTime(0.06, now);
-                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(now + idx * 0.03);
-                osc.stop(now + 0.75);
-              });
+              playAccessGrantedAudio();
             } else {
               const osc = ctx.createOscillator();
               const gain = ctx.createGain();
@@ -2876,9 +3111,7 @@
               osc.start(now);
               osc.stop(now + 0.22);
             }
-          } catch (e) {
-            // Audio policy silently bypassed
-          }
+          } catch (e) {}
         }
 
         // Text Scramble / Decrypt Engine
@@ -3053,6 +3286,20 @@
                 p.vx += (mdx / mdist) * 0.12;
                 p.vy += (mdy / mdist) * 0.12;
               }
+
+              // Gravitational suction vortex toward center while holding
+              if (holdCompressionLevel > 0) {
+                const cdx = centerX - p.x;
+                const cdy = centerY - p.y;
+                const cdist = Math.sqrt(cdx * cdx + cdy * cdy) || 1;
+                const pullPower = holdCompressionLevel * 0.55;
+                p.vx += (cdx / cdist) * pullPower;
+                p.vy += (cdy / cdist) * pullPower;
+                // Tangential swirl
+                p.vx += (-cdy / cdist) * pullPower * 0.35;
+                p.vy += (cdx / cdist) * pullPower * 0.35;
+              }
+
               // Boundary bounce
               if (p.x < 0 || p.x > width) p.vx *= -1;
               if (p.y < 0 || p.y > height) p.vy *= -1;
@@ -3098,8 +3345,9 @@
           }
 
           // 2. Render Nested Concentric 3D Polyhedrons with Synaptic Energy Pulses
-          rotX += 0.008;
-          rotY += 0.012;
+          const kineticSpeed = 1 + holdCompressionLevel * 3.2;
+          rotX += 0.008 * kineticSpeed;
+          rotY += 0.012 * kineticSpeed;
           const scaleMultiplier = isWarping ? (1 + warpProgress * 5) : 1;
           const cameraDistance = 350;
 
@@ -3215,32 +3463,182 @@
           animationFrameId = requestAnimationFrame(renderSplashCanvas);
         }
 
-        // Progress Bar Simulation
-        function runSplashProgress() {
-          let currentPct = 0;
-          const steps = [
-            { pct: 25, label: "Exploring clinical logistics and spatial tooling..." },
-            { pct: 55, label: "Mounting 3D neuroanatomy spatial models..." },
-            { pct: 80, label: "Verifying zero knowledge cryptographic proofs..." },
-            { pct: 100, label: "Ready to explore the work." }
-          ];
+        // =====================================================================
+        // INTERACTIVE 2.0-SECOND BIOMETRIC HOLD & IGNITION ENGINE
+        // =====================================================================
+        const HOLD_DURATION_MS = 2000;
+        const CIRCUMFERENCE = 490.088; // 2 * PI * 78
+        let isHolding = false;
+        let holdStartTime = 0;
+        let holdRafId = null;
+        let hapticSteps = { 300: false, 700: false, 1100: false, 1500: false, 1850: false };
 
-          const progressInterval = setInterval(() => {
-            currentPct += 4;
-            if (currentPct > 100) currentPct = 100;
+        function onHoldStart(e) {
+          if (accessUnlocked || isWarping) return;
+          if (e && e.target && e.target.closest && e.target.closest("#skipSplashBtn")) return;
+          if (e && e.preventDefault && e.type !== "keydown") e.preventDefault();
 
-            if (loadingBarFill) loadingBarFill.style.width = `${currentPct}%`;
-            if (loadingPercent) loadingPercent.textContent = `${currentPct}%`;
+          // Initialize Web Audio on gesture
+          getAudioContext();
 
-            const currentStep = steps.find(s => currentPct <= s.pct) || steps[steps.length - 1];
-            if (loadingStepLabel) loadingStepLabel.textContent = currentStep.label;
+          isHolding = true;
+          holdStartTime = performance.now();
+          hapticSteps = { 300: false, 700: false, 1100: false, 1500: false, 1850: false };
 
-            if (currentPct >= 100) {
-              clearInterval(progressInterval);
-              if (scrambleStatus) scrambleStatus.textContent = "Entering workspace...";
-              setTimeout(dismissSplash, 300);
+          if (holdProgressRing) {
+            holdProgressRing.style.transition = "none";
+          }
+          if (holdCoreCenter) {
+            holdCoreCenter.style.transform = "scale(0.95)";
+          }
+          if (holdCoreGlow) {
+            holdCoreGlow.style.opacity = "0.45";
+          }
+
+          startChargingAudio();
+          triggerHaptic("tick-1");
+
+          if (holdStatusText) {
+            holdStatusText.textContent = "CHARGING SYSTEM CORE · MAINTAIN PRESSURE";
+          }
+          if (holdStatusDot) {
+            holdStatusDot.className = "w-2.5 h-2.5 rounded-full bg-canvas-accent shadow-[0_0_12px_#ff3358] animate-ping";
+          }
+
+          if (holdRafId) cancelAnimationFrame(holdRafId);
+          holdRafId = requestAnimationFrame(tickHold);
+        }
+
+        function tickHold(now) {
+          if (!isHolding || accessUnlocked) return;
+
+          const elapsed = now - holdStartTime;
+          const progress = Math.min(1, elapsed / HOLD_DURATION_MS);
+          holdCompressionLevel = progress;
+
+          // Circular SVG fill
+          const offset = CIRCUMFERENCE * (1 - progress);
+          if (holdProgressRing) {
+            holdProgressRing.style.strokeDashoffset = offset.toString();
+            if (progress < 0.45) {
+              holdProgressRing.style.stroke = "#ff3358";
+            } else if (progress < 0.8) {
+              holdProgressRing.style.stroke = "#a78bfa";
+            } else {
+              holdProgressRing.style.stroke = "#2f81f7";
             }
-          }, 45);
+          }
+
+          // Countdown Label in center of core
+          const remaining = Math.max(0, (HOLD_DURATION_MS - elapsed) / 1000).toFixed(1);
+          if (holdCountdownLabel) {
+            holdCountdownLabel.textContent = `${remaining}s`;
+          }
+
+          // Status Badge message
+          const pct = Math.floor(progress * 100);
+          if (holdStatusText) {
+            holdStatusText.textContent = `SYNCHRONIZING SYSTEMS [ ${pct}% ] · ${remaining}s REMAINING`;
+          }
+
+          // Core visual compression
+          if (holdCoreCenter) {
+            holdCoreCenter.style.transform = `scale(${0.95 - progress * 0.04})`;
+          }
+          if (holdCoreGlow) {
+            holdCoreGlow.style.opacity = (0.35 + progress * 0.65).toString();
+          }
+
+          // Real-time audio pitch sweep
+          updateChargingAudio(progress);
+
+          // Staged Haptic Vibration Ticks
+          if (elapsed >= 300 && !hapticSteps[300]) { triggerHaptic("tick-1"); hapticSteps[300] = true; }
+          if (elapsed >= 700 && !hapticSteps[700]) { triggerHaptic("tick-2"); hapticSteps[700] = true; }
+          if (elapsed >= 1100 && !hapticSteps[1100]) { triggerHaptic("tick-3"); hapticSteps[1100] = true; }
+          if (elapsed >= 1500 && !hapticSteps[1500]) { triggerHaptic("tick-4"); hapticSteps[1500] = true; }
+          if (elapsed >= 1850 && !hapticSteps[1850]) { triggerHaptic("tick-4"); hapticSteps[1850] = true; }
+
+          // ================= THRESHOLD REACHED (2.0s FULL ACCESS) =================
+          if (progress >= 1) {
+            accessUnlocked = true;
+            isHolding = false;
+            holdCompressionLevel = 1;
+
+            triggerHaptic("granted");
+            stopChargingAudio(false);
+            playAccessGrantedAudio();
+
+            if (holdCountdownLabel) holdCountdownLabel.textContent = "0.0s";
+            if (holdStatusText) holdStatusText.textContent = "ACCESS GRANTED · SYSTEMS SYNCHRONIZED";
+            if (holdStatusBadge) {
+              holdStatusBadge.className = "font-mono text-xs sm:text-sm font-bold tracking-wide text-canvas-blue flex items-center gap-2";
+            }
+            if (holdStatusDot) {
+              holdStatusDot.className = "w-2.5 h-2.5 rounded-full bg-canvas-blue shadow-[0_0_16px_#2f81f7]";
+            }
+            if (holdProgressRing) {
+              holdProgressRing.style.stroke = "#58a6ff";
+            }
+            if (holdShockwaveFlare) {
+              holdShockwaveFlare.className = "absolute inset-0 rounded-full bg-gradient-to-r from-canvas-accent via-white to-canvas-blue pointer-events-none flash-expand";
+            }
+            if (splashOverlay) {
+              splashOverlay.classList.add("screen-shake");
+            }
+
+            isWarping = true;
+            setTimeout(dismissSplash, 480);
+            return;
+          }
+
+          holdRafId = requestAnimationFrame(tickHold);
+        }
+
+        function onHoldEnd() {
+          if (accessUnlocked || !isHolding) return;
+
+          isHolding = false;
+          holdCompressionLevel = 0;
+          if (holdRafId) cancelAnimationFrame(holdRafId);
+
+          stopChargingAudio(true);
+          triggerHaptic("abort");
+
+          // Elastic recoil ring back to empty
+          if (holdProgressRing) {
+            holdProgressRing.style.transition = "stroke-dashoffset 0.35s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.35s ease";
+            holdProgressRing.style.strokeDashoffset = CIRCUMFERENCE.toString();
+            holdProgressRing.style.stroke = "#ff3358";
+          }
+          if (holdCountdownLabel) {
+            holdCountdownLabel.textContent = "2.0s";
+          }
+          if (holdCoreCenter) {
+            holdCoreCenter.style.transform = "scale(1)";
+          }
+          if (holdCoreGlow) {
+            holdCoreGlow.style.opacity = "0.2";
+          }
+
+          // Amber insufficient pressure warning
+          if (holdStatusText) {
+            holdStatusText.textContent = "INSUFFICIENT DURATION · HOLD FOR FULL 2.0s";
+          }
+          if (holdStatusBadge) {
+            holdStatusBadge.classList.add("text-rose-400");
+          }
+          if (holdStatusDot) {
+            holdStatusDot.className = "w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e] animate-pulse";
+          }
+
+          setTimeout(() => {
+            if (!isHolding && !accessUnlocked) {
+              if (holdStatusText) holdStatusText.textContent = "PRESS & HOLD FOR 2 SECONDS";
+              if (holdStatusBadge) holdStatusBadge.classList.remove("text-rose-400");
+              if (holdStatusDot) holdStatusDot.className = "w-2 h-2 rounded-full bg-canvas-accent shadow-[0_0_8px_#ff3358] animate-pulse";
+            }
+          }, 1400);
         }
 
         // Dismiss / Warp into Main Interface
@@ -3268,11 +3666,30 @@
         function launchSplashScreen() {
           if (!splashOverlay) return;
           playSciFiChime("ping");
+
+          accessUnlocked = false;
+          isHolding = false;
+          holdCompressionLevel = 0;
+          if (holdRafId) cancelAnimationFrame(holdRafId);
+
+          if (holdProgressRing) {
+            holdProgressRing.style.transition = "none";
+            holdProgressRing.style.strokeDashoffset = CIRCUMFERENCE.toString();
+            holdProgressRing.style.stroke = "#ff3358";
+          }
+          if (holdCountdownLabel) holdCountdownLabel.textContent = "2.0s";
+          if (holdStatusText) holdStatusText.textContent = "PRESS & HOLD FOR 2 SECONDS";
+          if (holdStatusBadge) holdStatusBadge.className = "font-mono text-xs sm:text-sm font-semibold tracking-wide text-zinc-100 flex items-center gap-2";
+          if (holdStatusDot) holdStatusDot.className = "w-2 h-2 rounded-full bg-canvas-accent shadow-[0_0_8px_#ff3358] animate-pulse";
+          if (holdCoreCenter) holdCoreCenter.style.transform = "scale(1)";
+          if (holdCoreGlow) holdCoreGlow.style.opacity = "0.2";
+          if (holdShockwaveFlare) holdShockwaveFlare.className = "absolute inset-0 rounded-full bg-gradient-to-r from-canvas-accent via-white to-canvas-blue pointer-events-none opacity-0";
+
+          splashOverlay.classList.remove("screen-shake", "opacity-0", "scale-105", "pointer-events-none");
           splashOverlay.style.display = "flex";
           document.body.style.overflow = "hidden";
 
           requestAnimationFrame(() => {
-            splashOverlay.classList.remove("opacity-0", "scale-105", "pointer-events-none");
             initSplashCanvas();
             isWarping = false;
             warpProgress = 0;
@@ -3281,11 +3698,9 @@
             renderSplashCanvas();
 
             // Run Scramble Decryption
-            scrambleText(scrambleName, "Vaishnav Workspace", 1000);
+            scrambleText(scrambleName, "Vaishnav Deshmukh", 1000);
             scrambleText(scrambleRole, "Systems Architecture & UX Engineering · London, UK", 1200);
-            scrambleText(scrambleStatus, "Initializing workspace...", 800);
-
-            runSplashProgress();
+            scrambleText(scrambleStatus, "Biometric gate armed · Ready to synchronize", 800);
           });
         }
 
@@ -3301,38 +3716,65 @@
           }
         }, { passive: true });
 
-        // Event Triggers to Enter
-        if (enterWorkspaceBtn) enterWorkspaceBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          dismissSplash();
-        });
+        // Event Listeners for 2-Second Biometric Hold Trigger
+        if (holdTriggerPad) {
+          holdTriggerPad.addEventListener("pointerdown", onHoldStart);
+          holdTriggerPad.addEventListener("pointerup", onHoldEnd);
+          holdTriggerPad.addEventListener("pointercancel", onHoldEnd);
+          holdTriggerPad.addEventListener("contextmenu", (e) => e.preventDefault());
+        }
 
-        if (skipSplashBtn) skipSplashBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          dismissSplash();
-        });
+        // Pressing & holding anywhere on the splash background also charges the gate
+        if (splashOverlay) {
+          splashOverlay.addEventListener("pointerdown", (e) => {
+            if (e.target.closest && e.target.closest("#skipSplashBtn")) return;
+            onHoldStart(e);
+          });
+        }
 
-        if (replayIntroBtn) replayIntroBtn.addEventListener("click", () => {
-          launchSplashScreen();
-        });
+        window.addEventListener("pointerup", onHoldEnd);
+        window.addEventListener("pointercancel", onHoldEnd);
+        window.addEventListener("blur", onHoldEnd);
 
-        // Click anywhere on splash overlay to enter immediately
-        if (splashOverlay) splashOverlay.addEventListener("click", dismissSplash);
-
-        // Keyboard Shortcut Triggers: Any key to Enter
+        // Keyboard Shortcut Triggers: Hold Spacebar or Enter for 2 seconds
         window.addEventListener("keydown", (e) => {
-          if (splashOverlay && splashOverlay.style.display !== "none" && !splashOverlay.classList.contains("pointer-events-none")) {
-            dismissSplash();
+          if ((e.code === "Space" || e.code === "Enter") && !e.repeat) {
+            if (splashOverlay && splashOverlay.style.display !== "none" && !accessUnlocked) {
+              e.preventDefault();
+              onHoldStart(e);
+            }
+          } else if (e.key === "Escape") {
+            if (splashOverlay && splashOverlay.style.display !== "none") {
+              dismissSplash();
+            }
           }
         });
 
-        // Initial Boot: Check if already visited or has direct anchor hash
-        let hasSeenSplash = false;
-        try {
-          hasSeenSplash = sessionStorage.getItem("splash_dismissed") === "true";
-        } catch (e) {}
+        window.addEventListener("keyup", (e) => {
+          if (e.code === "Space" || e.code === "Enter") {
+            if (splashOverlay && splashOverlay.style.display !== "none") {
+              onHoldEnd();
+            }
+          }
+        });
 
-        if (!hasSeenSplash && !window.location.hash) {
+        // Skip button for immediate access
+        if (skipSplashBtn) {
+          skipSplashBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dismissSplash();
+          });
+        }
+
+        // Replay button in navigation bar
+        if (replayIntroBtn) {
+          replayIntroBtn.addEventListener("click", () => {
+            launchSplashScreen();
+          });
+        }
+
+        // Initial Boot: Always launch splash gate unless direct deep anchor hash is requested
+        if (!window.location.hash) {
           launchSplashScreen();
         } else {
           if (splashOverlay) {
