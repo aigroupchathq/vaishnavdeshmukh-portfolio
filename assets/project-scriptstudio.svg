@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="studio-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1618"/>
+      <stop offset="100%" stop-color="#050d0e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#studio-grad)"/>
+
+  <!-- Top bar -->
+  <rect x="30" y="24" width="900" height="50" rx="10" fill="#0f2225" stroke="#1d3f44" stroke-width="1"/>
+  <circle cx="56" cy="49" r="6" fill="#ff5f56"/>
+  <circle cx="74" cy="49" r="6" fill="#ffbd2e"/>
+  <circle cx="92" cy="49" r="6" fill="#27c93f"/>
+  <text x="120" y="54" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">AI SCRIPT STUDIO</text>
+  <text x="270" y="54" fill="#7ba8ad" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">| Web Audio Speech Pacing &amp; Voice Synthesis</text>
+  <text x="760" y="54" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11">AUDIO ENGINE 44.1kHz</text>
+
+  <!-- Left: Script Editor Pane -->
+  <rect x="30" y="90" width="460" height="420" rx="12" fill="#0d1c1f" stroke="#193439" stroke-width="1"/>
+  <text x="54" y="125" fill="#7ba8ad" font-family="'JetBrains Mono', monospace" font-size="11">SHORT-FORM SCRIPT DRAFT</text>
+  
+  <rect x="54" y="145" width="412" height="260" rx="8" fill="#081315" stroke="#152b2f" stroke-width="1"/>
+  <text x="70" y="180" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="600">"Notice the friction before you write a solution."</text>
+  <text x="70" y="215" fill="#cfdedf" font-family="'Plus Jakarta Sans', sans-serif" font-size="14">When nurses hunt for equipment on a hospital ward, the issue isn't software—it's physical visibility.</text>
+  <text x="70" y="255" fill="#3ae4af" font-family="'Plus Jakarta Sans', sans-serif" font-size="14">[PAUSE · 1.2s] — Let that sink in.</text>
+  <text x="70" y="295" fill="#cfdedf" font-family="'Plus Jakarta Sans', sans-serif" font-size="14">If the tool requires six clicks to record an infusion pump, the ward team will simply bypass it.</text>
+
+  <!-- Teleprompter telemetry -->
+  <g transform="translate(54, 425)" font-family="'JetBrains Mono', monospace" font-size="11">
+    <rect x="0" y="0" width="130" height="65" rx="6" fill="#112428" stroke="#1c3d42" stroke-width="1"/>
+    <text x="12" y="24" fill="#7ba8ad">WORD COUNT</text>
+    <text x="12" y="48" fill="#3ae4af" font-size="18" font-weight="700">124 words</text>
+
+    <rect x="140" y="0" width="130" height="65" rx="6" fill="#112428" stroke="#1c3d42" stroke-width="1"/>
+    <text x="152" y="24" fill="#7ba8ad">EST. DURATION</text>
+    <text x="152" y="48" fill="#ffffff" font-size="18" font-weight="700">00:54s</text>
+
+    <rect x="280" y="0" width="130" height="65" rx="6" fill="#112428" stroke="#1c3d42" stroke-width="1"/>
+    <text x="292" y="24" fill="#7ba8ad">PACING SPEED</text>
+    <text x="292" y="48" fill="#60b5ff" font-size="18" font-weight="700">138 WPM</text>
+  </g>
+
+  <!-- Right: Audio Waveform & Speech Delivery Canvas -->
+  <rect x="510" y="90" width="420" height="420" rx="12" fill="#0d1c1f" stroke="#193439" stroke-width="1"/>
+  <text x="534" y="125" fill="#7ba8ad" font-family="'JetBrains Mono', monospace" font-size="11">REAL-TIME WEB AUDIO MONITOR</text>
+
+  <!-- Waveform visualization -->
+  <rect x="534" y="145" width="372" height="150" rx="8" fill="#081315" stroke="#152b2f" stroke-width="1"/>
+  <g transform="translate(544, 220)">
+    <!-- Mirrored audio bars -->
+    <rect x="0" y="-30" width="4" height="60" rx="2" fill="#3ae4af"/>
+    <rect x="10" y="-15" width="4" height="30" rx="2" fill="#3ae4af"/>
+    <rect x="20" y="-45" width="4" height="90" rx="2" fill="#3ae4af"/>
+    <rect x="30" y="-20" width="4" height="40" rx="2" fill="#3ae4af"/>
+    <rect x="40" y="-55" width="4" height="110" rx="2" fill="#3ae4af"/>
+    <rect x="50" y="-25" width="4" height="50" rx="2" fill="#3ae4af"/>
+    <rect x="60" y="-40" width="4" height="80" rx="2" fill="#3ae4af"/>
+    <rect x="70" y="-10" width="4" height="20" rx="2" fill="#3ae4af"/>
+    <rect x="80" y="-50" width="4" height="100" rx="2" fill="#3ae4af"/>
+    <rect x="90" y="-35" width="4" height="70" rx="2" fill="#3ae4af"/>
+    <rect x="100" y="-60" width="4" height="120" rx="2" fill="#3ae4af"/>
+    <rect x="110" y="-25" width="4" height="50" rx="2" fill="#3ae4af"/>
+    <rect x="120" y="-45" width="4" height="90" rx="2" fill="#3ae4af"/>
+    <rect x="130" y="-15" width="4" height="30" rx="2" fill="#3ae4af"/>
+    <rect x="140" y="-55" width="4" height="110" rx="2" fill="#3ae4af"/>
+    <rect x="150" y="-30" width="4" height="60" rx="2" fill="#3ae4af"/>
+    <rect x="160" y="-40" width="4" height="80" rx="2" fill="#3ae4af"/>
+    <rect x="170" y="-20" width="4" height="40" rx="2" fill="#3ae4af"/>
+    <rect x="180" y="-50" width="4" height="100" rx="2" fill="#3ae4af"/>
+    <rect x="190" y="-30" width="4" height="60" rx="2" fill="#3ae4af"/>
+    <rect x="200" y="-45" width="4" height="90" rx="2" fill="#3ae4af"/>
+    <rect x="210" y="-15" width="4" height="30" rx="2" fill="#3ae4af"/>
+    <rect x="220" y="-55" width="4" height="110" rx="2" fill="#3ae4af"/>
+    <rect x="230" y="-35" width="4" height="70" rx="2" fill="#3ae4af"/>
+    <rect x="240" y="-25" width="4" height="50" rx="2" fill="#3ae4af"/>
+    <rect x="250" y="-40" width="4" height="80" rx="2" fill="#3ae4af"/>
+    <rect x="260" y="-10" width="4" height="20" rx="2" fill="#3ae4af"/>
+    <rect x="270" y="-50" width="4" height="100" rx="2" fill="#3ae4af"/>
+    <rect x="280" y="-30" width="4" height="60" rx="2" fill="#3ae4af"/>
+    <rect x="290" y="-45" width="4" height="90" rx="2" fill="#3ae4af"/>
+    <rect x="300" y="-20" width="4" height="40" rx="2" fill="#3ae4af"/>
+    <rect x="310" y="-60" width="4" height="120" rx="2" fill="#3ae4af"/>
+    <rect x="320" y="-25" width="4" height="50" rx="2" fill="#3ae4af"/>
+    <rect x="330" y="-40" width="4" height="80" rx="2" fill="#3ae4af"/>
+    <rect x="340" y="-15" width="4" height="30" rx="2" fill="#3ae4af"/>
+  </g>
+
+  <!-- Voice simulation selector -->
+  <g transform="translate(534, 320)">
+    <rect x="0" y="0" width="372" height="165" rx="8" fill="#112428" stroke="#1c3d42" stroke-width="1"/>
+    <text x="18" y="32" fill="#7ba8ad" font-family="'JetBrains Mono', monospace" font-size="11">DELIVERY PROFILE</text>
+    <rect x="18" y="48" width="160" height="36" rx="6" fill="#3ae4af"/>
+    <text x="32" y="71" fill="#050d0e" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700">Calm &amp; Articulate</text>
+
+    <rect x="190" y="48" width="160" height="36" rx="6" fill="#152f34" stroke="#234a52" stroke-width="1"/>
+    <text x="212" y="71" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Narrative Pace</text>
+
+    <text x="18" y="125" fill="#7ba8ad" font-family="'JetBrains Mono', monospace" font-size="11">FREQUENCY RESPONSE: 20 Hz – 20 kHz (FLAT)</text>
+    <text x="18" y="145" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11">SPEECH-TO-AUDIO BUFFER: SYNCED</text>
+  </g>
+</svg>

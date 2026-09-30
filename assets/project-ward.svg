@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1418"/>
+      <stop offset="100%" stop-color="#070a0c"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3ae4af"/>
+      <stop offset="100%" stop-color="#60b5ff"/>
+    </linearGradient>
+    <radialGradient id="radar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(58,228,175,0.2)"/>
+      <stop offset="70%" stop-color="rgba(58,228,175,0.02)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="540" fill="url(#bg)"/>
+  
+  <!-- Grid lines -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="90" x2="960" y2="90"/>
+    <line x1="0" y1="180" x2="960" y2="180"/>
+    <line x1="0" y1="270" x2="960" y2="270"/>
+    <line x1="0" y1="360" x2="960" y2="360"/>
+    <line x1="0" y1="450" x2="960" y2="450"/>
+    <line x1="160" y1="0" x2="160" y2="540"/>
+    <line x1="320" y1="0" x2="320" y2="540"/>
+    <line x1="480" y1="0" x2="480" y2="540"/>
+    <line x1="640" y1="0" x2="640" y2="540"/>
+    <line x1="800" y1="0" x2="800" y2="540"/>
+  </g>
+
+  <!-- App Header Bar -->
+  <rect x="30" y="24" width="900" height="50" rx="10" fill="#111c22" stroke="#1f2f38" stroke-width="1"/>
+  <circle cx="56" cy="49" r="6" fill="#ff5f56"/>
+  <circle cx="74" cy="49" r="6" fill="#ffbd2e"/>
+  <circle cx="92" cy="49" r="6" fill="#27c93f"/>
+  <text x="120" y="54" fill="#f3f6f5" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700" letter-spacing="-0.2px">NHS TRUST · WARD LOGISTICS ENGINE</text>
+  <text x="640" y="54" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">● SCAN4SAFETY GS1 CONNECTED</text>
+  <text x="850" y="54" fill="#94a3a0" font-family="'JetBrains Mono', monospace" font-size="11">FHIR v4.3</text>
+
+  <!-- Left Sidebar / Ward Status -->
+  <rect x="30" y="90" width="260" height="420" rx="12" fill="#101a20" stroke="#1c2c36" stroke-width="1"/>
+  <text x="50" y="125" fill="#94a3a0" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="1px">WARD 4B · CRITICAL EQUIPMENT</text>
+  
+  <!-- Metric Box 1 -->
+  <rect x="50" y="145" width="220" height="74" rx="8" fill="#14222b" stroke="#223644" stroke-width="1"/>
+  <text x="64" y="172" fill="#94a3a0" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Infusion Pumps</text>
+  <text x="64" y="202" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="22" font-weight="700">14 / 14</text>
+  <text x="180" y="202" fill="#94a3a0" font-family="'JetBrains Mono', monospace" font-size="11">Located</text>
+
+  <!-- Metric Box 2 -->
+  <rect x="50" y="232" width="220" height="74" rx="8" fill="#14222b" stroke="#223644" stroke-width="1"/>
+  <text x="64" y="259" fill="#94a3a0" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Telemetry Monitors</text>
+  <text x="64" y="289" fill="#60b5ff" font-family="'JetBrains Mono', monospace" font-size="22" font-weight="700">8 / 8</text>
+  <text x="180" y="289" fill="#94a3a0" font-family="'JetBrains Mono', monospace" font-size="11">Online</text>
+
+  <!-- Metric Box 3 -->
+  <rect x="50" y="319" width="220" height="74" rx="8" fill="#14222b" stroke="#223644" stroke-width="1"/>
+  <text x="64" y="346" fill="#94a3a0" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Predictive Relocation</text>
+  <text x="64" y="376" fill="#ff7e56" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="700">0 Delay</text>
+  <text x="180" y="376" fill="#94a3a0" font-family="'JetBrains Mono', monospace" font-size="11">Risk Low</text>
+
+  <!-- Offline Cache indicator -->
+  <rect x="50" y="415" width="220" height="65" rx="8" fill="#132029" stroke="rgba(58,228,175,0.3)" stroke-width="1"/>
+  <text x="64" y="442" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">OFFLINE-FIRST SYNC</text>
+  <text x="64" y="464" fill="#94a3a0" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Cached SQLite · Zero-lag lookup</text>
+
+  <!-- Main Area: Ward Floor Map & Equipment Radar -->
+  <rect x="310" y="90" width="620" height="420" rx="12" fill="#0f181e" stroke="#1c2c36" stroke-width="1"/>
+  
+  <!-- Radar circles -->
+  <circle cx="620" cy="300" r="180" fill="url(#radar)"/>
+  <circle cx="620" cy="300" r="180" fill="none" stroke="#3ae4af" stroke-width="1" stroke-dasharray="4,6" opacity="0.4"/>
+  <circle cx="620" cy="300" r="120" fill="none" stroke="#3ae4af" stroke-width="1" opacity="0.3"/>
+  <circle cx="620" cy="300" r="60" fill="none" stroke="#3ae4af" stroke-width="1" opacity="0.5"/>
+  <circle cx="620" cy="300" r="8" fill="#3ae4af"/>
+
+  <!-- Beds & Equipment Nodes -->
+  <g font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3a0">
+    <!-- Bed 01 -->
+    <rect x="360" y="160" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="375" y="182" fill="#ffffff">BED 01</text>
+    <circle cx="410" cy="195" r="4" fill="#3ae4af"/>
+    
+    <!-- Bed 02 -->
+    <rect x="460" y="160" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="475" y="182" fill="#ffffff">BED 02</text>
+    <circle cx="510" cy="195" r="4" fill="#3ae4af"/>
+
+    <!-- Bed 03 -->
+    <rect x="710" y="160" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="725" y="182" fill="#ffffff">BED 03</text>
+    <circle cx="760" cy="195" r="4" fill="#3ae4af"/>
+
+    <!-- Bed 04 -->
+    <rect x="810" y="160" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="825" y="182" fill="#ffffff">BED 04</text>
+    <circle cx="860" cy="195" r="4" fill="#3ae4af"/>
+
+    <!-- Bed 05 -->
+    <rect x="360" y="380" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="375" y="402" fill="#ffffff">BED 05</text>
+    <circle cx="410" cy="415" r="4" fill="#60b5ff"/>
+
+    <!-- Bed 06 -->
+    <rect x="460" y="380" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="475" y="402" fill="#ffffff">BED 06</text>
+    <circle cx="510" cy="415" r="4" fill="#3ae4af"/>
+
+    <!-- Bed 07 -->
+    <rect x="710" y="380" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="725" y="402" fill="#ffffff">BED 07</text>
+    <circle cx="760" cy="415" r="4" fill="#3ae4af"/>
+
+    <!-- Bed 08 -->
+    <rect x="810" y="380" width="70" height="50" rx="6" fill="#15242d" stroke="#253a47" stroke-width="1"/>
+    <text x="825" y="402" fill="#ffffff">BED 08</text>
+    <circle cx="860" cy="415" r="4" fill="#ff7e56"/>
+  </g>
+
+  <!-- Live scan overlay badge -->
+  <rect x="330" y="110" width="340" height="34" rx="6" fill="#14232c" stroke="#243845" stroke-width="1"/>
+  <circle cx="348" cy="127" r="4" fill="#3ae4af"/>
+  <text x="362" y="131" fill="#f3f6f5" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">LIVE SCAN: ST THOMAS' HOSPITAL · WARD 4B</text>
+</svg>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting to Vaishnav Workspace...</title>
+    <script>
+      // Single Page App redirect for GitHub Pages
+      (function() {
+        var path = window.location.pathname;
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+        // If loaded under /vaishnav-workspace/ or root, redirect gracefully to index.html
+        var segments = path.split('/').filter(Boolean);
+        var base = segments.length > 0 ? '/' + segments[0] + '/' : '/';
+        window.location.replace(base + search + hash);
+      })();
+    </script>
+  </head>
+  <body style="background:#080a0c;color:#f4f4f5;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
+    <p>Redirecting to Vaishnav Workspace...</p>
+  </body>
+</html>

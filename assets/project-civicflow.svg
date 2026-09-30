@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cf-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#102a37"/>
+      <stop offset="100%" stop-color="#0b1b24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="540" fill="#f7faf8"/>
+
+  <!-- Left Sidebar (From real civicflow.html) -->
+  <rect x="0" y="0" width="220" height="540" fill="#102a37"/>
+  
+  <!-- Brand mark -->
+  <rect x="24" y="24" width="30" height="30" rx="8" fill="#c7ef6a"/>
+  <text x="33" y="44" fill="#102a37" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="900">C</text>
+  <text x="64" y="44" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800">Civic<tspan fill="#c7ef6a">Flow</tspan></text>
+
+  <!-- Workspace Box -->
+  <rect x="20" y="70" width="180" height="60" rx="8" fill="#183d4b" stroke="#2d5965" stroke-width="1"/>
+  <text x="32" y="90" fill="#9bb3b4" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700">WORKSPACE</text>
+  <text x="32" y="108" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Kingston Upon Thames</text>
+  <circle cx="36" cy="120" r="3" fill="#c7ef6a"/>
+  <text x="44" y="123" fill="#d2e8df" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Active Operations</text>
+
+  <!-- Navigation items -->
+  <g font-family="'Plus Jakarta Sans', sans-serif" font-size="11">
+    <rect x="20" y="145" width="180" height="34" rx="6" fill="#24515c"/>
+    <text x="36" y="166" fill="#ffffff" font-weight="700">Triage Queue</text>
+    <rect x="165" y="152" width="22" height="18" rx="9" fill="#c7ef6a"/>
+    <text x="172" y="165" fill="#102a37" font-weight="800" font-size="10">14</text>
+
+    <text x="36" y="206" fill="#b4c9c7">Cluster Map</text>
+    <text x="36" y="244" fill="#b4c9c7">Field Inspections</text>
+    <text x="36" y="282" fill="#b4c9c7">Verification Desk</text>
+  </g>
+
+  <!-- Top bar -->
+  <rect x="220" y="0" width="740" height="60" fill="#ffffff" stroke="#dfe8e3" stroke-width="1"/>
+  <text x="245" y="36" fill="#6a7773" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Overview / <tspan fill="#102321" font-weight="700">Infrastructure Defect Triage</tspan></text>
+  <rect x="800" y="15" width="130" height="30" rx="6" fill="#c7ef6a"/>
+  <text x="822" y="34" fill="#102a37" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">+ New Defect Scan</text>
+
+  <!-- Metric row -->
+  <g font-family="'Plus Jakarta Sans', sans-serif">
+    <!-- Card 1 -->
+    <rect x="245" y="80" width="215" height="85" rx="8" fill="#ffffff" stroke="#dfe8e3" stroke-width="1"/>
+    <text x="265" y="105" fill="#6a7773" font-size="11">Pending Triage</text>
+    <text x="265" y="138" fill="#ed7566" font-size="26" font-weight="800">14</text>
+    <text x="310" y="136" fill="#6a7773" font-size="11">Road Hazards</text>
+
+    <!-- Card 2 -->
+    <rect x="480" y="80" width="215" height="85" rx="8" fill="#ffffff" stroke="#dfe8e3" stroke-width="1"/>
+    <text x="500" y="105" fill="#6a7773" font-size="11">Clustered Duplicate Reports</text>
+    <text x="500" y="138" fill="#102a37" font-size="26" font-weight="800">42</text>
+    <text x="545" y="136" fill="#6d9b2d" font-size="11">Deduplicated 76%</text>
+
+    <!-- Card 3 -->
+    <rect x="715" y="80" width="215" height="85" rx="8" fill="#ffffff" stroke="#dfe8e3" stroke-width="1"/>
+    <text x="735" y="105" fill="#6a7773" font-size="11">Dispatched Works Orders</text>
+    <text x="735" y="138" fill="#102a37" font-size="26" font-weight="800">8</text>
+    <text x="765" y="136" fill="#6a7773" font-size="11">Crew Assigned</text>
+  </g>
+
+  <!-- Live Triage Queue Table (Real CivicFlow UI) -->
+  <rect x="245" y="185" width="685" height="325" rx="8" fill="#ffffff" stroke="#dfe8e3" stroke-width="1"/>
+  <rect x="245" y="185" width="685" height="40" rx="8" fill="#f7faf8" stroke="#dfe8e3" stroke-width="1"/>
+  
+  <g font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#6a7773">
+    <text x="265" y="210">DEFECT REF</text>
+    <text x="385" y="210">LOCATION</text>
+    <text x="560" y="210">SEVERITY</text>
+    <text x="690" y="210">CLUSTER STATUS</text>
+    <text x="840" y="210">ACTION</text>
+  </g>
+
+  <!-- Row 1 -->
+  <g font-family="'Plus Jakarta Sans', sans-serif" font-size="11">
+    <text x="265" y="250" font-family="'JetBrains Mono', monospace" font-weight="700" fill="#102321">POT-2026-081</text>
+    <text x="385" y="250" fill="#102321">A303 Byfleet Jn (Pothole 50mm)</text>
+    <rect x="560" y="235" width="80" height="22" rx="4" fill="#fdebe8"/>
+    <text x="572" y="250" fill="#ed7566" font-weight="700" font-size="10">CRITICAL</text>
+    <text x="690" y="250" fill="#6a7773">4 citizen reports merged</text>
+    <rect x="835" y="235" width="75" height="24" rx="4" fill="#102a37"/>
+    <text x="847" y="251" fill="#ffffff" font-weight="700" font-size="10">Verify ↗</text>
+    <line x1="245" y1="275" x2="930" y2="275" stroke="#dfe8e3" stroke-width="1"/>
+
+    <!-- Row 2 -->
+    <text x="265" y="305" font-family="'JetBrains Mono', monospace" font-weight="700" fill="#102321">KRB-2026-042</text>
+    <text x="385" y="305" fill="#102321">Kingston High St (Displaced Kerb)</text>
+    <rect x="560" y="290" width="80" height="22" rx="4" fill="#fef5e6"/>
+    <text x="572" y="305" fill="#f3b654" font-weight="700" font-size="10">MEDIUM</text>
+    <text x="690" y="305" fill="#6a7773">Verified by vehicle scan</text>
+    <rect x="835" y="290" width="75" height="24" rx="4" fill="#102a37"/>
+    <text x="847" y="306" fill="#ffffff" font-weight="700" font-size="10">Verify ↗</text>
+    <line x1="245" y1="330" x2="930" y2="330" stroke="#dfe8e3" stroke-width="1"/>
+
+    <!-- Row 3 -->
+    <text x="265" y="360" font-family="'JetBrains Mono', monospace" font-weight="700" fill="#102321">FIS-2026-119</text>
+    <text x="385" y="360" fill="#102321">Richmond Hill (Carriageway fissure)</text>
+    <rect x="560" y="345" width="80" height="22" rx="4" fill="#e8f8f2"/>
+    <text x="575" y="360" fill="#3ae4af" font-weight="700" font-size="10">LOW</text>
+    <text x="690" y="360" fill="#6a7773">Scheduled monitoring</text>
+    <rect x="835" y="345" width="75" height="24" rx="4" fill="#102a37"/>
+    <text x="847" y="361" fill="#ffffff" font-weight="700" font-size="10">Verify ↗</text>
+    <line x1="245" y1="385" x2="930" y2="385" stroke="#dfe8e3" stroke-width="1"/>
+
+    <!-- Row 4 -->
+    <text x="265" y="415" font-family="'JetBrains Mono', monospace" font-weight="700" fill="#102321">DRN-2026-093</text>
+    <text x="385" y="415" fill="#102321">Surbiton Rd (Gully Grate Blocked)</text>
+    <rect x="560" y="400" width="80" height="22" rx="4" fill="#fdebe8"/>
+    <text x="572" y="415" fill="#ed7566" font-weight="700" font-size="10">CRITICAL</text>
+    <text x="690" y="415" fill="#6a7773">Surface water risk flood</text>
+    <rect x="835" y="400" width="75" height="24" rx="4" fill="#102a37"/>
+    <text x="847" y="416" fill="#ffffff" font-weight="700" font-size="10">Verify ↗</text>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="carl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14110e"/>
+      <stop offset="100%" stop-color="#080706"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#carl-bg)"/>
+
+  <!-- Top bar -->
+  <rect x="30" y="24" width="900" height="50" rx="10" fill="#1f1a16" stroke="#362e26" stroke-width="1"/>
+  <circle cx="56" cy="49" r="6" fill="#ff5f56"/>
+  <circle cx="74" cy="49" r="6" fill="#ffbd2e"/>
+  <circle cx="92" cy="49" r="6" fill="#27c93f"/>
+  <text x="120" y="54" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">BABYCARL</text>
+  <text x="210" y="54" fill="#b09f90" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">| Small, Private Desktop Assistant · Zero External Telemetry</text>
+  <text x="760" y="54" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11">OFFLINE LOCAL INFERENCE</text>
+
+  <!-- Left: Native Terminal & Local Engine Log -->
+  <rect x="30" y="90" width="460" height="420" rx="12" fill="#181411" stroke="#2b231d" stroke-width="1"/>
+  <text x="54" y="125" fill="#b09f90" font-family="'JetBrains Mono', monospace" font-size="11">LOCAL EXECUTION RUNTIME</text>
+
+  <rect x="54" y="145" width="412" height="340" rx="8" fill="#0d0a08" stroke="#1f1813" stroke-width="1"/>
+  <g font-family="'JetBrains Mono', monospace" font-size="11">
+    <text x="70" y="180" fill="#3ae4af">$ babycarl --local-weights ./models/phi-3-mini.gguf</text>
+    <text x="70" y="205" fill="#99877b">[INFO] Initializing Metal / CPU acceleration</text>
+    <text x="70" y="230" fill="#99877b">[INFO] Memory allocated: 2.14 GB / 16.0 GB</text>
+    <text x="70" y="255" fill="#3ae4af">[INFO] Outbound network: DISCONNECTED (Air-gapped mode)</text>
+    
+    <text x="70" y="295" fill="#ffffff">> Query: "Index local health notes from Obsidian vault"</text>
+    <text x="70" y="325" fill="#ff7e56">[SQLITE VSS] 342 embedding vectors searched locally (12ms)</text>
+    <text x="70" y="355" fill="#99877b">> "Found 3 matching notes on sleep latency &amp; screen pacing."</text>
+    <text x="70" y="380" fill="#99877b">> "No personal data transmitted over WAN."</text>
+    
+    <text x="70" y="420" fill="#3ae4af">✓ INFERENCE COMPLETE · 48 TOKENS/SEC</text>
+    <text x="70" y="445" fill="#60b5ff">✓ PRIVACY AUDIT: 0 BYTES SENT TO CLOUD</text>
+  </g>
+
+  <!-- Right: Architecture & Hardware Diagnostics -->
+  <rect x="510" y="90" width="420" height="420" rx="12" fill="#181411" stroke="#2b231d" stroke-width="1"/>
+  <text x="534" y="125" fill="#b09f90" font-family="'JetBrains Mono', monospace" font-size="11">DEVICE HARDWARE TELEMETRY</text>
+
+  <g transform="translate(534, 150)">
+    <!-- CPU Gauge -->
+    <rect x="0" y="0" width="180" height="90" rx="8" fill="#1f1a16" stroke="#362e26" stroke-width="1"/>
+    <text x="16" y="28" fill="#b09f90" font-family="'JetBrains Mono', monospace" font-size="10">CPU USAGE</text>
+    <text x="16" y="60" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="700">18%</text>
+    <text x="80" y="60" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11">Energy Low</text>
+
+    <!-- RAM Gauge -->
+    <rect x="192" y="0" width="180" height="90" rx="8" fill="#1f1a16" stroke="#362e26" stroke-width="1"/>
+    <text x="208" y="28" fill="#b09f90" font-family="'JetBrains Mono', monospace" font-size="10">LOCAL RAM</text>
+    <text x="208" y="60" fill="#60b5ff" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="700">2.1 GB</text>
+    <text x="290" y="60" fill="#b09f90" font-family="'JetBrains Mono', monospace" font-size="11">Compact</text>
+
+    <!-- Database Box -->
+    <rect x="0" y="105" width="372" height="100" rx="8" fill="#1f1a16" stroke="#362e26" stroke-width="1"/>
+    <text x="16" y="132" fill="#b09f90" font-family="'JetBrains Mono', monospace" font-size="10">STORAGE PARADIGM</text>
+    <text x="16" y="160" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700">SQLite + sqlite-vec vector extension</text>
+    <text x="16" y="184" fill="#a08f82" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">100% single-file persistence stored inside your user folder</text>
+
+    <!-- Key Principle Box -->
+    <rect x="0" y="220" width="372" height="120" rx="8" fill="#142119" stroke="rgba(58,228,175,0.3)" stroke-width="1"/>
+    <text x="16" y="248" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">CORE VALUE ARCHITECTURE</text>
+    <text x="16" y="274" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="600">"Useful AI does not always need to leave your device."</text>
+    <text x="16" y="300" fill="#a5d8c3" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Your notes, emails, and ideas stay exclusively on your hardware.</text>
+  </g>
+</svg>

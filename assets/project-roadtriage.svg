@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="road-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121817"/>
+      <stop offset="100%" stop-color="#080c0b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#road-bg)"/>
+
+  <!-- Top bar -->
+  <rect x="30" y="24" width="900" height="50" rx="10" fill="#182321" stroke="#2a3d3a" stroke-width="1"/>
+  <circle cx="56" cy="49" r="6" fill="#ff5f56"/>
+  <circle cx="74" cy="49" r="6" fill="#ffbd2e"/>
+  <circle cx="92" cy="49" r="6" fill="#27c93f"/>
+  <text x="120" y="54" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">UK ROAD DEFECT TRIAGE</text>
+  <text x="315" y="54" fill="#8ea6a1" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">| Computer Vision &amp; Automated Edge Hazard Classification</text>
+  <text x="760" y="54" fill="#ff7e56" font-family="'JetBrains Mono', monospace" font-size="11">YOLOv8 EDGE INFERENCE</text>
+
+  <!-- Left: Road camera view with real bounding boxes -->
+  <rect x="30" y="90" width="560" height="420" rx="12" fill="#131a19" stroke="#253633" stroke-width="1"/>
+  
+  <!-- Simulated asphalt road perspective -->
+  <polygon points="120,510 240,160 380,160 500,510" fill="#1b2423"/>
+  <!-- Lane markings -->
+  <line x1="310" y1="180" x2="310" y2="230" stroke="#ffbd2e" stroke-width="4"/>
+  <line x1="310" y1="270" x2="310" y2="330" stroke="#ffbd2e" stroke-width="6"/>
+  <line x1="310" y1="380" x2="310" y2="470" stroke="#ffbd2e" stroke-width="8"/>
+
+  <!-- Pothole Bounding Box #1 -->
+  <rect x="180" y="320" width="130" height="90" fill="rgba(255,126,86,0.15)" stroke="#ff7e56" stroke-width="2" rx="4"/>
+  <rect x="180" y="300" width="165" height="20" fill="#ff7e56" rx="3"/>
+  <text x="188" y="314" fill="#0c1418" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="800">POTHOLE · SEV 3 (94.2%)</text>
+  <circle cx="245" cy="365" r="22" fill="#0d1413" stroke="#2b3b38" stroke-width="2"/>
+
+  <!-- Kerb Fracture Bounding Box #2 -->
+  <rect x="390" y="240" width="110" height="70" fill="rgba(255,189,46,0.15)" stroke="#ffbd2e" stroke-width="1.5" rx="4"/>
+  <rect x="390" y="222" width="160" height="18" fill="#ffbd2e" rx="3"/>
+  <text x="396" y="235" fill="#0c1418" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="800">KERB FRACTURE (87.5%)</text>
+
+  <!-- Right: Defect Telemetry & GIS Tagging -->
+  <rect x="610" y="90" width="320" height="420" rx="12" fill="#131a19" stroke="#253633" stroke-width="1"/>
+  <text x="634" y="125" fill="#8ea6a1" font-family="'JetBrains Mono', monospace" font-size="11">INSPECTION TELEMETRY</text>
+
+  <g transform="translate(634, 150)" font-family="'JetBrains Mono', monospace">
+    <rect x="0" y="0" width="272" height="70" rx="8" fill="#1c2826" stroke="#2d423f" stroke-width="1"/>
+    <text x="14" y="26" fill="#8ea6a1" font-size="10">GPS POSITION (SURREY A3)</text>
+    <text x="14" y="52" fill="#ffffff" font-size="14" font-weight="700">51.2362° N, 0.5704° W</text>
+
+    <rect x="0" y="85" width="272" height="70" rx="8" fill="#1c2826" stroke="#2d423f" stroke-width="1"/>
+    <text x="14" y="111" fill="#8ea6a1" font-size="10">VEHICLE VELOCITY</text>
+    <text x="14" y="137" fill="#3ae4af" font-size="14" font-weight="700">32 MPH · Realtime 30 FPS</text>
+
+    <rect x="0" y="170" width="272" height="130" rx="8" fill="#1c2826" stroke="#2d423f" stroke-width="1"/>
+    <text x="14" y="196" fill="#ff7e56" font-size="11" font-weight="700">PRIORITY RECOMMENDATION</text>
+    <text x="14" y="222" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Pothole exceeds 40mm depth threshold near cyclist corridor.</text>
+    <text x="14" y="260" fill="#3ae4af" font-size="11">➔ AUTO-SCHEDULE REPAIR ORDER</text>
+  </g>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gc-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14111d"/>
+      <stop offset="100%" stop-color="#08070d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#gc-bg)"/>
+
+  <!-- Top bar -->
+  <rect x="30" y="24" width="900" height="50" rx="10" fill="#1b1828" stroke="#2e2842" stroke-width="1"/>
+  <circle cx="56" cy="49" r="6" fill="#ff5f56"/>
+  <circle cx="74" cy="49" r="6" fill="#ffbd2e"/>
+  <circle cx="92" cy="49" r="6" fill="#27c93f"/>
+  <text x="120" y="54" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">AI GROUP CHAT</text>
+  <text x="250" y="54" fill="#a29ab8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">| The Original Creator Exploration &amp; Vibe Coding Setup</text>
+  <text x="760" y="54" fill="#c2bfff" font-family="'JetBrains Mono', monospace" font-size="11">V1 HISTORIC SNAPSHOT</text>
+
+  <!-- Left: Multi-Agent Chat Thread -->
+  <rect x="30" y="90" width="560" height="420" rx="12" fill="#171322" stroke="#2b233e" stroke-width="1"/>
+  <text x="54" y="125" fill="#a29ab8" font-family="'JetBrains Mono', monospace" font-size="11">CREATOR ARCHETYPES IN CONVERSATION</text>
+
+  <!-- Chat bubble 1 -->
+  <g transform="translate(54, 150)">
+    <rect x="0" y="0" width="340" height="60" rx="14" fill="#241e34" stroke="#3b3254" stroke-width="1"/>
+    <text x="18" y="26" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">CREATOR (USER)</text>
+    <text x="18" y="46" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">"Make something useful. That's the plan."</text>
+  </g>
+
+  <!-- Chat bubble 2 -->
+  <g transform="translate(140, 230)">
+    <rect x="0" y="0" width="380" height="74" rx="14" fill="#1b2530" stroke="#2c3e50" stroke-width="1"/>
+    <text x="18" y="26" fill="#60b5ff" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">ENGINEER AGENT</text>
+    <text x="18" y="46" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">"Keep the state local. Don't add a database until users actually demand multi-device sync."</text>
+  </g>
+
+  <!-- Chat bubble 3 -->
+  <g transform="translate(100, 325)">
+    <rect x="0" y="0" width="420" height="74" rx="14" fill="#291a24" stroke="#482d3e" stroke-width="1"/>
+    <text x="18" y="26" fill="#ff7e56" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">STRATEGY AGENT</text>
+    <text x="18" y="46" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="13">"Start with one nurse on one ward. If it saves her 10 minutes, the rest of the hospital follows."</text>
+  </g>
+
+  <!-- Right: Comparative Matrix -->
+  <rect x="610" y="90" width="320" height="420" rx="12" fill="#171322" stroke="#2b233e" stroke-width="1"/>
+  <text x="634" y="125" fill="#a29ab8" font-family="'JetBrains Mono', monospace" font-size="11">BUILDER COMPARISON MATRIX</text>
+
+  <g transform="translate(634, 150)" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">
+    <rect x="0" y="0" width="272" height="90" rx="8" fill="#201a30" stroke="#33294c" stroke-width="1"/>
+    <text x="14" y="28" fill="#c2bfff" font-weight="700">Prompt Scaffolding</text>
+    <text x="14" y="52" fill="#d2cbe3">Structured JSON schemas yield 4x higher consistency than raw markdown.</text>
+
+    <rect x="0" y="105" width="272" height="90" rx="8" fill="#201a30" stroke="#33294c" stroke-width="1"/>
+    <text x="14" y="133" fill="#60b5ff" font-weight="700">Fast Iteration &amp; Deploy</text>
+    <text x="14" y="157" fill="#d2cbe3">Single static deploys with local mocking allow instant user validation.</text>
+
+    <rect x="0" y="210" width="272" height="110" rx="8" fill="#1b2820" stroke="rgba(58,228,175,0.3)" stroke-width="1"/>
+    <text x="14" y="238" fill="#3ae4af" font-weight="700">Key Learning</text>
+    <text x="14" y="262" fill="#ffffff">The best AI tool is the one that gets out of the way of the person doing the work.</text>
+  </g>
+</svg>

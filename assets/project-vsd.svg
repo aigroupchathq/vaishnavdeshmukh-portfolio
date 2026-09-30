@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vsd-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#140f0c"/>
+      <stop offset="100%" stop-color="#0a0807"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#vsd-grad)"/>
+
+  <!-- Top bar -->
+  <rect x="30" y="24" width="900" height="50" rx="10" fill="#1c1613" stroke="#2d231e" stroke-width="1"/>
+  <circle cx="56" cy="49" r="6" fill="#ff5f56"/>
+  <circle cx="74" cy="49" r="6" fill="#ffbd2e"/>
+  <circle cx="92" cy="49" r="6" fill="#27c93f"/>
+  <text x="120" y="54" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">VSD <tspan fill="#ff7e56">LOGISTICS</tspan></text>
+  <text x="240" y="54" fill="#99877d" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">| Self-Hosted Privacy-Scoped Dispatch &amp; Tracking</text>
+  <text x="760" y="54" fill="#ff7e56" font-family="'JetBrains Mono', monospace" font-size="11">LIVE DEMO · PRIVACY OPT-IN</text>
+
+  <!-- Left Card: Live Shipment Overview -->
+  <rect x="30" y="90" width="460" height="420" rx="12" fill="#181310" stroke="#2a1f1a" stroke-width="1"/>
+  <text x="54" y="125" fill="#a8958b" font-family="'JetBrains Mono', monospace" font-size="11">SHIPMENT DISPATCH CONSOLE</text>
+  <text x="54" y="160" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800">VSD-2048</text>
+  <rect x="190" y="142" width="90" height="24" rx="4" fill="rgba(255,126,86,0.18)" stroke="#ff7e56" stroke-width="1"/>
+  <text x="202" y="158" fill="#ff7e56" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">IN TRANSIT</text>
+
+  <text x="54" y="195" fill="#cfc2bc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14">London Depot (Heathrow Hub) ➔ Customer Delivery (EC2A)</text>
+  
+  <!-- 4-Stage Progress Bar -->
+  <g transform="translate(54, 220)">
+    <rect x="0" y="0" width="95" height="6" rx="3" fill="#ff7e56"/>
+    <rect x="105" y="0" width="95" height="6" rx="3" fill="#ff7e56"/>
+    <rect x="210" y="0" width="95" height="6" rx="3" fill="#ff7e56"/>
+    <rect x="315" y="0" width="95" height="6" rx="3" fill="#3a2e28"/>
+    
+    <text x="0" y="24" fill="#a8958b" font-family="'JetBrains Mono', monospace" font-size="10">Order Booked</text>
+    <text x="105" y="24" fill="#a8958b" font-family="'JetBrains Mono', monospace" font-size="10">Collected</text>
+    <text x="210" y="24" fill="#ff7e56" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">In Transit</text>
+    <text x="315" y="24" fill="#66574f" font-family="'JetBrains Mono', monospace" font-size="10">Delivered</text>
+  </g>
+
+  <!-- Live Telemetry Pings -->
+  <text x="54" y="290" fill="#a8958b" font-family="'JetBrains Mono', monospace" font-size="11">CONSENT-BASED GPS EVENT LOG</text>
+  <g font-family="'Plus Jakarta Sans', sans-serif" font-size="11" transform="translate(54, 310)">
+    <circle cx="6" cy="10" r="4" fill="#ff7e56"/>
+    <text x="22" y="14" fill="#ffffff" font-weight="600">Driver Opt-in Ping Received</text>
+    <text x="330" y="14" fill="#a8958b" font-family="'JetBrains Mono', monospace">11:15 BST</text>
+    <text x="22" y="30" fill="#99877d" font-size="10">GPS coordinates shared strictly inside customer geofence</text>
+
+    <line x1="6" y1="20" x2="6" y2="55" stroke="#3a2e28" stroke-width="2"/>
+
+    <circle cx="6" cy="65" r="4" fill="#3ae4af"/>
+    <text x="22" y="69" fill="#ffffff" font-weight="600">Origin Depot Scan Confirmed</text>
+    <text x="330" y="69" fill="#a8958b" font-family="'JetBrains Mono', monospace">09:42 BST</text>
+    <text x="22" y="85" fill="#99877d" font-size="10">Automated barcode scan verified by dispatch engine</text>
+  </g>
+
+  <!-- Right Card: Route Simulation Map -->
+  <rect x="510" y="90" width="420" height="420" rx="12" fill="#140f0c" stroke="#2a1f1a" stroke-width="1"/>
+  
+  <!-- Stylized London Thames & Route -->
+  <g stroke="#30241e" stroke-width="1" fill="none">
+    <path d="M 520 200 Q 600 240 700 210 T 850 250 T 920 220" stroke="#253540" stroke-width="18"/>
+  </g>
+
+  <!-- Route Line -->
+  <path d="M 560 380 Q 640 320 720 260 T 820 180" stroke="#ff7e56" stroke-width="3" stroke-dasharray="8,6" fill="none"/>
+  
+  <!-- Origin Point -->
+  <circle cx="560" cy="380" r="10" fill="#ff7e56" fill-opacity="0.3"/>
+  <circle cx="560" cy="380" r="5" fill="#ff7e56"/>
+  <text x="580" y="385" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">HEATHROW DEPOT</text>
+
+  <!-- Current Van Location -->
+  <circle cx="720" cy="260" r="14" fill="#3ae4af" fill-opacity="0.2"/>
+  <circle cx="720" cy="260" r="7" fill="#3ae4af"/>
+  <rect x="690" y="210" width="130" height="34" rx="6" fill="#1c1613" stroke="#3ae4af" stroke-width="1"/>
+  <text x="702" y="226" fill="#3ae4af" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">● LIVE VEHICLE</text>
+  <text x="702" y="238" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">SPEED: 26 MPH</text>
+
+  <!-- Destination Point -->
+  <circle cx="820" cy="180" r="8" fill="#ffffff"/>
+  <text x="836" y="185" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">EC2A LONDON</text>
+</svg>
