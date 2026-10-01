@@ -31,7 +31,7 @@ Explore full-screen interactive prototypes, system specifications, and architect
 │ Prototype                   │ Architecture & Domain                │ Target Engineering Benchmark  │
 ├─────────────────────────────┼──────────────────────────────────────┼───────────────────────────────┤
 │ Ward Logistics Engine       │ Healthcare Telemetry · BLE · FHIR v4 │ <9s target locate speed       │
-│ iTHINK 3D Neuroanatomy      │ Three.js WebGL · GLSL Shaders        │ 60 FPS sustained render       │
+│ iTHINK Attention & Flow Lab │ Three.js WebGL · Cognitive Practice  │ Five learning layouts         │
 │ CivicFlow Municipal Triage  │ Civic Systems · PostGIS · DBSCAN     │ Sub-sec spatial deduplication │
 │ AI Script Studio DAW        │ Generative Audio · AudioWorklet DSP  │ Sub-12ms processing target    │
 │ RoadTriage Vision           │ Edge Computer Vision · YOLOv8 ONNX   │ Client-side on-device infer   │
@@ -41,6 +41,8 @@ Explore full-screen interactive prototypes, system specifications, and architect
 │ VISION Prompt Lab           │ AI Ergonomics · Prompt Architecture  │ 14 operational prompt models  │
 └─────────────────────────────┴──────────────────────────────────────┴───────────────────────────────┘
 ```
+
+**iTHINK:** [Updated experience](https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink/) · [Previous version](https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink-v1/) · [Source code](https://github.com/aigroupchathq/iTHINKwip)
 
 ---
 
