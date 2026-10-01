@@ -27,16 +27,16 @@
               'canvas-base': '#080a0c',
               'canvas-surface': '#0e1216',
               'canvas-elevated': '#13181f',
-              'canvas-accent': '#ff3358', // Vibrant Electric Red / Crimson
-              'canvas-accent-glow': 'rgba(255, 51, 88, 0.25)',
-              'canvas-red': '#ff3358',
-              'canvas-red-hover': '#ff1a43',
-              'canvas-alert': '#ff2a4b',
-              'canvas-blue': '#2f81f7', // Electric Cobalt Blue
-              'canvas-blue-glow': 'rgba(47, 129, 247, 0.25)',
-              'canvas-blue-light': '#58a6ff',
-              'canvas-amber': '#ffb03b',
-              'canvas-purple': '#a78bfa',
+              'canvas-accent': '#f5f5f5',
+              'canvas-accent-glow': 'rgba(245, 245, 245, 0.18)',
+              'canvas-red': '#d4d4d4',
+              'canvas-red-hover': '#ffffff',
+              'canvas-alert': '#d4d4d4',
+              'canvas-blue': '#c4c4c4',
+              'canvas-blue-glow': 'rgba(196, 196, 196, 0.18)',
+              'canvas-blue-light': '#e5e5e5',
+              'canvas-amber': '#b8b8b8',
+              'canvas-purple': '#a3a3a3',
               'canvas-border': 'rgba(255, 255, 255, 0.08)',
               'canvas-border-mid': 'rgba(255, 255, 255, 0.14)',
               'canvas-border-strong': 'rgba(255, 255, 255, 0.28)'
@@ -55,14 +55,18 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+      /* Keep project previews, illustrations, and generated graphics in the same monochrome palette. */
+      html {
+        filter: grayscale(1);
+      }
       /* WCAG 2.2 AA Focus Rings & Custom Neo-Brutalist Micro-Details */
       :focus-visible {
-        outline: 2px solid #ff3358 !important;
+        outline: 2px solid #ffffff !important;
         outline-offset: 3px !important;
       }
       ::selection {
-        background-color: #ff3358;
-        color: #ffffff;
+        background-color: #ffffff;
+        color: #080808;
       }
       .hairline-grid {
         background-size: 32px 32px;
@@ -136,7 +140,7 @@
         touch-action: none;
       }
       @media print {
-        #splashOverlay, #splashCanvas, .fixed, nav, footer, #caseStudyModalBackdrop, #profileModalBackdrop {
+        #splashOverlay, #splashCanvas, .fixed:not(#caseStudyModalBackdrop), nav, footer, #profileModalBackdrop {
           display: none !important;
         }
         body {
@@ -158,11 +162,51 @@
           text-decoration: underline !important;
           color: #1d4ed8 !important;
         }
+        #caseStudyModalBackdrop.print-dossier {
+          display: block !important;
+          position: static !important;
+          inset: auto !important;
+          overflow: visible !important;
+          padding: 0 !important;
+          background: #ffffff !important;
+          color: #111827 !important;
+          backdrop-filter: none !important;
+        }
+        #caseStudyModalBackdrop.print-dossier > div {
+          width: 100% !important;
+          max-width: none !important;
+          max-height: none !important;
+          overflow: visible !important;
+          display: block !important;
+          border: 0 !important;
+          box-shadow: none !important;
+          background: #ffffff !important;
+        }
+        #caseStudyModalBackdrop.print-dossier .overflow-y-auto {
+          overflow: visible !important;
+        }
+        #caseStudyModalBackdrop.print-dossier,
+        #caseStudyModalBackdrop.print-dossier * {
+          color: #111827 !important;
+          background-color: #ffffff !important;
+          border-color: #d1d5db !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+        }
+        #caseStudyModalBackdrop.print-dossier button,
+        #caseStudyModalBackdrop.print-dossier #modalLiveLinkContainer,
+        #caseStudyModalBackdrop.print-dossier #modalInquireLink {
+          display: none !important;
+        }
+        #caseStudyModalBackdrop.print-dossier article {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
       }
     </style>
   </head>
 
-  <body class="bg-canvas-base text-[#f2f5f4] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
+  <body class="bg-canvas-base text-[#f5f5f5] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
     <div id="splashOverlay" role="dialog" aria-modal="true" aria-label="Portfolio introduction" class="splash-is-entering fixed inset-0 z-[9999] flex min-h-screen flex-col overflow-hidden bg-black px-6 py-5 text-white transition-all duration-500 select-none sm:px-10 sm:py-7">
       <canvas id="splashCanvas" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></canvas>
       <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/45 pointer-events-none"></div>
@@ -252,7 +296,7 @@
             <i data-lucide="copy" class="w-3.5 h-3.5 text-canvas-accent"></i>
             <span id="copyEmailTopText">Copy email</span>
           </button>
-          <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-canvas-accent text-white text-xs font-mono font-bold hover:bg-[#ff1a43] transition-transform hover:-translate-y-0.5 shadow-[0_0_15px_rgba(255,51,88,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
+          <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-canvas-accent text-white text-xs font-mono font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 shadow-[0_0_15px_rgba(255,51,88,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
             <span>Send email</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
@@ -705,7 +749,7 @@
 
                       <div id="wardSimulatorOutput" class="p-2.5 rounded bg-black/60 border border-canvas-border font-mono text-[11px] text-zinc-300 flex flex-wrap items-center justify-between gap-2">
                         <div>
-                          <span class="text-canvas-accent font-bold">AL GP 084</span> · Bay 2, Bed 07 · Signal: <span class="text-zinc-100 font-semibold">-58 dBm (Strong)</span> · Distance: <span class="text-emerald-400 font-bold">1.4m</span>
+                          <span class="text-canvas-accent font-bold">AL GP 084</span> · Bay 2, Bed 07 · Signal: <span class="text-zinc-100 font-semibold">-58 dBm (Strong)</span> · Distance: <span class="text-zinc-300 font-bold">1.4m</span>
                         </div>
                         <span class="text-[10px] px-2 py-0.5 rounded bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/30">RSSI Triangulated</span>
                       </div>
@@ -950,7 +994,7 @@
                 <span>Inspect Blueprint</span>
                 <i data-lucide="maximize-2" class="w-3 h-3"></i>
               </button>
-              <a href="./civicflow.html" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-accent text-white font-bold hover:bg-[#ff1a43] transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
+              <a href="./civicflow.html" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
                 <span>Open CivicFlow tool</span>
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
@@ -1294,7 +1338,7 @@
                         <span class="text-zinc-300 font-bold flex items-center gap-1.5">
                           <i data-lucide="shield-check" class="w-3.5 h-3.5 text-canvas-purple"></i> Privacy Prover Verification:
                         </span>
-                        <span class="text-emerald-400 font-bold">0 Bytes Exfiltration</span>
+                        <span class="text-zinc-300 font-bold">0 Bytes Exfiltration</span>
                       </div>
 
                       <!-- Privacy View Toggle -->
@@ -1317,10 +1361,10 @@
 
                       <!-- View B: Verifier Zero Knowledge View (Hidden by default, toggled via JS) -->
                       <div id="zkVerifierContentView" class="hidden p-2.5 rounded bg-black/60 border border-white/10 text-[11px] space-y-1">
-                        <div class="text-zinc-400">Public Invariant: <span class="text-emerald-400 font-bold">is_above_age_18 = 1 (TRUE)</span></div>
+                        <div class="text-zinc-400">Public Invariant: <span class="text-zinc-300 font-bold">is_above_age_18 = 1 (TRUE)</span></div>
                         <div class="text-zinc-400">Jurisdiction Hash: <span class="text-zinc-200 font-mono">0x44 (GBR Valid)</span></div>
                         <div class="text-zinc-400">Groth16 Curve: <span class="text-zinc-200 font-mono">BN254 (Pairing verified)</span></div>
-                        <div class="text-emerald-400 text-[10px] pt-1">Zero plaintext bytes transmitted. Mathematical certainty achieved.</div>
+                        <div class="text-zinc-300 text-[10px] pt-1">Zero plaintext bytes transmitted. Mathematical certainty achieved.</div>
                       </div>
 
                       <div class="flex items-center justify-between gap-2 pt-1">
@@ -1331,7 +1375,7 @@
                       </div>
                       <div id="zkProofResult" class="p-2 rounded bg-black/60 border border-white/10 text-[10px] text-zinc-300">
                         <div class="text-zinc-400">Circuit: <span class="text-zinc-200">age_credential_check.circom</span></div>
-                        <div class="text-emerald-400 font-bold mt-0.5">Proof Valid: Age >= 18 · Identity bytes sent: 0</div>
+                        <div class="text-zinc-300 font-bold mt-0.5">Proof Valid: Age >= 18 · Identity bytes sent: 0</div>
                       </div>
                     </div>
                   </div>
@@ -2010,7 +2054,7 @@
                   <span aria-hidden="true" class="text-zinc-600">·</span>
                   <span class="text-zinc-200">Q3 2026</span>
                   <span aria-hidden="true" class="text-zinc-600">·</span>
-                  <span class="text-emerald-400">In Active Development</span>
+                  <span class="text-zinc-300">In Active Development</span>
                 </div>
                 <div class="flex items-center gap-2 text-[11px] text-zinc-500">
                   <span>Planned Repo: github.com/deshmukhvaishnav/ward-engine-core</span>
@@ -2092,7 +2136,7 @@
                   <span aria-hidden="true" class="text-zinc-600">·</span>
                   <span class="text-zinc-200">Q4 2026</span>
                   <span aria-hidden="true" class="text-zinc-600">·</span>
-                  <span class="text-emerald-400">In Active Development</span>
+                  <span class="text-zinc-300">In Active Development</span>
                 </div>
                 <div class="flex items-center gap-2 text-[11px] text-zinc-500">
                   <span>Planned Repo: github.com/deshmukhvaishnav/ithink-spatial-webgpu</span>
@@ -2173,7 +2217,7 @@
                   <span aria-hidden="true" class="text-zinc-600">·</span>
                   <span class="text-zinc-200">Q1 2027</span>
                   <span aria-hidden="true" class="text-zinc-600">·</span>
-                  <span class="text-amber-400">RFC Open / Architecture Phase</span>
+                  <span class="text-zinc-300">RFC Open / Architecture Phase</span>
                 </div>
                 <div class="flex items-center gap-2 text-[11px] text-zinc-500">
                   <span>Planned Repo: github.com/deshmukhvaishnav/civicflow-edge-triage</span>
@@ -2422,7 +2466,7 @@
                 <i data-lucide="copy" class="w-4 h-4 text-canvas-accent"></i>
                 <span id="copyEmailFooterText">deshmukhvaishnav@gmail.com</span>
               </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-canvas-accent text-white font-bold hover:bg-[#ff1a43] transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-[0_0_20px_rgba(255,51,88,0.4)]">
+              <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-[0_0_20px_rgba(255,51,88,0.4)]">
                 <span>Send an email</span>
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </a>
@@ -2488,7 +2532,7 @@
 
             <!-- Actions -->
             <div class="flex flex-wrap items-center gap-3">
-              <button type="button" id="launchBriefEmailBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-canvas-accent text-white font-bold text-xs hover:bg-[#ff1a43] transition-all transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(255,51,88,0.4)] cursor-pointer">
+              <button type="button" id="launchBriefEmailBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-canvas-accent text-white font-bold text-xs hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(255,51,88,0.4)] cursor-pointer">
                 <span>Launch Email with Brief</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </button>
@@ -2571,7 +2615,7 @@
             <div class="p-4 rounded-xl bg-canvas-base border border-canvas-alert/30">
               <div class="text-canvas-alert font-bold uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                 <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
-                <span>The Field Constraint</span>
+                <span>The User Need</span>
               </div>
               <p id="modalProblemText" class="text-zinc-200 font-sans text-sm leading-relaxed">
                 Acute hospital wards manage hundreds of mobile infusion pumps that shift between rooms.
@@ -2580,7 +2624,7 @@
             <div class="p-4 rounded-xl bg-canvas-base border border-canvas-accent/30">
               <div class="text-canvas-accent font-bold uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                 <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-                <span>Inventive Engineering</span>
+                <span>What the Prototype Does</span>
               </div>
               <p id="modalSolutionText" class="text-zinc-200 font-sans text-sm leading-relaxed">
                 Sub-meter BLE triangulation combined with offline-first IndexedDB and HL7 FHIR sync.
@@ -2592,7 +2636,7 @@
           <div class="p-4 rounded-xl bg-canvas-base border border-canvas-border font-mono text-xs space-y-3">
             <div class="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
               <i data-lucide="layers" class="w-3.5 h-3.5 text-canvas-blue"></i>
-              <span>System Stack &amp; Verification</span>
+              <span>Technologies Used in the Prototype</span>
             </div>
             <div id="modalStackTags" class="flex flex-wrap gap-1.5">
               <!-- Injected via JS -->
@@ -2601,6 +2645,7 @@
               <!-- Injected via JS -->
             </p>
           </div>
+          <div id="modalDossierSections" class="space-y-6"></div>
         </div>
 
         <!-- Modal Footer Actions -->
@@ -2609,7 +2654,7 @@
             <!-- Injected via JS if live URL exists -->
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" id="modalStartBriefBtn" class="px-4 py-2 rounded-lg bg-canvas-accent text-white font-bold hover:bg-[#ff1a43] transition-colors flex items-center gap-1.5 cursor-pointer">
+            <button type="button" id="modalStartBriefBtn" class="px-4 py-2 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-colors flex items-center gap-1.5 cursor-pointer">
               <span>Build Project Brief</span>
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
             </button>
@@ -2722,7 +2767,7 @@
               <i data-lucide="printer" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Print / Save Dossier</span>
             </button>
-            <a href="mailto:deshmukhvaishnav@gmail.com" class="px-4 py-2 rounded-lg bg-canvas-accent text-white font-bold hover:bg-[#ff1a43] transition-colors flex items-center gap-1.5">
+            <a href="mailto:deshmukhvaishnav@gmail.com" class="px-4 py-2 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-colors flex items-center gap-1.5">
               <span>Send Inquiry</span>
               <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
             </a>
@@ -4043,10 +4088,75 @@
             domain: "Cognitive Practice · Neuroscience Learning",
             previewImg: "assets/project-ithink.svg",
             badges: ["Three.js WebGL", "Interactive Brain Atlas", "Flow State Practice", "Five Learning Layouts"],
-            problem: "Attention and flow are often described in abstract terms, while static content makes it difficult to connect practical observation with neuroscience concepts.",
-            solution: "A browser-based learning lab that pairs an interactive 3D brain atlas with guided cognitive practice, flow reflection, and five distinct ways to explore concepts.",
+            problem: "iTHINK addresses a learning-design problem: attention and flow can feel abstract when presented only as definitions or static diagrams. Its intended audience is curious adults and learners who want an accessible introduction to cognitive practice and neuroscience. The app combines short attention tasks with an interactive brain atlas and optional reflection. For example, a learner can try a short task that asks them to withhold an automatic response, then explore a sourced explanation of neural signaling. The project materials do not document evaluation with a representative user group, so the size of the need and the quality of learning outcomes remain unverified.",
+            solution: "iTHINK is a browser-based educational prototype that combines scripted attention exercises, a 3D brain atlas, a flow reflection lab, audio tools, and five explanatory layouts. React and TypeScript help build and check the interface, while Three.js and WebGL are browser tools for displaying the interactive 3D brain model. Practice history uses browser storage, meaning the browser keeps it on the same device rather than in an iTHINK account. For example, a person can complete a short task, review their own score, and separately read how the brain model simplifies neuroscience. These features demonstrate an interface and learning concept, not a validated training treatment or a measurement of brain state.",
             stack: ["React / TypeScript", "Three.js / WebGL", "Interactive learning layouts", "Browser-local practice data", "Responsive navigation"],
-            impact: "An educational, non-diagnostic prototype. It does not read thoughts, measure brain activity, or detect flow; it helps users explore concepts and reflect on their own experience.",
+            impact: "The present impact is a publicly accessible demonstration of neuroscience learning and self-observation, not a proven improvement in attention or wellbeing. The live prototype brings exercises, explanatory material, and reflection into one browser experience. Its source code keeps challenge history in the user's browser storage, which supports on-device review without a central practice-history account. For example, a learner can compare their own task attempts over time and use the result as a prompt for reflection. The project materials reviewed document no published outcome study, independent evaluation, or verified economic saving, and the app does not read thoughts, measure brain activity, diagnose conditions, or detect flow.",
+            dossier: [
+              {
+                title: "Market & scope",
+                entries: [
+                  {
+                    question: "Who is iTHINK for?",
+                    answer: "iTHINK is intended for curious adults, students, and educators looking for an approachable way to explore attention and neuroscience concepts. It brings short practice tasks, plain-language explanations, and self-reflection together in one place. That combination is relevant to people who want to learn without starting with specialist equipment or a clinical appointment. For example, an educator could use the brain atlas as a discussion aid before asking learners to reflect on a simple attention task. The project materials do not document representative-user testing, so its best audience and accessibility needs still require research."
+                  },
+                  {
+                    question: "How large is the market opportunity?",
+                    answer: "The market opportunity has not yet been sized or validated. The project evidence contains no verified customer counts, paid contracts, repeat-use results, or findings on what users would pay. Potential audiences include independent learners, education settings, and organizations exploring general wellbeing education, but these are segments to investigate rather than confirmed buyers. For example, interviews could compare educator interest with repeat use by self-directed learners before estimating demand. No market-size or growth claim should be presented until reliable external sources and a clear research method support it."
+                  },
+                  {
+                    question: "How could it earn money?",
+                    answer: "iTHINK currently has no paid plan and reports no revenue. The live project is a publicly accessible prototype, and no commercial pricing or sales process has been validated. Possible future routes to test could include institutional licenses, which let an organization pay for access for its learners, funded education pilots, or grants. For example, an education partner might fund a time-limited pilot after agreeing on learning goals and evaluation criteria. These are options for investigation, not existing offers, commitments, or financial forecasts."
+                  },
+                  {
+                    question: "What is in scope, and what is not?",
+                    answer: "The current scope is browser-based cognitive exercises, an educational brain atlas, neuroscience explanations, optional flow reflection, and local review of practice results. The interactive scenes are scripted teaching demonstrations, and the scores describe task performance only. For example, a completed task may show a user's response time, but it cannot establish their general attention ability or explain why they responded that way. Diagnosis, treatment, clinical decision-making, EEG measurement (EEG records electrical signals from sensors placed on the scalp), thought reading, and automated flow detection are outside the product's scope. The prototype is not a substitute for professional care, validated clinical testing, or formal educational assessment."
+                  }
+                ]
+              },
+              {
+                title: "Potential impact",
+                entries: [
+                  {
+                    question: "What economic impact is demonstrated today?",
+                    answer: "No economic saving or commercial return has been demonstrated yet. The project materials report no measured time saved, customer acquisition, operating costs, or willingness to pay. Its potential economic value would depend on whether learners or institutions find the combined learning tools useful enough to adopt. For example, a future pilot could compare preparation time for a neuroscience lesson using the atlas with the partner's existing materials. Until those comparisons and costs are measured, the app should not claim productivity gains, cost reduction, or revenue potential as proven."
+                  },
+                  {
+                    question: "What could it contribute to the learning and wellbeing sector?",
+                    answer: "iTHINK contributes a working interface concept for combining cognitive practice with neuroscience education and reflection. The project makes boundaries visible by distinguishing task scores and scripted animations from biological measurements. For example, its flow explainer states that no single EEG frequency defines flow and that the illustration is not a flow detector. This may help frame more careful conversations about what consumer brain-training tools can and cannot show. The app has not undergone clinical, educational, or sector-wide evaluation, so broader claims about industry impact would be premature."
+                  },
+                  {
+                    question: "What social value is intended?",
+                    answer: "The intended social value is to make selected neuroscience ideas easier to explore while treating personal attention and reflection respectfully. The experience works in a browser and offers multiple ways to navigate its explanations, which may lower some access barriers. For example, a learner can read an explanation, use a visual atlas, or try a short task without being required to share a personal story. Accessibility and inclusion still need evaluation with people who use assistive technology and with varied learning needs. The prototype has no evidence yet that it improves wellbeing, educational attainment, or health outcomes."
+                  }
+                ]
+              },
+              {
+                title: "Practical FAQs",
+                entries: [
+                  {
+                    question: "How should iTHINK be marketed?",
+                    answer: "It should be described as an educational and self-observation prototype, not as a medical or brain-measurement product. That wording matches the functions currently available and the app's own scientific boundaries. Marketing can focus on trying short tasks, exploring a visual atlas, and reflecting on personal experience. For example, a public description can invite people to explore how attention tasks work while clearly stating that scores are task-specific. Claims about treating conditions, boosting intelligence, detecting flow, or changing brain activity are unsupported and should not be used."
+                  },
+                  {
+                    question: "Where does the neuroscience content come from?",
+                    answer: "The neuroscience journey links explanations to named educational and research sources, including OpenStax, an online educational textbook publisher, and cited review literature. The linked references provide readers with places to examine the material behind selected explanations. For example, the neuron and synapse stages cite OpenStax, while the flow section links to a review discussing flow research. These citations support educational context but do not mean every product statement has undergone independent expert review. Coverage and currency should be checked by qualified reviewers before the content is used for formal teaching or clinical decisions."
+                  },
+                  {
+                    question: "What happens to practice data?",
+                    answer: "The app stores challenge history in browser storage, meaning it stays in that browser on that device so it can be shown again later. The inspected application code does not send those saved challenge results to an iTHINK account service. For example, a user can revisit their own task history without creating a central profile. This information can be cleared or lost when browser data is removed, and local saving is not the same as a formal privacy certification. Users should avoid entering identifying or sensitive health information, and hosting or browser providers may still process ordinary connection data."
+                  },
+                  {
+                    question: "How can people collaborate, and how is it deployed?",
+                    answer: "Collaboration should begin with a specific issue, evidence correction, accessibility observation, or clearly bounded pilot proposal. The code is publicly available through the linked project repository, and the current browser app is published on GitHub Pages, a service that hosts web pages from a repository. For example, an educator can suggest a lesson scenario while a neuroscience reviewer can point to a source that clarifies a claim. The project materials do not state a formal clinical partnership, research-governance process, or service-level commitment, which would be a documented promise about availability and support. The live deployment is a prototype and has not been certified for clinical use or promised as a production service."
+                  },
+                  {
+                    question: "What do the technical terms mean in plain English?",
+                    answer: "These are tools used to build the prototype and display it in a browser. React and TypeScript help create and check the interface, while Three.js and WebGL draw the interactive three-dimensional brain model. Browser storage means the browser saves practice history on the same device rather than in an iTHINK account. For example, a learner can reopen the site in the same browser and see locally saved results. These technical choices describe how the prototype is built; they do not prove learning benefit, privacy certification, or clinical safety."
+                  }
+                ]
+              }
+            ],
             liveUrl: "ithink/",
             liveLabel: "Open the updated iTHINK experience",
             briefTag: "Attention, Flow & Neuroscience Learning"
@@ -4161,6 +4271,7 @@
         const modalSolutionText = document.getElementById("modalSolutionText");
         const modalStackTags = document.getElementById("modalStackTags");
         const modalImpactText = document.getElementById("modalImpactText");
+        const modalDossierSections = document.getElementById("modalDossierSections");
         const modalLiveLinkContainer = document.getElementById("modalLiveLinkContainer");
         const modalInquireLink = document.getElementById("modalInquireLink");
 
@@ -4197,6 +4308,39 @@
           if (modalProblemText) modalProblemText.textContent = data.problem;
           if (modalSolutionText) modalSolutionText.textContent = data.solution;
           if (modalImpactText) modalImpactText.textContent = data.impact;
+          if (modalDossierSections) {
+            modalDossierSections.replaceChildren();
+            (data.dossier || []).forEach((sectionData) => {
+              const section = document.createElement("section");
+              section.className = "space-y-3";
+
+              const heading = document.createElement("h3");
+              heading.className = "font-mono text-xs font-bold uppercase tracking-wider text-canvas-accent";
+              heading.textContent = sectionData.title;
+              section.appendChild(heading);
+
+              const entries = document.createElement("div");
+              entries.className = "grid grid-cols-1 md:grid-cols-2 gap-3";
+              sectionData.entries.forEach((entry) => {
+                const article = document.createElement("article");
+                article.className = "rounded-xl border border-canvas-border bg-canvas-base p-4";
+
+                const question = document.createElement("h4");
+                question.className = "text-sm font-semibold text-zinc-100";
+                question.textContent = entry.question;
+
+                const answer = document.createElement("p");
+                answer.className = "mt-2 text-sm leading-relaxed text-zinc-300";
+                answer.textContent = entry.answer;
+
+                article.append(question, answer);
+                entries.appendChild(article);
+              });
+
+              section.appendChild(entries);
+              modalDossierSections.appendChild(section);
+            });
+          }
 
           // Render Unboxed Badges with · separators (Zero-Pill Discipline)
           if (modalMetricBadges) {
@@ -4302,9 +4446,13 @@
         // Print Dossier trigger
         if (printCaseStudyModalBtn) {
           printCaseStudyModalBtn.addEventListener("click", () => {
+            caseStudyModal.classList.add("print-dossier");
             window.print();
           });
         }
+        window.addEventListener("afterprint", () => {
+          caseStudyModal?.classList.remove("print-dossier");
+        });
 
         // Seamless "Build Project Brief" trigger inside modal
         if (modalStartBriefBtn) {
@@ -4463,7 +4611,7 @@
             signal: "-58 dBm (Strong)",
             dist: "1.4m",
             badge: "Clinical Verified",
-            badgeClass: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+            badgeClass: "bg-zinc-400/15 text-zinc-300 border-zinc-400/30"
           },
           "baxter": {
             name: "BX SIG 109 · Baxter Sigma Driver",
@@ -4514,7 +4662,7 @@
             if (wardSimulatorOutput) {
               wardSimulatorOutput.innerHTML = `
                 <div>
-                  <span class="text-canvas-accent font-bold">${dev.name}</span> · ${dev.bay} · Signal: <span class="text-zinc-100 font-semibold">${dev.signal}</span> · Distance: <span class="text-emerald-400 font-bold">${dev.dist}</span>
+                  <span class="text-canvas-accent font-bold">${dev.name}</span> · ${dev.bay} · Signal: <span class="text-zinc-100 font-semibold">${dev.signal}</span> · Distance: <span class="text-zinc-300 font-bold">${dev.dist}</span>
                 </div>
                 <span class="text-[10px] px-2 py-0.5 rounded border ${dev.badgeClass}">${dev.badge}</span>
               `;
@@ -4693,7 +4841,7 @@
               if (zkProofTimer) zkProofTimer.textContent = "Latency: 138ms";
               zkProofResult.innerHTML = `
                 <div class="text-zinc-400">Circuit: <span class="text-zinc-200">age_credential_check.circom (Groth16)</span></div>
-                <div class="text-emerald-400 font-bold mt-0.5">✓ Math Validated: is_above_legal_age = 1 · 0 Bytes PII Exfiltrated</div>
+                <div class="text-zinc-300 font-bold mt-0.5">✓ Math Validated: is_above_legal_age = 1 · 0 Bytes PII Exfiltrated</div>
                 <div class="text-zinc-500 font-mono text-[9px] truncate">Pairing: e(A, B) = e(α, β) · e(x, γ) · e(C, δ) verified</div>
               `;
               runZkProofBtn.disabled = false;
