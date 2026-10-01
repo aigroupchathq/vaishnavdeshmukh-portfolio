@@ -181,7 +181,7 @@
         </div>
         <div class="flex items-center gap-3">
           <span class="text-zinc-400 text-[11px] hidden md:inline font-mono">Press Space or click to enter</span>
-          <button id="skipSplashBtn" class="px-3.5 py-1.5 rounded-lg border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-canvas-accent text-zinc-200 hover:text-white transition-all text-xs font-mono cursor-pointer backdrop-blur-md shadow-sm flex items-center gap-1.5">
+          <button id="skipSplashBtn" type="button" class="px-3.5 py-1.5 rounded-lg border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-canvas-accent text-zinc-200 hover:text-white transition-all text-xs font-mono cursor-pointer backdrop-blur-md shadow-sm flex items-center gap-1.5">
             <span>Skip intro</span>
             <span class="text-zinc-500">[Esc]</span>
           </button>
@@ -231,7 +231,7 @@
             <button id="enterWorkspaceBtn" 
                     tabindex="0"
                     role="button"
-                    aria-label="Press and hold for 2 seconds to synchronize neural network and enter workspace"
+                    aria-label="Explore the work. Click to enter, or hold for a neural surge."
                     class="relative inline-flex items-center justify-between gap-5 px-8 py-4 sm:px-11 sm:py-5 rounded-2xl bg-[#090d12]/90 border border-white/20 hover:border-canvas-accent/80 text-white font-mono font-bold text-sm sm:text-base transition-all duration-200 cursor-pointer overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_30px_rgba(255,51,88,0.25)] focus:outline-none focus:ring-4 focus:ring-canvas-accent/40 prevent-callout active:scale-[0.97]">
               
               <!-- Liquid Neural Surge Fill (0% to 100% across 2s) -->
@@ -268,10 +268,10 @@
                 <span id="neuralFiringFreq">NEURAL ACTIVITY: 14 Hz</span>
               </span>
               <span class="text-zinc-600 hidden sm:inline">·</span>
-              <span id="neuralStatusText" class="text-zinc-300 font-medium">PRESS &amp; HOLD FOR 2 SECONDS</span>
+              <span id="neuralStatusText" class="text-zinc-300 font-medium">CLICK TO ENTER · HOLD FOR NEURAL SURGE</span>
             </div>
             <div id="neuralSubHelp" class="font-mono text-[11px] text-zinc-400 tracking-wider">
-              Hold button, screen, or [Spacebar] to surge neural firing
+              Click to enter, or hold the button, screen, or [Spacebar] for a neural surge
             </div>
           </div>
         </div>
@@ -3600,7 +3600,7 @@
 
           // Insufficient duration prompt
           if (neuralStatusText) {
-            neuralStatusText.textContent = "MAINTAIN PRESSURE · HOLD FOR 2.0s";
+            neuralStatusText.textContent = "CLICK TO ENTER · HOLD FOR 2.0s SURGE";
             neuralStatusText.classList.add("text-rose-400");
           }
           if (neuralPulseIndicator) {
@@ -3610,7 +3610,7 @@
           setTimeout(() => {
             if (!isHolding && !accessUnlocked) {
               if (neuralStatusText) {
-                neuralStatusText.textContent = "PRESS & HOLD FOR 2 SECONDS";
+                neuralStatusText.textContent = "CLICK TO ENTER · HOLD FOR NEURAL SURGE";
                 neuralStatusText.classList.remove("text-rose-400");
               }
               if (neuralPulseIndicator) {
@@ -3656,7 +3656,7 @@
           if (btnMainLabel) btnMainLabel.textContent = "Explore the work";
           if (neuralFiringFreq) neuralFiringFreq.textContent = "NEURAL ACTIVITY: 14 Hz";
           if (neuralStatusText) {
-            neuralStatusText.textContent = "PRESS & HOLD FOR 2 SECONDS";
+            neuralStatusText.textContent = "CLICK TO ENTER · HOLD FOR NEURAL SURGE";
             neuralStatusText.className = "text-zinc-300 font-medium";
           }
           if (neuralPulseIndicator) {
@@ -3702,6 +3702,9 @@
           enterWorkspaceBtn.addEventListener("pointerdown", onHoldStart);
           enterWorkspaceBtn.addEventListener("pointerup", onHoldEnd);
           enterWorkspaceBtn.addEventListener("pointercancel", onHoldEnd);
+          enterWorkspaceBtn.addEventListener("click", () => {
+            if (!accessUnlocked) dismissSplash();
+          });
           enterWorkspaceBtn.addEventListener("contextmenu", (e) => e.preventDefault());
         }
 
@@ -3735,6 +3738,7 @@
           if (e.code === "Space" || e.code === "Enter") {
             if (splashOverlay && splashOverlay.style.display !== "none") {
               onHoldEnd();
+              if (!accessUnlocked) dismissSplash();
             }
           }
         });
@@ -3772,8 +3776,8 @@
         const neuralFiringRate = document.getElementById("neuralFiringRate");
         const triggerCascadeBtn = document.getElementById("triggerCascadeBtn");
         let neuralCtx = null;
-        let neuralNodes = [];
-        let neuralAxons = [];
+        let backgroundNodes = [];
+        let backgroundAxons = [];
         let actionPotentials = [];
         let firingsCountInWindow = 0;
         let lastFiringsResetTime = performance.now();
@@ -3792,9 +3796,9 @@
           const nodeCount = w < 768 ? 40 : 70;
 
           // Generate Neural Soma (Nodes)
-          neuralNodes = [];
+          backgroundNodes = [];
           for (let i = 0; i < nodeCount; i++) {
-            neuralNodes.push({
+            backgroundNodes.push({
               x: Math.random() * w,
               y: Math.random() * h,
               radius: Math.random() * 2.5 + 2,
@@ -3805,14 +3809,14 @@
           }
 
           // Build Axon Pathways Between Nearby Soma
-          neuralAxons = [];
-          for (let i = 0; i < neuralNodes.length; i++) {
-            for (let j = i + 1; j < neuralNodes.length; j++) {
-              const dx = neuralNodes[i].x - neuralNodes[j].x;
-              const dy = neuralNodes[i].y - neuralNodes[j].y;
+          backgroundAxons = [];
+          for (let i = 0; i < backgroundNodes.length; i++) {
+            for (let j = i + 1; j < backgroundNodes.length; j++) {
+              const dx = backgroundNodes[i].x - backgroundNodes[j].x;
+              const dy = backgroundNodes[i].y - backgroundNodes[j].y;
               const dist = Math.sqrt(dx * dx + dy * dy);
               if (dist < 180) {
-                neuralAxons.push({ from: i, to: j, dist: dist });
+                backgroundAxons.push({ from: i, to: j, dist: dist });
               }
             }
           }
@@ -3822,11 +3826,11 @@
 
         // Fire a New Action Potential Along an Axon
         function fireActionPotential(fromIdx, toIdx, color = null) {
-          const axon = neuralAxons.find(a => (a.from === fromIdx && a.to === toIdx) || (a.from === toIdx && a.to === fromIdx));
+          const axon = backgroundAxons.find(a => (a.from === fromIdx && a.to === toIdx) || (a.from === toIdx && a.to === fromIdx));
           if (!axon) return;
 
-          const nFrom = neuralNodes[fromIdx];
-          const nTo = neuralNodes[toIdx];
+          const nFrom = backgroundNodes[fromIdx];
+          const nTo = backgroundNodes[toIdx];
           const pulseColor = color || (Math.random() > 0.5 ? "#ff3358" : "#2f81f7");
 
           actionPotentials.push({
@@ -3850,7 +3854,7 @@
           const oy = originY || window.innerHeight / 2;
 
           // Find closest 6 nodes to origin
-          const sorted = [...neuralNodes].sort((a, b) => {
+          const sorted = [...backgroundNodes].sort((a, b) => {
             const da = (a.x - ox) ** 2 + (a.y - oy) ** 2;
             const db = (b.x - ox) ** 2 + (b.y - oy) ** 2;
             return da - db;
@@ -3858,8 +3862,8 @@
 
           sorted.slice(0, 8).forEach(node => {
             node.excitation = 1.0;
-            const idx = neuralNodes.indexOf(node);
-            const connected = neuralAxons.filter(a => a.from === idx || a.to === idx);
+            const idx = backgroundNodes.indexOf(node);
+            const connected = backgroundAxons.filter(a => a.from === idx || a.to === idx);
             connected.forEach(axon => {
               const target = axon.from === idx ? axon.to : axon.from;
               fireActionPotential(idx, target);
@@ -3882,9 +3886,9 @@
 
           // 1. Draw Axon Pathways (Subtle Neural Arborization)
           neuralCtx.lineWidth = 0.8;
-          neuralAxons.forEach(axon => {
-            const n1 = neuralNodes[axon.from];
-            const n2 = neuralNodes[axon.to];
+          backgroundAxons.forEach(axon => {
+            const n1 = backgroundNodes[axon.from];
+            const n2 = backgroundNodes[axon.to];
             const maxAlpha = 0.16 * (1 - axon.dist / 180);
             neuralCtx.strokeStyle = `rgba(255, 255, 255, ${maxAlpha})`;
             neuralCtx.beginPath();
@@ -3911,12 +3915,12 @@
 
             // When reaching target synapse
             if (ap.progress >= 1) {
-              const targetNode = neuralNodes[ap.toIdx];
+              const targetNode = backgroundNodes[ap.toIdx];
               if (targetNode) {
                 targetNode.excitation = Math.min(1.0, targetNode.excitation + 0.6);
                 // Propagate forward with 35% probability
                 if (Math.random() < 0.35 && actionPotentials.length < 45) {
-                  const connected = neuralAxons.filter(a => a.from === ap.toIdx || a.to === ap.toIdx);
+                  const connected = backgroundAxons.filter(a => a.from === ap.toIdx || a.to === ap.toIdx);
                   if (connected.length > 0) {
                     const nextAxon = connected[Math.floor(Math.random() * connected.length)];
                     const nextTarget = nextAxon.from === ap.toIdx ? nextAxon.to : nextAxon.from;
@@ -3929,7 +3933,7 @@
           }
 
           // 3. Draw Neural Soma Nodes
-          neuralNodes.forEach(node => {
+          backgroundNodes.forEach(node => {
             neuralCtx.beginPath();
             const radius = node.radius + node.excitation * 3;
             neuralCtx.arc(node.x, node.y, radius, 0, Math.PI * 2);
@@ -3948,8 +3952,8 @@
           });
 
           // 4. Spontaneous Background Synaptic Activity
-          if (Math.random() < 0.07 * overclockMultiplier && neuralAxons.length > 0 && actionPotentials.length < 35) {
-            const randomAxon = neuralAxons[Math.floor(Math.random() * neuralAxons.length)];
+          if (Math.random() < 0.07 * overclockMultiplier && backgroundAxons.length > 0 && actionPotentials.length < 35) {
+            const randomAxon = backgroundAxons[Math.floor(Math.random() * backgroundAxons.length)];
             fireActionPotential(randomAxon.from, randomAxon.to);
           }
 
@@ -3973,13 +3977,13 @@
         window.addEventListener("mousemove", (e) => {
           const mx = e.clientX;
           const my = e.clientY;
-          neuralNodes.forEach((node, idx) => {
+          backgroundNodes.forEach((node, idx) => {
             const dx = node.x - mx;
             const dy = node.y - my;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < 120 && node.excitation < 0.3) {
               node.excitation = 0.8;
-              const connected = neuralAxons.filter(a => a.from === idx || a.to === idx);
+              const connected = backgroundAxons.filter(a => a.from === idx || a.to === idx);
               if (connected.length > 0 && Math.random() < 0.4) {
                 const axon = connected[Math.floor(Math.random() * connected.length)];
                 const target = axon.from === idx ? axon.to : axon.from;
