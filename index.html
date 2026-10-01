@@ -24,22 +24,22 @@
         theme: {
           extend: {
             colors: {
-              'canvas-base': '#080a0c',
-              'canvas-surface': '#0e1216',
-              'canvas-elevated': '#13181f',
-              'canvas-accent': '#f5f5f5',
-              'canvas-accent-glow': 'rgba(245, 245, 245, 0.18)',
-              'canvas-red': '#d4d4d4',
+              'canvas-base': '#0b0c0e',
+              'canvas-surface': '#121316',
+              'canvas-elevated': '#1a1b1f',
+              'canvas-accent': '#eeeae1',
+              'canvas-accent-glow': 'rgba(238, 234, 225, 0.14)',
+              'canvas-red': '#cfcbc2',
               'canvas-red-hover': '#ffffff',
-              'canvas-alert': '#d4d4d4',
-              'canvas-blue': '#c4c4c4',
-              'canvas-blue-glow': 'rgba(196, 196, 196, 0.18)',
-              'canvas-blue-light': '#e5e5e5',
-              'canvas-amber': '#b8b8b8',
-              'canvas-purple': '#a3a3a3',
-              'canvas-border': 'rgba(255, 255, 255, 0.08)',
-              'canvas-border-mid': 'rgba(255, 255, 255, 0.14)',
-              'canvas-border-strong': 'rgba(255, 255, 255, 0.28)'
+              'canvas-alert': '#c9c5bc',
+              'canvas-blue': '#c7c9cc',
+              'canvas-blue-glow': 'rgba(199, 201, 204, 0.12)',
+              'canvas-blue-light': '#e0e1e2',
+              'canvas-amber': '#bdb9b0',
+              'canvas-purple': '#aaa9a7',
+              'canvas-border': 'rgba(238, 234, 225, 0.08)',
+              'canvas-border-mid': 'rgba(238, 234, 225, 0.13)',
+              'canvas-border-strong': 'rgba(238, 234, 225, 0.24)'
             },
             fontFamily: {
               sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
@@ -55,18 +55,65 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-      /* Keep project previews, illustrations, and generated graphics in the same monochrome palette. */
-      html {
+      body {
+        background-image:
+          radial-gradient(ellipse at 50% -18%, rgba(238, 234, 225, 0.075), transparent 42%),
+          linear-gradient(180deg, #121316 0%, #0b0c0e 44%, #090a0c 100%);
+        background-attachment: fixed;
+      }
+      .project-bento-card {
+        border-color: rgba(238, 234, 225, 0.12);
+        background-image: linear-gradient(145deg, rgba(238, 234, 225, 0.025), transparent 42%);
+        transition: border-color 280ms ease, box-shadow 280ms ease, transform 280ms ease;
         filter: grayscale(1);
+      }
+      .project-bento-card:hover {
+        border-color: rgba(238, 234, 225, 0.25);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+        transform: translateY(-2px);
+      }
+      #neuralCanvas,
+      #caseStudyModalBackdrop #modalPreviewImg {
+        filter: grayscale(1);
+      }
+      #main-content > section[aria-labelledby="hero-heading"] > div,
+      #work .grid > .project-bento-card:first-child {
+        background-image:
+          linear-gradient(128deg, rgba(238, 234, 225, 0.075), rgba(238, 234, 225, 0.018) 34%, transparent 68%),
+          radial-gradient(ellipse at 88% 0%, rgba(238, 234, 225, 0.055), transparent 40%);
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0.12), 0 22px 70px rgba(0, 0, 0, 0.24);
+      }
+      header.sticky {
+        background-color: rgba(17, 18, 20, 0.84);
+        background-image: linear-gradient(180deg, rgba(238, 234, 225, 0.035), transparent);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+      }
+      #caseStudyModalBackdrop > div,
+      #profileModalBackdrop > div {
+        background-image: linear-gradient(145deg, rgba(238, 234, 225, 0.045), transparent 34%);
+        border-color: rgba(238, 234, 225, 0.18);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52), inset 0 1px rgba(255, 255, 255, 0.11);
+      }
+      #splashOverlay {
+        background: radial-gradient(ellipse at 50% 42%, #17181a 0%, #0b0c0e 62%, #08090a 100%);
+        color: #eeeae1;
+      }
+      .bg-canvas-accent.text-white {
+        color: #171716 !important;
+      }
+      @media (max-width: 420px) {
+        header.sticky #copyEmailTopBtn {
+          display: none;
+        }
       }
       /* WCAG 2.2 AA Focus Rings & Custom Neo-Brutalist Micro-Details */
       :focus-visible {
-        outline: 2px solid #ffffff !important;
+        outline: 2px solid #eeeae1 !important;
         outline-offset: 3px !important;
       }
       ::selection {
-        background-color: #ffffff;
-        color: #080808;
+        background-color: #eeeae1;
+        color: #171716;
       }
       .hairline-grid {
         background-size: 32px 32px;
@@ -206,7 +253,7 @@
     </style>
   </head>
 
-  <body class="bg-canvas-base text-[#f5f5f5] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
+  <body class="bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
     <div id="splashOverlay" role="dialog" aria-modal="true" aria-label="Portfolio introduction" class="splash-is-entering fixed inset-0 z-[9999] flex min-h-screen flex-col overflow-hidden bg-black px-6 py-5 text-white transition-all duration-500 select-none sm:px-10 sm:py-7">
       <canvas id="splashCanvas" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></canvas>
       <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/45 pointer-events-none"></div>
@@ -245,7 +292,7 @@
     <aside class="relative z-40 border-b border-canvas-border bg-canvas-base/90 backdrop-blur-md font-mono text-[11px] text-zinc-400 py-2" aria-label="System status">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-canvas-accent telemetry-pulse inline-block shadow-[0_0_8px_#ff3358]"></span>
+          <span class="w-2 h-2 rounded-full bg-canvas-accent telemetry-pulse inline-block shadow-[0_0_8px_#d8d4cb]"></span>
           <span class="text-zinc-200 font-semibold tracking-wide">Available for Q2/Q3 2026</span>
           <span class="text-zinc-600">·</span>
           <span>Lead UX &amp; Systems Engineering</span>
@@ -296,7 +343,7 @@
             <i data-lucide="copy" class="w-3.5 h-3.5 text-canvas-accent"></i>
             <span id="copyEmailTopText">Copy email</span>
           </button>
-          <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-canvas-accent text-white text-xs font-mono font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 shadow-[0_0_15px_rgba(255,51,88,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
+          <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-canvas-accent text-white text-xs font-mono font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 shadow-[0_8px_24px_rgba(238,234,225,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
             <span>Send email</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
@@ -1113,7 +1160,7 @@
                       <div id="dawScrubberContainer" class="h-10 w-full rounded bg-black/70 border border-white/10 relative overflow-hidden flex items-center px-1 cursor-pointer" title="Click to scrub timeline">
                         <canvas id="dawWaveformCanvas" class="w-full h-full block"></canvas>
                         <!-- Draggable playhead line -->
-                        <div id="dawPlayheadLine" class="absolute top-0 bottom-0 left-[28%] w-[2px] bg-canvas-blue shadow-[0_0_8px_#2f81f7] pointer-events-none transition-[left] duration-100"></div>
+                        <div id="dawPlayheadLine" class="absolute top-0 bottom-0 left-[28%] w-[2px] bg-canvas-blue shadow-[0_0_8px_#c7c9cc] pointer-events-none transition-[left] duration-100"></div>
                       </div>
 
                       <div class="flex items-center justify-between font-mono text-[10px]">
@@ -1934,7 +1981,7 @@
         <div class="relative border-l border-canvas-border ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10 font-mono">
           <!-- Item 1 -->
           <div class="relative group">
-            <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-accent border-4 border-canvas-base shadow-[0_0_10px_#ff3358]"></span>
+            <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-accent border-4 border-canvas-base shadow-[0_0_10px_#d8d4cb]"></span>
             <div class="p-6 rounded-2xl border border-canvas-border bg-canvas-surface hover:border-canvas-border-strong transition-all">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
@@ -1957,7 +2004,7 @@
 
           <!-- Item 2 -->
           <div class="relative group">
-            <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-blue border-4 border-canvas-base shadow-[0_0_10px_#2f81f7]"></span>
+            <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-blue border-4 border-canvas-base shadow-[0_0_10px_#c7c9cc]"></span>
             <div class="p-6 rounded-2xl border border-canvas-border bg-canvas-surface hover:border-canvas-border-strong transition-all">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
@@ -1980,7 +2027,7 @@
 
           <!-- Item 3 -->
           <div class="relative group">
-            <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-purple border-4 border-canvas-base shadow-[0_0_10px_#a78bfa]"></span>
+            <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-purple border-4 border-canvas-base shadow-[0_0_10px_#aaa9a7]"></span>
             <div class="p-6 rounded-2xl border border-canvas-border bg-canvas-surface hover:border-canvas-border-strong transition-all">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
@@ -2042,7 +2089,7 @@
           <!-- Milestone 01 -->
           <div class="roadmap-item relative group" data-category="active">
             <!-- Node Marker -->
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-accent border-4 border-canvas-base shadow-[0_0_10px_#ff3358] flex items-center justify-center">
+            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-accent border-4 border-canvas-base shadow-[0_0_10px_#d8d4cb] flex items-center justify-center">
               <span class="sr-only">Milestone 01 active</span>
             </div>
 
@@ -2124,7 +2171,7 @@
           <!-- Milestone 02 -->
           <div class="roadmap-item relative group" data-category="active">
             <!-- Node Marker -->
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-blue border-4 border-canvas-base shadow-[0_0_10px_#2f81f7] flex items-center justify-center">
+            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-blue border-4 border-canvas-base shadow-[0_0_10px_#c7c9cc] flex items-center justify-center">
               <span class="sr-only">Milestone 02 active</span>
             </div>
 
@@ -2205,7 +2252,7 @@
           <!-- Milestone 03 -->
           <div class="roadmap-item relative group" data-category="rfc">
             <!-- Node Marker -->
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-purple border-4 border-canvas-base shadow-[0_0_10px_#a78bfa] flex items-center justify-center">
+            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-canvas-purple border-4 border-canvas-base shadow-[0_0_10px_#aaa9a7] flex items-center justify-center">
               <span class="sr-only">Milestone 03 RFC</span>
             </div>
 
@@ -2466,7 +2513,7 @@
                 <i data-lucide="copy" class="w-4 h-4 text-canvas-accent"></i>
                 <span id="copyEmailFooterText">deshmukhvaishnav@gmail.com</span>
               </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-[0_0_20px_rgba(255,51,88,0.4)]">
+              <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-[0_10px_30px_rgba(238,234,225,0.13)]">
                 <span>Send an email</span>
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </a>
@@ -2532,7 +2579,7 @@
 
             <!-- Actions -->
             <div class="flex flex-wrap items-center gap-3">
-              <button type="button" id="launchBriefEmailBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-canvas-accent text-white font-bold text-xs hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(255,51,88,0.4)] cursor-pointer">
+              <button type="button" id="launchBriefEmailBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-canvas-accent text-white font-bold text-xs hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 shadow-[0_10px_30px_rgba(238,234,225,0.13)] cursor-pointer">
                 <span>Launch Email with Brief</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </button>
