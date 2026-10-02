@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Vaishnav Workspace: Systems architecture, physical flow, and cognitive ergonomics prototypes built by Vaishnav Deshmukh." />
-    <meta property="og:title" content="Vaishnav Workspace · Systems Architecture &amp; UX Engineering" />
-    <meta property="og:description" content="Vaishnav Workspace: Exploring software through interdependent systems, physical flow, and human ergonomics. Built by Vaishnav Deshmukh." />
+    <meta name="description" content="Vaishnav Deshmukh is an independent product designer and engineer in London, making thoughtful software for complicated, very human problems." />
+    <meta property="og:title" content="Vaishnav Deshmukh · Product, Design &amp; Systems" />
+    <meta property="og:description" content="Thoughtful software for complicated, very human problems. A personal practice in product design, engineering and systems thinking." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/" />
     <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/" />
-    <title>Vaishnav Workspace · Systems Architecture &amp; UX Engineering</title>
+    <title>Vaishnav Deshmukh · Product, Design &amp; Systems</title>
 
     <!-- Typography: Plus Jakarta Sans, JetBrains Mono, Instrument Serif -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -168,6 +168,39 @@
         background-color: rgba(17, 18, 20, 0.84);
         background-image: linear-gradient(180deg, rgba(238, 234, 225, 0.035), transparent);
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+      }
+      .london-timepiece {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.35rem 0.75rem 0.35rem 0.4rem;
+        border: 1px solid rgba(238, 234, 225, 0.12);
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(238, 234, 225, 0.07), rgba(238, 234, 225, 0.015));
+        color: #eeeae1;
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
+      }
+      .london-timepiece-face {
+        width: 2.25rem;
+        height: 2.25rem;
+        flex: none;
+        overflow: visible;
+      }
+      .london-timepiece-face .clock-hand {
+        transform-origin: 20px 20px;
+        transition: transform 900ms linear;
+      }
+      .london-timepiece-readout {
+        display: flex;
+        align-items: baseline;
+        gap: 0.35rem;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.035em;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .london-timepiece-face .clock-hand {
+          transition: none;
+        }
       }
       #caseStudyModalBackdrop > div,
       #profileModalBackdrop > div {
@@ -354,14 +387,15 @@
       </header>
 
       <section class="splash-content relative z-10 my-auto flex w-full flex-col items-center px-2 py-16 text-center" aria-label="Portfolio introduction">
+        <p class="mb-5 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">A personal practice · London</p>
         <h1 id="scrambleName" class="splash-name max-w-full text-4xl font-semibold tracking-[-0.06em] text-white sm:text-6xl md:text-7xl lg:text-8xl">
           Vaishnav Deshmukh
         </h1>
-        <p id="scrambleRole" class="splash-role mt-5 text-sm font-normal tracking-wide text-white/65 sm:text-base">
-          Systems architecture &amp; UX engineering
+        <p id="scrambleRole" class="splash-role mt-5 max-w-lg font-serif text-xl italic font-normal tracking-wide text-white/70 sm:text-2xl">
+          Thoughtful software for complicated, very human problems.
         </p>
         <button id="enterWorkspaceBtn" type="button" aria-label="Explore the work" class="splash-cta mt-10 inline-flex items-center gap-3 rounded-full px-6 py-3 text-sm font-semibold">
-          Explore the work
+          Come take a look
           <i data-lucide="arrow-right" class="h-4 w-4" aria-hidden="true"></i>
         </button>
       </section>
@@ -377,22 +411,34 @@
     <!-- Atmospheric Sub-Pixel Grid Canvas -->
     <div class="fixed inset-0 hairline-grid pointer-events-none z-0 opacity-40" aria-hidden="true"></div>
 
-    <!-- 00: LIVE TELEMETRY STRIP (5-SECOND SCAN ARCHITECTURE) -->
-    <aside class="relative z-40 border-b border-canvas-border bg-canvas-base/90 backdrop-blur-md font-mono text-[11px] text-zinc-400 py-2" aria-label="System status">
+    <!-- 00: LONDON STATUS & LIVE TIME -->
+    <aside class="relative z-40 border-b border-canvas-border bg-canvas-base/90 backdrop-blur-md font-sans text-[11px] text-zinc-400 py-2" aria-label="Availability and local time">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-canvas-accent telemetry-pulse inline-block shadow-[0_0_8px_#d8d4cb]"></span>
-          <span class="text-zinc-200 font-semibold tracking-wide">Available for Q2/Q3 2026</span>
-          <span class="text-zinc-600">·</span>
-          <span>Lead UX &amp; Systems Engineering</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-canvas-accent/80 inline-block"></span>
+          <span class="text-zinc-200 font-medium tracking-wide">Open to thoughtful collaborations</span>
+          <span class="text-zinc-600 hidden sm:inline">·</span>
+          <span class="hidden sm:inline">Product, design &amp; systems</span>
         </div>
-        <div class="flex items-center gap-3">
-          <span class="text-zinc-600 hidden sm:inline">|</span>
-          <span id="londonClock" class="text-zinc-300 font-medium">London --:--:-- GMT</span>
-          <span class="text-zinc-600 hidden md:inline">·</span>
-          <span class="text-canvas-blue font-medium hidden md:inline">Conscious systems craft</span>
-          <button id="replayIntroBtn" class="ml-2 px-2.5 py-0.5 rounded bg-canvas-accent/15 border border-canvas-accent/40 text-canvas-accent hover:bg-canvas-accent hover:text-white transition-colors font-medium flex items-center gap-1 cursor-pointer" title="Replay intro animation">
-            <span>Replay intro</span>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div id="londonTimepiece" class="london-timepiece" role="img" aria-label="Live local time in London">
+            <svg class="london-timepiece-face" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <circle cx="20" cy="20" r="17" stroke="rgba(238,234,225,0.2)" />
+              <circle cx="20" cy="20" r="1.5" fill="#eeeae1" />
+              <path d="M20 5v2M35 20h-2M20 35v-2M5 20h2M30.6 9.4l-1.4 1.4M30.6 30.6l-1.4-1.4M9.4 30.6l1.4-1.4M9.4 9.4l1.4 1.4" stroke="rgba(238,234,225,0.42)" stroke-width="1" stroke-linecap="round" />
+              <path id="clockHourHand" class="clock-hand" d="M20 20V11" stroke="#eeeae1" stroke-width="1.8" stroke-linecap="round" />
+              <path id="clockMinuteHand" class="clock-hand" d="M20 20V7" stroke="#c8c3b8" stroke-width="1.25" stroke-linecap="round" />
+              <path id="clockSecondHand" class="clock-hand" d="M20 23V6" stroke="#d5b98c" stroke-width="0.8" stroke-linecap="round" />
+            </svg>
+            <span class="london-timepiece-readout">
+              <span class="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-400">London</span>
+              <time id="londonClock" class="font-serif text-base text-zinc-100 tabular-nums" aria-live="off" datetime="">--:--:--</time>
+              <span id="londonTimezone" class="font-mono text-[9px] text-zinc-400">UK</span>
+            </span>
+          </div>
+          <button id="replayIntroBtn" class="px-2.5 py-1 rounded-full border border-canvas-border-mid text-zinc-300 hover:text-white hover:border-canvas-border-strong transition-colors font-medium flex items-center gap-1 cursor-pointer" title="Replay the opening" aria-label="Replay the opening">
+            <span class="hidden sm:inline">The opening</span>
+            <span class="sm:hidden">Intro</span>
           </button>
         </div>
       </div>
@@ -402,24 +448,24 @@
     <header class="sticky top-0 z-30 border-b border-canvas-border bg-canvas-base/95 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <!-- Brand Lockup -->
-        <a href="./" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent rounded-lg" aria-label="Vaishnav Workspace Home">
+        <a href="./" class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent rounded-lg" aria-label="Vaishnav Deshmukh home">
           <div class="w-9 h-9 rounded-lg bg-canvas-surface border border-canvas-border-mid group-hover:border-canvas-accent flex items-center justify-center font-mono font-bold text-sm text-zinc-100 transition-colors shadow-sm">
-            VW<span class="text-canvas-accent">.</span>
+            VD<span class="text-canvas-accent">.</span>
           </div>
           <div>
-            <span class="block text-sm font-bold tracking-tight text-zinc-100 group-hover:text-canvas-accent transition-colors">Vaishnav Workspace</span>
-            <span class="block font-mono text-[10px] text-zinc-400">Vaishnav Deshmukh · London</span>
+            <span class="block text-sm font-semibold tracking-tight text-zinc-100 group-hover:text-canvas-accent transition-colors">Vaishnav Deshmukh</span>
+            <span class="block font-mono text-[10px] text-zinc-400">Product · Design · London</span>
           </div>
         </a>
 
         <!-- Segmented Navigation Links -->
         <nav class="hidden lg:flex items-center p-1 rounded-lg bg-canvas-surface border border-canvas-border font-mono text-xs text-zinc-400" aria-label="Main Navigation">
-          <a href="#work" id="nav-work" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">01. Case Studies</a>
-          <a href="#ideology" id="nav-ideology" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">02. About Me</a>
-          <a href="#capabilities" id="nav-capabilities" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">03. Capabilities</a>
-          <a href="#experience" id="nav-experience" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">04. Experience</a>
-          <a href="#roadmap" id="nav-roadmap" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">05. Roadmap</a>
-          <a href="#connect" id="nav-connect" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">06. Contact</a>
+          <a href="#work" id="nav-work" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Work</a>
+          <a href="#ideology" id="nav-ideology" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">About</a>
+          <a href="#capabilities" id="nav-capabilities" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Practice</a>
+          <a href="#experience" id="nav-experience" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Experience</a>
+          <a href="#roadmap" id="nav-roadmap" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Field notes</a>
+          <a href="#connect" id="nav-connect" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Contact</a>
         </nav>
 
         <!-- Direct Actions -->
@@ -433,7 +479,7 @@
             <span id="copyEmailTopText">Copy email</span>
           </button>
           <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-canvas-accent text-white text-xs font-mono font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 shadow-[0_8px_24px_rgba(238,234,225,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
-            <span>Send email</span>
+            <span>Say hello</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
@@ -453,7 +499,7 @@
           <!-- Role & Ethos Badges -->
           <div class="flex flex-wrap items-center gap-2.5 mb-6 font-mono text-xs">
             <span class="px-2.5 py-1 rounded bg-canvas-accent/10 border border-canvas-accent/30 text-canvas-accent font-semibold tracking-wide">
-              Lead UX Architect &amp; Product Systems Engineer
+              Product design &amp; systems engineering
             </span>
             <span class="px-2.5 py-1 rounded bg-zinc-800/80 border border-zinc-700/60 text-zinc-300">
               Based in Greater London, UK
@@ -465,48 +511,48 @@
 
           <!-- Value Proposition Grounded in Interdependent Systems -->
           <h1 id="hero-heading" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-100 leading-[1.12] mb-6">
-            Software through the lens of <span class="font-serif italic font-normal text-canvas-accent">interdependent systems, physical flow, and human ergonomics.</span>
+            Good software starts with <span class="font-serif italic font-normal text-canvas-accent">noticing.</span>
           </h1>
 
           <p class="text-base sm:text-lg text-zinc-300 max-w-3xl leading-relaxed mb-8">
-            The physical tolerances of an engine, the throughput of a supply chain, and the cognitive load on a human mind. With a master’s in logistics and a foundation in market behavior, I build responsive, quiet working prototypes and architectural case studies that absorb operational friction and respect human attention.
+            I’m drawn to the small frictions people learn to live with: a misplaced piece of equipment, a confusing public service, a tool that asks too much. I bring design, engineering and a logistics-minded eye together to make those moments feel a little easier.
           </p>
 
           <!-- Distinct Focus-Ring Call to Actions -->
           <div class="flex flex-wrap items-center gap-3.5">
             <a href="#work" class="inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-zinc-100 text-canvas-base font-bold text-sm hover:bg-white transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-lg">
-              <span>Explore the case studies</span>
+              <span>Selected work</span>
               <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
             </a>
             <a href="#ideology" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-canvas-elevated border border-canvas-border-mid text-zinc-200 hover:border-canvas-accent font-semibold text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
               <i data-lucide="compass" class="w-4 h-4 text-canvas-accent"></i>
-              <span>About Me &amp; Approach</span>
+              <span>A little about me</span>
             </a>
             <button type="button" id="heroOpenProfileBtn" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-canvas-surface border border-canvas-border text-zinc-300 hover:text-zinc-100 hover:border-canvas-border-mid font-semibold text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent cursor-pointer">
               <i data-lucide="file-text" class="w-4 h-4 text-canvas-blue"></i>
-              <span>Executive Profile &amp; CV</span>
+              <span>Read my CV</span>
             </button>
           </div>
 
           <!-- Quick 5-Second Scan Highlight Strip -->
           <div class="mt-12 pt-8 border-t border-canvas-border grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
             <div class="p-3 rounded-lg bg-canvas-base/50 border border-canvas-border">
-              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Target Locating Speed</div>
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Find essential equipment</div>
               <div class="text-xl font-bold text-canvas-accent mt-0.5">&lt;9s</div>
-              <div class="text-[11px] text-zinc-400">Ward Protocol Prototype</div>
+              <div class="text-[11px] text-zinc-400">Ward prototype</div>
             </div>
             <div class="p-3 rounded-lg bg-canvas-base/50 border border-canvas-border">
-              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Spatial Deduplication</div>
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Group nearby reports</div>
               <div class="text-xl font-bold text-canvas-blue mt-0.5">Sub-sec</div>
-              <div class="text-[11px] text-zinc-400">CivicFlow Clustering Bench</div>
+              <div class="text-[11px] text-zinc-400">CivicFlow prototype</div>
             </div>
             <div class="p-3 rounded-lg bg-canvas-base/50 border border-canvas-border">
-              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Realtime 3D Pipeline</div>
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">A neuroanatomy atlas</div>
               <div class="text-xl font-bold text-canvas-purple mt-0.5">60 FPS</div>
-              <div class="text-[11px] text-zinc-400">iTHINK WebGL Shader</div>
+              <div class="text-[11px] text-zinc-400">Runs in the browser</div>
             </div>
             <div class="p-3 rounded-lg bg-canvas-base/50 border border-canvas-border">
-              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Plaintext Data Leaked</div>
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Personal data exposed</div>
               <div class="text-xl font-bold text-canvas-amber mt-0.5">0 Bytes</div>
               <div class="text-[11px] text-zinc-400">It's You ZK Identity Proof</div>
             </div>
@@ -3056,23 +3102,40 @@
           // Gracefully fallback
         }
 
-        // Live London Time Ticker
+        // A small, live London clock for the local-time detail in the header.
+        const londonTimepiece = document.getElementById("londonTimepiece");
         const londonClock = document.getElementById("londonClock");
+        const londonTimezone = document.getElementById("londonTimezone");
+        const clockHourHand = document.getElementById("clockHourHand");
+        const clockMinuteHand = document.getElementById("clockMinuteHand");
+        const clockSecondHand = document.getElementById("clockSecondHand");
+        const londonClockFormatter = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Europe/London",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hourCycle: "h23",
+          timeZoneName: "short"
+        });
         function updateClock() {
           if (!londonClock) return;
-          try {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString("en-GB", {
-              timeZone: "Europe/London",
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-              hour12: false
-            });
-            londonClock.textContent = `LON ${timeStr} GMT`;
-          } catch (e) {
-            londonClock.textContent = "LON 12:00:00 GMT";
+          const now = new Date();
+          const parts = Object.fromEntries(
+            londonClockFormatter.formatToParts(now).map(({ type, value }) => [type, value])
+          );
+          const hours = Number(parts.hour);
+          const minutes = Number(parts.minute);
+          const seconds = Number(parts.second) + now.getMilliseconds() / 1000;
+
+          londonClock.textContent = `${parts.hour}:${parts.minute}:${parts.second}`;
+          londonClock.dateTime = now.toISOString();
+          if (londonTimezone) londonTimezone.textContent = parts.timeZoneName;
+          if (londonTimepiece) {
+            londonTimepiece.setAttribute("aria-label", `Local time in London: ${parts.hour}:${parts.minute}:${parts.second} ${parts.timeZoneName}`);
           }
+          if (clockHourHand) clockHourHand.setAttribute("transform", `rotate(${((hours % 12) + minutes / 60) * 30} 20 20)`);
+          if (clockMinuteHand) clockMinuteHand.setAttribute("transform", `rotate(${(minutes + seconds / 60) * 6} 20 20)`);
+          if (clockSecondHand) clockSecondHand.setAttribute("transform", `rotate(${seconds * 6} 20 20)`);
         }
         updateClock();
         setInterval(updateClock, 1000);
