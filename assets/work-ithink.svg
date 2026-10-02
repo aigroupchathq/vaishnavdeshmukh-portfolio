@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#766b91" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">COGNITION / A LEARNING STUDY</text>
+  <text x="76" y="155" fill="#29272e" font-family="Arial,sans-serif" font-size="38" font-weight="600">Make space to notice.</text>
+  <text x="76" y="190" fill="#5d5963" font-family="Arial,sans-serif" font-size="17">Explore attention through practice,</text>
+  <text x="76" y="216" fill="#5d5963" font-family="Arial,sans-serif" font-size="17">a visual atlas and quiet reflection.</text>
+  <path d="M76 260h196" stroke="#c0bacb"/>
+  <text x="76" y="292" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">LEARNING, NOT MEASUREMENT</text>
+  <g transform="translate(370 120)">
+    <path d="M228 30c-56-48-131-15-145 38-39 6-60 40-47 74-31 31-16 80 19 91-2 40 35 63 69 51 20 30 62 30 87 7 28 22 70 7 78-26 39-6 52-49 28-76 22-36 3-76-31-88-4-39-32-69-58-71Z" fill="#d8d2e0" stroke="#766b91" stroke-width="3"/>
+    <path d="M234 35c7 31-8 48-3 70m-104-35c27 12 30 34 35 53m-83 22c35-7 54 8 72 25m-25 71c14-32 37-38 57-47m106-104c-29 6-42 25-55 48m-36 111c-3-35 13-50 32-67m61-2c-32-8-48 0-69 19" fill="none" stroke="#9182ad" stroke-width="2"/>
+    <g fill="#9e91bc">
+      <circle cx="133" cy="123" r="6"/><circle cx="202" cy="106" r="6"/><circle cx="261" cy="143" r="6"/>
+      <circle cx="163" cy="182" r="6"/><circle cx="235" cy="211" r="6"/><circle cx="124" cy="225" r="6"/>
+    </g>
+    <path d="M133 123 202 106l59 37-26 68-72-29-39 43m39-43 39-76" fill="none" stroke="#b7a4eb" stroke-width="2"/>
+  </g>
+  <g transform="translate(690 468)" font-family="Arial,sans-serif" font-size="13" fill="#6b6574">
+    <circle cx="0" cy="0" r="5" fill="#9e91bc"/><text x="14" y="5">attention</text>
+    <circle cx="110" cy="0" r="5" fill="#7d9c91"/><text x="124" y="5">practice</text>
+    <circle cx="222" cy="0" r="5" fill="#c19b76"/><text x="236" y="5">reflection</text>
+  </g>
+</svg>

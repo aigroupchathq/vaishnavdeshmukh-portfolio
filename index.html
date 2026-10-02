@@ -74,37 +74,32 @@
       }
       #work .project-bento-card {
         --project-accent: #91c5a8;
-        --project-wash: rgba(145, 197, 168, 0.09);
-        --project-border: rgba(145, 197, 168, 0.3);
+        --project-wash: rgba(145, 197, 168, 0.07);
+        --project-border: rgba(238, 234, 225, 0.11);
+        min-width: 0;
         border-color: var(--project-border);
-        background-color: #131517;
-        background-image:
-          radial-gradient(ellipse at 94% 0%, var(--project-wash), transparent 35%),
-          linear-gradient(145deg, rgba(238, 234, 225, 0.025), transparent 42%);
-        box-shadow: inset 0 2px 0 var(--project-accent), 0 16px 40px rgba(0, 0, 0, 0.2);
+        border-radius: 1rem;
+        background-color: #121416;
+        background-image: none;
+        box-shadow: inset 0 1px 0 var(--project-accent);
         filter: none;
       }
       #work .project-bento-card[data-category="cognitive"] {
         --project-accent: #b7a4eb;
-        --project-wash: rgba(183, 164, 235, 0.1);
-        --project-border: rgba(183, 164, 235, 0.28);
+        --project-wash: rgba(183, 164, 235, 0.07);
       }
       #work .project-bento-card[data-category="civic"] {
         --project-accent: #8dbfd1;
-        --project-wash: rgba(141, 191, 209, 0.1);
-        --project-border: rgba(141, 191, 209, 0.28);
+        --project-wash: rgba(141, 191, 209, 0.07);
       }
       #work .project-bento-card[data-category="creative"] {
         --project-accent: #e1b878;
-        --project-wash: rgba(225, 184, 120, 0.1);
-        --project-border: rgba(225, 184, 120, 0.28);
+        --project-wash: rgba(225, 184, 120, 0.07);
       }
       #work .project-bento-card:hover {
-        border-color: var(--project-accent);
-        background-image:
-          radial-gradient(ellipse at 94% 0%, var(--project-wash), transparent 42%),
-          linear-gradient(145deg, rgba(238, 234, 225, 0.045), transparent 48%);
-        box-shadow: inset 0 2px 0 var(--project-accent), 0 24px 52px rgba(0, 0, 0, 0.3);
+        border-color: rgba(238, 234, 225, 0.24);
+        box-shadow: inset 0 1px 0 var(--project-accent), 0 20px 44px rgba(0, 0, 0, 0.26);
+        transform: translateY(-1px);
       }
       #work .project-bento-card .inspect-btn {
         color: var(--project-accent);
@@ -115,6 +110,48 @@
         color: #111214;
         border-color: var(--project-accent);
         background-color: var(--project-accent);
+      }
+      #work .inspect-card-trigger:has(> div > img) {
+        margin-top: 1rem;
+        overflow: hidden;
+        border-color: rgba(238, 234, 225, 0.14);
+        background: #0d0f11;
+      }
+      #work .inspect-card-trigger:has(> div > img) > div:first-child {
+        display: none;
+      }
+      #work .inspect-card-trigger:has(> div > img) > div:last-child {
+        border-radius: inherit;
+      }
+      #work .inspect-card-trigger:has(> div > img) img {
+        transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      #work .inspect-card-trigger:has(> div > img):hover img {
+        transform: scale(1.015);
+      }
+      #work .project-bento-card:first-child .inspect-card-trigger img {
+        object-fit: contain;
+        background: #e8e5dd;
+      }
+      #work [data-category="health"] .card-panel-inquiry,
+      #work [data-category="health"] .card-panel-solution {
+        border-left: 2px solid var(--project-accent);
+      }
+      #work [data-category="cognitive"] .card-panel-inquiry,
+      #work [data-category="cognitive"] .card-panel-solution {
+        border-left: 2px solid var(--project-accent);
+      }
+      #work [data-category="civic"] .card-panel-inquiry,
+      #work [data-category="civic"] .card-panel-solution {
+        border-left: 2px solid var(--project-accent);
+      }
+      #work [data-category="creative"] .card-panel-inquiry,
+      #work [data-category="creative"] .card-panel-solution {
+        border-left: 2px solid var(--project-accent);
+      }
+      #work .project-bento-card .card-toggle-details {
+        min-height: 2rem;
+        color: #c5c2bb;
       }
       #neuralCanvas,
       #caseStudyModalBackdrop #modalPreviewImg {
@@ -603,11 +640,11 @@
               <span>Selected Case Studies</span>
             </div>
             <h2 id="work-heading" class="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
-              Curious inquiries, <span class="font-serif italic font-normal text-zinc-400">inventive solutions.</span>
+              Work shaped around <span class="font-serif italic font-normal text-zinc-400">real needs.</span>
             </h2>
           </div>
           <p class="text-sm text-zinc-300 max-w-md">
-            Every project begins with a curious question about physical and operational constraints—exploring flow, bottlenecks, and cognitive load through working prototypes and architectural case studies under active development on GitHub.
+            A selection of independent prototypes across health, civic systems, privacy, learning and creative tools. Each starts with a specific friction; open a project for its context, decisions and working details.
           </p>
         </div>
 
@@ -648,10 +685,10 @@
           <!-- Interactive View Density Switcher -->
           <div class="flex items-center gap-1.5 font-mono text-xs text-zinc-400 bg-canvas-surface border border-canvas-border rounded-lg p-1 w-fit">
             <span class="text-[11px] px-2 text-zinc-500 font-semibold uppercase tracking-wider hidden sm:inline">View mode:</span>
-            <button id="viewInteractiveBtn" class="px-2.5 py-1 rounded bg-canvas-elevated border border-canvas-accent text-canvas-accent font-bold transition-all cursor-pointer">
-              Interactive Toggled
+            <button id="viewInteractiveBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer">
+              Interactive
             </button>
-            <button id="viewCompactBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer">
+            <button id="viewCompactBtn" class="px-2.5 py-1 rounded bg-canvas-elevated border border-canvas-accent text-canvas-accent font-bold transition-all cursor-pointer">
               Compact
             </button>
             <button id="viewExpandAllBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer">
@@ -710,7 +747,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/9] sm:aspect-[22/9]">
-                  <img src="assets/project-ward.svg" alt="Predictive Ward Logistics UI Blueprint" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-ward.svg" alt="Illustrated hospital floor plan with an equipment location marker" class="w-full h-full object-contain transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-4">
                     <span class="px-3 py-1.5 rounded-lg bg-black/85 backdrop-blur-md border border-white/20 text-xs font-mono text-white flex items-center gap-1.5 shadow-lg">
                       <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-canvas-accent"></i> Click to inspect architectural blueprint &amp; clinical workflow
@@ -865,9 +902,8 @@
                   <span class="text-[11px] font-mono text-zinc-500">Click tabs to switch context</span>
                 </div>
               </div>
-            </div>
 
-            <!-- Footer Action Links -->
+              <!-- Footer Action Links -->
             <div class="pt-6 mt-6 border-t border-canvas-border flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
               <span class="text-zinc-400">Full Stack Implementation: TypeScript · SQLite / IndexedDB · HL7 FHIR Client</span>
               <div class="flex items-center gap-2.5">
@@ -1029,7 +1065,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-ithink.svg" alt="iTHINK interactive neuroscience learning experience" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-ithink.svg" alt="Illustration of connected brain pathways for attention, practice, and reflection" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-purple"></i> Explore the learning experience
@@ -1143,7 +1179,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-civicflow.svg" alt="CivicFlow Highways Triage Interface" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-civicflow.svg" alt="Illustrated street map grouping nearby reports for crew review" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-accent"></i> Inspect geospatial clustering &amp; triage pipeline
@@ -1246,7 +1282,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-scriptstudio.svg" alt="AI Script Studio DAW Interface" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-scriptstudio.svg" alt="Script notes beside a hand-drawn audio waveform" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-blue"></i> Inspect audio DSP timeline &amp; phoneme alignment
@@ -1394,7 +1430,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-roadtriage.svg" alt="RoadTriage Edge Vision Scanner" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-roadtriage.svg" alt="Illustration marking a road surface defect for field review" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-amber"></i> Inspect YOLOv8 edge pipeline &amp; GIS geotagging
@@ -1496,7 +1532,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-itsyou.svg" alt="It's You Zero Knowledge Identity Interface" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-itsyou.svg" alt="Credential card and shield illustrating selective proof" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-purple"></i> Inspect Groth16 circuit &amp; W3C DID schema
@@ -1648,7 +1684,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-babycarl.svg" alt="BabyCarl Pediatric Telemetry Interface" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-babycarl.svg" alt="Calm telemetry line with a note for shared clinical review" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-blue"></i> Inspect 440Hz spectrogram &amp; circadian spiral
@@ -1753,7 +1789,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-groupchat.svg" alt="GroupChat HQ Consensus Synthesizer" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-groupchat.svg" alt="Conversation bubbles converging on a shared direction" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-accent"></i> Inspect semantic clustering &amp; consensus graph
@@ -1858,7 +1894,7 @@
                   </span>
                 </div>
                 <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/project-vision.svg" alt="VISION Prompt Lab Interface" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
+                  <img src="assets/work-vision.svg" alt="Prompt notebook with three paths for exploring an idea" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
                     <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
                       <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-accent"></i> Inspect XML scaffolding &amp; deterministic tool rules
@@ -4276,6 +4312,7 @@
         if (viewInteractiveBtn) viewInteractiveBtn.addEventListener("click", () => setDensityMode("interactive"));
         if (viewCompactBtn) viewCompactBtn.addEventListener("click", () => setDensityMode("compact"));
         if (viewExpandAllBtn) viewExpandAllBtn.addEventListener("click", () => setDensityMode("expandAll"));
+        setDensityMode("compact");
 
         // =====================================================================
         // 05. CASE STUDIES DATA & DEEP-DIVE MODAL CONTROLLER

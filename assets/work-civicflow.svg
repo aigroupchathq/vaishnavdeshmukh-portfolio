@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#527786" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">CIVIC SYSTEMS / SERVICE DESIGN</text>
+  <text x="76" y="155" fill="#252b2d" font-family="Arial,sans-serif" font-size="38" font-weight="600">From reports to a clearer route.</text>
+  <text x="76" y="190" fill="#586267" font-family="Arial,sans-serif" font-size="17">A concept for helping public works teams</text>
+  <text x="76" y="216" fill="#586267" font-family="Arial,sans-serif" font-size="17">make sense of nearby street reports.</text>
+  <g transform="translate(74 268)" fill="none" stroke="#9ca7a3" stroke-width="2">
+    <path d="M18 24 238 0l30 90 210-22 55 151-227 39-29-105-224 23z" fill="#f1efe9"/>
+    <path d="m95 26 39 215m92-230 32 184m102-120 40 173m-280-120 324-35"/>
+    <path d="M20 24 238 0l30 90 210-22" stroke="#8dbfd1" stroke-width="5"/>
+    <path d="m28 210 191-19" stroke="#8dbfd1" stroke-width="5"/>
+  </g>
+  <g fill="#527786" stroke="#e8e5dd" stroke-width="4">
+    <circle cx="168" cy="312" r="10"/><circle cx="278" cy="301" r="10"/><circle cx="383" cy="355" r="10"/>
+  </g>
+  <g fill="#9d745a" stroke="#e8e5dd" stroke-width="4">
+    <circle cx="247" cy="455" r="10"/><circle cx="453" cy="414" r="10"/>
+  </g>
+  <path d="M560 332h118" stroke="#627b80" stroke-width="2"/>
+  <path d="m670 322 12 10-12 10" fill="none" stroke="#627b80" stroke-width="2"/>
+  <g transform="translate(690 282)">
+    <rect width="194" height="142" rx="5" fill="#f1efe9" stroke="#bfc2bb"/>
+    <text x="18" y="30" fill="#617174" font-family="Arial,sans-serif" font-size="12" letter-spacing="1.5">NEARBY REPORTS</text>
+    <circle cx="30" cy="62" r="5" fill="#8dbfd1"/><text x="46" y="67" fill="#424a49" font-family="Arial,sans-serif" font-size="14">Location A</text>
+    <circle cx="30" cy="91" r="5" fill="#8dbfd1"/><text x="46" y="96" fill="#424a49" font-family="Arial,sans-serif" font-size="14">Location A</text>
+    <circle cx="30" cy="120" r="5" fill="#9d745a"/><text x="46" y="125" fill="#424a49" font-family="Arial,sans-serif" font-size="14">Crew review</text>
+  </g>
+</svg>

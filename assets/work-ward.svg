@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 590" role="img">
+  <rect width="1440" height="590" fill="#e8e5dd"/>
+  <path d="M52 48h1336v494H52z" fill="none" stroke="#c8c5bc"/>
+  <text x="88" y="105" fill="#637269" font-family="Arial,sans-serif" font-size="16" letter-spacing="3">HEALTH SYSTEMS / FIELD STUDY 01</text>
+  <text x="88" y="184" fill="#252a28" font-family="Arial,sans-serif" font-size="39" font-weight="600">Find what you need.</text>
+  <text x="88" y="222" fill="#555c57" font-family="Arial,sans-serif" font-size="19">A floor plan shaped around the search</text>
+  <text x="88" y="250" fill="#555c57" font-family="Arial,sans-serif" font-size="19">for essential mobile equipment.</text>
+  <path d="M88 292h320" stroke="#a7aaa1"/>
+  <text x="88" y="326" fill="#637269" font-family="Arial,sans-serif" font-size="14" letter-spacing="2">SPATIAL WAYFINDING</text>
+  <g transform="translate(500 86)" fill="none" stroke="#65736b" stroke-width="2">
+    <path d="M0 0h846v410H0z"/>
+    <path d="M0 128h846M0 282h846M205 0v128m203 0v154m205-282v128m0 154v128m-410-128v128m614-410v128"/>
+    <path d="M20 148h175v116H20zm203-128h172v88H223zm203 148h175v93H426zm208 154h190v88H634z" fill="#f0eee8"/>
+    <path d="M24 278h798" stroke="#b7b9b1" stroke-dasharray="7 8"/>
+  </g>
+  <g fill="#91a896">
+    <circle cx="610" cy="165" r="8"/><circle cx="813" cy="165" r="8"/><circle cx="1017" cy="165" r="8"/>
+    <circle cx="813" cy="320" r="8"/><circle cx="1222" cy="320" r="8"/>
+  </g>
+  <circle cx="813" cy="320" r="25" fill="none" stroke="#577960" stroke-width="2"/>
+  <circle cx="813" cy="320" r="39" fill="none" stroke="#91a896" stroke-width="1" stroke-dasharray="3 5"/>
+  <path d="M813 359v63h118" fill="none" stroke="#577960" stroke-width="2"/>
+  <rect x="931" y="403" width="208" height="42" rx="21" fill="#d5ddd4"/>
+  <text x="957" y="430" fill="#3e5747" font-family="Arial,sans-serif" font-size="14" letter-spacing="1">EQUIPMENT LOCATION</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#766b91" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">PRIVACY / A PROOF OF CONCEPT</text>
+  <text x="76" y="159" fill="#29282d" font-family="Arial,sans-serif" font-size="38" font-weight="600">Prove one thing. Keep the rest.</text>
+  <text x="76" y="199" fill="#5d5961" font-family="Arial,sans-serif" font-size="17">Exploring how a credential can answer</text>
+  <text x="76" y="226" fill="#5d5961" font-family="Arial,sans-serif" font-size="17">a question without showing every detail.</text>
+  <path d="M76 267h286" stroke="#c6c1ce"/>
+  <text x="76" y="300" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">PRIVATE INPUT / LIMITED PROOF</text>
+  <g transform="translate(432 123)">
+    <rect x="0" y="22" width="260" height="300" rx="8" fill="#d2cfd6" stroke="#aaa6b2" transform="rotate(-7 130 172)"/>
+    <rect x="31" y="10" width="260" height="300" rx="8" fill="#f2f0ea" stroke="#bcb8c0" transform="rotate(4 161 160)"/>
+    <rect x="64" y="48" width="194" height="24" rx="3" fill="#ddd9e4"/>
+    <circle cx="105" cy="133" r="29" fill="#d4d0db" stroke="#91869f" stroke-width="2"/>
+    <path d="M86 190h143M86 214h110" stroke="#c7c3c8" stroke-width="5" stroke-linecap="round"/>
+    <text x="86" y="260" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="1.5">CREDENTIAL</text>
+  </g>
+  <path d="M733 247h86" stroke="#817792" stroke-width="2"/>
+  <path d="m808 237 12 10-12 10" fill="none" stroke="#817792" stroke-width="2"/>
+  <path d="M865 218c-20 9-37 9-54 0v31c0 32 22 48 54 61 32-13 54-29 54-61v-31c-17 9-34 9-54 0Z" fill="#d8d4df" stroke="#766b91" stroke-width="2"/>
+  <path d="m843 252 15 15 28-32" fill="none" stroke="#766b91" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="812" y="344" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="1.5">ONE ANSWER</text>
+</svg>

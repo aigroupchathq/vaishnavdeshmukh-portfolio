@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#527786" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">CIVIC INFRASTRUCTURE / FIELD NOTE</text>
+  <text x="76" y="160" fill="#292b2b" font-family="Arial,sans-serif" font-size="38" font-weight="600">See the road as a crew does.</text>
+  <text x="76" y="199" fill="#5d615e" font-family="Arial,sans-serif" font-size="17">A mobile concept for spotting, reviewing</text>
+  <text x="76" y="226" fill="#5d615e" font-family="Arial,sans-serif" font-size="17">and recording surface defects.</text>
+  <path d="M76 267h270" stroke="#c1c0b9"/>
+  <text x="76" y="300" fill="#527786" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">FIELD CAPTURE / HUMAN REVIEW</text>
+  <path d="M400 95h480v402H400z" fill="#d6d3cb"/>
+  <path d="M486 96h310l108 401H378z" fill="#535655"/>
+  <path d="M629 120 593 497" stroke="#e1b878" stroke-width="6" stroke-dasharray="22 20"/>
+  <path d="m513 360 18-23 7 12 22-39 11 13 20-27 12 10 15-23 10 9 15-17" fill="none" stroke="#272a29" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M522 354h145v84H522z" fill="none" stroke="#c5755f" stroke-width="2"/>
+  <path d="M667 396h64" stroke="#c5755f" stroke-width="2"/>
+  <circle cx="522" cy="354" r="6" fill="#c5755f"/>
+  <rect x="730" y="368" width="126" height="58" rx="4" fill="#e8e5dd"/>
+  <text x="745" y="391" fill="#875346" font-family="Arial,sans-serif" font-size="12" letter-spacing="1">SURFACE NOTE</text>
+  <path d="M746 405h88" stroke="#b8b4ac"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#637269" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">HEALTH SYSTEMS / PEDIATRIC CARE</text>
+  <text x="76" y="158" fill="#282b29" font-family="Arial,sans-serif" font-size="38" font-weight="600">Keep the signal in view.</text>
+  <text x="76" y="198" fill="#5d625f" font-family="Arial,sans-serif" font-size="17">A calmer way to bring bedside observations</text>
+  <text x="76" y="225" fill="#5d625f" font-family="Arial,sans-serif" font-size="17">together for a care team.</text>
+  <path d="M76 267h292" stroke="#c2c7c0"/>
+  <text x="76" y="300" fill="#637269" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">PEDIATRIC TELEMETRY / CONCEPT</text>
+  <rect x="407" y="105" width="478" height="370" rx="12" fill="#f2f0ea" stroke="#c8c5bc"/>
+  <text x="443" y="152" fill="#737d76" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">A QUIET VIEW OF CHANGE</text>
+  <path d="M443 196h400M443 259h400M443 322h400M443 385h400" stroke="#d6d3cb"/>
+  <path d="M443 417V184" stroke="#b8b8ae"/>
+  <path d="M443 295c28 1 29-18 48-18s19 37 38 37 20-26 39-26 18 12 38 12 19-20 38-20 19 33 38 33 20-18 39-18 18 2 38 2 19-26 38-26 21 23 46 23" fill="none" stroke="#718e7c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M443 439h400" stroke="#b8b8ae"/>
+  <circle cx="637" cy="300" r="8" fill="#91a896" stroke="#f2f0ea" stroke-width="4"/>
+  <path d="M637 300v-53h92" fill="none" stroke="#718e7c" stroke-width="1.5"/>
+  <rect x="729" y="225" width="116" height="48" rx="4" fill="#dfe7de"/>
+  <text x="744" y="246" fill="#536858" font-family="Arial,sans-serif" font-size="12">OBSERVATION</text>
+  <text x="744" y="263" fill="#536858" font-family="Arial,sans-serif" font-size="12">review together</text>
+</svg>

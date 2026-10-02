@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#8a7147" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">COLLABORATION / DECISION SUPPORT</text>
+  <text x="76" y="159" fill="#2c2a27" font-family="Arial,sans-serif" font-size="38" font-weight="600">Many voices, one next step.</text>
+  <text x="76" y="199" fill="#605b52" font-family="Arial,sans-serif" font-size="17">A conversation tool for gathering ideas</text>
+  <text x="76" y="226" fill="#605b52" font-family="Arial,sans-serif" font-size="17">and finding the point they share.</text>
+  <path d="M76 267h278" stroke="#d2c7b4"/>
+  <text x="76" y="300" fill="#8a7147" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">LISTEN / COMPARE / SYNTHESISE</text>
+  <g fill="none" stroke="#b9b3a7" stroke-width="2">
+    <path d="M518 189c72 0 94 47 142 70m-142-70c60 87 89 97 142 70m-142-70c36 131 83 104 142 70"/>
+    <path d="M660 259h95"/>
+  </g>
+  <g>
+    <path d="M412 132h190q16 0 16 16v68q0 16-16 16h-83l-27 25v-25h-80q-16 0-16-16v-68q0-16 16-16Z" fill="#f2f0ea" stroke="#c8c5bc"/>
+    <circle cx="441" cy="182" r="7" fill="#91a896"/><path d="M461 176h116m-116 16h90" stroke="#c2beb5" stroke-width="4" stroke-linecap="round"/>
+    <path d="M556 253h178q16 0 16 16v64q0 16-16 16h-70l-25 23v-23h-83q-16 0-16-16v-64q0-16 16-16Z" fill="#f2f0ea" stroke="#c8c5bc"/>
+    <circle cx="584" cy="302" r="7" fill="#8dbfd1"/><path d="M604 296h104m-104 16h74" stroke="#c2beb5" stroke-width="4" stroke-linecap="round"/>
+    <path d="M411 358h188q16 0 16 16v63q0 16-16 16h-84l-26 23v-23h-78q-16 0-16-16v-63q0-16 16-16Z" fill="#f2f0ea" stroke="#c8c5bc"/>
+    <circle cx="439" cy="407" r="7" fill="#b7a4eb"/><path d="M460 401h115m-115 16h80" stroke="#c2beb5" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <circle cx="799" cy="259" r="66" fill="#dfd8c9" stroke="#b2a58d" stroke-width="2"/>
+  <path d="m770 259 20 20 39-43" fill="none" stroke="#8a7147" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="749" y="351" fill="#78694f" font-family="Arial,sans-serif" font-size="13" letter-spacing="1.5">SHARED DIRECTION</text>
+</svg>

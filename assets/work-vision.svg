@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="98" fill="#766b91" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">CREATIVE TECHNOLOGY / PROMPT LAB</text>
+  <text x="76" y="159" fill="#29272e" font-family="Arial,sans-serif" font-size="38" font-weight="600">A place to work an idea through.</text>
+  <text x="76" y="199" fill="#5d5963" font-family="Arial,sans-serif" font-size="17">A prompt workspace for exploring a question,</text>
+  <text x="76" y="226" fill="#5d5963" font-family="Arial,sans-serif" font-size="17">testing variations and keeping what matters.</text>
+  <path d="M76 267h306" stroke="#c6c1ce"/>
+  <text x="76" y="300" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">QUESTION / ITERATION / EDIT</text>
+  <g transform="translate(437 95)">
+    <path d="M0 20q0-12 12-12h358v356H0z" fill="#f2f0ea" stroke="#c8c5bc"/>
+    <text x="33" y="54" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">THE STARTING QUESTION</text>
+    <path d="M33 77h303" stroke="#d0ccc4"/>
+    <text x="33" y="117" fill="#37343b" font-family="Georgia,serif" font-size="24">What if the interface</text>
+    <text x="33" y="148" fill="#37343b" font-family="Georgia,serif" font-size="24">made room to think?</text>
+    <path d="M33 180h303" stroke="#d0ccc4"/>
+    <rect x="33" y="202" width="92" height="38" rx="19" fill="#e5dff0"/><text x="54" y="226" fill="#675982" font-family="Arial,sans-serif" font-size="13">Tone</text>
+    <rect x="136" y="202" width="92" height="38" rx="19" fill="#e4e9e3"/><text x="158" y="226" fill="#5b705f" font-family="Arial,sans-serif" font-size="13">Shape</text>
+    <rect x="239" y="202" width="97" height="38" rx="19" fill="#efe4d5"/><text x="256" y="226" fill="#806746" font-family="Arial,sans-serif" font-size="13">Meaning</text>
+    <path d="M33 273h303m-303 18h245m-245 18h276" stroke="#c8c4bb" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="315" cy="345" r="5" fill="#b7a4eb"/>
+  </g>
+</svg>
