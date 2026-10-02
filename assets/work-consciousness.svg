@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#e8e5dd"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#c8c5bc"/>
+  <text x="76" y="96" fill="#766b91" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">COGNITIVE SCIENCE / FIELD NOTE 02</text>
+  <text x="76" y="168" fill="#29272e" font-family="Georgia,serif" font-size="43">A closer look</text>
+  <text x="76" y="218" fill="#29272e" font-family="Georgia,serif" font-size="43">at awareness.</text>
+  <text x="76" y="264" fill="#5d5963" font-family="Arial,sans-serif" font-size="17">Five visual paradigms, brought</text>
+  <text x="76" y="291" fill="#5d5963" font-family="Arial,sans-serif" font-size="17">together in one interactive study.</text>
+  <path d="M76 332h278" stroke="#c0bacb"/>
+  <text x="76" y="366" fill="#766b91" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">PERCEPTION / ATTENTION / REPORT</text>
+  <g transform="translate(612 278)" fill="none">
+    <circle r="152" stroke="#c9c3d0" stroke-width="1"/>
+    <ellipse rx="128" ry="56" stroke="#766b91" stroke-width="2" transform="rotate(-36)"/>
+    <ellipse rx="128" ry="56" stroke="#9e91bc" stroke-width="2" transform="rotate(36)"/>
+    <ellipse rx="128" ry="56" stroke="#7d9c91" stroke-width="2" transform="rotate(90)"/>
+    <circle r="48" fill="#ddd7e5" stroke="#766b91" stroke-width="2"/>
+    <path d="M-27 0q27-28 54 0-27 28-54 0Z" fill="#f4f1eb" stroke="#766b91" stroke-width="2"/>
+    <circle r="7" fill="#766b91"/>
+    <circle cx="104" cy="-74" r="7" fill="#b7a4eb"/>
+    <circle cx="-91" cy="-95" r="6" fill="#7d9c91"/>
+    <circle cx="3" cy="129" r="6" fill="#c19b76"/>
+  </g>
+  <path d="M449 469h362" stroke="#c0bacb"/>
+  <text x="449" y="499" fill="#766b91" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">FIVE VISUAL PARADIGMS</text>
+  <g fill="#5d5963" font-family="Arial,sans-serif" font-size="11" letter-spacing="1">
+    <text x="449" y="526">FLICKER</text>
+    <text x="529" y="526">MOTION</text>
+    <text x="609" y="526">BISTABLE</text>
+    <text x="704" y="526">SUPPRESSION</text>
+    <text x="821" y="526">RIVALRY</text>
+  </g>
+  <g fill="#9e91bc">
+    <circle cx="449" cy="546" r="3"/><circle cx="529" cy="546" r="3"/>
+    <circle cx="609" cy="546" r="3"/><circle cx="704" cy="546" r="3"/>
+    <circle cx="821" cy="546" r="3"/>
+  </g>
+</svg>
