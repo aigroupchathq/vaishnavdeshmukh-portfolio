@@ -194,6 +194,34 @@ export async function ingestGS1Telemetry(scanBuffer: string): Promise<FHIRDevice
   return metricPayload;
 }`
     },
+    consciousness: {
+      title: "The Unexplored Interior · Phenomenological Neuro-Engine",
+      domain: "COGNITIVE NEUROSCIENCE · IIT 4.0 INTEGRATED INFO · GLOBAL NEURONAL WORKSPACE",
+      problem: "Subjective conscious awareness and sensory bottleneck dynamics are typically discussed as philosophical abstractions, lacking rigorous, accessible tools to measure attentional bandwidth and phenomenological state transitions in real time.",
+      architecture: "A high-precision client-side neuro-diagnostic engine and phenomenological benchmark uniting Integrated Information Theory (IIT 4.0) with Global Neuronal Workspace (GNW) models. Features 5 interactive visual awareness paradigms (Flicker Change Blindness, Motion-Induced Blindness, Bistable Necker dynamics, Continuous Flash Suppression, Binocular Rivalry) paired with an interactive 3D gyroscopic chronometer core and Web Audio binaural acoustic synthesizer.",
+      techDecisions: [
+        "Interactive 3D gyroscopic gimbal chronometer and crystalline core rendered with hardware-accelerated Canvas vector math.",
+        "Empirical Integrated Information (IIT 4.0) Phi (Φ) state-partitioning and mutual information calculator.",
+        "Harmonic 528Hz Solfeggio acoustic bell tone synthesizer via low-latency Web Audio API."
+      ],
+      codeSnippet: `// IIT 4.0 Integrated Information (Φ) & GNW Bandwidth Engine
+export function calculateIntegratedInformation(transitionMatrix: number[][]): number {
+  const wholeEntropy = calculateSystemEntropy(transitionMatrix);
+  const partitions = generateBipartitions(transitionMatrix.length);
+  
+  let minInformationDistance = Infinity;
+  for (const partition of partitions) {
+    const partitionedEntropy = calculatePartitionedEntropy(transitionMatrix, partition);
+    const distance = wholeEntropy - partitionedEntropy;
+    if (distance < minInformationDistance) {
+      minInformationDistance = distance;
+    }
+  }
+  
+  const phi = Math.max(0, minInformationDistance);
+  return Number(phi.toFixed(2)); // bits of integrated conscious awareness
+}`
+    },
     ithink: {
       title: "iTHINK · 3D Neuroanatomy Atlas",
       domain: "COGNITIVE NEUROSCIENCE · THREE.JS WEBGL · 34 3D GLB BRAIN SUBSTRUCTURES",

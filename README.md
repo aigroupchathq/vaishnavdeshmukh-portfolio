@@ -26,21 +26,22 @@ But mechanical efficiency means nothing if the interaction feels hostile. Guided
 
 ---
 
-## 9 Prototypes & Architectural Case Studies (Under Active Development)
+## 10 Prototypes & Architectural Case Studies (Under Active Development)
 
 All projects represent personal concepts, working prototypes, and architectural case studies under active development on GitHub:
 
 | # | Prototype | Domain & Architecture | Key Engineering Targets |
 |---|---|---|---|
 | **01** | **Predictive Ward Logistics Engine** | Health Systems · Offline BLE Telemetry | `<9s` search time target · 100% offline cache · HL7 FHIR v4 schema · GS1 DataMatrix |
-| **02** | **iTHINK: 3D Neuroanatomy Atlas** | Cognitive Neuroscience · WebGL Shaders | `60 FPS` WebGL render cadence · GLTF Draco compression · Zero external plugins · Web Audio spatial cues |
-| **03** | **CivicFlow: Municipal Triage** | Civic Systems · Spatial Clustering | `Sub-sec` DBSCAN clustering · PostGIS geospatial deduplication · Offline field PWA |
-| **04** | **AI Script Studio** | Generative Audio · In-Browser DAW | `Sub-12ms` AudioWorklet DSP latency · Multi-track stem matrix · Canvas waveform rendering |
-| **05** | **RoadTriage: Pavement Distress Vision** | Civic Infrastructure · Edge ML | `YOLOv8` edge segmentation · ONNX Runtime Web client inference · Sub-meter GPS geotag |
-| **06** | **It's You: Zero-Knowledge Identity Vault** | Privacy Engineering · zk-SNARK Groth16 | `0 Bytes` plaintext personal data leaked · Circom 2.1 arithmetic circuits · SnarkJS mobile prover (~1.4s) |
-| **07** | **BabyCarl: Circadian Telemetry** | Connected Hardware · Ambient Sensing | Non-contact optical micro-motion · Local Kalman filter DSP · Zero cloud storage dependency |
-| **08** | **GroupChat HQ** | Collaborative Architecture · Semantic Clustering | Vector similarity embeddings · CRDT local state synchronization · Local-first cache |
-| **09** | **VISION: Prompt Lab** | AI Systems Ergonomics · Prompt Framework | 14 operational prompt patterns · Deterministic tool schema outputs · XML parameter scaffolding |
+| **02** | **The Unexplored Interior** | Cognitive Neuroscience · IIT 4.0 Benchmark | `IIT 4.0` \(\Phi\) state engine · 5 sensory awareness tests · 3D gyroscopic gimbal · 528Hz Solfeggio sound synth |
+| **03** | **iTHINK: 3D Neuroanatomy Atlas** | Cognitive Neuroscience · WebGL Shaders | `60 FPS` WebGL render cadence · GLTF Draco compression · Zero external plugins · Web Audio spatial cues |
+| **04** | **CivicFlow: Municipal Triage** | Civic Systems · Spatial Clustering | `Sub-sec` DBSCAN clustering · PostGIS geospatial deduplication · Offline field PWA |
+| **05** | **AI Script Studio** | Generative Audio · In-Browser DAW | `Sub-12ms` AudioWorklet DSP latency · Multi-track stem matrix · Canvas waveform rendering |
+| **06** | **RoadTriage: Pavement Distress Vision** | Civic Infrastructure · Edge ML | `YOLOv8` edge segmentation · ONNX Runtime Web client inference · Sub-meter GPS geotag |
+| **07** | **It's You: Zero-Knowledge Identity Vault** | Privacy Engineering · zk-SNARK Groth16 | `0 Bytes` plaintext personal data leaked · Circom 2.1 arithmetic circuits · SnarkJS mobile prover (~1.4s) |
+| **08** | **BabyCarl: Circadian Telemetry** | Connected Hardware · Ambient Sensing | Non-contact optical micro-motion · Local Kalman filter DSP · Zero cloud storage dependency |
+| **09** | **GroupChat HQ** | Collaborative Architecture · Semantic Clustering | Vector similarity embeddings · CRDT local state synchronization · Local-first cache |
+| **10** | **VISION: Prompt Lab** | AI Systems Ergonomics · Prompt Framework | 14 operational prompt patterns · Deterministic tool schema outputs · XML parameter scaffolding |
 
 ---
 
