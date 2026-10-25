@@ -2,7 +2,7 @@
 
 [![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-aigroupchathq.github.io%2Fvaishnavdeshmukh--portfolio-2f81f7?style=flat-square&logo=github)](https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/)
 [![Node Version](https://img.shields.io/badge/Node-20+-brightgreen?style=flat-square&logo=node.js)](https://nodejs.org/)
-[![Status](https://img.shields.io/badge/Status-Active_Prototypes_on_GitHub-ff3358?style=flat-square)](https://github.com/aigroupchathq/vaishnavdeshmukh-portfolio)
+[![Status](https://img.shields.io/badge/Status-Selected_Projects-355b76?style=flat-square)](https://github.com/aigroupchathq/vaishnavdeshmukh-portfolio)
 [![Location](https://img.shields.io/badge/Location-London%2C_UK-a78bfa?style=flat-square)](#)
 
 > **Live Portfolio**: [https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/](https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/)
@@ -19,40 +19,40 @@ But mechanical efficiency means nothing if the interaction feels hostile. Guided
 
 ## Core Focus Areas
 
-- **Healthcare Logistics & Clinical Flows**: Offline-first asset telemetry, HL7 FHIR v4 data schemas, GS1-128 DataMatrix verification, and low-latency Bluetooth Low Energy (BLE) RSSI triangulation models.
-- **Spatial 3D & Interactive Tooling**: Browser-native WebGL shaders, Three.js 60 FPS pipelines, procedural geometric dissection, and low-latency Web Audio API Worklet DSP synthesis.
-- **Civic Infrastructure & Municipal Triage**: Spatial DBSCAN clustering algorithms, perceptual image deduplication, and high-density operator triage workflows.
-- **Applied Cryptography & Privacy**: Client-side zero-knowledge proof generation (zk-SNARK Groth16 with Circom 2.1 & SnarkJS) and decentralized verifiable credentials with 0 bytes of plaintext data leaked.
+- **Operational systems**: Healthcare logistics, civic infrastructure, education, and automotive product concepts.
+- **Interactive technology**: Spatial interfaces, attention and learning experiences, browser-based creative tools, and practical AI applications.
+- **Product design**: Clear information architecture, human-centred workflows, and privacy-aware design.
 
 ---
 
-## 10 Prototypes & Architectural Case Studies (Under Active Development)
+## 16 Selected Projects & Case Studies
 
-All projects represent personal concepts, working prototypes, and architectural case studies under active development on GitHub:
+The portfolio distinguishes live products, source repositories, prototypes, and concept studies. Archived placeholders and generic starter repositories are not presented as finished projects.
 
-| # | Prototype | Domain & Architecture | Key Engineering Targets |
+| # | Project | Area | Stage & links |
 |---|---|---|---|
-| **01** | **Predictive Ward Logistics Engine** | Health Systems · Offline BLE Telemetry | `<9s` search time target · 100% offline cache · HL7 FHIR v4 schema · GS1 DataMatrix |
-| **02** | **The Unexplored Interior** | Cognitive Neuroscience · IIT 4.0 Benchmark | `IIT 4.0` \(\Phi\) state engine · 5 sensory awareness tests · 3D gyroscopic gimbal · 528Hz Solfeggio sound synth |
-| **03** | **iTHINK: 3D Neuroanatomy Atlas** | Cognitive Neuroscience · WebGL Shaders | `60 FPS` WebGL render cadence · GLTF Draco compression · Zero external plugins · Web Audio spatial cues |
-| **04** | **CivicFlow: Municipal Triage** | Civic Systems · Spatial Clustering | `Sub-sec` DBSCAN clustering · PostGIS geospatial deduplication · Offline field PWA |
-| **05** | **AI Script Studio** | Generative Audio · In-Browser DAW | `Sub-12ms` AudioWorklet DSP latency · Multi-track stem matrix · Canvas waveform rendering |
-| **06** | **RoadTriage: Pavement Distress Vision** | Civic Infrastructure · Edge ML | `YOLOv8` edge segmentation · ONNX Runtime Web client inference · Sub-meter GPS geotag |
-| **07** | **It's You: Zero-Knowledge Identity Vault** | Privacy Engineering · zk-SNARK Groth16 | `0 Bytes` plaintext personal data leaked · Circom 2.1 arithmetic circuits · SnarkJS mobile prover (~1.4s) |
-| **08** | **BabyCarl: Circadian Telemetry** | Connected Hardware · Ambient Sensing | Non-contact optical micro-motion · Local Kalman filter DSP · Zero cloud storage dependency |
-| **09** | **GroupChat HQ** | Collaborative Architecture · Semantic Clustering | Vector similarity embeddings · CRDT local state synchronization · Local-first cache |
-| **10** | **VISION: Prompt Lab** | AI Systems Ergonomics · Prompt Framework | 14 operational prompt patterns · Deterministic tool schema outputs · XML parameter scaffolding |
+| **01** | **Predictive Ward Logistics Engine** | Health systems | Architecture concept / case study |
+| **02** | **The Unexplored Interior** | Attention & awareness | [Live experience](https://aigroupchathq.github.io/consciousness-mechanism/) · [Source](https://github.com/aigroupchathq/consciousness-mechanism) |
+| **03** | **iTHINK** | Attention & learning | [Source](https://github.com/aigroupchathq/iTHINKwip) |
+| **04** | **CivicFlow** | Civic systems | [Civic Infrastructure Triage source](https://github.com/aigroupchathq/civic-infrastructure-triage) |
+| **05** | **AI Script Studio** | Creative technology | Audio-workstation concept / case study |
+| **06** | **RoadTriage** | Civic infrastructure | [Civic Infrastructure Triage source](https://github.com/aigroupchathq/civic-infrastructure-triage) |
+| **07** | **The Observer** | Thought & awareness | [Live experience](https://itsyou.ai.studio/) · [Source](https://github.com/aigroupchathq/its-you-ai) |
+| **08** | **BabyCarl** | Ambient health systems | Concept / case study |
+| **09** | **GroupChat HQ** | Collaborative systems | Concept / case study |
+| **10** | **Vision Intelligence** | AI-guided work | [Live experience](https://aigroupchathq.github.io/vision-intelligence/) · [Source](https://github.com/aigroupchathq/vision-intelligence) |
+| **11** | **Datum ADAS** | Automotive systems | Prototype in development · [Source](https://github.com/aigroupchathq/datum-adas) |
+| **12** | **Checkmate** | Human connection | [Live product](https://aigroupchathq.github.io/velum-labs/) · [Source](https://github.com/aigroupchathq/velum-labs) |
+| **13** | **Vedic Tree OS** | Education systems | [Live product](https://aigroupchathq.github.io/vtsystem/) · [Source](https://github.com/aigroupchathq/vtsystem) |
+| **14** | **The Driver of God** | Interactive philosophy | [Source](https://github.com/aigroupchathq/the-driver-of-god) |
+| **15** | **Hidden Leaf Studio** | Creative tools | [Source](https://github.com/aigroupchathq/hidden-leaf-studio) |
+| **16** | **Datum Atelier** | Automotive product | [Live experience](https://datumatelier.uk/) · [Source](https://github.com/aigroupchathq/datum-intro) |
 
 ---
 
-## Planned Open-Source Roadmap & Technical Deliverables
+## Project stages
 
-| Milestone | Target Horizon | Open-Source Package / Repo | Primary Architectural Focus |
-|---|---|---|---|
-| **01** | **Q3 2026** (Active Dev) | `github.com/deshmukhvaishnav/ward-engine-core` (Apache 2.0) | Web Bluetooth Gateway daemon, P2P CRDT vector clock sync (Yjs), HL7 FHIR v4 schema validation. |
-| **02** | **Q4 2026** (Active Dev) | `github.com/deshmukhvaishnav/ithink-spatial-webgpu` (MIT) | WebGPU WGSL compute shaders, mathematical clipping planes, 60 FPS Draco decompression pipeline. |
-| **03** | **Q1 2027** (RFC Open) | `github.com/deshmukhvaishnav/civicflow-edge-triage` (AGPLv3) | In-browser ONNX Runtime Web YOLOv8 pavement classifier, WebAssembly R-Tree spatial deduplication index. |
-| **04** | **Q2 2027** (Research) | `github.com/deshmukhvaishnav/scriptstudio-dsp` (MIT) | Zero GC audio ring buffers, AudioWorklet DSP 16-stem mixing matrix, client-side vector embeddings. |
+The portfolio marks whether work is a live product, a prototype, or a concept study. Proposed explorations are not presented as active builds, published packages, or measured performance results. Follow the project links above for current demos and source code.
 
 ---
 
@@ -61,7 +61,7 @@ All projects represent personal concepts, working prototypes, and architectural 
 1. **Quiet Tools Over Alert Fatigue**: Software built for high-stakes environments (clinical wards, municipal works) should not scream for attention or freeze when Wi-Fi drops. Quiet software caches locally, triangulates passively, and stays responsive.
 2. **Zero-Pill Discipline & Editorial Hierarchy**: Replace generic colored rounded tag spam with unboxed, high-contrast monospace metrics separated by middle dots (`·`). Prioritize typographic weight and structural alignment.
 3. **High-Density Operational Ergonomics**: Provide clear keyboard accessibility, predictable ARIA navigation, sustained 60 FPS transitions, and tactile feedback.
-4. **Verifiable Client-Side Privacy**: Minimize third-party trust boundaries. Move cryptographic proof generation and inference to the client device wherever computationally feasible.
+4. **Privacy-Aware Product Design**: Make data use clear, minimize unnecessary collection, and keep trust boundaries visible.
 
 ---
 
@@ -82,7 +82,7 @@ All projects represent personal concepts, working prototypes, and architectural 
 ### Running Locally
 ```bash
 # Clone the repository
-git clone https://github.com/deshmukhvaishnav/<your-repo-name>.git
+git clone https://github.com/aigroupchathq/vaishnavdeshmukh-portfolio.git
 cd <your-repo-name>
 
 # Install dependencies
