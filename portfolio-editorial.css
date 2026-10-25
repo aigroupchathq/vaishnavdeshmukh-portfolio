@@ -1,4 +1,12 @@
 body.editorial-portfolio {
+  --editorial-ink: #202020;
+  --editorial-muted: #625f59;
+  --editorial-paper: #fff;
+  --editorial-warm: #f1efe9;
+  --editorial-border: #d5d1c8;
+  --editorial-accent: #355b76;
+  --editorial-accent-hover: #29485f;
+  --editorial-accent-wash: #e8eef2;
   color: #171717;
   background: #faf9f6;
   background-image: none;
@@ -40,7 +48,7 @@ body.editorial-portfolio header.sticky .border-canvas-border-mid {
 }
 
 body.editorial-portfolio header.sticky .bg-canvas-accent {
-  background: #355b76 !important;
+  background: var(--editorial-accent) !important;
   color: #fff !important;
 }
 
@@ -63,12 +71,12 @@ body.editorial-portfolio #main-content {
 body.editorial-portfolio #main-content .text-zinc-100,
 body.editorial-portfolio #main-content .text-zinc-200,
 body.editorial-portfolio #main-content .text-zinc-300 {
-  color: #202020 !important;
+  color: var(--editorial-ink) !important;
 }
 
 body.editorial-portfolio #main-content .text-zinc-400,
 body.editorial-portfolio #main-content .text-zinc-500 {
-  color: #56534f !important;
+  color: var(--editorial-muted) !important;
 }
 
 body.editorial-portfolio #main-content .text-zinc-600 {
@@ -77,16 +85,16 @@ body.editorial-portfolio #main-content .text-zinc-600 {
 
 body.editorial-portfolio #main-content .text-canvas-accent,
 body.editorial-portfolio #main-content .text-canvas-blue {
-  color: #355b76 !important;
+  color: var(--editorial-accent) !important;
 }
 
 body.editorial-portfolio #main-content .text-canvas-purple {
-  color: #66537f !important;
+  color: var(--editorial-accent) !important;
 }
 
 body.editorial-portfolio #main-content .text-canvas-amber,
 body.editorial-portfolio #main-content .text-canvas-alert {
-  color: #805b28 !important;
+  color: var(--editorial-accent) !important;
 }
 
 body.editorial-portfolio #main-content .bg-canvas-base {
@@ -394,7 +402,7 @@ body.editorial-portfolio #main-content a.bg-canvas-accent {
 body.editorial-portfolio #main-content .project-bento-card .inspect-btn:hover,
 body.editorial-portfolio #main-content a.bg-canvas-accent:hover {
   color: #fff !important;
-  background: #29485f !important;
+  background: var(--editorial-accent-hover) !important;
 }
 
 body.editorial-portfolio #main-content #ideology > div,
@@ -424,6 +432,66 @@ body.editorial-portfolio #main-content #heuristics .bg-canvas-surface {
 body.editorial-portfolio #main-content #footer-heading ~ div,
 body.editorial-portfolio #main-content footer {
   color: #333 !important;
+}
+
+body.editorial-portfolio #main-content [class*="bg-canvas-base/"],
+body.editorial-portfolio #main-content [class*="bg-zinc-800/"] {
+  background-color: var(--editorial-warm) !important;
+}
+
+body.editorial-portfolio #main-content [class*="bg-canvas-surface/"],
+body.editorial-portfolio #main-content [class*="bg-canvas-elevated/"] {
+  background-color: var(--editorial-paper) !important;
+}
+
+body.editorial-portfolio #main-content [class*="bg-canvas-accent/"],
+body.editorial-portfolio #main-content [class*="bg-canvas-blue/"],
+body.editorial-portfolio #main-content [class*="bg-canvas-purple/"],
+body.editorial-portfolio #main-content [class*="bg-canvas-amber/"],
+body.editorial-portfolio #main-content [class*="bg-canvas-alert/"],
+body.editorial-portfolio #main-content [class*="bg-canvas-red/"] {
+  background-color: var(--editorial-accent-wash) !important;
+}
+
+body.editorial-portfolio #main-content [class*="border-canvas-accent/"],
+body.editorial-portfolio #main-content [class*="border-canvas-blue/"],
+body.editorial-portfolio #main-content [class*="border-canvas-purple/"],
+body.editorial-portfolio #main-content [class*="border-canvas-amber/"],
+body.editorial-portfolio #main-content [class*="border-canvas-alert/"],
+body.editorial-portfolio #main-content [class*="border-canvas-red/"] {
+  border-color: #b6c8d3 !important;
+}
+
+body.editorial-portfolio #main-content .text-canvas-accent,
+body.editorial-portfolio #main-content .text-canvas-blue,
+body.editorial-portfolio #main-content .text-canvas-blue-light,
+body.editorial-portfolio #main-content .text-canvas-purple,
+body.editorial-portfolio #main-content .text-canvas-amber,
+body.editorial-portfolio #main-content .text-canvas-alert,
+body.editorial-portfolio #main-content .text-canvas-red {
+  color: var(--editorial-accent) !important;
+}
+
+body.editorial-portfolio #main-content .workflow-node-btn {
+  border-color: var(--editorial-border) !important;
+  background-color: var(--editorial-paper) !important;
+}
+
+body.editorial-portfolio #main-content .workflow-node-btn.bg-canvas-accent\/15 {
+  border-color: var(--editorial-accent) !important;
+  background-color: var(--editorial-accent-wash) !important;
+}
+
+body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-accent,
+body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-blue,
+body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-blue-light,
+body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-purple,
+body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-amber {
+  color: #b8cbd7 !important;
+}
+
+body.editorial-portfolio #main-content .inspect-card-trigger [class*="bg-canvas-base/"] {
+  background-color: #101113 !important;
 }
 
 @media (max-width: 760px) {

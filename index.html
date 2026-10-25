@@ -4067,8 +4067,8 @@
 
           // Draw filled gradient area
           const gradient = ctx.createLinearGradient(0, 0, 0, h);
-          gradient.addColorStop(0, "rgba(255, 51, 88, 0.3)");
-          gradient.addColorStop(0.6, "rgba(47, 129, 247, 0.15)");
+          gradient.addColorStop(0, "rgba(53, 91, 118, 0.22)");
+          gradient.addColorStop(0.6, "rgba(53, 91, 118, 0.1)");
           gradient.addColorStop(1, "transparent");
 
           ctx.beginPath();
@@ -4093,10 +4093,10 @@
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           });
-          ctx.strokeStyle = "#ff3358";
+          ctx.strokeStyle = "#355b76";
           ctx.lineWidth = 1.8;
-          ctx.shadowColor = "#ff3358";
-          ctx.shadowBlur = 8;
+          ctx.shadowColor = "rgba(53, 91, 118, 0.35)";
+          ctx.shadowBlur = 5;
           ctx.stroke();
 
           // Latest head point
@@ -4105,9 +4105,9 @@
           const lastY = h - (lastVal / 100) * (h - 8);
           ctx.beginPath();
           ctx.arc(lastX - 2, lastY, 3, 0, Math.PI * 2);
-          ctx.fillStyle = "#2f81f7";
-          ctx.shadowColor = "#2f81f7";
-          ctx.shadowBlur = 10;
+          ctx.fillStyle = "#355b76";
+          ctx.shadowColor = "rgba(53, 91, 118, 0.35)";
+          ctx.shadowBlur = 5;
           ctx.fill();
         }
 
