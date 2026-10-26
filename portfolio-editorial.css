@@ -1,643 +1,105 @@
 /* ==========================================================================
-   VAISHNAV DESHMUKH — TACTICAL MONOCHROME ARMY INTERFACE
-   Black & White Theme · High-Density Army Matrix · Zero-Scroll Friction
+   SIMPLE, CLEAN, MINIMAL DARK PORTFOLIO STYLES
+   Calm Aesthetics · Subtle Contrast · Quiet Typography · Low-Scroll Grid
    ========================================================================== */
 
 :root {
-  --army-black: #030305;
-  --army-surface: #090a0e;
-  --army-elevated: #111319;
-  --army-highlight: #181b24;
-  --army-white: #ffffff;
-  --army-silver: #e4e4e7;
-  --army-muted: #a1a1aa;
-  --army-dim: #71717a;
-  --army-border: rgba(255, 255, 255, 0.14);
-  --army-border-bright: rgba(255, 255, 255, 0.45);
-  --army-border-active: #ffffff;
-  --army-glow: rgba(255, 255, 255, 0.15);
+  --bg-main: #0b0c0e;
+  --bg-surface: #121316;
+  --bg-elevated: #181a1f;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.22);
+  --text-main: #f4f4f5;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
 }
 
-/* ==========================================================================
-   01. GLOBAL RESET TO STRICT BLACK & WHITE
-   ========================================================================== */
-html,
-body,
-body.editorial-portfolio {
+html, body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
   color-scheme: dark !important;
-  background-color: var(--army-black) !important;
-  color: var(--army-white) !important;
-  background-image: 
-    radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.07), transparent 45%),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px) !important;
-  background-size: 100% 100%, 28px 28px, 28px 28px !important;
-  background-attachment: fixed !important;
 }
 
-/* Subtle particle canvas */
-body.editorial-portfolio #neuralCanvas,
-#neuralCanvas {
-  opacity: 0.18 !important;
-  mix-blend-mode: screen !important;
-  filter: grayscale(1) contrast(1.5) !important;
-}
-
-/* Hairline Grid */
-.hairline-grid {
-  opacity: 0.08 !important;
-  filter: grayscale(1) !important;
-}
-
-/* Selection */
-::selection {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* Global Typography Overrides */
-.text-zinc-100,
-.text-zinc-200,
-body.editorial-portfolio .text-zinc-100,
-body.editorial-portfolio .text-zinc-200 {
-  color: #ffffff !important;
-}
-
-.text-zinc-300,
-body.editorial-portfolio .text-zinc-300 {
-  color: #e4e4e7 !important;
-}
-
-.text-zinc-400,
-body.editorial-portfolio .text-zinc-400 {
-  color: #a1a1aa !important;
-}
-
-.text-zinc-500,
-.text-zinc-600,
-body.editorial-portfolio .text-zinc-500,
-body.editorial-portfolio .text-zinc-600 {
-  color: #71717a !important;
-}
-
-/* Accents normalized to high-contrast white */
-.text-canvas-accent,
-.text-canvas-blue,
-.text-canvas-blue-light,
-.text-canvas-purple,
-.text-canvas-amber,
-.text-canvas-alert,
-.text-canvas-red,
-body.editorial-portfolio .text-canvas-accent,
-body.editorial-portfolio .text-canvas-blue,
-body.editorial-portfolio .text-canvas-blue-light,
-body.editorial-portfolio .text-canvas-purple,
-body.editorial-portfolio .text-canvas-amber,
-body.editorial-portfolio .text-canvas-alert,
-body.editorial-portfolio .text-canvas-red {
-  color: #ffffff !important;
-}
-
-/* Backgrounds */
-.bg-canvas-base,
-body.editorial-portfolio .bg-canvas-base,
-body.editorial-portfolio #main-content .bg-canvas-base {
-  background-color: var(--army-black) !important;
-}
-
-.bg-canvas-surface,
-body.editorial-portfolio .bg-canvas-surface,
-body.editorial-portfolio #main-content .bg-canvas-surface {
-  background-color: var(--army-surface) !important;
-}
-
-.bg-canvas-elevated,
-body.editorial-portfolio .bg-canvas-elevated,
-body.editorial-portfolio #main-content .bg-canvas-elevated {
-  background-color: var(--army-elevated) !important;
-}
-
-.bg-canvas-accent,
-body.editorial-portfolio .bg-canvas-accent {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  font-weight: 700 !important;
-}
-
-/* Borders */
-.border-canvas-border,
-.border-canvas-border-mid,
-body.editorial-portfolio .border-canvas-border,
-body.editorial-portfolio .border-canvas-border-mid {
-  border-color: var(--army-border) !important;
-}
-
-.border-canvas-border-strong,
-body.editorial-portfolio .border-canvas-border-strong {
-  border-color: var(--army-border-bright) !important;
-}
-
-/* ==========================================================================
-   02. TACTICAL NAVIGATION & TIMEPIECE
-   ========================================================================== */
-header.sticky,
-body.editorial-portfolio header.sticky {
-  background-color: rgba(3, 3, 5, 0.92) !important;
-  backdrop-filter: blur(16px) !important;
-  border-bottom: 1px solid var(--army-border) !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7) !important;
-}
-
-header.sticky .brand,
-body.editorial-portfolio header.sticky .brand {
-  color: #ffffff !important;
-}
-
-header.sticky a,
-header.sticky button {
-  color: #a1a1aa !important;
-}
-
-header.sticky a:hover,
-header.sticky button:hover {
-  color: #ffffff !important;
-}
-
-/* Timepiece */
-.london-timepiece,
-body.editorial-portfolio .london-timepiece,
-aside[aria-label="Availability and local time"],
-body.editorial-portfolio aside[aria-label="Availability and local time"] {
-  background-color: var(--army-surface) !important;
-  border: 1px solid var(--army-border) !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* ==========================================================================
-   03. THE ARMY FORMATION (ALL PROJECTS SIDE-BY-SIDE)
-   ========================================================================== */
-#work {
-  width: 100% !important;
-  max-width: 1440px !important;
-  margin-inline: auto !important;
-  padding-inline: clamp(1rem, 3vw, 2.5rem) !important;
-  padding-block: 3.5rem !important;
-  background: transparent !important;
-  border-top: 1px solid var(--army-border) !important;
-}
-
-/* The Army Grid Container: 4 Columns on Desktop */
-#work .projects-army-grid,
-#work > .grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 1.15rem !important;
-  align-items: stretch !important;
-}
-
-@media (max-width: 1200px) {
-  #work .projects-army-grid,
-  #work > .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-}
-
-@media (max-width: 860px) {
-  #work .projects-army-grid,
-  #work > .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-}
-
-@media (max-width: 540px) {
-  #work .projects-army-grid,
-  #work > .grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* Tactical Project Card */
-#work .project-bento-card,
-#work .editorial-project-card,
-body.editorial-portfolio #work .project-bento-card,
-body.editorial-portfolio #work .editorial-project-card {
-  grid-column: span 1 !important;
+/* Calm 3-column project grid */
+#work .project-bento-card {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  min-width: 0 !important;
-  height: 100% !important;
-  background-color: var(--army-surface) !important;
-  border: 1px solid var(--army-border) !important;
-  border-radius: 8px !important;
-  padding: 1.15rem !important;
-  position: relative !important;
-  overflow: hidden !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.22s ease,
-              box-shadow 0.22s ease,
-              background-color 0.22s ease !important;
+  border-radius: 0.875rem !important;
+  border: 1px solid var(--border-subtle) !important;
+  background-color: var(--bg-surface) !important;
+  padding: 1.25rem !important;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Hover State: Blazing White Laser Border & Subtle Glow */
-#work .project-bento-card:hover,
-#work .editorial-project-card:hover,
-body.editorial-portfolio #work .project-bento-card:hover,
-body.editorial-portfolio #work .editorial-project-card:hover {
-  transform: translateY(-3px) !important;
-  border-color: #ffffff !important;
-  background-color: var(--army-elevated) !important;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.14), 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+#work .project-bento-card:hover {
+  border-color: var(--border-hover) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Corner Crosshair HUD Accent on Card */
-#work .project-bento-card::before,
-#work .editorial-project-card::before {
-  content: "+";
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--army-dim);
-  pointer-events: none;
-  transition: color 0.2s ease;
-}
-
-#work .project-bento-card:hover::before,
-#work .editorial-project-card:hover::before {
-  color: #ffffff;
-}
-
-/* Card Internal Layout Normalization */
-#work .project-bento-card > div:first-child,
-#work .editorial-project-card .editorial-card-copy {
-  display: flex !important;
-  flex-direction: column !important;
-  width: 100% !important;
-  padding: 0 !important;
-}
-
-/* Top Telemetry Row: Unit Code + Radar Status */
-.tactical-unit-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--army-muted);
-}
-
-.tactical-status-radar {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: #ffffff;
-  font-size: 0.62rem;
-}
-
-.radar-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  box-shadow: 0 0 8px #ffffff;
-  animation: radarPulse 2s infinite ease-in-out;
-}
-
-@keyframes radarPulse {
-  0% { transform: scale(0.95); opacity: 0.7; }
-  50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 12px #ffffff; }
-  100% { transform: scale(0.95); opacity: 0.7; }
-}
-
-/* Schematic Vector Preview Container */
-#work .inspect-card-trigger,
-#work .editorial-project-preview,
-.tactical-schematic-wrap {
+/* Clean image preview frame */
+#work .inspect-card-trigger {
   display: block !important;
   width: 100% !important;
-  height: 130px !important;
-  min-height: 130px !important;
-  margin: 0.6rem 0 !important;
-  border-radius: 6px !important;
+  height: 155px !important;
+  border-radius: 0.5rem !important;
   overflow: hidden !important;
-  border: 1px solid var(--army-border) !important;
-  background-color: #000000 !important;
-  position: relative !important;
+  border: 1px solid var(--border-subtle) !important;
+  background: #0e1014 !important;
+  margin: 0.75rem 0 !important;
   cursor: pointer !important;
 }
 
-#work .inspect-card-trigger:hover,
-.tactical-schematic-wrap:hover {
-  border-color: var(--army-border-bright) !important;
-}
-
-#work .inspect-card-trigger img,
-.tactical-schematic-wrap img {
+#work .inspect-card-trigger img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  filter: invert(0.93) hue-rotate(180deg) contrast(1.15) brightness(0.92) !important;
-  transition: transform 0.35s ease !important;
+  opacity: 0.92 !important;
+  transition: transform 0.25s ease, opacity 0.25s ease !important;
 }
 
-#work .project-bento-card:hover .inspect-card-trigger img,
-#work .editorial-project-card:hover .tactical-schematic-wrap img {
-  transform: scale(1.04) !important;
+#work .project-bento-card:hover .inspect-card-trigger img {
+  transform: scale(1.02) !important;
+  opacity: 1 !important;
 }
 
-/* Hide bulky header in preview inside cards to save vertical space */
-#work .inspect-card-trigger > div:first-child {
-  display: none !important;
-}
-
-#work .inspect-card-trigger > div:last-child {
-  height: 100% !important;
-  aspect-ratio: auto !important;
-}
-
-/* Project Titles */
-#work .project-bento-card h3,
-#work .editorial-project-card h3,
-body.editorial-portfolio #work .project-bento-card h3,
-body.editorial-portfolio #work .editorial-project-card h3 {
-  color: #ffffff !important;
-  font-size: 1.15rem !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.025em !important;
-  line-height: 1.25 !important;
-  margin: 0.4rem 0 0.2rem 0 !important;
-}
-
-/* Domain / Category Tag */
-.tactical-domain-tag,
-.editorial-card-kicker {
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.65rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  color: var(--army-muted) !important;
-}
-
-/* Concise Summary Paragraph */
-#work .project-bento-card p,
-#work .editorial-project-card p {
-  color: var(--army-muted) !important;
-  font-size: 0.78rem !important;
-  line-height: 1.45 !important;
-  margin: 0.35rem 0 !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
-}
-
-/* Core Combat / Operational Yield Metric */
-.tactical-yield-badge {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.35rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  color: #ffffff !important;
-  padding: 0.25rem 0.55rem !important;
-  border-radius: 4px !important;
-  font-size: 0.68rem !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-weight: 700 !important;
-  margin: 0.5rem 0 !important;
-  width: fit-content !important;
-}
-
-/* Unboxed Editorial Yields top bar within cards: hide to keep zero-scroll army density */
-#work .project-bento-card > div:first-child > div:first-child:has(i) {
-  display: none !important;
-}
-
-/* Hide cumbersome accordion tabs inside compact army grid cards */
-#work .card-panels-container,
-#work .card-toggle-details,
-#work .editorial-project-preview strong,
-#work .preview-mark,
-#work .preview-index {
-  display: none !important;
-}
-
-/* Action Bar */
-#work .project-bento-card > div:last-child,
-#work .editorial-project-card .editorial-card-links,
-.tactical-card-actions {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 0.45rem !important;
-  margin-top: 0.85rem !important;
-  padding-top: 0.75rem !important;
-  border-top: 1px solid var(--army-border) !important;
-  width: 100% !important;
-}
-
-/* Primary Inspect Button: High-Contrast White */
-#work .inspect-modal-btn,
-#work .inspect-btn,
-.tactical-btn-primary {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: 1px solid #ffffff !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.72rem !important;
-  font-weight: 800 !important;
-  padding: 0.4rem 0.75rem !important;
-  border-radius: 5px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.35rem !important;
-  cursor: pointer !important;
-  transition: all 0.15s ease !important;
-  text-decoration: none !important;
-}
-
-#work .inspect-modal-btn:hover,
-#work .inspect-btn:hover,
-.tactical-btn-primary:hover {
-  background: #e4e4e7 !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25) !important;
-}
-
-/* Secondary Action Buttons (Source / Live) */
-.tactical-btn-secondary,
-#work .editorial-card-links a,
-#work .project-bento-card > div:last-child a {
-  background: var(--army-elevated) !important;
-  color: #ffffff !important;
-  border: 1px solid var(--army-border) !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.7rem !important;
-  font-weight: 600 !important;
-  padding: 0.4rem 0.65rem !important;
-  border-radius: 5px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.3rem !important;
-  text-decoration: none !important;
-  transition: all 0.15s ease !important;
-}
-
-.tactical-btn-secondary:hover,
-#work .editorial-card-links a:hover,
-#work .project-bento-card > div:last-child a:hover {
-  border-color: #ffffff !important;
-  background: var(--army-highlight) !important;
-  color: #ffffff !important;
-  transform: translateY(-1px) !important;
-}
-
-/* ==========================================================================
-   04. CONTROLS: SEARCH & CATEGORY RADAR
-   ========================================================================== */
-#projectSearchInput {
-  background: transparent !important;
-  color: #ffffff !important;
-  border: none !important;
-}
-
-#projectSearchInput::placeholder {
-  color: var(--army-dim) !important;
-}
-
-/* Filter Tabs */
-.filter-tab,
-body.editorial-portfolio .filter-tab {
-  background-color: var(--army-surface) !important;
-  color: var(--army-muted) !important;
-  border: 1px solid var(--army-border) !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.72rem !important;
+/* Subtle filter tabs */
+.filter-tab {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 0.5rem !important;
   padding: 0.35rem 0.75rem !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
+  font-size: 0.75rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
   transition: all 0.15s ease !important;
 }
 
 .filter-tab:hover {
-  color: #ffffff !important;
-  border-color: var(--army-border-bright) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-hover) !important;
 }
 
 .filter-tab.active,
-.filter-tab.border-canvas-accent,
-body.editorial-portfolio .filter-tab.border-canvas-accent {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-  font-weight: 800 !important;
-  box-shadow: 0 0 14px rgba(255, 255, 255, 0.25) !important;
+.filter-tab.border-canvas-accent {
+  background-color: #f4f4f5 !important;
+  color: #121316 !important;
+  border-color: #f4f4f5 !important;
+  font-weight: 700 !important;
 }
 
-/* View Density Controls */
-.project-density-controls,
-body.editorial-portfolio .project-density-controls {
-  display: flex !important;
-  background-color: var(--army-surface) !important;
-  border: 1px solid var(--army-border) !important;
-  border-radius: 6px !important;
-  padding: 3px !important;
-}
-
-.project-density-controls button {
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.7rem !important;
-  padding: 0.25rem 0.6rem !important;
-  border-radius: 4px !important;
-  color: var(--army-muted) !important;
-  transition: all 0.15s ease !important;
-}
-
-.project-density-controls button.active,
-.project-density-controls button.bg-canvas-elevated {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
-}
-
-/* ==========================================================================
-   05. CASE STUDY DEEP-DIVE MODAL (PURE BLACK & WHITE DOSSIER)
-   ========================================================================== */
+/* Modal calm styling */
 #caseStudyModalBackdrop,
 #profileModalBackdrop {
-  background-color: rgba(0, 0, 0, 0.9) !important;
-  backdrop-filter: blur(20px) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
 }
 
 #caseStudyModalBackdrop > div,
 #profileModalBackdrop > div {
-  background-color: var(--army-surface) !important;
-  border: 1px solid var(--army-border-bright) !important;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
-}
-
-#modalPreviewImg {
-  filter: invert(0.93) hue-rotate(180deg) contrast(1.15) brightness(0.92) !important;
-  background-color: #000000 !important;
-}
-
-/* ==========================================================================
-   06. ALL OTHER SECTIONS HIGH-CONTRAST MONOCHROME NORMALIZATION
-   ========================================================================== */
-#ideology,
-#capabilities,
-#experience,
-#roadmap,
-#testimonials,
-#connect,
-body.editorial-portfolio #ideology,
-body.editorial-portfolio #capabilities,
-body.editorial-portfolio #experience,
-body.editorial-portfolio #roadmap,
-body.editorial-portfolio #testimonials,
-body.editorial-portfolio #connect {
-  border-top: 1px solid var(--army-border) !important;
-  background-color: transparent !important;
-}
-
-/* Brief Builder in Connect */
-#briefDomainsContainer button {
-  background-color: var(--army-surface) !important;
-  border: 1px solid var(--army-border) !important;
-  color: var(--army-muted) !important;
-}
-
-#briefDomainsContainer button.active,
-#briefDomainsContainer button.border-canvas-accent {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-  font-weight: 700 !important;
-}
-
-/* Buttons in footer */
-#copyEmailFooterBtn {
-  background-color: var(--army-surface) !important;
-  border: 1px solid var(--army-border) !important;
-  color: #ffffff !important;
-}
-
-#copyEmailFooterBtn:hover {
-  border-color: #ffffff !important;
-}
-
-a[href^="mailto:"] {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  font-weight: 700 !important;
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border-hover) !important;
+  color: var(--text-main) !important;
 }

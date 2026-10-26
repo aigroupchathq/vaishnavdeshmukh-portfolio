@@ -376,7 +376,7 @@
     <link rel="stylesheet" href="portfolio-editorial.css" />
   </head>
 
-  <body class="editorial-portfolio bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
+  <body class="bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
     <div id="splashOverlay" role="dialog" aria-modal="true" aria-label="Portfolio introduction" class="splash-is-entering fixed inset-0 z-[9999] flex min-h-screen flex-col overflow-hidden bg-black px-6 py-5 text-white transition-all duration-500 select-none sm:px-10 sm:py-7">
       <canvas id="splashCanvas" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></canvas>
       <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/45 pointer-events-none"></div>
@@ -678,1586 +678,541 @@
         </div>
       </section>
 
-      <!-- 03: FEATURED WORK (ARMY FORMATION GRID) -->
-      <section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-canvas-border" aria-labelledby="work-heading">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <!-- 03: FEATURED WORK (SIMPLE CLEAN MINIMAL GRID) -->
+      <section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-canvas-border" aria-labelledby="work-heading">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
-            <div class="font-mono text-xs font-bold text-white uppercase tracking-widest mb-1.5 flex items-center gap-2">
-              <span class="radar-dot"></span>
-              <span>TACTICAL FORMATION // 16 OPERATIONAL DIVISIONS</span>
+            <div class="font-mono text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">
+              <i data-lucide="briefcase" class="w-3.5 h-3.5 text-zinc-400"></i>
+              <span>Selected Work</span>
             </div>
-            <h2 id="work-heading" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Systems built like an army in formation.
+            <h2 id="work-heading" class="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
+              Thoughtful software, built around <span class="font-serif italic font-normal text-zinc-400">real needs.</span>
             </h2>
           </div>
-          <p class="text-xs sm:text-sm text-zinc-400 font-mono max-w-md">
-            16 active project units standing shoulder to shoulder. High-density tactical matrix, zero unnecessary scrolling friction.
+          <p class="text-sm text-zinc-400 max-w-md">
+            Sixteen independent prototypes across healthcare, cognitive tools, civic systems, creative technology and automotive systems.
           </p>
         </div>
 
-        <!-- Live Real-Time Project Search Bar -->
-        <div class="mb-5 p-2 rounded-xl bg-canvas-surface border border-canvas-border-mid font-mono text-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-inner">
+        <!-- Real-Time Search Bar -->
+        <div class="mb-6 p-2 rounded-xl bg-canvas-surface border border-canvas-border font-mono text-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-sm">
           <div class="relative flex-1">
             <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input type="text" id="projectSearchInput" placeholder="Search army units by name, division, or technology..." class="w-full bg-transparent pl-9 pr-16 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-white rounded-lg" aria-label="Search projects" autocomplete="off" />
-            <kbd class="hidden sm:inline-block absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 px-1.5 py-0.5 rounded border border-white/10 bg-white/[0.04]">Press /</kbd>
+            <input type="text" id="projectSearchInput" placeholder="Filter projects by name, technology, or domain..." class="w-full bg-transparent pl-9 pr-16 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-400 rounded-lg" aria-label="Search projects" autocomplete="off" />
+            <kbd class="hidden sm:inline-block absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-zinc-500 px-1.5 py-0.5 rounded border border-white/10 bg-white/[0.04]">Press /</kbd>
           </div>
           <div class="flex items-center justify-between sm:justify-end gap-3 px-2 border-t sm:border-t-0 border-canvas-border pt-2 sm:pt-0">
-            <span id="searchMatchCount" class="text-zinc-400 text-[11px] whitespace-nowrap font-medium">16 units active</span>
-            <button id="searchClearBtn" class="text-white hover:underline text-[11px] hidden cursor-pointer">Clear</button>
+            <span id="searchMatchCount" class="text-zinc-500 text-[11px] whitespace-nowrap">16 projects</span>
+            <button id="searchClearBtn" class="text-zinc-400 hover:text-white text-[11px] hidden cursor-pointer">Clear</button>
           </div>
         </div>
 
-        <!-- Controls: Category Filters & Interactive Density Toggles -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
-          <!-- Filter Tabs -->
-          <div class="flex flex-wrap items-center gap-2 font-mono text-xs" role="tablist" aria-label="Project domain filters">
-            <button class="filter-tab px-3 py-1.5 rounded-lg border border-white bg-white text-black font-extrabold cursor-pointer transition-all active" data-category="all">
-              All Units (16)
-            </button>
-            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="cognitive">
-              Cognitive &amp; Tools (7)
-            </button>
-            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="creative">
-              Creative Tech (3)
-            </button>
-            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="civic">
-              Civic Systems (2)
-            </button>
-            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="health">
-              Healthcare Systems (2)
-            </button>
-            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="automotive">
-              Automotive Systems (2)
-            </button>
-          </div>
-
-          <!-- Interactive View Density Switcher -->
-          <div class="project-density-controls flex items-center gap-1.5 font-mono text-xs text-zinc-400 bg-canvas-surface border border-canvas-border rounded-lg p-1 w-fit">
-            <span class="text-[11px] px-2 text-zinc-500 font-semibold uppercase tracking-wider hidden sm:inline">Array:</span>
-            <button id="viewInteractiveBtn" class="px-2.5 py-1 rounded bg-white text-black font-extrabold transition-all cursor-pointer">
-              ☵ Army Formation
-            </button>
-            <button id="viewCompactBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-white transition-all cursor-pointer">
-              ☲ HUD Radar
-            </button>
-            <button id="viewExpandAllBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-white transition-all cursor-pointer">
-              ☷ Dossier View
-            </button>
-          </div>
+        <!-- Category Filters -->
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs mb-8" role="tablist" aria-label="Project domain filters">
+          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-zinc-300 bg-zinc-100 text-zinc-900 font-semibold cursor-pointer transition-all active" data-category="all">
+            All (16)
+          </button>
+          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="cognitive">
+            Cognitive &amp; Learning (7)
+          </button>
+          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="creative">
+            Creative Tech (3)
+          </button>
+          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="civic">
+            Civic Infrastructure (2)
+          </button>
+          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="health">
+            Healthcare (2)
+          </button>
+          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="automotive">
+            Automotive (2)
+          </button>
         </div>
 
-        <!-- Army Projects Formation Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- 3-Column Clean Minimal Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          <!-- 01: PREDICTIVE WARD LOGISTICS ENGINE (Span 12 / Hero Project) -->
-          <article class="project-bento-card md:col-span-12 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-8 transition-all flex flex-col justify-between" data-category="health">
+          <!-- Predictive Ward Logistics Engine -->
+          <article class="project-bento-card" data-category="health">
             <div>
-              <div class="tactical-unit-header"><span>// UNIT 01</span><span class="tactical-status-radar"><span class="radar-dot"></span> OPERATIONAL</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs mb-4 pb-3 border-b border-canvas-border/60">
-                <span class="text-canvas-accent font-bold flex items-center gap-1.5">
-                  <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
-                  <span>Sub-9s target locate speed</span>
-                </span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-blue font-semibold flex items-center gap-1.5">
-                  <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-                  <span>Offline-first design target</span>
-                </span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">HL7 FHIR v4.3 schema</span>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Healthcare Logistics · Concept Study
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Predictive Ward Logistics Engine
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="ward" title="Open case study for Predictive Ward Logistics Engine">
+                <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" />
               </div>
 
-              <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-4">
-                <div>
-                  <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Health Systems Architecture · Concept Study</span>
-                  <h3 class="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">Predictive Ward Logistics Engine</h3>
-                </div>
-                <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 flex-wrap">
-                  <span class="text-zinc-300">HL7 FHIR v4.3</span>
-                  <span class="text-zinc-600" aria-hidden="true">·</span>
-                  <span class="text-zinc-300">Scan4Safety GS1-128</span>
-                  <span class="text-zinc-600" aria-hidden="true">·</span>
-                  <span class="text-zinc-300">Offline-First IndexedDB</span>
-                </div>
-              </div>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-4 rounded-xl border border-canvas-border-mid bg-[#070a0c] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="ward" title="Click to inspect architecture and clinical spec">
-                <div class="px-3.5 py-2 border-b border-canvas-border bg-canvas-base/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1.5 font-medium">Ward Logistics Console · Floorplan Telemetry Prototype</span>
-                  </div>
-                  <span class="text-canvas-accent group-hover/preview:underline flex items-center gap-1 font-semibold text-[11px]">
-                    <span>Inspect Blueprint</span>
-                    <i data-lucide="maximize-2" class="w-3 h-3"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/9] sm:aspect-[22/9]">
-                  <img src="assets/work-ward.svg" alt="Illustrated hospital floor plan with an equipment location marker" class="w-full h-full object-contain transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-4">
-                    <span class="px-3 py-1.5 rounded-lg bg-black/85 backdrop-blur-md border border-white/20 text-xs font-mono text-white flex items-center gap-1.5 shadow-lg">
-                      <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-canvas-accent"></i> Click to inspect architectural blueprint &amp; clinical workflow
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Information Hub -->
-              <div class="mt-4">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-3 font-mono text-xs overflow-x-auto">
-                  <button type="button" class="card-tab-btn flex-1 py-1.5 px-3 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 whitespace-nowrap" data-tab="inquiry">
-                    01. Curious inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1.5 px-3 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent whitespace-nowrap" data-tab="solution">
-                    02. Inventive solution
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1.5 px-3 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent whitespace-nowrap" data-tab="tech">
-                    03. Live ward telemetry buffer
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-4 rounded-xl bg-canvas-base/80 border border-canvas-alert/30 font-mono text-xs">
-                    <div class="text-canvas-alert font-bold uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                      <i data-lucide="help-circle" class="w-3.5 h-3.5 shrink-0"></i>
-                      <span>What makes locating essential medical hardware across hospital floors such a persistent puzzle?</span>
-                    </div>
-                    <p class="text-zinc-200 font-sans text-sm leading-relaxed">
-                      Acute hospital wards manage hundreds of mobile infusion pumps, syringe drivers, and telemetry monitors that constantly shift between departments. When traditional cloud locators drop in basement corridors, physical clinical workflows stall.
-                    </p>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-4 rounded-xl bg-canvas-base/80 border border-canvas-accent/30 font-mono text-xs">
-                    <div class="text-canvas-accent font-bold uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                      <i data-lucide="check-circle" class="w-3.5 h-3.5 shrink-0"></i>
-                      <span>How can spatial telemetry and offline open protocols guide staff straight to working devices instantly?</span>
-                    </div>
-                    <p class="text-zinc-200 font-sans text-sm leading-relaxed">
-                      An architectural concept and functional prototype fusing Bluetooth Low Energy triangulation with GS1 barcode standards and offline-first IndexedDB storage, exploring sub-9s hardware locating with zero cloud dependency.
-                    </p>
-                  </div>
-
-                  <!-- Panel 03: Tech & Telemetry -->
-                  <div class="card-panel-tech hidden rounded-xl border border-canvas-border bg-canvas-base p-4 font-mono text-xs overflow-x-auto">
-                    <div class="flex items-center justify-between pb-3 mb-3 border-b border-canvas-border text-zinc-400">
-                      <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-canvas-accent inline-block"></span>
-                        <span class="font-bold text-zinc-200">Ward 4B simulated telemetry buffer · Inpatient Floorplan Bench Model</span>
-                      </div>
-                      <span class="text-canvas-blue font-semibold">FHIR clinical protocol synced</span>
-                    </div>
-                      <span class="text-canvas-blue font-semibold">FHIR clinical protocol synced</span>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
-                      <div class="p-2.5 rounded bg-canvas-surface border border-canvas-border">
-                        <div class="text-[10px] text-zinc-500">AL GP 084 · Alaris GP Pump</div>
-                        <div class="font-bold text-zinc-200 mt-1">Bay 2 · Bed 07 (Active Infusion)</div>
-                        <div class="text-canvas-accent text-[10px] mt-1">Battery: 98% · Certified safe</div>
-                      </div>
-                      <div class="p-2.5 rounded bg-canvas-surface border border-canvas-border">
-                        <div class="text-[10px] text-zinc-500">BX SIG 109 · Baxter Sigma</div>
-                        <div class="font-bold text-zinc-200 mt-1">Clean Utility Rm 4 (Staged)</div>
-                        <div class="text-canvas-blue text-[10px] mt-1">Battery: 100% · Ready for patient intake</div>
-                      </div>
-                      <div class="p-2.5 rounded bg-canvas-surface border border-canvas-border">
-                        <div class="text-[10px] text-zinc-500">GS1 SCANNER BUFFER</div>
-                        <div class="font-bold text-canvas-accent mt-1 truncate">(01)05012345678900(21)SN948124</div>
-                        <div class="text-zinc-400 text-[10px] mt-1">Checksum: Verified GS1 128</div>
-                      </div>
-                    </div>
-
-                    <!-- Live Interactive Asset Triangulation Simulator with Floorplan Radar -->
-                    <div class="p-3.5 rounded-lg bg-canvas-surface/90 border border-canvas-border text-xs">
-                      <div class="flex items-center justify-between mb-2">
-                        <span class="text-zinc-300 font-bold flex items-center gap-1.5">
-                          <i data-lucide="radar" class="w-3.5 h-3.5 text-canvas-accent"></i> Live Triangulation Simulator (Click to locate):
-                        </span>
-                        <span class="text-[10px] text-canvas-blue font-mono">RSSI Sub-Meter Tracking</span>
-                      </div>
-                      <div class="flex flex-wrap gap-2 mb-2.5">
-                        <button type="button" class="ward-asset-btn px-2.5 py-1.5 rounded bg-canvas-accent/15 border border-canvas-accent text-canvas-accent text-[11px] font-bold transition-all cursor-pointer" data-device="alaris" data-asset="infusion-402">
-                          Alaris GP (Bay 2)
-                        </button>
-                        <button type="button" class="ward-asset-btn px-2.5 py-1.5 rounded bg-canvas-elevated hover:bg-canvas-accent/10 border border-canvas-border hover:border-canvas-accent text-zinc-300 text-[11px] transition-all cursor-pointer" data-device="baxter" data-asset="syringe-054">
-                          Baxter Sigma (Utility)
-                        </button>
-                        <button type="button" class="ward-asset-btn px-2.5 py-1.5 rounded bg-canvas-elevated hover:bg-canvas-accent/10 border border-canvas-border hover:border-canvas-accent text-zinc-300 text-[11px] transition-all cursor-pointer" data-device="philips" data-asset="telemetry-118">
-                          Philips Telemetry (Bay 4)
-                        </button>
-                      </div>
-
-                      <!-- Floorplan Visual Spatial Radar Graphic -->
-                      <div class="rounded-lg border border-canvas-border bg-black/75 p-2.5 mb-2.5 relative overflow-hidden">
-                        <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400 mb-1.5">
-                          <span>Ward 4B Spatial Map (Simulated Acute Floorplan)</span>
-                          <span id="wardRadarTargetCoord" class="text-canvas-accent font-bold">X: 18.4m, Y: 06.2m</span>
-                        </div>
-                        <svg viewBox="0 0 400 120" class="w-full h-24 stroke-zinc-800 fill-transparent font-mono text-[9px]">
-                          <!-- Hospital Bay Outlines -->
-                          <rect x="8" y="10" width="85" height="46" rx="3" stroke="#22272e" fill="#0d1117" />
-                          <text x="16" y="25" fill="#6e7681" stroke="none">Bay 01</text>
-                          <rect x="100" y="10" width="85" height="46" rx="3" stroke="#22272e" fill="#0d1117" />
-                          <text x="108" y="25" fill="#6e7681" stroke="none">Bay 02</text>
-                          <rect x="192" y="10" width="85" height="46" rx="3" stroke="#22272e" fill="#0d1117" />
-                          <text x="200" y="25" fill="#6e7681" stroke="none">Bay 03</text>
-                          <rect x="284" y="10" width="108" height="46" rx="3" stroke="#22272e" fill="#0d1117" />
-                          <text x="292" y="25" fill="#6e7681" stroke="none">Bay 04 (HDU)</text>
-                          <!-- Corridor & Utility Rooms -->
-                          <rect x="8" y="65" width="200" height="46" rx="3" stroke="#22272e" fill="#080a0c" />
-                          <text x="16" y="80" fill="#6e7681" stroke="none">Central Corridor &amp; Nurses Desk</text>
-                          <rect x="216" y="65" width="85" height="46" rx="3" stroke="#22272e" fill="#0d1117" />
-                          <text x="222" y="80" fill="#6e7681" stroke="none">Clean Utility</text>
-                          <rect x="308" y="65" width="84" height="46" rx="3" stroke="#22272e" fill="#0d1117" />
-                          <text x="314" y="80" fill="#6e7681" stroke="none">Isolation 12</text>
-                          <!-- BLE Gateway Nodes -->
-                          <circle cx="50" cy="33" r="3" fill="#2f81f7" />
-                          <circle cx="142" cy="33" r="3" fill="#2f81f7" />
-                          <circle cx="234" cy="33" r="3" fill="#2f81f7" />
-                          <circle cx="338" cy="33" r="3" fill="#2f81f7" />
-                          <!-- Active Target Beacon (Animates via JS coordinate update) -->
-                          <g id="wardRadarTargetGroup" transform="translate(142, 33)" class="transition-transform duration-500 ease-out">
-                            <circle r="12" fill="none" stroke="#ff3358" stroke-width="1.5" opacity="0.6">
-                              <animate attributeName="r" values="4;18" dur="1.8s" repeatCount="indefinite" />
-                              <animate attributeName="opacity" values="0.8;0" dur="1.8s" repeatCount="indefinite" />
-                            </circle>
-                            <circle r="4" fill="#ff3358" />
-                          </g>
-                        </svg>
-                      </div>
-
-                      <div id="wardSimulatorOutput" class="p-2.5 rounded bg-black/60 border border-canvas-border font-mono text-[11px] text-zinc-300 flex flex-wrap items-center justify-between gap-2">
-                        <div>
-                          <span class="text-canvas-accent font-bold">AL GP 084</span> · Bay 2, Bed 07 · Signal: <span class="text-zinc-100 font-semibold">-58 dBm (Strong)</span> · Distance: <span class="text-zinc-300 font-bold">1.4m</span>
-                        </div>
-                        <span class="text-[10px] px-2 py-0.5 rounded bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/30">RSSI Triangulated</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card Toggle Helper -->
-                <div class="flex items-center justify-between mt-2 pt-1">
-                  <button type="button" class="card-toggle-details text-xs font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1.5 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3.5 h-3.5 card-chevron"></i>
-                  </button>
-                  <span class="text-[11px] font-mono text-zinc-500">Click tabs to switch context</span>
-                </div>
-              </div>
-
-              <!-- Footer Action Links -->
-            <div class="pt-6 mt-6 border-t border-canvas-border flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-              <span class="text-zinc-400">Full Stack Implementation: TypeScript · SQLite / IndexedDB · HL7 FHIR Client</span>
-              <div class="flex items-center gap-2.5">
-                <button type="button" class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-accent/15 border border-canvas-accent/40 text-canvas-accent hover:bg-canvas-accent hover:text-white transition-all font-bold cursor-pointer" data-project="ward">
-                  <span>Inspect Blueprint &amp; Specs</span>
-                  <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                </button>
-                <a href="mailto:deshmukhvaishnav@gmail.com?subject=Predictive%20Ward%20Logistics%20Engine%20Architecture" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                  <span>Inquire</span>
-                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 02: THE UNEXPLORED INTERIOR (Interactive Exploration - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 02</span><span class="tactical-status-radar"><span class="radar-dot"></span> LIVE LAB</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-purple font-bold">Attention &amp; perception</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-accent font-semibold">Visual exercises</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">3D interaction &amp; audio</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Interactive experience · Attention &amp; awareness</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">The Unexplored Interior</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#08090b] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="consciousness" title="Explore The Unexplored Interior">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#0e1013]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">The Unexplored Interior · Interactive Experience</span>
-                  </div>
-                  <span class="text-canvas-purple group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-consciousness.svg" alt="Editorial illustration of a perceptual study with intersecting awareness pathways" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-purple"></i> Explore attention and perception
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Explore
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Approach
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Scope
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">How might interactive exercises help people explore attention and perception?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">The experience makes selected ideas and perceptual tasks available through a self-guided browser-based format.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">An interactive introduction to ideas about awareness.</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Visual tasks, 3D interaction, and audio offer ways to explore concepts associated with attention and perception. The experience is not a validated research instrument or diagnostic tool.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">Experience components:</div>
-                    <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300 flex-wrap">
-                      <span>Interactive visual tasks</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>3D browser visualization</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Web Audio</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Educational, not clinical</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Links -->
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="consciousness">
-                <span>Project overview</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <div class="flex flex-wrap items-center gap-3">
-                <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-purple text-canvas-base font-bold hover:bg-[#b8a0ff] transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-purple">
-                  <span>Open live experience</span>
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                </a>
-                <a href="./consciousness/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-100 hover:underline">
-                  Local Mirror
-                </a>
-                <a href="https://github.com/aigroupchathq/consciousness-mechanism" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-100 hover:underline">
-                  Source on GitHub
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 03: iTHINK (Cognitive Neuroscience Interactive 3D Experience - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 03</span><span class="tactical-status-radar"><span class="radar-dot"></span> 3D ATLAS</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-purple font-bold">Interactive Neuroscience</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-accent font-semibold">Attention &amp; Flow Practice</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">Zero plugins</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Cognitive Practice · Neuroscience Learning Lab</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">iTHINK: Attention &amp; Flow Learning Lab</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0a0a14] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="ithink" title="Explore the iTHINK learning experience">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#0f0f1e]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">iTHINK · Neuroscience Learning Lab</span>
-                  </div>
-                  <span class="text-canvas-purple group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-ithink.svg" alt="Illustration of connected brain pathways for attention, practice, and reflection" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-purple"></i> Explore the learning experience
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Invention
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Experience
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">How can people explore attention, flow, and neuroscience without treating a task like a brain scan?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Neuroscience concepts can feel abstract. iTHINK pairs guided practice and reflection with an interactive brain atlas, while keeping observations in context and clearly non-diagnostic.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">A learning lab that makes the ideas tangible.</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Explore a 3D brain, try short cognitive exercises, and reflect on conditions that support focused work. Five distinct learning layouts offer analytical, narrative, conversational, hands-on, and quiet ways to explore.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">Learning experience &amp; technology:</div>
-                    <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300 flex-wrap">
-                      <span>Three.js WebGL</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Flow reflection</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Five learning layouts</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Zero Telemetry</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Current and archived iTHINK versions -->
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="ithink">
-                <span>Project overview</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <div class="flex flex-wrap items-center gap-3">
-                <a href="./ithink/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-purple text-canvas-base font-bold hover:bg-[#b8a0ff] transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-purple">
-                  <span>Updated experience</span>
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                </a>
-                <a href="./ithink-v1/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-100 hover:underline">
-                  Previous version
-                </a>
-                <a href="https://github.com/aigroupchathq/iTHINKwip" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-100 hover:underline">
-                  Source on GitHub
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 03: CivicFlow (Municipal Defect Triage Platform - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="civic">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 04</span><span class="tactical-status-radar"><span class="radar-dot"></span> MUNICIPAL</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-accent font-bold">DBSCAN Geospatial Clustering</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-amber font-semibold">Image Hash Deduplication</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">PostGIS Triage</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Civic Systems · High-Friction Public Works Concept</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">CivicFlow: Highways Triage Engine</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0c1418] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="civicflow" title="Click to inspect CivicFlow triage architecture">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#102a37]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">CivicFlow · Highways Triage</span>
-                  </div>
-                  <span class="text-canvas-accent group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-civicflow.svg" alt="Illustrated street map grouping nearby reports for crew review" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-accent"></i> Inspect geospatial clustering &amp; triage pipeline
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Invention
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Geospatial Stack
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">What prevents municipal councils from turning citizen road hazard reports into swift repair crews?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Borough highways receive hundreds of duplicate citizen reports whenever an asphalt hazard appears, burying council teams under weeks of manual verification.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">How can spatial clustering algorithms automatically synthesize hundreds of duplicate reports into prioritized repair routes?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">A concept and prototype exploring how DBSCAN spatial clustering and perceptual image hashing can group proximate citizen submissions into consolidated, prioritized work orders.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">Architecture &amp; Algorithm Stack:</div>
-                    <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-zinc-300">
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Geospatial Clustering</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">UK Highways Code of Practice</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Rapid Repair Dispatch</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Automated Image Hash Dedup</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Direct Live App Link (Hosted locally on /civicflow) -->
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="civicflow">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="./civicflow.html" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-accent text-white font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
-                <span>Open CivicFlow tool</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 04: AI SCRIPT STUDIO (Generative Audio DAW - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="creative">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 05</span><span class="tactical-status-radar"><span class="radar-dot"></span> AUDIO DAW</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-blue font-bold">Low-Latency Web Audio</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-accent font-semibold">&lt;12ms AudioWorklet DSP</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">Multi-stem sync</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Creative Technology · In-Browser DAW Prototype</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">AI Script Studio: Multi-Track DAW</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#080d12] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="scriptstudio" title="Click to inspect audio DAW architecture">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#0d1620]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">AI Script Studio · Multi-Track DAW</span>
-                  </div>
-                  <span class="text-canvas-blue group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-scriptstudio.svg" alt="Script notes beside a hand-drawn audio waveform" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-blue"></i> Inspect audio DSP timeline &amp; phoneme alignment
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Invention
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Audio Stack &amp; DAW
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">Why do modern speech synthesis tools lack the tactile immediacy of a musician's physical mixing console?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Generating synthetic voice tracks often feels like a slow black box where fixing a single mispronounced word requires regenerating the entire audio track from scratch.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">How can sub twelve millisecond audio processing give creators surgical control over voice synthesis?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">A tactile, in browser multi track digital audio workstation with instant sub twelve millisecond playback, giving creators surgical control to replace individual phonemes seamlessly without losing creative flow.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2.5">
-                    <div class="text-[11px] text-zinc-400">Audio Engineering &amp; DSP Graph:</div>
-                    <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300 flex-wrap">
-                      <span>Web Audio API</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>AudioWorklet DSP</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>FLAC 48kHz Output</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Canvas2D Waveform</span>
-                    </div>
-
-                    <!-- Live Interactive Waveform Preview Player with Stems & Scrubber -->
-                    <div class="p-3 rounded-lg bg-canvas-surface border border-canvas-border space-y-2">
-                      <div class="flex items-center justify-between font-mono text-[10px]">
-                        <span class="text-zinc-300 font-bold flex items-center gap-1.5">
-                          <i data-lucide="sliders" class="w-3.5 h-3.5 text-canvas-blue"></i> Multi-Track Stem Mixer:
-                        </span>
-                        <span id="dawLatencyBadge" class="text-canvas-blue font-bold">&lt;8.2ms latency</span>
-                      </div>
-
-                      <!-- 3 Stem Control Rows -->
-                      <div class="space-y-1 font-mono text-[10px]">
-                        <div class="flex items-center justify-between p-1.5 rounded bg-black/40 border border-white/5">
-                          <span class="text-zinc-300">Track 01: Dialogue Stem</span>
-                          <div class="flex items-center gap-1">
-                            <button type="button" class="stem-toggle-btn px-1.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-zinc-300 text-[9px] cursor-pointer" data-stem="dialogue" data-action="mute">Mute</button>
-                            <button type="button" class="stem-toggle-btn px-1.5 py-0.5 rounded bg-canvas-blue/20 text-canvas-blue border border-canvas-blue/40 text-[9px] cursor-pointer" data-stem="dialogue" data-action="solo">Solo</button>
-                          </div>
-                        </div>
-                        <div class="flex items-center justify-between p-1.5 rounded bg-black/40 border border-white/5">
-                          <span class="text-zinc-300">Track 02: Foley Ambience</span>
-                          <div class="flex items-center gap-1">
-                            <button type="button" class="stem-toggle-btn px-1.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-zinc-300 text-[9px] cursor-pointer" data-stem="ambient" data-action="mute">Mute</button>
-                            <button type="button" class="stem-toggle-btn px-1.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-zinc-300 text-[9px] cursor-pointer" data-stem="ambient" data-action="solo">Solo</button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Interactive Scrubber & Canvas -->
-                      <div id="dawScrubberContainer" class="h-10 w-full rounded bg-black/70 border border-white/10 relative overflow-hidden flex items-center px-1 cursor-pointer" title="Click to scrub timeline">
-                        <canvas id="dawWaveformCanvas" class="w-full h-full block"></canvas>
-                        <!-- Draggable playhead line -->
-                        <div id="dawPlayheadLine" class="absolute top-0 bottom-0 left-[28%] w-[2px] bg-canvas-blue shadow-[0_0_8px_#c7c9cc] pointer-events-none transition-[left] duration-100"></div>
-                      </div>
-
-                      <div class="flex items-center justify-between font-mono text-[10px]">
-                        <button type="button" id="toggleDawPlayBtn" class="px-2.5 py-1 rounded bg-canvas-blue/15 border border-canvas-blue/40 text-canvas-blue hover:bg-canvas-blue hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer font-bold">
-                          <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
-                          <span id="dawPlayLabel">Play Waveform</span>
-                        </button>
-                        <span id="dawTimelinePosition" class="text-zinc-400 tabular-nums">00:48 / 03:20</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="scriptstudio">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com?subject=AI%20Script%20Studio%20Architecture" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                <span>Inquire</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 05: ROADTRIAGE (Edge Computer Vision - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="civic">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 06</span><span class="tactical-status-radar"><span class="radar-dot"></span> EDGE AI</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-accent font-bold">Edge Computer Vision</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-amber font-semibold">30 FPS YOLOv8 Inference</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">Sub-meter GPS</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Civic Infrastructure · Edge Computer Vision Experiment</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">RoadTriage: Edge Defect Scanner</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0e1216] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="roadtriage" title="Click to inspect RoadTriage edge vision blueprint">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#131b22]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">RoadTriage · Edge Vision Camera</span>
-                  </div>
-                  <span class="text-canvas-amber group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-roadtriage.svg" alt="Illustration marking a road surface defect for field review" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-amber"></i> Inspect YOLOv8 edge pipeline &amp; GIS geotagging
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Invention
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Edge Stack
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">Can everyday municipal vehicles map and audit an entire city's road surfaces as part of their routine drive?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Commissioning specialized laser survey trucks costs £45k per audit, meaning residential neighborhood streets go unmapped for years until damage becomes severe.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">How can lightweight edge computer vision turn vehicles into continuous civic infrastructure scanners?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">An architectural concept exploring how edge computer vision models running on compact low-power hardware could passively inspect road surfaces and segment asphalt distresses with localized GPS geotags.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">Embedded Vision Pipeline:</div>
-                    <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-zinc-300">
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">YOLOv8 Seg TensorRT</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">GPS Coordinate Fusion</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">IRI Roughness Index</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Jetson Orin Nano 15W</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="roadtriage">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com?subject=RoadTriage%20Edge%20Vision" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                <span>Inquire</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 06: THE OBSERVER (Thought & Awareness Experience) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 07</span><span class="tactical-status-radar"><span class="radar-dot"></span> INTERACTIVE</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-accent font-bold">Thought &amp; awareness</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-purple font-semibold">Metacognition</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">Guided reflection</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Cognitive tools · Thought &amp; awareness experience</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">The Observer: Thought &amp; Awareness</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0b0c10] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="itsyou" title="Explore The Observer thought and awareness experience">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#10141a]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">The Observer · Thought &amp; Awareness</span>
-                  </div>
-                  <span class="text-canvas-purple group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-observer.svg" alt="Quiet guided reflection interface illustrating attention and self-observation" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-purple"></i> Explore the reflection experience
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Notice
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Reflect
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Choose
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">How might we notice what is happening in our thoughts before reacting?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Busy routines can make it difficult to pause, recognise a thought pattern, and choose what to do next.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">What would a small, user-led reflection practice look like?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">The Observer offers a cinematic, interactive space to explore metacognition, predictive processing, and awareness at your own pace.</span>
-                  </div>
-
-                  <!-- Panel 03: Reflection practice -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2.5">
-                    <div class="text-[11px] text-zinc-400">A simple practice loop:</div>
-                    <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300 flex-wrap">
-                      <span>Notice</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Reflect</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Choose</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Return to the moment</span>
-                    </div>
-
-                    <div class="p-3 rounded-lg bg-canvas-surface border border-canvas-border font-mono text-xs space-y-2">
-                      <div class="flex items-center gap-2 text-zinc-300 font-bold">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-canvas-purple" aria-hidden="true"></i>
-                        <span>Start with one thing you noticed.</span>
-                      </div>
-                      <p class="text-zinc-400 leading-relaxed">
-                        The experience offers guided prompts and visual exploration; it is for reflection, not diagnosis.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="itsyou">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://itsyou.ai.studio/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                <span>Visit The Observer</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </a>
-              <a href="https://github.com/aigroupchathq/its-you-ai" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 07: BABYCART (Pediatric Biometric Telemetry - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="health">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 08</span><span class="tactical-status-radar"><span class="radar-dot"></span> TELEMETRY</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-blue font-bold">Non-contact micro-motion</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-accent font-semibold">Local Kalman Filter DSP</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">Zero cloud storage</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Connected Hardware · Ambient Health Systems Concept</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">BabyCarl: Circadian Telemetry</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0a0d11] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="babycarl" title="Click to inspect BabyCarl acoustic telemetry blueprint">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#0f141a]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">BabyCarl · Calm Circadian Monitor</span>
-                  </div>
-                  <span class="text-canvas-blue group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-babycarl.svg" alt="Calm telemetry line with a note for shared clinical review" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-blue"></i> Inspect 440Hz spectrogram &amp; circadian spiral
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Invention
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Health Stack
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">Why do modern nursery monitors fill homes with artificial alert fatigue instead of peaceful awareness?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Most smart nursery monitors flood parents with noisy false alarms and stream private video feeds to remote cloud servers, increasing cognitive fatigue rather than offering quiet clarity.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">How can quiet ambient acoustic intelligence give parents clear reassurance without intrusive cloud video feeds?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">A gentle, local first ambient dashboard combining 440Hz cry spectrogram harmonics with circadian sleep spirals, delivering clear reassurance while keeping all family data private on device.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">Acoustic &amp; Health Signal Engine:</div>
-                    <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300 flex-wrap">
-                      <span>FFT Spectrogram</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Circadian Rhythm Index</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>WHO Pediatric Norms</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Local Encrypted Buffer</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="babycarl">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl%20Pediatric%20Telemetry" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                <span>Inquire</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 08: GROUPCHAT HQ (Collaborative Discussion Synthesizer - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="creative">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 09</span><span class="tactical-status-radar"><span class="radar-dot"></span> SEMANTIC SYNC</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-accent font-bold">Semantic Graph Clustering</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-blue font-semibold">Vector similarity embeddings</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">CRDT local state</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">Collaboration Architecture · Semantic Clustering Prototype</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">GroupChat HQ</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0f1115] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="groupchat" title="Click to inspect GroupChat HQ consensus architecture">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#14181f]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">GroupChat HQ · Discussion Graph</span>
-                  </div>
-                  <span class="text-canvas-accent group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-groupchat.svg" alt="Conversation bubbles converging on a shared direction" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-accent"></i> Inspect semantic clustering &amp; consensus graph
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Inquiry
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Invention
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Graph Stack
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">Why do distributed team discussions get lost across hundreds of fragmented chat bubbles?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Cross functional product teams operating across multiple time zones suffer from fragmented discussion threads where critical decisions get buried in 300+ unread chat messages.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">How can semantic clustering transform noisy group debates into clear consensus decisions?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">An asynchronous discussion clustering engine that analyzes unstructured chat logs, groups messages by semantic intent, extracts consensus agreements, and synthesizes unambiguous action item pipelines.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">Semantic Graph Architecture:</div>
-                    <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300 flex-wrap">
-                      <span>Semantic Intent Clustering</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Consensus Agreement Trees</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>Action Item Ownership</span>
-                      <span class="text-zinc-600" aria-hidden="true">·</span>
-                      <span>CRDT Sync</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="groupchat">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com?subject=GroupChat%20HQ" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated hover:border-canvas-accent text-zinc-200 text-xs transition-colors">
-                <span>Inquire</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 09: VISION INTELLIGENCE (AI Guidance - Span 6) -->
-          <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
-            <div>
-              <div class="tactical-unit-header"><span>// UNIT 10</span><span class="tactical-status-radar"><span class="radar-dot"></span> LIVE GUIDE</span></div>
-              <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
-                <span class="text-canvas-blue font-bold">Design · Implementation · Verification</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-canvas-accent font-semibold">Clearer AI direction</span>
-                <span class="text-zinc-600" aria-hidden="true">·</span>
-                <span class="text-zinc-400">Browser-local lessons</span>
-              </div>
-
-              <span class="font-mono text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">AI tools · Practical prompt guidance</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-100 tracking-tight mb-2">Vision Intelligence</h3>
-
-              <!-- High-Fidelity Vector UI Preview Banner -->
-              <div class="my-3 rounded-xl border border-canvas-border-mid bg-[#0e1117] overflow-hidden group/preview relative cursor-pointer inspect-card-trigger" data-project="vision" title="Click to inspect Vision Intelligence">
-                <div class="px-3 py-1.5 border-b border-canvas-border bg-[#131922]/90 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#27c93f]"></span>
-                    <span class="text-zinc-300 ml-1 font-medium">Vision Intelligence · Work modes</span>
-                  </div>
-                  <span class="text-canvas-accent group-hover/preview:underline flex items-center gap-1 font-semibold text-[10px]">
-                    <span>Inspect</span>
-                    <i data-lucide="maximize-2" class="w-2.5 h-2.5"></i>
-                  </span>
-                </div>
-                <div class="relative overflow-hidden aspect-[16/10]">
-                  <img src="assets/work-vision.svg" alt="Vision Intelligence interface showing Design, Implementation and Verification modes" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover/preview:scale-[1.02]" loading="lazy" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-end p-3">
-                    <span class="px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 text-[11px] font-mono text-white flex items-center gap-1.5 shadow">
-                      <i data-lucide="zoom-in" class="w-3 h-3 text-canvas-accent"></i> Explore three practical work modes
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Toggled Hub -->
-              <div class="mt-3">
-                <!-- Segmented Tabs -->
-                <div class="flex items-center gap-1 p-1 bg-canvas-base rounded-lg border border-canvas-border mb-2.5 font-mono text-xs">
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-bold text-center transition-all bg-canvas-accent/15 text-canvas-accent border border-canvas-accent/40 text-[11px] whitespace-nowrap" data-tab="inquiry">
-                    01. Design
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="solution">
-                    02. Implement
-                  </button>
-                  <button type="button" class="card-tab-btn flex-1 py-1 px-2 rounded font-medium text-center text-zinc-400 hover:text-zinc-200 transition-all border border-transparent text-[11px] whitespace-nowrap" data-tab="tech">
-                    03. Verify
-                  </button>
-                </div>
-
-                <!-- Toggled Panels Container -->
-                <div class="card-panels-container">
-                  <!-- Panel 01: Inquiry -->
-                  <div class="card-panel-inquiry p-3 rounded-lg bg-canvas-base border border-canvas-alert/30 font-mono text-xs">
-                    <span class="text-canvas-alert font-bold block mb-1">How can people give AI clearer direction without treating its output as guaranteed truth?</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Useful requests need context and boundaries, while generated results still need human judgement and appropriate checks.</span>
-                  </div>
-
-                  <!-- Panel 02: Solution -->
-                  <div class="card-panel-solution hidden p-3 rounded-lg bg-canvas-base border border-canvas-accent/30 font-mono text-xs">
-                    <span class="text-canvas-accent font-bold block mb-1">A practical guide for clearer requests and more deliberate review.</span>
-                    <span class="text-zinc-200 font-sans text-xs leading-relaxed">Vision Intelligence offers Design, Implementation, and Verification work modes, with tone guidance and browser-local lessons. It guides requests; it does not make AI infallible.</span>
-                  </div>
-
-                  <!-- Panel 03: Tech Tokens -->
-                  <div class="card-panel-tech hidden p-3 rounded-lg bg-canvas-base border border-canvas-border font-mono text-xs space-y-2">
-                    <div class="text-[11px] text-zinc-400">How it works:</div>
-                    <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-zinc-300">
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Static HTML, CSS &amp; JavaScript</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Browser-local lesson log</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">Copy &amp; share actions</span>
-                      <span class="px-2 py-0.5 rounded bg-canvas-elevated border border-canvas-border">No AI backend</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Toggle Helper -->
-                <div class="flex items-center justify-between mt-2">
-                  <button type="button" class="card-toggle-details text-[11px] font-mono text-zinc-400 hover:text-canvas-accent flex items-center gap-1 transition-colors cursor-pointer">
-                    <span class="toggle-label">Hide breakdown</span>
-                    <i data-lucide="chevron-up" class="w-3 h-3 card-chevron"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5 mt-5 border-t border-canvas-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-              <button type="button" class="inspect-btn inline-flex items-center gap-1.5 text-canvas-accent hover:underline font-bold cursor-pointer" data-project="vision">
-                <span>Inspect Blueprint</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://aigroupchathq.github.io/vision-intelligence/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-elevated border border-canvas-border hover:border-canvas-accent text-zinc-200 font-bold transition-colors">
-                <span>Open live tool</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              </a>
-              <a href="https://github.com/aigroupchathq/vision-intelligence" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-canvas-elevated border border-canvas-border hover:border-canvas-accent text-zinc-200 font-bold transition-colors">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </article>
-
-          <!-- 11: DATUM ADAS -->
-          <article class="project-bento-card" data-category="automotive">
-            <div>
-              <div class="tactical-unit-header">
-                <span>// UNIT 11</span>
-                <span class="tactical-status-radar"><span class="radar-dot"></span> CONCEPT PROTO</span>
-              </div>
-              <span class="tactical-domain-tag">Automotive Systems · On-Device Perception</span>
-              <h3 class="text-xl font-extrabold text-white tracking-tight">Datum ADAS</h3>
-              
-              <div class="inspect-card-trigger" data-project="datumadas" title="Click to inspect ADAS telemetry spec">
-                <div>
-                  <img src="assets/work-datumadas.svg" alt="Datum ADAS perception schematic" loading="lazy" />
-                </div>
-              </div>
-
-              <p class="text-xs text-zinc-400 line-clamp-2">
-                On-device forward collision awareness, lane context and kinematic trajectory estimation.
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.
               </p>
 
-              <div class="tactical-yield-badge">
-                <i data-lucide="zap" class="w-3 h-3 text-white"></i>
-                <span>Edge Vision · Sub-11ms Inference</span>
-              </div>
-
-              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
-                <span>Edge Vision</span> · <span>WebAssembly</span> · <span>Offline-First</span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">HL7 FHIR v4</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">GS1-128</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">IndexedDB</span>
               </div>
             </div>
 
-            <div class="tactical-card-actions">
-              <button type="button" class="inspect-modal-btn" data-project="datumadas">
-                <span>Dossier</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3 h-3"></i>
-              </a>
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="ward"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=Ward%20Logistics" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
+              </div>
             </div>
           </article>
 
-          <!-- 12: CHECKMATE (VELUM LABS) -->
+          <!-- The Unexplored Interior -->
           <article class="project-bento-card" data-category="cognitive">
             <div>
-              <div class="tactical-unit-header">
-                <span>// UNIT 12</span>
-                <span class="tactical-status-radar"><span class="radar-dot"></span> LIVE PROTOCOL</span>
-              </div>
-              <span class="tactical-domain-tag">Cognitive Systems · Relational Decisions</span>
-              <h3 class="text-xl font-extrabold text-white tracking-tight">Checkmate</h3>
-              
-              <div class="inspect-card-trigger" data-project="velum" title="Click to inspect Checkmate compatibility architecture">
-                <div>
-                  <img src="assets/work-velum.svg" alt="Checkmate compatibility decision schematic" loading="lazy" />
-                </div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Cognitive Science · Interactive Inquiry
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                The Unexplored Interior
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="consciousness" title="Open case study for The Unexplored Interior">
+                <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" />
               </div>
 
-              <p class="text-xs text-zinc-400 line-clamp-2">
-                Reciprocal, explainable compatibility platform for grounded human relationship decisions based on shared dealbreakers.
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.
               </p>
 
-              <div class="tactical-yield-badge">
-                <i data-lucide="shield-check" class="w-3 h-3 text-white"></i>
-                <span>Zero Dark Patterns · Mutuality</span>
-              </div>
-
-              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
-                <span>React 19</span> · <span>TypeScript</span> · <span>Deterministic Match</span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">HTML Canvas</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Vanilla JS</span>
               </div>
             </div>
 
-            <div class="tactical-card-actions">
-              <button type="button" class="inspect-modal-btn" data-project="velum">
-                <span>Dossier</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Live Experience">
-                <span>Live</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </a>
-              <a href="https://github.com/aigroupchathq/velum-labs" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3 h-3"></i>
-              </a>
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="consciousness"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a>
+              </div>
             </div>
           </article>
 
-          <!-- 13: VEDIC TREE OS -->
+          <!-- iTHINK: Attention & Flow Lab -->
           <article class="project-bento-card" data-category="cognitive">
             <div>
-              <div class="tactical-unit-header">
-                <span>// UNIT 13</span>
-                <span class="tactical-status-radar"><span class="radar-dot"></span> LIVE SYSTEM</span>
-              </div>
-              <span class="tactical-domain-tag">Education Systems · Multi-Tenant OS</span>
-              <h3 class="text-xl font-extrabold text-white tracking-tight">Vedic Tree OS</h3>
-              
-              <div class="inspect-card-trigger" data-project="vtsystem" title="Click to inspect Vedic Tree OS topology">
-                <div>
-                  <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS network topology schematic" loading="lazy" />
-                </div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Cognitive Practice · Neuroscience Lab
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                iTHINK: Attention & Flow Lab
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="ithink" title="Open case study for iTHINK: Attention & Flow Lab">
+                <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" />
               </div>
 
-              <p class="text-xs text-zinc-400 line-clamp-2">
-                Multi-campus institutional education OS combining operational governance with human-centric student development.
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.
               </p>
 
-              <div class="tactical-yield-badge">
-                <i data-lucide="layers" class="w-3 h-3 text-white"></i>
-                <span>Multi-Tenant · RBAC Governance</span>
-              </div>
-
-              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
-                <span>Multi-Tenant</span> · <span>TypeScript</span> · <span>Growth Ledger</span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Three.js</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">WebGL</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">TypeScript</span>
               </div>
             </div>
 
-            <div class="tactical-card-actions">
-              <button type="button" class="inspect-modal-btn" data-project="vtsystem">
-                <span>Dossier</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Live System">
-                <span>Live</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </a>
-              <a href="https://github.com/aigroupchathq/vtsystem" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3 h-3"></i>
-              </a>
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="ithink"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/ithinkstudio/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/ithinkstudio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
             </div>
           </article>
 
-          <!-- 14: THE DRIVER OF GOD -->
-          <article class="project-bento-card" data-category="cognitive">
+          <!-- CivicFlow: Highways Triage Engine -->
+          <article class="project-bento-card" data-category="civic">
             <div>
-              <div class="tactical-unit-header">
-                <span>// UNIT 14</span>
-                <span class="tactical-status-radar"><span class="radar-dot"></span> AUDIO LAB</span>
-              </div>
-              <span class="tactical-domain-tag">Cognitive Tools · Philosophical Inquiry</span>
-              <h3 class="text-xl font-extrabold text-white tracking-tight">The Driver of God</h3>
-              
-              <div class="inspect-card-trigger" data-project="driver" title="Click to inspect philosophical audio architecture">
-                <div>
-                  <img src="assets/work-driver.svg" alt="The Driver of God audiovisual waveform schematic" loading="lazy" />
-                </div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Civic Infrastructure · Municipal Triage
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                CivicFlow: Highways Triage Engine
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="civicflow" title="Open case study for CivicFlow: Highways Triage Engine">
+                <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" />
               </div>
 
-              <p class="text-xs text-zinc-400 line-clamp-2">
-                Audiovisual interactive inquiry into self-will, attention and surrender through procedural soundscapes.
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.
               </p>
 
-              <div class="tactical-yield-badge">
-                <i data-lucide="music" class="w-3 h-3 text-white"></i>
-                <span>Web Audio · 432 Hz Synthesizer</span>
-              </div>
-
-              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
-                <span>Web Audio API</span> · <span>Canvas 2D</span> · <span>Interactive SVG</span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">DBSCAN Spatial</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">GeoJSON</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Turf.js</span>
               </div>
             </div>
 
-            <div class="tactical-card-actions">
-              <button type="button" class="inspect-modal-btn" data-project="driver">
-                <span>Dossier</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3 h-3"></i>
-              </a>
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="civicflow"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=CivicFlow" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
+              </div>
             </div>
           </article>
 
-          <!-- 15: HIDDEN LEAF STUDIO -->
+          <!-- AI Script Studio: Multi-Track DAW -->
           <article class="project-bento-card" data-category="creative">
             <div>
-              <div class="tactical-unit-header">
-                <span>// UNIT 15</span>
-                <span class="tactical-status-radar"><span class="radar-dot"></span> STUDIO DAW</span>
-              </div>
-              <span class="tactical-domain-tag">Creative Tech · Bilingual DAW</span>
-              <h3 class="text-xl font-extrabold text-white tracking-tight">Hidden Leaf Studio</h3>
-              
-              <div class="inspect-card-trigger" data-project="hiddenleaf" title="Click to inspect bilingual rhythm DAW spec">
-                <div>
-                  <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio spectrogram DAW schematic" loading="lazy" />
-                </div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Creative Technology · Generative Audio
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                AI Script Studio: Multi-Track DAW
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="scriptstudio" title="Open case study for AI Script Studio: Multi-Track DAW">
+                <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" />
               </div>
 
-              <p class="text-xs text-zinc-400 line-clamp-2">
-                Hindi-English rap writing workspace exploring wordplay, matra alignment, rhythm and vocal pitch contours.
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.
               </p>
 
-              <div class="tactical-yield-badge">
-                <i data-lucide="mic" class="w-3 h-3 text-white"></i>
-                <span>Phoneme &amp; Cadence Alignment</span>
-              </div>
-
-              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
-                <span>Web Audio API</span> · <span>Phoneme Engine</span> · <span>TypeScript</span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Canvas Timeline</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">TypeScript</span>
               </div>
             </div>
 
-            <div class="tactical-card-actions">
-              <button type="button" class="inspect-modal-btn" data-project="hiddenleaf">
-                <span>Dossier</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3 h-3"></i>
-              </a>
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="scriptstudio"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/gstudio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
             </div>
           </article>
 
-          <!-- 16: DATUM ATELIER -->
+          <!-- RoadTriage: Edge Defect Scanner -->
+          <article class="project-bento-card" data-category="civic">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Civic Infrastructure · Edge Vision
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                RoadTriage: Edge Defect Scanner
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="roadtriage" title="Open case study for RoadTriage: Edge Defect Scanner">
+                <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Computer Vision</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">TensorFlow.js</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">IndexedDB</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="roadtriage"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=RoadTriage" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- The Observer: Thought & Awareness -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Cognitive Science · Metacognition
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                The Observer: Thought & Awareness
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="itsyou" title="Open case study for The Observer: Thought & Awareness">
+                <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An interactive reflection interface examining mental models, decision-making habits, and attention patterns.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Interactive Narrative</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Canvas 2D</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Vanilla JS</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="itsyou"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/its-you-ai/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/its-you-ai" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- BabyCarl: Circadian Telemetry -->
+          <article class="project-bento-card" data-category="health">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Pediatric Health · Circadian Telemetry
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                BabyCarl: Circadian Telemetry
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="babycarl" title="Open case study for BabyCarl: Circadian Telemetry">
+                <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Circadian Telemetry</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Local Storage</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Tactile UX</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="babycarl"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- GroupChat HQ: Consensus Engine -->
+          <article class="project-bento-card" data-category="creative">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Collaboration Systems · Semantic Sync
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                GroupChat HQ: Consensus Engine
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="groupchat" title="Open case study for GroupChat HQ: Consensus Engine">
+                <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Vector Embeddings</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Semantic Graphs</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">CRDT State</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="groupchat"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=GroupChat" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Vision Intelligence -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                AI Tools · Practical Guidance
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Vision Intelligence
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="vision" title="Open case study for Vision Intelligence">
+                <img src="assets/work-vision.svg" alt="Vision Intelligence" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A practical browser tool for planning, building, and verifying software with structured prompt clarity and deliberate human review.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Static Architecture</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Local Storage</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Responsive UI</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="vision"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/vision-intelligence/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/vision-intelligence" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Datum ADAS -->
           <article class="project-bento-card" data-category="automotive">
             <div>
-              <div class="tactical-unit-header">
-                <span>// UNIT 16</span>
-                <span class="tactical-status-radar"><span class="radar-dot"></span> LIVE PLATFORM</span>
-              </div>
-              <span class="tactical-domain-tag">Automotive Systems · Provenance Ledger</span>
-              <h3 class="text-xl font-extrabold text-white tracking-tight">Datum Atelier</h3>
-              
-              <div class="inspect-card-trigger" data-project="datumatelier" title="Click to inspect Datum Atelier cryptographic provenance spec">
-                <div>
-                  <img src="assets/work-datumatelier.svg" alt="Datum Atelier cryptographic vehicle passport schematic" loading="lazy" />
-                </div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Automotive Systems · Perception
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Datum ADAS
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="datumadas" title="Open case study for Datum ADAS">
+                <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" />
               </div>
 
-              <p class="text-xs text-zinc-400 line-clamp-2">
-                High-society automotive provenance, digital handover protocols and owner-controlled vehicle history records.
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.
               </p>
 
-              <div class="tactical-yield-badge">
-                <i data-lucide="shield" class="w-3 h-3 text-white"></i>
-                <span>Cryptographic Ownership Vault</span>
-              </div>
-
-              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
-                <span>Cryptographic Seals</span> · <span>Offline Vault</span> · <span>Luxury UI</span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Computer Vision</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">On-Device</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Kinematics</span>
               </div>
             </div>
 
-            <div class="tactical-card-actions">
-              <button type="button" class="inspect-modal-btn" data-project="datumatelier">
-                <span>Dossier</span>
-                <i data-lucide="maximize-2" class="w-3 h-3"></i>
-              </button>
-              <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Visit Datum Atelier">
-                <span>Live</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </a>
-              <a href="https://github.com/aigroupchathq/datum-intro" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
-                <span>Source</span>
-                <i data-lucide="github" class="w-3 h-3"></i>
-              </a>
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="datumadas"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
             </div>
           </article>
+
+          <!-- Checkmate (Velum Labs) -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Human Decisions · Compatibility
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Checkmate (Velum Labs)
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="velum" title="Open case study for Checkmate (Velum Labs)">
+                <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Explainable Matching</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">React 19</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">TypeScript</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="velum"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/velum-labs" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Vedic Tree OS -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Education Systems · Institutional OS
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Vedic Tree OS
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="vtsystem" title="Open case study for Vedic Tree OS">
+                <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Multi-Tenant</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">RBAC Security</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">TypeScript</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="vtsystem"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/vtsystem" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- The Driver of God -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Interactive Philosophy · Audio
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                The Driver of God
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="driver" title="Open case study for The Driver of God">
+                <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Interactive Philosophy</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Canvas 2D</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="driver"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hidden Leaf Studio -->
+          <article class="project-bento-card" data-category="creative">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Creative Tools · Bilingual Studio
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Hidden Leaf Studio
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="hiddenleaf" title="Open case study for Hidden Leaf Studio">
+                <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Phoneme Parser</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Rhythm Studio</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="hiddenleaf"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Datum Atelier -->
+          <article class="project-bento-card" data-category="automotive">
+            <div>
+              <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
+                Automotive Systems · Provenance
+              </span>
+              <h3 class="text-xl font-bold text-zinc-100 tracking-tight mb-2">
+                Datum Atelier
+              </h3>
+
+              <div class="inspect-card-trigger" data-project="datumatelier" title="Open case study for Datum Atelier">
+                <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" />
+              </div>
+
+              <p class="text-sm text-zinc-300 leading-relaxed mb-4 line-clamp-2">
+                An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.
+              </p>
+
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400 flex-wrap mb-4">
+                <span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Vehicle Provenance</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Owner Records</span><span class="px-2 py-0.5 rounded bg-canvas-base border border-canvas-border text-[11px] font-mono text-zinc-400">Offline-First</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="datumatelier"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Site</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/datum-intro" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+              </div>
+            </div>
+          </article>
+
         </div>
       </section>
 
