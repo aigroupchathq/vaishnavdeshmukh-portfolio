@@ -603,6 +603,16 @@ body.editorial-portfolio #work .project-bento-card:hover a.bg-canvas-accent {
   }
 }
 
+@media (max-width: 360px) {
+  body.editorial-portfolio header.sticky > div > div:last-child {
+    gap: 0.25rem !important;
+  }
+
+  body.editorial-portfolio header.sticky > div > div:last-child > a[href^="mailto:"] {
+    padding-inline: 0.625rem;
+  }
+}
+
 @media (max-width: 480px) {
   body.editorial-portfolio aside[aria-label="Availability and local time"] #replayIntroBtn {
     display: none !important;
