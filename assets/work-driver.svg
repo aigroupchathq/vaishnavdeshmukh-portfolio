@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#080a0d"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#22262e"/>
+  <text x="76" y="98" fill="#a1a1aa" font-family="monospace" font-size="14" letter-spacing="3">COGNITIVE TOOLS // PHILOSOPHICAL INQUIRY LAB</text>
+  <text x="76" y="160" fill="#ffffff" font-family="Arial,sans-serif" font-size="36" font-weight="700">The Driver of God</text>
+  <text x="76" y="199" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">Audiovisual interactive inquiry into self-will, attention</text>
+  <text x="76" y="226" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">and surrender through soundscapes and visual storytelling.</text>
+  <path d="M76 267h270" stroke="#333842"/>
+  <text x="76" y="300" fill="#e4e4e7" font-family="monospace" font-size="13" letter-spacing="2">WEB AUDIO // SPECTRAL WAVEFORM</text>
+  
+  <g transform="translate(430 80)">
+    <rect width="470" height="440" fill="#0c0e14" stroke="#272b36" rx="8"/>
+    <!-- Compass / Celestial Axis -->
+    <circle cx="235" cy="180" r="100" fill="none" stroke="#333844" stroke-width="1.5" stroke-dasharray="4 6"/>
+    <circle cx="235" cy="180" r="60" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="235" cy="180" r="15" fill="#ffffff"/>
+    
+    <line x1="235" y1="50" x2="235" y2="310" stroke="#444b58" stroke-width="1"/>
+    <line x1="105" y1="180" x2="365" y2="180" stroke="#444b58" stroke-width="1"/>
+    
+    <!-- Waveform display -->
+    <path d="M 50 380 Q 90 320 130 380 T 210 380 T 290 380 T 370 380 T 430 380" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+    <text x="50" y="415" fill="#a1a1aa" font-family="monospace" font-size="11">AUDIO CARRIER: 432 Hz RESONANCE · ATTENTION: 100%</text>
+  </g>
+</svg>

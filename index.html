@@ -678,20 +678,20 @@
         </div>
       </section>
 
-      <!-- 03: FEATURED WORK (CONSCIOUS HUMAN CURIOUS TO CREATE - INTERACTIVE TOGGLED) -->
-      <section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-canvas-border" aria-labelledby="work-heading">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <!-- 03: FEATURED WORK (ARMY FORMATION GRID) -->
+      <section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-canvas-border" aria-labelledby="work-heading">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
-            <div class="font-mono text-xs font-semibold text-canvas-accent uppercase tracking-widest mb-1.5 flex items-center gap-2">
-              <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
-              <span>Selected Projects &amp; Case Studies</span>
+            <div class="font-mono text-xs font-bold text-white uppercase tracking-widest mb-1.5 flex items-center gap-2">
+              <span class="radar-dot"></span>
+              <span>TACTICAL FORMATION // 16 OPERATIONAL DIVISIONS</span>
             </div>
-            <h2 id="work-heading" class="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
-              Thoughtful work, built around <span class="font-serif italic font-normal text-zinc-400">real needs.</span>
+            <h2 id="work-heading" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Systems built like an army in formation.
             </h2>
           </div>
-          <p class="text-sm text-zinc-300 max-w-md">
-            Sixteen projects: ten case studies and six recent additions. Concepts and prototypes are clearly labeled.
+          <p class="text-xs sm:text-sm text-zinc-400 font-mono max-w-md">
+            16 active project units standing shoulder to shoulder. High-density tactical matrix, zero unnecessary scrolling friction.
           </p>
         </div>
 
@@ -699,12 +699,12 @@
         <div class="mb-5 p-2 rounded-xl bg-canvas-surface border border-canvas-border-mid font-mono text-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-inner">
           <div class="relative flex-1">
             <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input type="text" id="projectSearchInput" placeholder="Search projects by name, area, or technology..." class="w-full bg-transparent pl-9 pr-16 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-canvas-accent rounded-lg" aria-label="Search projects" autocomplete="off" />
+            <input type="text" id="projectSearchInput" placeholder="Search army units by name, division, or technology..." class="w-full bg-transparent pl-9 pr-16 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-white rounded-lg" aria-label="Search projects" autocomplete="off" />
             <kbd class="hidden sm:inline-block absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 px-1.5 py-0.5 rounded border border-white/10 bg-white/[0.04]">Press /</kbd>
           </div>
           <div class="flex items-center justify-between sm:justify-end gap-3 px-2 border-t sm:border-t-0 border-canvas-border pt-2 sm:pt-0">
-            <span id="searchMatchCount" class="text-zinc-400 text-[11px] whitespace-nowrap font-medium">16 projects</span>
-            <button id="searchClearBtn" class="text-canvas-accent hover:underline text-[11px] hidden cursor-pointer">Clear</button>
+            <span id="searchMatchCount" class="text-zinc-400 text-[11px] whitespace-nowrap font-medium">16 units active</span>
+            <button id="searchClearBtn" class="text-white hover:underline text-[11px] hidden cursor-pointer">Clear</button>
           </div>
         </div>
 
@@ -712,47 +712,48 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
           <!-- Filter Tabs -->
           <div class="flex flex-wrap items-center gap-2 font-mono text-xs" role="tablist" aria-label="Project domain filters">
-            <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-accent bg-canvas-accent/10 text-canvas-accent font-bold cursor-pointer transition-all" data-category="all">
-              All projects (16)
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-white bg-white text-black font-extrabold cursor-pointer transition-all active" data-category="all">
+              All Units (16)
             </button>
-            <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="health">
-              Healthcare &amp; Logistics (2)
-            </button>
-            <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="civic">
-              Civic &amp; Municipal (2)
-            </button>
-            <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="cognitive">
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="cognitive">
               Cognitive &amp; Tools (7)
             </button>
-            <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="creative">
-              Creative Technology (3)
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="creative">
+              Creative Tech (3)
             </button>
-            <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="automotive">
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="civic">
+              Civic Systems (2)
+            </button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="health">
+              Healthcare Systems (2)
+            </button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white cursor-pointer transition-all" data-category="automotive">
               Automotive Systems (2)
             </button>
           </div>
 
           <!-- Interactive View Density Switcher -->
           <div class="project-density-controls flex items-center gap-1.5 font-mono text-xs text-zinc-400 bg-canvas-surface border border-canvas-border rounded-lg p-1 w-fit">
-            <span class="text-[11px] px-2 text-zinc-500 font-semibold uppercase tracking-wider hidden sm:inline">View mode:</span>
-            <button id="viewInteractiveBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer">
-              Interactive
+            <span class="text-[11px] px-2 text-zinc-500 font-semibold uppercase tracking-wider hidden sm:inline">Array:</span>
+            <button id="viewInteractiveBtn" class="px-2.5 py-1 rounded bg-white text-black font-extrabold transition-all cursor-pointer">
+              ☵ Army Formation
             </button>
-            <button id="viewCompactBtn" class="px-2.5 py-1 rounded bg-canvas-elevated border border-canvas-accent text-canvas-accent font-bold transition-all cursor-pointer">
-              Compact
+            <button id="viewCompactBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-white transition-all cursor-pointer">
+              ☲ HUD Radar
             </button>
-            <button id="viewExpandAllBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-zinc-200 transition-all cursor-pointer">
-              Expand All
+            <button id="viewExpandAllBtn" class="px-2.5 py-1 rounded border border-transparent text-zinc-400 hover:text-white transition-all cursor-pointer">
+              ☷ Dossier View
             </button>
           </div>
         </div>
 
-        <!-- Editorial Project List -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- Army Projects Formation Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
           <!-- 01: PREDICTIVE WARD LOGISTICS ENGINE (Span 12 / Hero Project) -->
           <article class="project-bento-card md:col-span-12 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-8 transition-all flex flex-col justify-between" data-category="health">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 01</span><span class="tactical-status-radar"><span class="radar-dot"></span> OPERATIONAL</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs mb-4 pb-3 border-b border-canvas-border/60">
                 <span class="text-canvas-accent font-bold flex items-center gap-1.5">
@@ -972,6 +973,7 @@
           <!-- 02: THE UNEXPLORED INTERIOR (Interactive Exploration - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 02</span><span class="tactical-status-radar"><span class="radar-dot"></span> LIVE LAB</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-purple font-bold">Attention &amp; perception</span>
@@ -1086,6 +1088,7 @@
           <!-- 03: iTHINK (Cognitive Neuroscience Interactive 3D Experience - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 03</span><span class="tactical-status-radar"><span class="radar-dot"></span> 3D ATLAS</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-purple font-bold">Interactive Neuroscience</span>
@@ -1200,6 +1203,7 @@
           <!-- 03: CivicFlow (Municipal Defect Triage Platform - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="civic">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 04</span><span class="tactical-status-radar"><span class="radar-dot"></span> MUNICIPAL</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-accent font-bold">DBSCAN Geospatial Clustering</span>
@@ -1303,6 +1307,7 @@
           <!-- 04: AI SCRIPT STUDIO (Generative Audio DAW - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="creative">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 05</span><span class="tactical-status-radar"><span class="radar-dot"></span> AUDIO DAW</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-blue font-bold">Low-Latency Web Audio</span>
@@ -1451,6 +1456,7 @@
           <!-- 05: ROADTRIAGE (Edge Computer Vision - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="civic">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 06</span><span class="tactical-status-radar"><span class="radar-dot"></span> EDGE AI</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-accent font-bold">Edge Computer Vision</span>
@@ -1553,6 +1559,7 @@
           <!-- 06: THE OBSERVER (Thought & Awareness Experience) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 07</span><span class="tactical-status-radar"><span class="radar-dot"></span> INTERACTIVE</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-accent font-bold">Thought &amp; awareness</span>
@@ -1672,6 +1679,7 @@
           <!-- 07: BABYCART (Pediatric Biometric Telemetry - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="health">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 08</span><span class="tactical-status-radar"><span class="radar-dot"></span> TELEMETRY</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-blue font-bold">Non-contact micro-motion</span>
@@ -1777,6 +1785,7 @@
           <!-- 08: GROUPCHAT HQ (Collaborative Discussion Synthesizer - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="creative">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 09</span><span class="tactical-status-radar"><span class="radar-dot"></span> SEMANTIC SYNC</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-accent font-bold">Semantic Graph Clustering</span>
@@ -1882,6 +1891,7 @@
           <!-- 09: VISION INTELLIGENCE (AI Guidance - Span 6) -->
           <article class="project-bento-card md:col-span-6 border border-canvas-border-mid bg-canvas-surface hover:border-canvas-border-strong rounded-2xl p-6 sm:p-7 transition-all flex flex-col justify-between" data-category="cognitive">
             <div>
+              <div class="tactical-unit-header"><span>// UNIT 10</span><span class="tactical-status-radar"><span class="radar-dot"></span> LIVE GUIDE</span></div>
               <!-- Unboxed Editorial Yields (Zero-Pill Discipline) -->
               <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs mb-3 text-zinc-300 pb-2 border-b border-canvas-border/50">
                 <span class="text-canvas-blue font-bold">Design · Implementation · Verification</span>
@@ -1985,123 +1995,269 @@
             </div>
           </article>
 
-          <article class="project-bento-card editorial-project-card" data-category="automotive">
-            <div class="editorial-card-copy">
-              <span class="editorial-card-kicker">Automotive systems · Concept in development</span>
-              <h3>Datum ADAS</h3>
-              <p>An on-device automotive perception concept exploring forward-collision awareness, lane context and kinematic safety with privacy-preserving, offline-first design. A prototype—not a certified driver-assistance system.</p>
-              <div class="editorial-card-tags">
-                <span>Computer vision</span><span>On-device</span><span>Safety concept</span>
+          <!-- 11: DATUM ADAS -->
+          <article class="project-bento-card" data-category="automotive">
+            <div>
+              <div class="tactical-unit-header">
+                <span>// UNIT 11</span>
+                <span class="tactical-status-radar"><span class="radar-dot"></span> CONCEPT PROTO</span>
               </div>
-              <div class="editorial-card-links">
-                <a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener noreferrer">View source <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
+              <span class="tactical-domain-tag">Automotive Systems · On-Device Perception</span>
+              <h3 class="text-xl font-extrabold text-white tracking-tight">Datum ADAS</h3>
+              
+              <div class="inspect-card-trigger" data-project="datumadas" title="Click to inspect ADAS telemetry spec">
+                <div>
+                  <img src="assets/work-datumadas.svg" alt="Datum ADAS perception schematic" loading="lazy" />
+                </div>
+              </div>
+
+              <p class="text-xs text-zinc-400 line-clamp-2">
+                On-device forward collision awareness, lane context and kinematic trajectory estimation.
+              </p>
+
+              <div class="tactical-yield-badge">
+                <i data-lucide="zap" class="w-3 h-3 text-white"></i>
+                <span>Edge Vision · Sub-11ms Inference</span>
+              </div>
+
+              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
+                <span>Edge Vision</span> · <span>WebAssembly</span> · <span>Offline-First</span>
               </div>
             </div>
-            <div class="editorial-project-preview" aria-hidden="true">
-              <span class="preview-index">Systems / 11</span>
-              <strong>DATUM<br />ADAS</strong>
-              <span class="preview-mark">Perception, with restraint.</span>
+
+            <div class="tactical-card-actions">
+              <button type="button" class="inspect-modal-btn" data-project="datumadas">
+                <span>Dossier</span>
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+              <a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
+                <span>Source</span>
+                <i data-lucide="github" class="w-3 h-3"></i>
+              </a>
             </div>
           </article>
 
-          <article class="project-bento-card editorial-project-card" data-category="cognitive">
-            <div class="editorial-card-copy">
-              <span class="editorial-card-kicker">Human connection · Live product</span>
-              <h3>Checkmate</h3>
-              <p>A reciprocal, explainable compatibility platform for making grounded relationship decisions—focused on shared values and dealbreakers rather than swipe-driven engagement.</p>
-              <div class="editorial-card-tags">
-                <span>Explainable matching</span><span>Reciprocal decisions</span><span>React · TypeScript</span>
+          <!-- 12: CHECKMATE (VELUM LABS) -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <div class="tactical-unit-header">
+                <span>// UNIT 12</span>
+                <span class="tactical-status-radar"><span class="radar-dot"></span> LIVE PROTOCOL</span>
               </div>
-              <div class="editorial-card-links">
-                <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer">Visit Checkmate <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
-                <a href="https://github.com/aigroupchathq/velum-labs" target="_blank" rel="noopener noreferrer">Source <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
+              <span class="tactical-domain-tag">Cognitive Systems · Relational Decisions</span>
+              <h3 class="text-xl font-extrabold text-white tracking-tight">Checkmate</h3>
+              
+              <div class="inspect-card-trigger" data-project="velum" title="Click to inspect Checkmate compatibility architecture">
+                <div>
+                  <img src="assets/work-velum.svg" alt="Checkmate compatibility decision schematic" loading="lazy" />
+                </div>
+              </div>
+
+              <p class="text-xs text-zinc-400 line-clamp-2">
+                Reciprocal, explainable compatibility platform for grounded human relationship decisions based on shared dealbreakers.
+              </p>
+
+              <div class="tactical-yield-badge">
+                <i data-lucide="shield-check" class="w-3 h-3 text-white"></i>
+                <span>Zero Dark Patterns · Mutuality</span>
+              </div>
+
+              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
+                <span>React 19</span> · <span>TypeScript</span> · <span>Deterministic Match</span>
               </div>
             </div>
-            <div class="editorial-project-preview" aria-hidden="true">
-              <span class="preview-index">People / 12</span>
-              <strong>CHECK<br />MATE</strong>
-              <span class="preview-mark">Mutuality over metrics.</span>
+
+            <div class="tactical-card-actions">
+              <button type="button" class="inspect-modal-btn" data-project="velum">
+                <span>Dossier</span>
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+              <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Live Experience">
+                <span>Live</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </a>
+              <a href="https://github.com/aigroupchathq/velum-labs" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
+                <span>Source</span>
+                <i data-lucide="github" class="w-3 h-3"></i>
+              </a>
             </div>
           </article>
 
-          <article class="project-bento-card editorial-project-card" data-category="cognitive">
-            <div class="editorial-card-copy">
-              <span class="editorial-card-kicker">Education systems · Live product</span>
-              <h3>Vedic Tree OS</h3>
-              <p>An institutional education platform for multi-campus school networks, combining operational governance with a more human-centred approach to student development.</p>
-              <div class="editorial-card-tags">
-                <span>Education</span><span>Multi-tenant systems</span><span>Role-based access</span>
+          <!-- 13: VEDIC TREE OS -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <div class="tactical-unit-header">
+                <span>// UNIT 13</span>
+                <span class="tactical-status-radar"><span class="radar-dot"></span> LIVE SYSTEM</span>
               </div>
-              <div class="editorial-card-links">
-                <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer">Visit Vedic Tree OS <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
-                <a href="https://github.com/aigroupchathq/vtsystem" target="_blank" rel="noopener noreferrer">Source <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
+              <span class="tactical-domain-tag">Education Systems · Multi-Tenant OS</span>
+              <h3 class="text-xl font-extrabold text-white tracking-tight">Vedic Tree OS</h3>
+              
+              <div class="inspect-card-trigger" data-project="vtsystem" title="Click to inspect Vedic Tree OS topology">
+                <div>
+                  <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS network topology schematic" loading="lazy" />
+                </div>
+              </div>
+
+              <p class="text-xs text-zinc-400 line-clamp-2">
+                Multi-campus institutional education OS combining operational governance with human-centric student development.
+              </p>
+
+              <div class="tactical-yield-badge">
+                <i data-lucide="layers" class="w-3 h-3 text-white"></i>
+                <span>Multi-Tenant · RBAC Governance</span>
+              </div>
+
+              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
+                <span>Multi-Tenant</span> · <span>TypeScript</span> · <span>Growth Ledger</span>
               </div>
             </div>
-            <div class="editorial-project-preview" aria-hidden="true">
-              <span class="preview-index">Learning / 13</span>
-              <strong>VEDIC<br />TREE</strong>
-              <span class="preview-mark">Growth without ranking.</span>
+
+            <div class="tactical-card-actions">
+              <button type="button" class="inspect-modal-btn" data-project="vtsystem">
+                <span>Dossier</span>
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+              <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Live System">
+                <span>Live</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </a>
+              <a href="https://github.com/aigroupchathq/vtsystem" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
+                <span>Source</span>
+                <i data-lucide="github" class="w-3 h-3"></i>
+              </a>
             </div>
           </article>
 
-          <article class="project-bento-card editorial-project-card" data-category="cognitive">
-            <div class="editorial-card-copy">
-              <span class="editorial-card-kicker">Interactive philosophy · Prototype</span>
-              <h3>The Driver of God</h3>
-              <p>An audiovisual, interactive inquiry into self-will, attention and surrender, bringing reflective questions together with sound, symbolic instruments and visual storytelling.</p>
-              <div class="editorial-card-tags">
-                <span>Interactive narrative</span><span>Web Audio</span><span>Reflection</span>
+          <!-- 14: THE DRIVER OF GOD -->
+          <article class="project-bento-card" data-category="cognitive">
+            <div>
+              <div class="tactical-unit-header">
+                <span>// UNIT 14</span>
+                <span class="tactical-status-radar"><span class="radar-dot"></span> AUDIO LAB</span>
               </div>
-              <div class="editorial-card-links">
-                <a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener noreferrer">Explore the project <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
+              <span class="tactical-domain-tag">Cognitive Tools · Philosophical Inquiry</span>
+              <h3 class="text-xl font-extrabold text-white tracking-tight">The Driver of God</h3>
+              
+              <div class="inspect-card-trigger" data-project="driver" title="Click to inspect philosophical audio architecture">
+                <div>
+                  <img src="assets/work-driver.svg" alt="The Driver of God audiovisual waveform schematic" loading="lazy" />
+                </div>
+              </div>
+
+              <p class="text-xs text-zinc-400 line-clamp-2">
+                Audiovisual interactive inquiry into self-will, attention and surrender through procedural soundscapes.
+              </p>
+
+              <div class="tactical-yield-badge">
+                <i data-lucide="music" class="w-3 h-3 text-white"></i>
+                <span>Web Audio · 432 Hz Synthesizer</span>
+              </div>
+
+              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
+                <span>Web Audio API</span> · <span>Canvas 2D</span> · <span>Interactive SVG</span>
               </div>
             </div>
-            <div class="editorial-project-preview" aria-hidden="true">
-              <span class="preview-index">Inquiry / 14</span>
-              <strong>THE<br />DRIVER</strong>
-              <span class="preview-mark">A study in perspective.</span>
+
+            <div class="tactical-card-actions">
+              <button type="button" class="inspect-modal-btn" data-project="driver">
+                <span>Dossier</span>
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+              <a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
+                <span>Source</span>
+                <i data-lucide="github" class="w-3 h-3"></i>
+              </a>
             </div>
           </article>
 
-          <article class="project-bento-card editorial-project-card" data-category="creative">
-            <div class="editorial-card-copy">
-              <span class="editorial-card-kicker">Creative tools · Studio prototype</span>
-              <h3>Hidden Leaf Studio</h3>
-              <p>A Hindi–English rap-writing workspace for exploring words, rhythm and vocal pitch in one place.</p>
-              <div class="editorial-card-tags">
-                <span>Writing tools</span><span>Rhythm</span><span>Voice exploration</span>
+          <!-- 15: HIDDEN LEAF STUDIO -->
+          <article class="project-bento-card" data-category="creative">
+            <div>
+              <div class="tactical-unit-header">
+                <span>// UNIT 15</span>
+                <span class="tactical-status-radar"><span class="radar-dot"></span> STUDIO DAW</span>
               </div>
-              <div class="editorial-card-links">
-                <a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener noreferrer">View studio source <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
+              <span class="tactical-domain-tag">Creative Tech · Bilingual DAW</span>
+              <h3 class="text-xl font-extrabold text-white tracking-tight">Hidden Leaf Studio</h3>
+              
+              <div class="inspect-card-trigger" data-project="hiddenleaf" title="Click to inspect bilingual rhythm DAW spec">
+                <div>
+                  <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio spectrogram DAW schematic" loading="lazy" />
+                </div>
+              </div>
+
+              <p class="text-xs text-zinc-400 line-clamp-2">
+                Hindi-English rap writing workspace exploring wordplay, matra alignment, rhythm and vocal pitch contours.
+              </p>
+
+              <div class="tactical-yield-badge">
+                <i data-lucide="mic" class="w-3 h-3 text-white"></i>
+                <span>Phoneme &amp; Cadence Alignment</span>
+              </div>
+
+              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
+                <span>Web Audio API</span> · <span>Phoneme Engine</span> · <span>TypeScript</span>
               </div>
             </div>
-            <div class="editorial-project-preview" aria-hidden="true">
-              <span class="preview-index">Creative / 15</span>
-              <strong>HIDDEN<br />LEAF</strong>
-              <span class="preview-mark">Language in rhythm.</span>
+
+            <div class="tactical-card-actions">
+              <button type="button" class="inspect-modal-btn" data-project="hiddenleaf">
+                <span>Dossier</span>
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+              <a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
+                <span>Source</span>
+                <i data-lucide="github" class="w-3 h-3"></i>
+              </a>
             </div>
           </article>
 
-          <article class="project-bento-card editorial-project-card" data-category="automotive">
-            <div class="editorial-card-copy">
-              <span class="editorial-card-kicker">Automotive product · In development</span>
-              <h3>Datum Atelier</h3>
-              <p>An independent automotive project exploring private, durable vehicle histories. Its product principles include owner-controlled records, explicit sharing, and offline-capable work.</p>
-              <div class="editorial-card-tags">
-                <span>Vehicle history</span><span>Owner-controlled records</span><span>Offline-first</span>
+          <!-- 16: DATUM ATELIER -->
+          <article class="project-bento-card" data-category="automotive">
+            <div>
+              <div class="tactical-unit-header">
+                <span>// UNIT 16</span>
+                <span class="tactical-status-radar"><span class="radar-dot"></span> LIVE PLATFORM</span>
               </div>
-              <div class="editorial-card-links">
-                <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer">Visit Datum Atelier <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
-                <a href="https://github.com/aigroupchathq/datum-intro" target="_blank" rel="noopener noreferrer">Source <i data-lucide="arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true"></i></a>
+              <span class="tactical-domain-tag">Automotive Systems · Provenance Ledger</span>
+              <h3 class="text-xl font-extrabold text-white tracking-tight">Datum Atelier</h3>
+              
+              <div class="inspect-card-trigger" data-project="datumatelier" title="Click to inspect Datum Atelier cryptographic provenance spec">
+                <div>
+                  <img src="assets/work-datumatelier.svg" alt="Datum Atelier cryptographic vehicle passport schematic" loading="lazy" />
+                </div>
+              </div>
+
+              <p class="text-xs text-zinc-400 line-clamp-2">
+                High-society automotive provenance, digital handover protocols and owner-controlled vehicle history records.
+              </p>
+
+              <div class="tactical-yield-badge">
+                <i data-lucide="shield" class="w-3 h-3 text-white"></i>
+                <span>Cryptographic Ownership Vault</span>
+              </div>
+
+              <div class="flex items-center gap-1.5 font-mono text-[10px] text-zinc-400 flex-wrap my-1">
+                <span>Cryptographic Seals</span> · <span>Offline Vault</span> · <span>Luxury UI</span>
               </div>
             </div>
-            <div class="editorial-project-preview" aria-hidden="true">
-              <span class="preview-index">Automotive / 16</span>
-              <strong>DATUM<br />ATELIER</strong>
-              <span class="preview-mark">Complexity, made legible.</span>
+
+            <div class="tactical-card-actions">
+              <button type="button" class="inspect-modal-btn" data-project="datumatelier">
+                <span>Dossier</span>
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+              <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Visit Datum Atelier">
+                <span>Live</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </a>
+              <a href="https://github.com/aigroupchathq/datum-intro" target="_blank" rel="noopener noreferrer" class="tactical-btn-secondary" title="Source Code">
+                <span>Source</span>
+                <i data-lucide="github" class="w-3 h-3"></i>
+              </a>
             </div>
           </article>
-
         </div>
       </section>
 
@@ -4439,7 +4595,12 @@
         // =====================================================================
         // 05. CASE STUDIES DATA & DEEP-DIVE MODAL CONTROLLER
         // =====================================================================
-        const caseStudyKeys = ["ward", "consciousness", "ithink", "civicflow", "scriptstudio", "roadtriage", "itsyou", "babycarl", "groupchat", "vision"];
+        const caseStudyKeys = [
+          "ward", "consciousness", "ithink", "civicflow", 
+          "scriptstudio", "roadtriage", "itsyou", "babycarl", 
+          "groupchat", "vision", "datumadas", "velum", 
+          "vtsystem", "driver", "hiddenleaf", "datumatelier"
+        ];
         let currentCaseStudyIndex = 0;
         let lastFocusedElement = null;
 
@@ -4638,6 +4799,84 @@
             liveUrl: "https://aigroupchathq.github.io/vision-intelligence/",
             liveLabel: "Open Vision Intelligence",
             briefTag: "AI Tools & Prompt Guidance"
+          },
+          datumadas: {
+            title: "Datum ADAS: Edge Automotive Perception",
+            domain: "Automotive Systems · On-Device Vision",
+            previewImg: "assets/work-datumadas.svg",
+            badges: ["Offline-First Telemetry", "Edge Computer Vision", "Kinematic Trajectory", "Privacy-Preserving"],
+            problem: "Modern vehicle telemetry and driver-assistance concepts frequently rely on invasive cloud streaming and opaque black-box sensors. Driver awareness tools need lightweight, deterministic, privacy-first edge perception.",
+            solution: "A local, on-device automotive perception concept exploring forward-collision awareness, lane boundary context, and kinematic safety metrics without streaming telemetry to third-party servers.",
+            stack: ["Edge Computer Vision", "WebAssembly / C++ Core", "Kinematic Physics Engine", "Offline-First Storage", "Canvas Telemetry HUD"],
+            impact: "An architecture exploration in restraint and on-device compute for mobility workflows. Exploratory prototype, not an active certified driver-assistance system.",
+            liveUrl: "",
+            liveLabel: "",
+            briefTag: "Automotive Systems & ADAS"
+          },
+          velum: {
+            title: "Checkmate: Mutuality & Compatibility Platform",
+            domain: "Cognitive Systems · Relational Decision Architecture",
+            previewImg: "assets/work-velum.svg",
+            badges: ["Explainable Matching", "Reciprocal Decisions", "React / TypeScript", "Zero Dark Patterns"],
+            problem: "Dating and relationship interfaces prioritize engagement loops, endless swiping, and superficial dopamine triggers rather than grounded human compatibility and shared values.",
+            solution: "A reciprocal, explainable compatibility platform designed to help humans make deliberate, value-aligned relationship decisions based on transparent dealbreakers and mutual autonomy.",
+            stack: ["React 19", "TypeScript", "Tailwind CSS", "Deterministic Matching Engine", "Client-Side Encryption"],
+            impact: "A deployed platform exploring ethical relational mechanics and explainable compatibility without gamified engagement traps.",
+            liveUrl: "https://aigroupchathq.github.io/velum-labs/",
+            liveLabel: "Launch Checkmate",
+            briefTag: "Applied Neuroscience & Cognitive Tools"
+          },
+          vtsystem: {
+            title: "Vedic Tree OS: Institutional Education Operating System",
+            domain: "Education Systems · Multi-Tenant Governance",
+            previewImg: "assets/work-vtsystem.svg",
+            badges: ["Multi-Tenant Architecture", "RBAC Security", "Student Growth Ledger", "Institutional Governance"],
+            problem: "Multi-campus school networks struggle with fragmented record-keeping, disjointed administrative silos, and rigid grading software that reduces student potential to numerical ranks.",
+            solution: "An institutional education operating system providing unified multi-campus operational governance, role-based access control, and human-centred student progress tracking.",
+            stack: ["TypeScript", "Multi-Tenant Cloud DB", "RBAC Engine", "Real-Time Telemetry", "Responsive UI"],
+            impact: "Enterprise education platform providing administrative clarity and holistic student development tracking across school networks.",
+            liveUrl: "https://aigroupchathq.github.io/vtsystem/",
+            liveLabel: "Open Vedic Tree OS",
+            briefTag: "Civic Systems & Municipal Infrastructure"
+          },
+          driver: {
+            title: "The Driver of God: Audiovisual Inquiry Lab",
+            domain: "Cognitive Tools · Philosophical Web Experience",
+            previewImg: "assets/work-driver.svg",
+            badges: ["Web Audio API", "Interactive Philosophy", "Symbolic Instruments", "Reflective Inquiry"],
+            problem: "Philosophical inquiries into self-will, attention, and surrender often feel dry and academic when confined to printed text, missing the visceral resonance of music and symbolic visual art.",
+            solution: "An interactive audiovisual experience harmonizing philosophical questions with generative Web Audio synthesis, interactive symbolic instruments, and contemplative narrative arcs.",
+            stack: ["Web Audio API", "HTML5 Canvas", "Procedural Sound Synthesis", "Interactive SVG", "Vanilla JavaScript"],
+            impact: "An open interactive philosophy laboratory exploring deep cognitive questions through sensory synthesis.",
+            liveUrl: "https://github.com/aigroupchathq/the-driver-of-god",
+            liveLabel: "Explore Project",
+            briefTag: "Applied Neuroscience & Cognitive Tools"
+          },
+          hiddenleaf: {
+            title: "Hidden Leaf Studio: Bilingual Rap & Cadence DAW",
+            domain: "Creative Technology · Audio & Rhythm Studio",
+            previewImg: "assets/work-hiddenleaf.svg",
+            badges: ["Multi-Track WebAudio", "Hindi-English Phoneme Grid", "Pitch Contour Tracking", "Cadence Visualizer"],
+            problem: "Bilingual rap writers and lyricists juggling Hindi and English have no dedicated tool that analyzes cross-lingual syllable meter, matra alignment, and vocal pitch contours simultaneously.",
+            solution: "A bespoke browser-based DAW and lyric workspace engineered for Hindi-English rap writing, featuring phoneme rhyme mapping, beat synchronization, and real-time pitch feedback.",
+            stack: ["Web Audio API", "Phoneme Alignment Parser", "Devanagari Metrical Engine", "Canvas Spectrogram", "TypeScript"],
+            impact: "A specialized studio tool bridging South Asian poetic meters with modern hip-hop rhythm analysis.",
+            liveUrl: "https://github.com/aigroupchathq/hidden-leaf-studio",
+            liveLabel: "View Studio Source",
+            briefTag: "Spatial Interfaces & 3D WebGL (Three.js)"
+          },
+          datumatelier: {
+            title: "Datum Atelier: High-Society Vehicle Provenance",
+            domain: "Automotive Systems · Cryptographic Ownership",
+            previewImg: "assets/work-datumatelier.svg",
+            badges: ["Cryptographic Passport", "Owner-Controlled Records", "Offline Vault", "Zero Data Brokerage"],
+            problem: "Collector cars and high-society vehicles suffer from fragmented paper histories, broker fraud, and intrusive centralized platforms that monetize private owner telemetry.",
+            solution: "An independent automotive provenance platform providing tamper-evident, owner-controlled vehicle histories, digital handover protocols, and offline-first encrypted records.",
+            stack: ["TypeScript", "Offline-First Local Storage", "Cryptographic Hash Seals", "Responsive Luxury UI", "Canvas Engine"],
+            impact: "Setting a new privacy-centric benchmark for automotive handover, vehicle heritage, and private ownership records.",
+            liveUrl: "https://datumatelier.uk/",
+            liveLabel: "Visit Datum Atelier",
+            briefTag: "Automotive Systems & ADAS"
           }
         };
 

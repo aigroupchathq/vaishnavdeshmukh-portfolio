@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#080a0d"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#22262e"/>
+  <text x="76" y="98" fill="#a1a1aa" font-family="monospace" font-size="14" letter-spacing="3">AUTOMOTIVE SYSTEMS // PROVENANCE &amp; HANDOVER PLATFORM</text>
+  <text x="76" y="160" fill="#ffffff" font-family="Arial,sans-serif" font-size="36" font-weight="700">Datum Atelier</text>
+  <text x="76" y="199" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">High-society automotive provenance, digital handover</text>
+  <text x="76" y="226" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">and cryptographic owner-controlled vehicle history ledger.</text>
+  <path d="M76 267h270" stroke="#333842"/>
+  <text x="76" y="300" fill="#e4e4e7" font-family="monospace" font-size="13" letter-spacing="2">PROVENANCE // CRYPTOGRAPHIC PASSPORT</text>
+  
+  <g transform="translate(430 80)">
+    <rect width="470" height="440" fill="#0c0e14" stroke="#272b36" rx="8"/>
+    <!-- Vehicle Silhouette Outline -->
+    <path d="M 60 210 L 120 170 L 220 140 L 320 140 L 390 180 L 430 210 L 430 250 L 60 250 Z" fill="#151924" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="130" cy="250" r="28" fill="#0c0e14" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="360" cy="250" r="28" fill="#0c0e14" stroke="#ffffff" stroke-width="3"/>
+    
+    <!-- Ledger Block Entries -->
+    <rect x="40" y="310" width="390" height="100" rx="6" fill="#131620" stroke="#2c3342"/>
+    <text x="60" y="340" fill="#ffffff" font-family="monospace" font-size="11">CHASSIS VIN: WBA33AY08N · PROVENANCE SEAL: VERIFIED</text>
+    <line x1="60" y1="355" x2="390" y2="355" stroke="#262c3a"/>
+    <text x="60" y="375" fill="#a1a1aa" font-family="monospace" font-size="10">HANDOVER LOG: 2026-10-25 // OWNER CONTROLLED RECORD</text>
+    <text x="60" y="395" fill="#ffffff" font-family="monospace" font-size="10" font-weight="bold">TELEMETRY: OFFLINE-CAPABLE VAULT · ZERO-DATA BROKERAGE</text>
+  </g>
+</svg>

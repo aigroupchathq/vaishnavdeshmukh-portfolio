@@ -1,1086 +1,643 @@
+/* ==========================================================================
+   VAISHNAV DESHMUKH — TACTICAL MONOCHROME ARMY INTERFACE
+   Black & White Theme · High-Density Army Matrix · Zero-Scroll Friction
+   ========================================================================== */
+
+:root {
+  --army-black: #030305;
+  --army-surface: #090a0e;
+  --army-elevated: #111319;
+  --army-highlight: #181b24;
+  --army-white: #ffffff;
+  --army-silver: #e4e4e7;
+  --army-muted: #a1a1aa;
+  --army-dim: #71717a;
+  --army-border: rgba(255, 255, 255, 0.14);
+  --army-border-bright: rgba(255, 255, 255, 0.45);
+  --army-border-active: #ffffff;
+  --army-glow: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   01. GLOBAL RESET TO STRICT BLACK & WHITE
+   ========================================================================== */
+html,
+body,
 body.editorial-portfolio {
-  --editorial-ink: #202020;
-  --editorial-muted: #625f59;
-  --editorial-paper: #fff;
-  --editorial-warm: #f1efe9;
-  --editorial-border: #d5d1c8;
-  --editorial-accent: #355b76;
-  --editorial-accent-hover: #29485f;
-  --editorial-accent-wash: #e8eef2;
-  color: #171717;
-  background: #faf9f6;
-  background-image: none;
-  color-scheme: light;
+  color-scheme: dark !important;
+  background-color: var(--army-black) !important;
+  color: var(--army-white) !important;
+  background-image: 
+    radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.07), transparent 45%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 28px 28px, 28px 28px !important;
+  background-attachment: fixed !important;
 }
 
-body.editorial-portfolio #neuralCanvas {
-  opacity: 0.13 !important;
-  mix-blend-mode: multiply;
+/* Subtle particle canvas */
+body.editorial-portfolio #neuralCanvas,
+#neuralCanvas {
+  opacity: 0.18 !important;
+  mix-blend-mode: screen !important;
+  filter: grayscale(1) contrast(1.5) !important;
 }
 
-body.editorial-portfolio .hairline-grid {
-  opacity: 0.12 !important;
+/* Hairline Grid */
+.hairline-grid {
+  opacity: 0.08 !important;
+  filter: grayscale(1) !important;
 }
 
-body.editorial-portfolio aside[aria-label="Availability and local time"],
-body.editorial-portfolio header.sticky {
-  color: #333 !important;
-  background-color: rgba(250, 249, 246, 0.94) !important;
-  border-color: #1c1c1c !important;
-  box-shadow: none !important;
+/* Selection */
+::selection {
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
 
-body.editorial-portfolio aside[aria-label="Availability and local time"] .text-zinc-200,
-body.editorial-portfolio header.sticky .text-zinc-100,
-body.editorial-portfolio header.sticky .text-zinc-300,
-body.editorial-portfolio header.sticky .text-zinc-400 {
-  color: #252525 !important;
+/* Global Typography Overrides */
+.text-zinc-100,
+.text-zinc-200,
+body.editorial-portfolio .text-zinc-100,
+body.editorial-portfolio .text-zinc-200 {
+  color: #ffffff !important;
 }
 
-body.editorial-portfolio header.sticky .bg-canvas-surface,
-body.editorial-portfolio header.sticky .bg-canvas-elevated {
-  background: #fff !important;
+.text-zinc-300,
+body.editorial-portfolio .text-zinc-300 {
+  color: #e4e4e7 !important;
 }
 
-body.editorial-portfolio header.sticky .border-canvas-border,
-body.editorial-portfolio header.sticky .border-canvas-border-mid {
-  border-color: #222 !important;
+.text-zinc-400,
+body.editorial-portfolio .text-zinc-400 {
+  color: #a1a1aa !important;
 }
 
-body.editorial-portfolio header.sticky .bg-canvas-accent {
-  background: var(--editorial-accent) !important;
-  color: #fff !important;
+.text-zinc-500,
+.text-zinc-600,
+body.editorial-portfolio .text-zinc-500,
+body.editorial-portfolio .text-zinc-600 {
+  color: #71717a !important;
 }
 
-body.editorial-portfolio .london-timepiece {
-  color: #242424;
-  border-color: #292929;
-  background: #fff;
-  box-shadow: none;
+/* Accents normalized to high-contrast white */
+.text-canvas-accent,
+.text-canvas-blue,
+.text-canvas-blue-light,
+.text-canvas-purple,
+.text-canvas-amber,
+.text-canvas-alert,
+.text-canvas-red,
+body.editorial-portfolio .text-canvas-accent,
+body.editorial-portfolio .text-canvas-blue,
+body.editorial-portfolio .text-canvas-blue-light,
+body.editorial-portfolio .text-canvas-purple,
+body.editorial-portfolio .text-canvas-amber,
+body.editorial-portfolio .text-canvas-alert,
+body.editorial-portfolio .text-canvas-red {
+  color: #ffffff !important;
 }
 
-body.editorial-portfolio .london-timepiece .text-zinc-400,
-body.editorial-portfolio .london-timepiece .text-zinc-100 {
-  color: #333 !important;
-}
-
-body.editorial-portfolio #main-content {
-  color: #171717;
-}
-
-body.editorial-portfolio #main-content .text-zinc-100,
-body.editorial-portfolio #main-content .text-zinc-200,
-body.editorial-portfolio #main-content .text-zinc-300 {
-  color: var(--editorial-ink) !important;
-}
-
-body.editorial-portfolio #main-content .text-zinc-400,
-body.editorial-portfolio #main-content .text-zinc-500 {
-  color: var(--editorial-muted) !important;
-}
-
-body.editorial-portfolio #main-content .text-zinc-600 {
-  color: #77736d !important;
-}
-
-body.editorial-portfolio #main-content .text-canvas-accent,
-body.editorial-portfolio #main-content .text-canvas-blue {
-  color: var(--editorial-accent) !important;
-}
-
-body.editorial-portfolio #main-content .text-canvas-purple {
-  color: var(--editorial-accent) !important;
-}
-
-body.editorial-portfolio #main-content .text-canvas-amber,
-body.editorial-portfolio #main-content .text-canvas-alert {
-  color: var(--editorial-accent) !important;
-}
-
+/* Backgrounds */
+.bg-canvas-base,
+body.editorial-portfolio .bg-canvas-base,
 body.editorial-portfolio #main-content .bg-canvas-base {
-  background-color: #f1efe9 !important;
+  background-color: var(--army-black) !important;
 }
 
-body.editorial-portfolio #main-content .bg-canvas-surface,
+.bg-canvas-surface,
+body.editorial-portfolio .bg-canvas-surface,
+body.editorial-portfolio #main-content .bg-canvas-surface {
+  background-color: var(--army-surface) !important;
+}
+
+.bg-canvas-elevated,
+body.editorial-portfolio .bg-canvas-elevated,
 body.editorial-portfolio #main-content .bg-canvas-elevated {
-  background-color: #fff !important;
+  background-color: var(--army-elevated) !important;
 }
 
-body.editorial-portfolio #main-content .border-canvas-border,
-body.editorial-portfolio #main-content .border-canvas-border-mid {
-  border-color: #282828 !important;
+.bg-canvas-accent,
+body.editorial-portfolio .bg-canvas-accent {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
 }
 
-body.editorial-portfolio #main-content section {
-  border-color: #292929 !important;
+/* Borders */
+.border-canvas-border,
+.border-canvas-border-mid,
+body.editorial-portfolio .border-canvas-border,
+body.editorial-portfolio .border-canvas-border-mid {
+  border-color: var(--army-border) !important;
 }
 
-body.editorial-portfolio #work .filter-tab,
-body.editorial-portfolio #work #viewInteractiveBtn,
-body.editorial-portfolio #work #viewCompactBtn,
-body.editorial-portfolio #work #viewExpandAllBtn {
-  color: #333 !important;
-  border-color: #292929 !important;
-  background-color: #fff !important;
+.border-canvas-border-strong,
+body.editorial-portfolio .border-canvas-border-strong {
+  border-color: var(--army-border-bright) !important;
 }
 
-body.editorial-portfolio #work .filter-tab.border-canvas-accent {
-  color: #fff !important;
-  border-color: #171717 !important;
-  background-color: #171717 !important;
+/* ==========================================================================
+   02. TACTICAL NAVIGATION & TIMEPIECE
+   ========================================================================== */
+header.sticky,
+body.editorial-portfolio header.sticky {
+  background-color: rgba(3, 3, 5, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid var(--army-border) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7) !important;
 }
 
-body.editorial-portfolio #work input#projectSearchInput {
-  color: #171717 !important;
+header.sticky .brand,
+body.editorial-portfolio header.sticky .brand {
+  color: #ffffff !important;
 }
 
-body.editorial-portfolio #work input#projectSearchInput::placeholder {
-  color: #77736d !important;
+header.sticky a,
+header.sticky button {
+  color: #a1a1aa !important;
 }
 
-body.editorial-portfolio #work .bg-canvas-surface,
-body.editorial-portfolio #work .bg-canvas-elevated {
-  background-color: #fff !important;
+header.sticky a:hover,
+header.sticky button:hover {
+  color: #ffffff !important;
 }
 
-body.editorial-portfolio #work kbd {
-  color: #444 !important;
-  border-color: #bdb9b1 !important;
-  background-color: #f0eee8 !important;
+/* Timepiece */
+.london-timepiece,
+body.editorial-portfolio .london-timepiece,
+aside[aria-label="Availability and local time"],
+body.editorial-portfolio aside[aria-label="Availability and local time"] {
+  background-color: var(--army-surface) !important;
+  border: 1px solid var(--army-border) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
-body.editorial-portfolio #main-content section[aria-labelledby="hero-heading"] > div {
-  border: 2px solid #171717 !important;
-  border-radius: 0 !important;
-  background: rgba(255, 255, 255, 0.93) !important;
-  box-shadow: none !important;
+/* ==========================================================================
+   03. THE ARMY FORMATION (ALL PROJECTS SIDE-BY-SIDE)
+   ========================================================================== */
+#work {
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin-inline: auto !important;
+  padding-inline: clamp(1rem, 3vw, 2.5rem) !important;
+  padding-block: 3.5rem !important;
+  background: transparent !important;
+  border-top: 1px solid var(--army-border) !important;
 }
 
-body.editorial-portfolio #main-content section[aria-labelledby="hero-heading"] > div > .absolute {
-  color: #77736d !important;
+/* The Army Grid Container: 4 Columns on Desktop */
+#work .projects-army-grid,
+#work > .grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 1.15rem !important;
+  align-items: stretch !important;
 }
 
-body.editorial-portfolio #main-content .project-bento-card {
-  width: 100%;
-  min-width: 0;
-  padding: 0 !important;
-  color: #202020 !important;
-  border: 2px solid #171717 !important;
-  border-radius: 0 !important;
-  background: #fff !important;
-  box-shadow: none !important;
-  transform: none !important;
+@media (max-width: 1200px) {
+  #work .projects-army-grid,
+  #work > .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
 }
 
-body.editorial-portfolio #work > .grid {
+@media (max-width: 860px) {
+  #work .projects-army-grid,
+  #work > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 540px) {
+  #work .projects-army-grid,
+  #work > .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tactical Project Card */
+#work .project-bento-card,
+#work .editorial-project-card,
+body.editorial-portfolio #work .project-bento-card,
+body.editorial-portfolio #work .editorial-project-card {
+  grid-column: span 1 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 1.5rem !important;
+  justify-content: space-between !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  background-color: var(--army-surface) !important;
+  border: 1px solid var(--army-border) !important;
+  border-radius: 8px !important;
+  padding: 1.15rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s ease,
+              box-shadow 0.22s ease,
+              background-color 0.22s ease !important;
 }
 
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.9fr);
-  align-items: start;
-  column-gap: clamp(1.5rem, 4vw, 3.5rem);
-  padding: clamp(1.25rem, 3vw, 2.5rem);
+/* Hover State: Blazing White Laser Border & Subtle Glow */
+#work .project-bento-card:hover,
+#work .editorial-project-card:hover,
+body.editorial-portfolio #work .project-bento-card:hover,
+body.editorial-portfolio #work .editorial-project-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: #ffffff !important;
+  background-color: var(--army-elevated) !important;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.14), 0 10px 30px rgba(0, 0, 0, 0.8) !important;
 }
 
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(1),
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(2),
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(5) {
-  grid-column: 1 / -1;
+/* Corner Crosshair HUD Accent on Card */
+#work .project-bento-card::before,
+#work .editorial-project-card::before {
+  content: "+";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--army-dim);
+  pointer-events: none;
+  transition: color 0.2s ease;
 }
 
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(3) {
-  grid-column: 2;
-  grid-row: 3 / span 2;
-  align-self: stretch;
+#work .project-bento-card:hover::before,
+#work .editorial-project-card:hover::before {
+  color: #ffffff;
 }
 
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(4) {
-  grid-column: 1;
+/* Card Internal Layout Normalization */
+#work .project-bento-card > div:first-child,
+#work .editorial-project-card .editorial-card-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  padding: 0 !important;
 }
 
-body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) .inspect-card-trigger {
-  border: 1px solid #222 !important;
-  border-radius: 0.25rem !important;
-  background: #111 !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-100,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-200,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-300 {
-  color: #f2f0eb !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-400,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-500 {
-  color: #b8b5ae !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .bg-canvas-base {
-  background-color: #101113 !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .bg-canvas-surface,
-body.editorial-portfolio #main-content .inspect-card-trigger .bg-canvas-elevated {
-  background-color: #1a1b1f !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .card-panel-inquiry,
-body.editorial-portfolio #main-content .project-bento-card .card-panel-solution,
-body.editorial-portfolio #main-content .project-bento-card .card-panel-tech,
-body.editorial-portfolio #main-content .project-bento-card .card-tab-btn,
-body.editorial-portfolio #main-content .project-bento-card .card-toggle-details {
-  color: #282828 !important;
-  border-color: #c8c4bb !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .card-panel-inquiry,
-body.editorial-portfolio #main-content .project-bento-card .card-panel-solution,
-body.editorial-portfolio #main-content .project-bento-card .card-panel-tech {
-  background: #f6f5f1 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .card-panels-container .text-zinc-200,
-body.editorial-portfolio #main-content .project-bento-card .card-panels-container .text-zinc-300,
-body.editorial-portfolio #main-content .project-bento-card .card-panels-container .text-zinc-400 {
-  color: #383633 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .card-tab-btn.bg-canvas-accent\/15 {
-  color: #fff !important;
-  background: #355b76 !important;
-  border-color: #355b76 !important;
-}
-
-body.editorial-portfolio #main-content .editorial-project-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-  gap: 0;
-  min-height: 18rem;
-}
-
-body.editorial-portfolio .editorial-card-copy {
+/* Top Telemetry Row: Unit Code + Radar Status */
+.tactical-unit-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: clamp(1.5rem, 4vw, 3rem);
-}
-
-body.editorial-portfolio .editorial-card-kicker {
-  margin-bottom: 0.75rem;
-  color: #55748b;
-  font: 600 0.68rem/1.4 "JetBrains Mono", monospace;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-body.editorial-portfolio .editorial-card-copy h3 {
-  margin: 0;
-  color: #141414;
-  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 1.12;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--army-muted);
 }
 
-body.editorial-portfolio .editorial-card-copy p {
-  max-width: 38rem;
-  margin: 1rem 0 0;
-  color: #4b4945;
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-body.editorial-portfolio .editorial-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.15rem;
-}
-
-body.editorial-portfolio .editorial-card-tags span {
-  padding: 0.35rem 0.55rem;
-  border: 1px solid #c9c5bd;
-  color: #484641;
-  font: 500 0.68rem/1.3 "JetBrains Mono", monospace;
-}
-
-body.editorial-portfolio .editorial-card-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.4rem;
-}
-
-body.editorial-portfolio .editorial-card-links a {
+.tactical-status-radar {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  min-height: 2.5rem;
-  padding: 0.55rem 0.85rem;
-  border: 1px solid #171717;
-  color: #171717;
-  font-size: 0.78rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 160ms ease, background-color 160ms ease;
+  gap: 0.35rem;
+  color: #ffffff;
+  font-size: 0.62rem;
 }
 
-body.editorial-portfolio .editorial-card-links a:first-child {
-  color: #fff;
-  background: #171717;
+.radar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  animation: radarPulse 2s infinite ease-in-out;
 }
 
-body.editorial-portfolio .editorial-card-links a:hover {
-  color: #fff;
-  background: #355b76;
-  border-color: #355b76;
+@keyframes radarPulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 12px #ffffff; }
+  100% { transform: scale(0.95); opacity: 0.7; }
 }
 
-body.editorial-portfolio .editorial-project-preview {
-  display: flex;
-  min-height: 18rem;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border-left: 1px solid #171717;
-  background: #efeee9;
-}
-
-body.editorial-portfolio .editorial-project-preview .preview-index {
-  color: #66625c;
-  font: 500 0.67rem/1.5 "JetBrains Mono", monospace;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-body.editorial-portfolio .editorial-project-preview strong {
-  color: #171717;
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  font-weight: 700;
-  letter-spacing: -0.08em;
-  line-height: 0.9;
-}
-
-body.editorial-portfolio .editorial-project-preview .preview-mark {
-  align-self: flex-end;
-  color: #355b76;
-  font: italic 1.1rem/1.4 "Instrument Serif", Georgia, serif;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview {
-  color: #171717 !important;
-  background-color: #efeee9 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview .text-zinc-100,
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview .text-zinc-200,
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview .text-zinc-300 {
-  color: #171717 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview .text-zinc-400,
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview .text-zinc-500 {
-  color: #66625c !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .editorial-project-preview .text-canvas-accent {
-  color: #355b76 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .inspect-btn,
-body.editorial-portfolio #main-content a.bg-canvas-accent {
-  color: #fff !important;
-  background: #355b76 !important;
-  border-color: #355b76 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .inspect-btn:hover,
-body.editorial-portfolio #main-content a.bg-canvas-accent:hover {
-  color: #fff !important;
-  background: var(--editorial-accent-hover) !important;
-}
-
-body.editorial-portfolio #main-content #ideology > div,
-body.editorial-portfolio #main-content #capabilities > div,
-body.editorial-portfolio #main-content #roadmap > div,
-body.editorial-portfolio #main-content #heuristics > div {
-  border-radius: 0 !important;
-  border-color: #171717 !important;
-  background: rgba(255, 255, 255, 0.94) !important;
-  box-shadow: none !important;
-}
-
-body.editorial-portfolio #main-content #ideology .bg-canvas-base,
-body.editorial-portfolio #main-content #capabilities .bg-canvas-base,
-body.editorial-portfolio #main-content #roadmap .bg-canvas-base,
-body.editorial-portfolio #main-content #heuristics .bg-canvas-base {
-  background-color: #f2f0ea !important;
-}
-
-body.editorial-portfolio #main-content #ideology .bg-canvas-surface,
-body.editorial-portfolio #main-content #capabilities .bg-canvas-surface,
-body.editorial-portfolio #main-content #roadmap .bg-canvas-surface,
-body.editorial-portfolio #main-content #heuristics .bg-canvas-surface {
-  background-color: #fff !important;
-}
-
-body.editorial-portfolio #main-content #footer-heading ~ div,
-body.editorial-portfolio #main-content footer {
-  color: #333 !important;
-}
-
-body.editorial-portfolio #main-content [class*="bg-canvas-base/"],
-body.editorial-portfolio #main-content [class*="bg-zinc-800/"] {
-  background-color: var(--editorial-warm) !important;
-}
-
-body.editorial-portfolio #main-content [class*="bg-canvas-surface/"],
-body.editorial-portfolio #main-content [class*="bg-canvas-elevated/"] {
-  background-color: var(--editorial-paper) !important;
-}
-
-body.editorial-portfolio #main-content [class*="bg-canvas-accent/"],
-body.editorial-portfolio #main-content [class*="bg-canvas-blue/"],
-body.editorial-portfolio #main-content [class*="bg-canvas-purple/"],
-body.editorial-portfolio #main-content [class*="bg-canvas-amber/"],
-body.editorial-portfolio #main-content [class*="bg-canvas-alert/"],
-body.editorial-portfolio #main-content [class*="bg-canvas-red/"] {
-  background-color: var(--editorial-accent-wash) !important;
-}
-
-body.editorial-portfolio #main-content [class*="border-canvas-accent/"],
-body.editorial-portfolio #main-content [class*="border-canvas-blue/"],
-body.editorial-portfolio #main-content [class*="border-canvas-purple/"],
-body.editorial-portfolio #main-content [class*="border-canvas-amber/"],
-body.editorial-portfolio #main-content [class*="border-canvas-alert/"],
-body.editorial-portfolio #main-content [class*="border-canvas-red/"] {
-  border-color: #b6c8d3 !important;
-}
-
-body.editorial-portfolio #main-content .text-canvas-accent,
-body.editorial-portfolio #main-content .text-canvas-blue,
-body.editorial-portfolio #main-content .text-canvas-blue-light,
-body.editorial-portfolio #main-content .text-canvas-purple,
-body.editorial-portfolio #main-content .text-canvas-amber,
-body.editorial-portfolio #main-content .text-canvas-alert,
-body.editorial-portfolio #main-content .text-canvas-red {
-  color: var(--editorial-accent) !important;
-}
-
-body.editorial-portfolio #main-content .workflow-node-btn {
-  border-color: var(--editorial-border) !important;
-  background-color: var(--editorial-paper) !important;
-}
-
-body.editorial-portfolio #main-content .workflow-node-btn.bg-canvas-accent\/15 {
-  border-color: var(--editorial-accent) !important;
-  background-color: var(--editorial-accent-wash) !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-accent,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-blue,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-blue-light,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-purple,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-canvas-amber {
-  color: #b8cbd7 !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger [class*="bg-canvas-base/"] {
-  background-color: #101113 !important;
-}
-
-@media (max-width: 760px) {
-  body.editorial-portfolio #work .card-tab-btn {
-    min-width: 0;
-    white-space: normal !important;
-    overflow-wrap: anywhere;
-  }
-
-  body.editorial-portfolio #work .project-density-controls {
-    width: 100%;
-    max-width: 100%;
-    flex-wrap: wrap;
-  }
-
-  body.editorial-portfolio #roadmap [role="tablist"] {
-    width: 100%;
-    max-width: 100%;
-    flex-wrap: wrap;
-  }
-
-  body.editorial-portfolio #roadmap .roadmap-filter-btn {
-    min-width: 0;
-    white-space: normal;
-  }
-
-  body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(1),
-  body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(2),
-  body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(3),
-  body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(4),
-  body.editorial-portfolio #work .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(5) {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  body.editorial-portfolio #main-content .editorial-project-card {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  body.editorial-portfolio .editorial-project-preview {
-    min-height: 12rem;
-    border-top: 1px solid #171717;
-    border-left: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.editorial-portfolio .editorial-card-links a {
-    transition: none;
-  }
-}
-
-body.editorial-portfolio {
-  --editorial-ink: #080808;
-  --editorial-muted: #4b4b4b;
-  --editorial-paper: #fff;
-  --editorial-warm: #f0f0f0;
-  --editorial-border: #b8b8b8;
-  --editorial-accent: #080808;
-  --editorial-accent-hover: #333;
-  --editorial-accent-wash: #e8e8e8;
-  color: #080808;
-  background: #fff;
-}
-
-body.editorial-portfolio #neuralCanvas {
-  opacity: 0.08 !important;
-  filter: grayscale(1);
-}
-
-body.editorial-portfolio .hairline-grid {
-  opacity: 0.06 !important;
-  filter: grayscale(1);
-}
-
-body.editorial-portfolio aside[aria-label="Availability and local time"],
-body.editorial-portfolio header.sticky {
-  color: #fff !important;
-  background: #080808 !important;
-  border-color: #080808 !important;
-}
-
-body.editorial-portfolio #main-content section[aria-labelledby="hero-heading"] > div > .mt-8.pt-6.border-t {
-  display: none !important;
-}
-
-body.editorial-portfolio header.sticky .text-zinc-100,
-body.editorial-portfolio header.sticky .text-zinc-200,
-body.editorial-portfolio header.sticky .text-zinc-300,
-body.editorial-portfolio header.sticky .text-zinc-400 {
-  color: #fff !important;
-}
-
-body.editorial-portfolio header.sticky nav,
-body.editorial-portfolio header.sticky nav a,
-body.editorial-portfolio header.sticky button:not(.bg-canvas-accent) {
-  color: #fff !important;
-}
-
-body.editorial-portfolio header.sticky .bg-canvas-surface,
-body.editorial-portfolio header.sticky .bg-canvas-elevated,
-body.editorial-portfolio header.sticky .london-timepiece {
-  color: #fff !important;
-  background: #080808 !important;
-  border-color: #686868 !important;
-}
-
-body.editorial-portfolio header.sticky .bg-canvas-accent,
-body.editorial-portfolio header.sticky a.bg-canvas-accent {
-  color: #080808 !important;
-  background: #fff !important;
-}
-
-body.editorial-portfolio #main-content {
-  color: #080808;
-}
-
-body.editorial-portfolio #main-content .text-zinc-100,
-body.editorial-portfolio #main-content .text-zinc-200,
-body.editorial-portfolio #main-content .text-zinc-300,
-body.editorial-portfolio #main-content .text-canvas-accent,
-body.editorial-portfolio #main-content .text-canvas-blue,
-body.editorial-portfolio #main-content .text-canvas-blue-light,
-body.editorial-portfolio #main-content .text-canvas-purple,
-body.editorial-portfolio #main-content .text-canvas-amber,
-body.editorial-portfolio #main-content .text-canvas-alert,
-body.editorial-portfolio #main-content .text-canvas-red {
-  color: #080808 !important;
-}
-
-body.editorial-portfolio #main-content .text-zinc-400,
-body.editorial-portfolio #main-content .text-zinc-500,
-body.editorial-portfolio #main-content .text-zinc-600 {
-  color: #555 !important;
-}
-
-body.editorial-portfolio #main-content [class*="bg-canvas-base"],
-body.editorial-portfolio #main-content [class*="bg-canvas-surface"],
-body.editorial-portfolio #main-content [class*="bg-canvas-elevated"],
-body.editorial-portfolio #main-content [class*="bg-zinc-800"] {
-  color: #080808;
-  background-color: #f0f0f0 !important;
-}
-
-body.editorial-portfolio #main-content [class*="border-canvas-"] {
-  border-color: #b8b8b8 !important;
-}
-
-body.editorial-portfolio #main-content section {
-  border-color: #080808 !important;
-}
-
-body.editorial-portfolio #main-content section[aria-labelledby="hero-heading"] > div,
-body.editorial-portfolio #main-content #ideology > div,
-body.editorial-portfolio #main-content #capabilities > div,
-body.editorial-portfolio #main-content #roadmap > div,
-body.editorial-portfolio #main-content #heuristics > div {
-  color: #080808 !important;
-  background: #fff !important;
-  border-color: #080808 !important;
-}
-
-body.editorial-portfolio #work .filter-tab,
-body.editorial-portfolio #work #viewInteractiveBtn,
-body.editorial-portfolio #work #viewCompactBtn,
-body.editorial-portfolio #work #viewExpandAllBtn {
-  color: #080808 !important;
-  border-color: #080808 !important;
-  background: #fff !important;
-}
-
-body.editorial-portfolio #work .filter-tab.border-canvas-accent {
-  color: #fff !important;
-  border-color: #080808 !important;
-  background: #080808 !important;
-}
-
-body.editorial-portfolio #work input#projectSearchInput {
-  color: #080808 !important;
-  background: #fff !important;
-}
-
-body.editorial-portfolio #work input#projectSearchInput::placeholder {
-  color: #555 !important;
-}
-
-body.editorial-portfolio #work > .grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: stretch;
-  gap: 0.75rem !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card {
-  grid-column: span 1 / span 1 !important;
-  display: flex;
-  min-width: 0;
-  min-height: 10rem;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  color: #080808 !important;
-  border: 1px solid #080808 !important;
-  border-radius: 0 !important;
-  background: #fff !important;
-  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:hover {
-  background: #f0f0f0 !important;
-  transform: translateY(-2px) !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child {
-  display: flex;
-  min-height: 0;
-  flex-direction: column;
-  gap: 0;
-  padding: 1.1rem !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(1),
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(3),
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(5) {
-  display: none !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) .inspect-card-trigger,
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > .mt-3 {
-  display: none !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:has(.card-tab-btn) {
-  display: none !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(2) {
-  display: flex;
-  min-height: 0;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 0.3rem;
-  margin: 0 !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(2) > div {
-  display: none !important;
-}
-
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child > div:nth-child(2) > div:first-child {
+/* Schematic Vector Preview Container */
+#work .inspect-card-trigger,
+#work .editorial-project-preview,
+.tactical-schematic-wrap {
   display: block !important;
+  width: 100% !important;
+  height: 130px !important;
+  min-height: 130px !important;
+  margin: 0.6rem 0 !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--army-border) !important;
+  background-color: #000000 !important;
+  position: relative !important;
+  cursor: pointer !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) h3 {
-  color: #080808 !important;
-  font-size: clamp(1.1rem, 1.35vw, 1.45rem) !important;
-  font-weight: 750 !important;
-  letter-spacing: -0.045em !important;
-  line-height: 1.12 !important;
+#work .inspect-card-trigger:hover,
+.tactical-schematic-wrap:hover {
+  border-color: var(--army-border-bright) !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child {
-  display: flex;
-  min-height: 3.25rem;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.45rem 0.8rem;
-  padding: 0.7rem 1.1rem !important;
-  border-top: 1px solid #b8b8b8 !important;
+#work .inspect-card-trigger img,
+.tactical-schematic-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  filter: invert(0.93) hue-rotate(180deg) contrast(1.15) brightness(0.92) !important;
+  transition: transform 0.35s ease !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child > span {
+#work .project-bento-card:hover .inspect-card-trigger img,
+#work .editorial-project-card:hover .tactical-schematic-wrap img {
+  transform: scale(1.04) !important;
+}
+
+/* Hide bulky header in preview inside cards to save vertical space */
+#work .inspect-card-trigger > div:first-child {
   display: none !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child a,
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child button {
-  min-height: 1.5rem;
-  padding: 0 !important;
-  color: #080808 !important;
-  border: 0 !important;
-  background: transparent !important;
-  font-size: 0.68rem !important;
+#work .inspect-card-trigger > div:last-child {
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+
+/* Project Titles */
+#work .project-bento-card h3,
+#work .editorial-project-card h3,
+body.editorial-portfolio #work .project-bento-card h3,
+body.editorial-portfolio #work .editorial-project-card h3 {
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.25 !important;
+  margin: 0.4rem 0 0.2rem 0 !important;
+}
+
+/* Domain / Category Tag */
+.tactical-domain-tag,
+.editorial-card-kicker {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.65rem !important;
   font-weight: 700 !important;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--army-muted) !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card {
-  display: flex;
-  min-height: 10rem;
+/* Concise Summary Paragraph */
+#work .project-bento-card p,
+#work .editorial-project-card p {
+  color: var(--army-muted) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.45 !important;
+  margin: 0.35rem 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-copy {
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 1.1rem;
+/* Core Combat / Operational Yield Metric */
+.tactical-yield-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+  padding: 0.25rem 0.55rem !important;
+  border-radius: 4px !important;
+  font-size: 0.68rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 700 !important;
+  margin: 0.5rem 0 !important;
+  width: fit-content !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-kicker {
-  min-height: 2.2em;
-  margin-bottom: 0.75rem;
-  color: #555;
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-}
-
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-copy h3 {
-  font-size: clamp(1.15rem, 1.45vw, 1.5rem);
-  line-height: 1.1;
-}
-
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-copy p {
-  display: -webkit-box;
-  overflow: hidden;
-  margin-top: 0.65rem;
-  color: #444;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-tags,
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-project-preview {
-  display: none;
-}
-
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links {
-  margin-top: auto;
-  padding-top: 1rem;
-}
-
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a {
-  min-height: 1.75rem;
-  padding: 0.25rem 0.5rem;
-  color: #080808;
-  border-color: #080808;
-  background: #fff;
-  font-size: 0.65rem;
-}
-
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a:first-child,
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a:hover {
-  color: #fff;
-  background: #080808;
-  border-color: #080808;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-100,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-200,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-300 {
-  color: #fff !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-400,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-500,
-body.editorial-portfolio #main-content .inspect-card-trigger .text-zinc-600 {
-  color: #c8c8c8 !important;
-}
-
-body.editorial-portfolio #main-content .inspect-card-trigger [class*="bg-canvas-"] {
-  color: #fff !important;
-  background-color: #171717 !important;
-}
-
-body.editorial-portfolio #main-content .project-bento-card .card-tab-btn.bg-canvas-accent\/15 {
-  color: #fff !important;
-  border-color: #080808 !important;
-  background: #080808 !important;
-}
-
-@media (max-width: 900px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.6rem !important;
-  }
-
-  body.editorial-portfolio #work > .grid > .project-bento-card,
-  body.editorial-portfolio #work > .grid > .editorial-project-card {
-    min-height: 12rem;
-  }
-
-  body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:first-child,
-  body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child,
-  body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-copy {
-    padding: 0.85rem !important;
-  }
-}
-
-@media (max-width: 420px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  body.editorial-portfolio #work > .grid > .project-bento-card,
-  body.editorial-portfolio #work > .grid > .editorial-project-card {
-    min-height: 11rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.editorial-portfolio #work > .grid > .project-bento-card {
-    transition: none;
-  }
-}
-
-body.editorial-portfolio #work {
-  width: 100%;
-  max-width: none !important;
-  margin-inline: 0 !important;
-  padding-inline: max(1.25rem, calc((100vw - 1280px) / 2)) !important;
-  padding-block: 2.75rem !important;
-  color: #fff !important;
-  border-color: #fff !important;
-  background: #080808 !important;
-}
-
-body.editorial-portfolio #work .text-zinc-100,
-body.editorial-portfolio #work .text-zinc-200,
-body.editorial-portfolio #work .text-zinc-300,
-body.editorial-portfolio #work .text-canvas-accent,
-body.editorial-portfolio #work .text-canvas-blue,
-body.editorial-portfolio #work .text-canvas-blue-light,
-body.editorial-portfolio #work .text-canvas-purple,
-body.editorial-portfolio #work .text-canvas-amber,
-body.editorial-portfolio #work .text-canvas-alert,
-body.editorial-portfolio #work .text-canvas-red {
-  color: #fff !important;
-}
-
-body.editorial-portfolio #work .text-zinc-400,
-body.editorial-portfolio #work .text-zinc-500,
-body.editorial-portfolio #work .text-zinc-600 {
-  color: #b3b3b3 !important;
-}
-
-body.editorial-portfolio #work .filter-tab,
-body.editorial-portfolio #work #viewInteractiveBtn,
-body.editorial-portfolio #work #viewCompactBtn,
-body.editorial-portfolio #work #viewExpandAllBtn,
-body.editorial-portfolio #work input#projectSearchInput,
-body.editorial-portfolio #work .project-search-wrapper,
-body.editorial-portfolio #work .project-density-controls {
-  color: #fff !important;
-  border-color: #777 !important;
-  background: #080808 !important;
-}
-
-body.editorial-portfolio #work input#projectSearchInput::placeholder {
-  color: #aaa !important;
-}
-
-body.editorial-portfolio #work > .mb-5 {
-  color: #fff !important;
-  border-color: #777 !important;
-  background: #080808 !important;
-  box-shadow: none !important;
-}
-
-body.editorial-portfolio #work .filter-tab.border-canvas-accent {
-  color: #080808 !important;
-  border-color: #fff !important;
-  background: #fff !important;
-}
-
-body.editorial-portfolio #work .project-density-controls {
+/* Unboxed Editorial Yields top bar within cards: hide to keep zero-scroll army density */
+#work .project-bento-card > div:first-child > div:first-child:has(i) {
   display: none !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card {
-  color: #fff !important;
-  border-color: #fff !important;
-  background: #080808 !important;
+/* Hide cumbersome accordion tabs inside compact army grid cards */
+#work .card-panels-container,
+#work .card-toggle-details,
+#work .editorial-project-preview strong,
+#work .preview-mark,
+#work .preview-index {
+  display: none !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:hover {
-  color: #080808 !important;
-  background: #fff !important;
+/* Action Bar */
+#work .project-bento-card > div:last-child,
+#work .editorial-project-card .editorial-card-links,
+.tactical-card-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.45rem !important;
+  margin-top: 0.85rem !important;
+  padding-top: 0.75rem !important;
+  border-top: 1px solid var(--army-border) !important;
+  width: 100% !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card h3,
-body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-copy h3 {
-  color: #fff !important;
+/* Primary Inspect Button: High-Contrast White */
+#work .inspect-modal-btn,
+#work .inspect-btn,
+.tactical-btn-primary {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ffffff !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  padding: 0.4rem 0.75rem !important;
+  border-radius: 5px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  text-decoration: none !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-copy h3 {
-  color: #fff !important;
+#work .inspect-modal-btn:hover,
+#work .inspect-btn:hover,
+.tactical-btn-primary:hover {
+  background: #e4e4e7 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25) !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) h3.text-zinc-100 {
-  color: #fff !important;
+/* Secondary Action Buttons (Source / Live) */
+.tactical-btn-secondary,
+#work .editorial-card-links a,
+#work .project-bento-card > div:last-child a {
+  background: var(--army-elevated) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--army-border) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  padding: 0.4rem 0.65rem !important;
+  border-radius: 5px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-kicker,
-body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-copy p {
-  color: #bdbdbd !important;
+.tactical-btn-secondary:hover,
+#work .editorial-card-links a:hover,
+#work .project-bento-card > div:last-child a:hover {
+  border-color: #ffffff !important;
+  background: var(--army-highlight) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:hover .editorial-card-kicker,
-body.editorial-portfolio #work > .grid > .project-bento-card:hover .editorial-card-copy p {
-  color: #444 !important;
+/* ==========================================================================
+   04. CONTROLS: SEARCH & CATEGORY RADAR
+   ========================================================================== */
+#projectSearchInput {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: none !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child {
-  border-color: #555 !important;
+#projectSearchInput::placeholder {
+  color: var(--army-dim) !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child a,
-body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child button {
-  color: #fff !important;
+/* Filter Tabs */
+.filter-tab,
+body.editorial-portfolio .filter-tab {
+  background-color: var(--army-surface) !important;
+  color: var(--army-muted) !important;
+  border: 1px solid var(--army-border) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.72rem !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card:hover > div:last-child a,
-body.editorial-portfolio #work > .grid > .project-bento-card:hover > div:last-child button {
-  color: #080808 !important;
+.filter-tab:hover {
+  color: #ffffff !important;
+  border-color: var(--army-border-bright) !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a,
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a:first-child {
-  color: #fff;
-  border-color: #fff;
-  background: #080808;
+.filter-tab.active,
+.filter-tab.border-canvas-accent,
+body.editorial-portfolio .filter-tab.border-canvas-accent {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.25) !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card:hover .editorial-card-links a,
-body.editorial-portfolio #work > .grid > .editorial-project-card:hover .editorial-card-links a:first-child {
-  color: #080808;
-  border-color: #080808;
-  background: #fff;
+/* View Density Controls */
+.project-density-controls,
+body.editorial-portfolio .project-density-controls {
+  display: flex !important;
+  background-color: var(--army-surface) !important;
+  border: 1px solid var(--army-border) !important;
+  border-radius: 6px !important;
+  padding: 3px !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a:hover {
-  color: #080808;
-  border-color: #080808;
-  background: #fff;
+.project-density-controls button {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.7rem !important;
+  padding: 0.25rem 0.6rem !important;
+  border-radius: 4px !important;
+  color: var(--army-muted) !important;
+  transition: all 0.15s ease !important;
 }
 
-body.editorial-portfolio #work > .grid > .editorial-project-card:hover .editorial-card-links a:hover {
-  color: #fff;
-  background: #080808;
+.project-density-controls button.active,
+.project-density-controls button.bg-canvas-elevated {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
 }
 
-body.editorial-portfolio #work .project-bento-card .inspect-btn,
-body.editorial-portfolio #work a.bg-canvas-accent {
-  color: #080808 !important;
-  border-color: #fff !important;
-  background: #fff !important;
+/* ==========================================================================
+   05. CASE STUDY DEEP-DIVE MODAL (PURE BLACK & WHITE DOSSIER)
+   ========================================================================== */
+#caseStudyModalBackdrop,
+#profileModalBackdrop {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
 }
 
-body.editorial-portfolio #work .project-bento-card:hover .inspect-btn,
-body.editorial-portfolio #work .project-bento-card:hover a.bg-canvas-accent {
-  color: #fff !important;
-  border-color: #080808 !important;
-  background: #080808 !important;
+#caseStudyModalBackdrop > div,
+#profileModalBackdrop > div {
+  background-color: var(--army-surface) !important;
+  border: 1px solid var(--army-border-bright) !important;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
 }
 
-@media (max-width: 900px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+#modalPreviewImg {
+  filter: invert(0.93) hue-rotate(180deg) contrast(1.15) brightness(0.92) !important;
+  background-color: #000000 !important;
 }
 
-@media (max-width: 640px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+/* ==========================================================================
+   06. ALL OTHER SECTIONS HIGH-CONTRAST MONOCHROME NORMALIZATION
+   ========================================================================== */
+#ideology,
+#capabilities,
+#experience,
+#roadmap,
+#testimonials,
+#connect,
+body.editorial-portfolio #ideology,
+body.editorial-portfolio #capabilities,
+body.editorial-portfolio #experience,
+body.editorial-portfolio #roadmap,
+body.editorial-portfolio #testimonials,
+body.editorial-portfolio #connect {
+  border-top: 1px solid var(--army-border) !important;
+  background-color: transparent !important;
 }
 
-@media (max-width: 420px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+/* Brief Builder in Connect */
+#briefDomainsContainer button {
+  background-color: var(--army-surface) !important;
+  border: 1px solid var(--army-border) !important;
+  color: var(--army-muted) !important;
 }
 
-@media (max-width: 360px) {
-  body.editorial-portfolio #work > .grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
+#briefDomainsContainer button.active,
+#briefDomainsContainer button.border-canvas-accent {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Buttons in footer */
+#copyEmailFooterBtn {
+  background-color: var(--army-surface) !important;
+  border: 1px solid var(--army-border) !important;
+  color: #ffffff !important;
+}
+
+#copyEmailFooterBtn:hover {
+  border-color: #ffffff !important;
+}
+
+a[href^="mailto:"] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
 }

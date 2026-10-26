@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <rect width="960" height="600" fill="#080a0d"/>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#22262e"/>
+  <text x="76" y="98" fill="#a1a1aa" font-family="monospace" font-size="14" letter-spacing="3">COGNITIVE SYSTEMS // COMPATIBILITY DECISION PLATFORM</text>
+  <text x="76" y="160" fill="#ffffff" font-family="Arial,sans-serif" font-size="36" font-weight="700">Checkmate (Velum Labs)</text>
+  <text x="76" y="199" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">Reciprocal, explainable relationship decisions</text>
+  <text x="76" y="226" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">focused on values and dealbreakers over swipe mechanics.</text>
+  <path d="M76 267h270" stroke="#333842"/>
+  <text x="76" y="300" fill="#e4e4e7" font-family="monospace" font-size="13" letter-spacing="2">MUTUALITY // DECISION VECTORS</text>
+  
+  <g transform="translate(430 80)">
+    <rect width="470" height="440" fill="#0c0e14" stroke="#272b36" rx="8"/>
+    <!-- Compatibility Nodes -->
+    <circle cx="150" cy="220" r="45" fill="#141824" stroke="#ffffff" stroke-width="2"/>
+    <text x="130" y="225" fill="#ffffff" font-family="monospace" font-size="13" font-weight="bold">USER A</text>
+    <circle cx="320" cy="220" r="45" fill="#141824" stroke="#ffffff" stroke-width="2"/>
+    <text x="300" y="225" fill="#ffffff" font-family="monospace" font-size="13" font-weight="bold">USER B</text>
+    <!-- Vector Link -->
+    <line x1="195" y1="220" x2="275" y2="220" stroke="#ffffff" stroke-width="3"/>
+    <polygon points="245,214 255,220 245,226" fill="#ffffff"/>
+    <polygon points="225,214 215,220 225,226" fill="#ffffff"/>
+    
+    <!-- Alignment Metrics -->
+    <rect x="40" y="320" width="390" height="80" rx="6" fill="#141722" stroke="#2d3342"/>
+    <text x="60" y="350" fill="#a1a1aa" font-family="monospace" font-size="11">CORE VALUE ALIGNMENT: 94.2%</text>
+    <text x="60" y="375" fill="#ffffff" font-family="monospace" font-size="12" font-weight="bold">DEALBREAKER CONGRUENCE: VERIFIED (0 CONFLICTS)</text>
+    
+    <!-- Radar Chart Elements -->
+    <polygon points="235,90 275,130 250,160 210,150 200,110" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="200" y="75" fill="#a1a1aa" font-family="monospace" font-size="10">AXIS: AUTONOMY</text>
+  </g>
+</svg>
