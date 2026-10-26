@@ -373,7 +373,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="portfolio-editorial.css?v=20261026-editorial-redesign" />
+    <link rel="stylesheet" href="portfolio-editorial.css?v=20261026-projects-simplified-v3" />
   </head>
 
   <body class="editorial-portfolio bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
@@ -690,17 +690,13 @@
               Thoughtful software, built around <span class="font-serif italic font-normal text-zinc-400">real needs.</span>
             </h2>
           </div>
-          <p class="text-sm text-zinc-400 max-w-md">
-            Sixteen independent prototypes across healthcare, cognitive tools, civic systems, creative technology and automotive systems.
-          </p>
         </div>
 
         <!-- Real-Time Search Bar -->
         <div class="mb-6 p-2 rounded-xl bg-canvas-surface border border-canvas-border font-mono text-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-sm">
           <div class="relative flex-1">
             <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input type="text" id="projectSearchInput" placeholder="Filter projects by name, technology, or domain..." class="w-full bg-transparent pl-9 pr-16 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-400 rounded-lg" aria-label="Search projects" autocomplete="off" />
-            <kbd class="hidden sm:inline-block absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-zinc-500 px-1.5 py-0.5 rounded border border-white/10 bg-white/[0.04]">Press /</kbd>
+            <input type="text" id="projectSearchInput" placeholder="Search projects..." class="w-full bg-transparent pl-9 pr-3 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-400 rounded-lg" aria-label="Search projects" autocomplete="off" />
           </div>
           <div class="flex items-center justify-between sm:justify-end gap-3 px-2 border-t sm:border-t-0 border-canvas-border pt-2 sm:pt-0">
             <span id="searchMatchCount" class="text-zinc-500 text-[11px] whitespace-nowrap">16 projects</span>
@@ -708,29 +704,7 @@
           </div>
         </div>
 
-        <!-- Category Filters -->
-        <div class="flex flex-wrap items-center gap-2 font-mono text-xs mb-8" role="tablist" aria-label="Project domain filters">
-          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-zinc-300 bg-zinc-100 text-zinc-900 font-semibold cursor-pointer transition-all active" data-category="all">
-            All (16)
-          </button>
-          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="cognitive">
-            Cognitive &amp; Learning (7)
-          </button>
-          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="creative">
-            Creative Tech (3)
-          </button>
-          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="civic">
-            Civic Infrastructure (2)
-          </button>
-          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="health">
-            Healthcare (2)
-          </button>
-          <button class="filter-tab px-3.5 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-zinc-200 cursor-pointer transition-all" data-category="automotive">
-            Automotive (2)
-          </button>
-        </div>
-
-        <!-- 3-Column Clean Minimal Projects Grid -->
+        <!-- Compact project grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
           <!-- Predictive Ward Logistics Engine -->
@@ -3349,14 +3323,12 @@
         setupCopyButton("copyEmailTopBtn", "copyEmailTopText");
         setupCopyButton("copyEmailFooterBtn", "copyEmailFooterText");
 
-        // Bento Grid Filter & Live Search System
-        const filterTabs = document.querySelectorAll(".filter-tab");
+        // Project search
         const cards = document.querySelectorAll(".project-bento-card");
         const searchInput = document.getElementById("projectSearchInput");
         const searchClearBtn = document.getElementById("searchClearBtn");
         const searchMatchCount = document.getElementById("searchMatchCount");
 
-        let activeCategory = "all";
         let activeQuery = "";
 
         function filterProjects() {
@@ -3364,13 +3336,10 @@
           const query = activeQuery.trim().toLowerCase();
 
           cards.forEach((card) => {
-            const cardCat = card.getAttribute("data-category") || "";
             const cardText = (card.textContent || "").toLowerCase();
-
-            const matchesCategory = activeCategory === "all" || cardCat === activeCategory;
             const matchesQuery = query === "" || cardText.includes(query);
 
-            if (matchesCategory && matchesQuery) {
+            if (matchesQuery) {
               card.style.display = "";
               visibleCount++;
             } else {
@@ -3386,22 +3355,6 @@
             searchClearBtn.classList.toggle("hidden", query === "");
           }
         }
-
-        filterTabs.forEach((tab) => {
-          tab.addEventListener("click", () => {
-            activeCategory = tab.getAttribute("data-category") || "all";
-
-            filterTabs.forEach((t) => {
-              t.classList.remove("border-canvas-accent", "bg-canvas-accent/10", "text-canvas-accent", "font-bold");
-              t.classList.add("border-canvas-border", "bg-canvas-surface", "text-zinc-400");
-            });
-
-            tab.classList.remove("border-canvas-border", "bg-canvas-surface", "text-zinc-400");
-            tab.classList.add("border-canvas-accent", "bg-canvas-accent/10", "text-canvas-accent", "font-bold");
-
-            filterProjects();
-          });
-        });
 
         if (searchInput) {
           searchInput.addEventListener("input", (e) => {

@@ -706,13 +706,12 @@ body.editorial-portfolio #work {
 
 body.editorial-portfolio #work > div:first-child {
   display: grid !important;
-  grid-template-columns: minmax(0, 1.6fr) minmax(16rem, 0.8fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: end;
   gap: clamp(1.25rem, 4vw, 3.5rem);
 }
 
-body.editorial-portfolio #work > div:first-child > div,
-body.editorial-portfolio #work > div:first-child > p {
+body.editorial-portfolio #work > div:first-child > div {
   min-width: 0;
   max-width: none;
 }
@@ -722,13 +721,6 @@ body.editorial-portfolio #work h2 {
   font-size: clamp(2.1rem, 3.35vw, 3.1rem) !important;
   line-height: 1.06 !important;
   letter-spacing: -0.055em !important;
-}
-
-body.editorial-portfolio #work > div:first-child > p {
-  padding-bottom: 0.3rem;
-  color: #b7b7b7 !important;
-  font-size: 0.9rem;
-  line-height: 1.65;
 }
 
 body.editorial-portfolio #work h2,
@@ -830,6 +822,10 @@ body.editorial-portfolio #work > .grid > .project-bento-card > div:first-child {
   min-width: 0;
 }
 
+body.editorial-portfolio #work > .grid > .project-bento-card > div:first-child > div:has(> span.rounded) {
+  display: none !important;
+}
+
 body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) h3.text-zinc-100,
 body.editorial-portfolio #work > .grid > .project-bento-card h3.text-zinc-100,
 body.editorial-portfolio #work > .grid > .project-bento-card h3 {
@@ -925,7 +921,7 @@ body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-c
   text-underline-offset: 0.2em;
 }
 
-body.editorial-portfolio #work > .grid > .project-bento-card .inspect-modal-btn {
+body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child > div:first-child button.inspect-modal-btn {
   padding: 0.42rem 0.65rem !important;
   color: #080808 !important;
   border: 1px solid #f2f2f2 !important;
@@ -935,18 +931,9 @@ body.editorial-portfolio #work > .grid > .project-bento-card .inspect-modal-btn 
 }
 
 @media (max-width: 480px) {
-  body.editorial-portfolio #work > div:first-child {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
-  }
-
   body.editorial-portfolio #work h2 {
     max-width: 16ch;
     font-size: clamp(2rem, 9vw, 2.6rem) !important;
-  }
-
-  body.editorial-portfolio #work > div:first-child > p {
-    font-size: 0.82rem;
   }
 
   body.editorial-portfolio #work > .grid > .project-bento-card {
