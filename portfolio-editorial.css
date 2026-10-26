@@ -311,3 +311,339 @@ footer#connect a[href^="mailto:"] {
   color: #000000 !important;
   font-weight: 700 !important;
 }
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] {
+  min-height: 2.5rem;
+  padding-block: 0.3rem !important;
+  color: #d5d5d5 !important;
+  border-color: #303030 !important;
+  background: #111 !important;
+}
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] > div {
+  min-height: 1.9rem;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  padding-inline: clamp(1rem, 4vw, 2.5rem) !important;
+}
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] > div > div {
+  min-width: 0;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] .london-timepiece {
+  gap: 0.45rem;
+  padding: 0.15rem 0.4rem;
+  border-color: #444;
+  border-radius: 999px;
+  background: transparent;
+}
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] .london-timepiece-face {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] #londonClock {
+  color: #f5f5f5 !important;
+  font-size: 0.8rem;
+}
+
+body.editorial-portfolio aside[aria-label="Availability and local time"] #replayIntroBtn {
+  min-height: 1.75rem;
+  padding: 0.2rem 0.6rem;
+  color: #ddd !important;
+  border-color: #555 !important;
+}
+
+body.editorial-portfolio header.sticky {
+  background: rgba(17, 17, 17, 0.97) !important;
+  border-color: #333 !important;
+  backdrop-filter: blur(12px);
+}
+
+body.editorial-portfolio header.sticky > div {
+  min-height: 3.75rem;
+  height: auto;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding-inline: clamp(1rem, 4vw, 2.5rem) !important;
+}
+
+body.editorial-portfolio header.sticky > div > a[aria-label*="home"] {
+  flex: 0 0 auto;
+  gap: 0.65rem;
+  white-space: nowrap;
+}
+
+body.editorial-portfolio header.sticky > div > a[aria-label*="home"] > div:first-child {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-color: #777 !important;
+  border-radius: 0.45rem;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+body.editorial-portfolio header.sticky nav {
+  gap: 0.1rem;
+  padding: 0 !important;
+  color: #ccc !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body.editorial-portfolio header.sticky nav a {
+  padding: 0.45rem 0.6rem;
+  color: #c7c7c7 !important;
+  border-radius: 0.3rem;
+  font-size: 0.7rem;
+  transition: color 140ms ease, background-color 140ms ease;
+}
+
+body.editorial-portfolio header.sticky nav a:hover,
+body.editorial-portfolio header.sticky nav a.text-zinc-200 {
+  color: #fff !important;
+  background: #292929 !important;
+}
+
+body.editorial-portfolio header.sticky > div > div:last-child {
+  flex: 0 0 auto;
+  gap: 0.45rem;
+}
+
+body.editorial-portfolio header.sticky #openProfileBtn,
+body.editorial-portfolio header.sticky #copyEmailTopBtn {
+  min-height: 2.1rem;
+  padding: 0.4rem 0.65rem;
+  color: #eee !important;
+  border-color: #555 !important;
+  border-radius: 0.35rem;
+  background: transparent !important;
+  font-size: 0.68rem;
+}
+
+body.editorial-portfolio header.sticky a[href^="mailto:"] {
+  min-height: 2.1rem;
+  padding: 0.4rem 0.8rem;
+  color: #111 !important;
+  border-radius: 0.35rem;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+body.editorial-portfolio #work {
+  padding-block: clamp(2.25rem, 5vw, 3.5rem) !important;
+  color: #171717 !important;
+  border-color: #d8d8d8 !important;
+  background: #f4f4f4 !important;
+}
+
+body.editorial-portfolio #work .text-zinc-100,
+body.editorial-portfolio #work .text-zinc-200,
+body.editorial-portfolio #work .text-zinc-300,
+body.editorial-portfolio #work .text-canvas-accent,
+body.editorial-portfolio #work .text-canvas-blue,
+body.editorial-portfolio #work .text-canvas-blue-light,
+body.editorial-portfolio #work .text-canvas-purple,
+body.editorial-portfolio #work .text-canvas-amber,
+body.editorial-portfolio #work .text-canvas-alert,
+body.editorial-portfolio #work .text-canvas-red {
+  color: #171717 !important;
+}
+
+body.editorial-portfolio #work .text-zinc-400,
+body.editorial-portfolio #work .text-zinc-500,
+body.editorial-portfolio #work .text-zinc-600 {
+  color: #626262 !important;
+}
+
+body.editorial-portfolio #work .filter-tab,
+body.editorial-portfolio #work #viewInteractiveBtn,
+body.editorial-portfolio #work #viewCompactBtn,
+body.editorial-portfolio #work #viewExpandAllBtn,
+body.editorial-portfolio #work .project-search-wrapper,
+body.editorial-portfolio #work input#projectSearchInput {
+  color: #262626 !important;
+  border-color: #d2d2d2 !important;
+  background: #fff !important;
+}
+
+body.editorial-portfolio #work > .mb-5 {
+  color: #262626 !important;
+  border-color: #d2d2d2 !important;
+  background: #fff !important;
+}
+
+body.editorial-portfolio #work input#projectSearchInput::placeholder {
+  color: #777 !important;
+}
+
+body.editorial-portfolio #work .filter-tab.border-canvas-accent {
+  color: #fff !important;
+  border-color: #171717 !important;
+  background: #171717 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card {
+  color: #171717 !important;
+  border-color: #d3d3d3 !important;
+  background: #fff !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:hover {
+  color: #171717 !important;
+  border-color: #8b8b8b !important;
+  background: #fff !important;
+  transform: translateY(-2px) !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card h3,
+body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-copy h3,
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) h3.text-zinc-100 {
+  color: #171717 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-kicker,
+body.editorial-portfolio #work > .grid > .project-bento-card .editorial-card-copy p,
+body.editorial-portfolio #work > .grid > .project-bento-card:hover .editorial-card-kicker,
+body.editorial-portfolio #work > .grid > .project-bento-card:hover .editorial-card-copy p {
+  color: #555 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child {
+  border-color: #e1e1e1 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child a,
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child button {
+  color: #333 !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:hover > div:last-child a,
+body.editorial-portfolio #work > .grid > .project-bento-card:hover > div:last-child button {
+  color: #000 !important;
+}
+
+body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a,
+body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a:first-child,
+body.editorial-portfolio #work > .grid > .editorial-project-card:hover .editorial-card-links a,
+body.editorial-portfolio #work > .grid > .editorial-project-card:hover .editorial-card-links a:first-child {
+  color: #252525;
+  border-color: #c9c9c9;
+  background: #fff;
+}
+
+body.editorial-portfolio #work > .grid > .editorial-project-card .editorial-card-links a:hover,
+body.editorial-portfolio #work > .grid > .editorial-project-card:hover .editorial-card-links a:hover {
+  color: #000;
+  border-color: #777;
+  background: #f4f4f4;
+}
+
+body.editorial-portfolio #work .project-bento-card .inspect-btn,
+body.editorial-portfolio #work a.bg-canvas-accent,
+body.editorial-portfolio #work .project-bento-card:hover .inspect-btn,
+body.editorial-portfolio #work .project-bento-card:hover a.bg-canvas-accent {
+  color: #171717 !important;
+  border-color: #c9c9c9 !important;
+  background: #fff !important;
+}
+
+@media (max-width: 1100px) {
+  body.editorial-portfolio header.sticky #copyEmailTopBtn {
+    display: none !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  body.editorial-portfolio header.sticky nav {
+    display: flex !important;
+    flex: 0 1 auto;
+    margin-left: auto;
+  }
+
+  body.editorial-portfolio header.sticky nav a {
+    padding-inline: 0.45rem;
+  }
+
+  body.editorial-portfolio header.sticky #nav-capabilities,
+  body.editorial-portfolio header.sticky #nav-experience,
+  body.editorial-portfolio header.sticky #nav-roadmap {
+    display: none !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.editorial-portfolio aside[aria-label="Availability and local time"] > div {
+    gap: 0.5rem;
+  }
+
+  body.editorial-portfolio aside[aria-label="Availability and local time"] > div > div:first-child > .hidden.sm\:inline {
+    display: none !important;
+  }
+
+  body.editorial-portfolio aside[aria-label="Availability and local time"] .london-timepiece-face {
+    display: none;
+  }
+
+  body.editorial-portfolio header.sticky > div {
+    min-height: 3.5rem;
+  }
+
+  body.editorial-portfolio header.sticky > div > a[aria-label*="home"] > div:last-child > span:last-child {
+    display: none;
+  }
+
+  body.editorial-portfolio header.sticky #openProfileBtn {
+    padding-inline: 0.55rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body.editorial-portfolio aside[aria-label="Availability and local time"] #replayIntroBtn {
+    display: none !important;
+  }
+
+  body.editorial-portfolio aside[aria-label="Availability and local time"] > div > div:first-child > span:first-child {
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body.editorial-portfolio aside[aria-label="Availability and local time"] .london-timepiece-readout > span {
+    display: none;
+  }
+
+  body.editorial-portfolio header.sticky > div {
+    gap: 0.5rem;
+    padding-inline: 0.75rem !important;
+  }
+
+  body.editorial-portfolio header.sticky > div > a[aria-label*="home"] {
+    gap: 0.45rem;
+  }
+
+  body.editorial-portfolio header.sticky > div > a[aria-label*="home"] > div:last-child > span:first-child {
+    font-size: 0.78rem;
+  }
+
+  body.editorial-portfolio header.sticky #openProfileBtn span,
+  body.editorial-portfolio header.sticky a[href^="mailto:"] span {
+    font-size: 0.65rem;
+  }
+
+  body.editorial-portfolio header.sticky #openProfileBtn span {
+    display: none;
+  }
+
+  body.editorial-portfolio header.sticky #openProfileBtn {
+    width: 2.1rem;
+    justify-content: center;
+    padding-inline: 0;
+  }
+}
