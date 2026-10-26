@@ -647,3 +647,52 @@ body.editorial-portfolio #work .project-bento-card:hover a.bg-canvas-accent {
     padding-inline: 0;
   }
 }
+
+body.editorial-portfolio #work > .grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+body.editorial-portfolio #work .project-bento-card[style*="display: none"] {
+  display: none !important;
+}
+
+@media (max-width: 1023px) {
+  body.editorial-portfolio #work > .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  body.editorial-portfolio #work > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  body.editorial-portfolio #roadmap [role="tablist"][aria-label="Roadmap Milestone Filters"] {
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child {
+    justify-content: flex-start !important;
+  }
+
+  body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child > div:first-child {
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child > div:first-child > span.text-zinc-600 {
+    display: none !important;
+  }
+
+  body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child a,
+  body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child button {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
