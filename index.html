@@ -691,7 +691,7 @@
             </h2>
           </div>
           <p class="text-sm text-zinc-300 max-w-md">
-            Sixteen selected projects, including ten in-depth case studies and six newer public projects. Stages and links distinguish live work from concepts and prototypes.
+            Sixteen projects: ten case studies and six recent additions. Concepts and prototypes are clearly labeled.
           </p>
         </div>
 
@@ -4067,8 +4067,8 @@
 
           // Draw filled gradient area
           const gradient = ctx.createLinearGradient(0, 0, 0, h);
-          gradient.addColorStop(0, "rgba(53, 91, 118, 0.22)");
-          gradient.addColorStop(0.6, "rgba(53, 91, 118, 0.1)");
+          gradient.addColorStop(0, "rgba(0, 0, 0, 0.16)");
+          gradient.addColorStop(0.6, "rgba(0, 0, 0, 0.06)");
           gradient.addColorStop(1, "transparent");
 
           ctx.beginPath();
@@ -4093,10 +4093,10 @@
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           });
-          ctx.strokeStyle = "#355b76";
+          ctx.strokeStyle = "#171717";
           ctx.lineWidth = 1.8;
-          ctx.shadowColor = "rgba(53, 91, 118, 0.35)";
-          ctx.shadowBlur = 5;
+          ctx.shadowColor = "rgba(0, 0, 0, 0.18)";
+          ctx.shadowBlur = 3;
           ctx.stroke();
 
           // Latest head point
@@ -4105,9 +4105,9 @@
           const lastY = h - (lastVal / 100) * (h - 8);
           ctx.beginPath();
           ctx.arc(lastX - 2, lastY, 3, 0, Math.PI * 2);
-          ctx.fillStyle = "#355b76";
-          ctx.shadowColor = "rgba(53, 91, 118, 0.35)";
-          ctx.shadowBlur = 5;
+          ctx.fillStyle = "#171717";
+          ctx.shadowColor = "rgba(0, 0, 0, 0.18)";
+          ctx.shadowBlur = 3;
           ctx.fill();
         }
 
