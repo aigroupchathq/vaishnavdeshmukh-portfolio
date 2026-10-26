@@ -696,3 +696,264 @@ body.editorial-portfolio #work .project-bento-card[style*="display: none"] {
     overflow-wrap: anywhere;
   }
 }
+
+body.editorial-portfolio #work {
+  padding-block: clamp(3rem, 6vw, 5rem) !important;
+  color: #f5f5f5 !important;
+  border-color: #292929 !important;
+  background: #080808 !important;
+}
+
+body.editorial-portfolio #work > div:first-child {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.6fr) minmax(16rem, 0.8fr);
+  align-items: end;
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+body.editorial-portfolio #work > div:first-child > div,
+body.editorial-portfolio #work > div:first-child > p {
+  min-width: 0;
+  max-width: none;
+}
+
+body.editorial-portfolio #work h2 {
+  max-width: 17ch;
+  font-size: clamp(2.1rem, 3.35vw, 3.1rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.055em !important;
+}
+
+body.editorial-portfolio #work > div:first-child > p {
+  padding-bottom: 0.3rem;
+  color: #b7b7b7 !important;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+body.editorial-portfolio #work h2,
+body.editorial-portfolio #work h3 {
+  color: #f5f5f5 !important;
+}
+
+body.editorial-portfolio #work h2 .font-serif {
+  color: #bcbcbc !important;
+}
+
+body.editorial-portfolio #work .text-zinc-100,
+body.editorial-portfolio #work .text-zinc-200,
+body.editorial-portfolio #work .text-zinc-300 {
+  color: #e7e7e7 !important;
+}
+
+body.editorial-portfolio #work .text-zinc-400,
+body.editorial-portfolio #work .text-zinc-500,
+body.editorial-portfolio #work .text-zinc-600 {
+  color: #a4a4a4 !important;
+}
+
+body.editorial-portfolio #work .text-canvas-accent,
+body.editorial-portfolio #work .text-canvas-blue,
+body.editorial-portfolio #work .text-canvas-blue-light,
+body.editorial-portfolio #work .text-canvas-purple,
+body.editorial-portfolio #work .text-canvas-amber,
+body.editorial-portfolio #work .text-canvas-alert,
+body.editorial-portfolio #work .text-canvas-red {
+  color: #bdbdbd !important;
+}
+
+body.editorial-portfolio #work .bg-canvas-base,
+body.editorial-portfolio #work .bg-canvas-surface,
+body.editorial-portfolio #work .bg-canvas-elevated {
+  background-color: #1b1b1b !important;
+}
+
+body.editorial-portfolio #work .mb-6.p-2 {
+  padding: 0.5rem 0.75rem !important;
+  border-color: #303030 !important;
+  border-radius: 0.5rem !important;
+  background: #111 !important;
+  box-shadow: none !important;
+}
+
+body.editorial-portfolio #work input#projectSearchInput {
+  color: #f5f5f5 !important;
+  background: transparent !important;
+}
+
+body.editorial-portfolio #work input#projectSearchInput::placeholder {
+  color: #929292 !important;
+}
+
+body.editorial-portfolio #work .filter-tab {
+  padding: 0.45rem 0.75rem !important;
+  color: #d0d0d0 !important;
+  border-color: #333 !important;
+  border-radius: 0.35rem !important;
+  background: #111 !important;
+  font-size: 0.7rem !important;
+}
+
+body.editorial-portfolio #work .filter-tab:hover {
+  color: #fff !important;
+  border-color: #777 !important;
+  background: #191919 !important;
+}
+
+body.editorial-portfolio #work .filter-tab.active,
+body.editorial-portfolio #work .filter-tab.border-canvas-accent {
+  color: #090909 !important;
+  border-color: #f2f2f2 !important;
+  background: #f2f2f2 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card {
+  grid-column: auto !important;
+  min-width: 0;
+  padding: 1rem !important;
+  color: #f0f0f0 !important;
+  border: 1px solid #303030 !important;
+  border-radius: 0.55rem !important;
+  background: #111 !important;
+  box-shadow: none !important;
+  transition: border-color 160ms ease, background-color 160ms ease !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:hover {
+  border-color: #777 !important;
+  background: #151515 !important;
+  box-shadow: none !important;
+  transform: translateY(-1px) !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card > div:first-child {
+  min-width: 0;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) h3.text-zinc-100,
+body.editorial-portfolio #work > .grid > .project-bento-card h3.text-zinc-100,
+body.editorial-portfolio #work > .grid > .project-bento-card h3 {
+  margin-bottom: 0.5rem !important;
+  color: #f5f5f5 !important;
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.035em !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card span.font-mono {
+  color: #b8b8b8 !important;
+  font-size: 0.65rem !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0.07em;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card p {
+  margin-bottom: 0.75rem !important;
+  color: #c2c2c2 !important;
+  font-size: 0.8rem !important;
+  line-height: 1.55 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card .inspect-card-trigger {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 10;
+  min-height: 7rem;
+  margin: 0.8rem 0 !important;
+  overflow: hidden !important;
+  border: 1px solid #383838 !important;
+  border-radius: 0.35rem !important;
+  background: #1a1a1a !important;
+  cursor: pointer;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card .inspect-card-trigger > div {
+  height: 100% !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card .inspect-card-trigger img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  filter: grayscale(1) contrast(1.04);
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card span.rounded {
+  padding: 0.2rem 0.45rem !important;
+  color: #d4d4d4 !important;
+  border: 1px solid #393939 !important;
+  background: #191919 !important;
+  font-size: 0.65rem !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child {
+  justify-content: flex-start !important;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem !important;
+  border-color: #333 !important;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child > div:first-child {
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child a,
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card) > div:last-child button,
+body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-card > div:last-child a,
+body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-card > div:last-child button {
+  min-width: 0;
+  color: #dedede !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  overflow-wrap: anywhere;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card):hover > div:last-child a,
+body.editorial-portfolio #work > .grid > .project-bento-card:not(.editorial-project-card):hover > div:last-child button,
+body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-card:hover > div:last-child a,
+body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-card:hover > div:last-child button {
+  color: #fff !important;
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em;
+}
+
+body.editorial-portfolio #work > .grid > .project-bento-card .inspect-modal-btn {
+  padding: 0.42rem 0.65rem !important;
+  color: #080808 !important;
+  border: 1px solid #f2f2f2 !important;
+  border-radius: 0.3rem !important;
+  background: #f2f2f2 !important;
+  font-size: 0.7rem !important;
+}
+
+@media (max-width: 480px) {
+  body.editorial-portfolio #work > div:first-child {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  body.editorial-portfolio #work h2 {
+    max-width: 16ch;
+    font-size: clamp(2rem, 9vw, 2.6rem) !important;
+  }
+
+  body.editorial-portfolio #work > div:first-child > p {
+    font-size: 0.82rem;
+  }
+
+  body.editorial-portfolio #work > .grid > .project-bento-card {
+    padding: 0.8rem !important;
+  }
+
+  body.editorial-portfolio #work > .grid > .project-bento-card .inspect-card-trigger {
+    min-height: 6rem;
+  }
+}
