@@ -40,7 +40,7 @@ The portfolio distinguishes live products, source repositories, prototypes, and 
 | **07** | **The Observer** | Thought & awareness | [Live experience](https://itsyou.ai.studio/) · [Source](https://github.com/aigroupchathq/its-you-ai) |
 | **08** | **BabyCarl** | Ambient health systems | Concept / case study |
 | **09** | **GroupChat HQ** | Collaborative systems | Concept / case study |
-| **10** | **Vision Intelligence** | AI-guided work | [Live experience](https://aigroupchathq.github.io/vision-intelligence/) · [Source](https://github.com/aigroupchathq/vision-intelligence) |
+| **10** | **Rulers Language** | AI-guided work | [Live experience](https://aigroupchathq.github.io/rulers-language/) · [Source](https://github.com/aigroupchathq/rulers-language) |
 | **11** | **Datum ADAS** | Automotive systems | Prototype in development · [Source](https://github.com/aigroupchathq/datum-adas) |
 | **12** | **Checkmate** | Human connection | [Live product](https://aigroupchathq.github.io/velum-labs/) · [Source](https://github.com/aigroupchathq/velum-labs) |
 | **13** | **Vedic Tree OS** | Education systems | [Live product](https://aigroupchathq.github.io/vtsystem/) · [Source](https://github.com/aigroupchathq/vtsystem) |
