@@ -1,54 +1,105 @@
 /* ==========================================================================
-   SIMPLE, CLEAN, MINIMAL DARK PORTFOLIO STYLES
-   Calm Aesthetics · Subtle Contrast · Quiet Typography · Low-Scroll Grid
+   PURE BLACK & WHITE · MINIMAL · CLEAN
+   High Contrast · True Black & Crisp White · No Low-Contrast "Black-on-Black"
    ========================================================================== */
 
 :root {
-  --bg-main: #0b0c0e;
-  --bg-surface: #121316;
-  --bg-elevated: #181a1f;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.22);
-  --text-main: #f4f4f5;
-  --text-muted: #9ca3af;
-  --text-dim: #6b7280;
+  --bw-black: #000000;
+  --bw-card: #0a0a0a;
+  --bw-card-hover: #121212;
+  --bw-border: #262626;
+  --bw-border-bright: #ffffff;
+  --bw-white: #ffffff;
+  --bw-text-body: #e4e4e7;
+  --bw-text-muted: #a1a1aa;
 }
 
-html, body {
-  background-color: var(--bg-main) !important;
-  color: var(--text-main) !important;
+/* Base Document */
+html,
+body {
+  background-color: var(--bw-black) !important;
+  color: var(--bw-white) !important;
   color-scheme: dark !important;
 }
 
-/* Calm 3-column project grid */
+/* Ensure all text is bright, high-contrast, and never "black-on-black" */
+h1, h2, h3, h4, h5, h6,
+.text-zinc-100,
+.text-zinc-200 {
+  color: #ffffff !important;
+}
+
+p,
+.text-zinc-300,
+.text-zinc-400 {
+  color: #e4e4e7 !important;
+}
+
+.text-zinc-500,
+.text-zinc-600 {
+  color: #a1a1aa !important;
+}
+
+/* Navigation & Header */
+header.sticky {
+  background-color: rgba(0, 0, 0, 0.94) !important;
+  border-bottom: 1px solid var(--bw-border) !important;
+}
+
+header.sticky a,
+header.sticky button {
+  color: #e4e4e7 !important;
+}
+
+header.sticky a:hover,
+header.sticky button:hover {
+  color: #ffffff !important;
+}
+
+/* Timepiece & Top Bar */
+.london-timepiece,
+aside[aria-label="Availability and local time"] {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   WORK SECTION · 3-COLUMN CLEAN MINIMAL GRID
+   ========================================================================== */
+#work {
+  border-top: 1px solid var(--bw-border) !important;
+}
+
+/* Project Cards: Clean, distinct border, crisp white on dark */
 #work .project-bento-card {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  border-radius: 0.875rem !important;
-  border: 1px solid var(--border-subtle) !important;
-  background-color: var(--bg-surface) !important;
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+  border-radius: 12px !important;
   padding: 1.25rem !important;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease !important;
 }
 
 #work .project-bento-card:hover {
-  border-color: var(--border-hover) !important;
+  border-color: var(--bw-border-bright) !important;
+  background-color: var(--bw-card-hover) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Clean image preview frame */
+/* Clean SVG Preview */
 #work .inspect-card-trigger {
   display: block !important;
   width: 100% !important;
-  height: 155px !important;
-  border-radius: 0.5rem !important;
+  height: 160px !important;
+  border-radius: 8px !important;
   overflow: hidden !important;
-  border: 1px solid var(--border-subtle) !important;
-  background: #0e1014 !important;
-  margin: 0.75rem 0 !important;
+  border: 1px solid var(--bw-border) !important;
+  background-color: #0c0d12 !important;
+  margin: 0.85rem 0 !important;
   cursor: pointer !important;
 }
 
@@ -56,50 +107,207 @@ html, body {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  opacity: 0.92 !important;
-  transition: transform 0.25s ease, opacity 0.25s ease !important;
+  transition: transform 0.25s ease !important;
 }
 
 #work .project-bento-card:hover .inspect-card-trigger img {
   transform: scale(1.02) !important;
-  opacity: 1 !important;
 }
 
-/* Subtle filter tabs */
-.filter-tab {
-  background-color: var(--bg-surface) !important;
-  color: var(--text-muted) !important;
-  border: 1px solid var(--border-subtle) !important;
-  border-radius: 0.5rem !important;
+/* Titles */
+#work .project-bento-card h3 {
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 0.35rem !important;
+}
+
+/* Domain kickers */
+#work .project-bento-card span.font-mono {
+  color: #a1a1aa !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Project Description */
+#work .project-bento-card p {
+  color: #d4d4d8 !important;
+  font-size: 0.825rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.85rem !important;
+}
+
+/* Tags */
+#work .project-bento-card span.rounded {
+  background-color: #141416 !important;
+  border: 1px solid #2e2e32 !important;
+  color: #f4f4f5 !important;
+  font-size: 0.7rem !important;
+  padding: 0.2rem 0.5rem !important;
+}
+
+/* Bottom Card Action Links */
+#work .project-bento-card > div:last-child {
+  border-top: 1px solid var(--bw-border) !important;
+  padding-top: 0.85rem !important;
+}
+
+.inspect-modal-btn {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
   padding: 0.35rem 0.75rem !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.inspect-modal-btn:hover {
+  background-color: #e4e4e7 !important;
+}
+
+#work .project-bento-card a {
+  color: #ffffff !important;
   font-size: 0.75rem !important;
   font-family: 'JetBrains Mono', monospace !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+#work .project-bento-card a:hover {
+  color: #d4d4d8 !important;
+}
+
+/* ==========================================================================
+   SEARCH & FILTER CONTROLS
+   ========================================================================== */
+#projectSearchInput {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+#projectSearchInput::placeholder {
+  color: #71717a !important;
+}
+
+#work .mb-6.p-2 {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+}
+
+/* Filter Tabs */
+.filter-tab {
+  background-color: var(--bw-card) !important;
+  color: #e4e4e7 !important;
+  border: 1px solid var(--bw-border) !important;
+  border-radius: 6px !important;
+  padding: 0.4rem 0.85rem !important;
+  font-size: 0.75rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 500 !important;
   transition: all 0.15s ease !important;
 }
 
 .filter-tab:hover {
-  color: var(--text-main) !important;
-  border-color: var(--border-hover) !important;
+  color: #ffffff !important;
+  border-color: #71717a !important;
 }
 
 .filter-tab.active,
 .filter-tab.border-canvas-accent {
-  background-color: #f4f4f5 !important;
-  color: #121316 !important;
-  border-color: #f4f4f5 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
   font-weight: 700 !important;
 }
 
-/* Modal calm styling */
+/* ==========================================================================
+   OTHER SECTIONS (HERO, IDEOLOGY, CAPABILITIES, EXPERIENCE, CONNECT)
+   ========================================================================== */
+#main-content section {
+  border-color: var(--bw-border) !important;
+}
+
+/* Hero Card */
+section[aria-labelledby="hero-heading"] > div {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+}
+
+section[aria-labelledby="hero-heading"] .bg-canvas-base\/50 {
+  background-color: #121214 !important;
+  border: 1px solid var(--bw-border) !important;
+}
+
+section[aria-labelledby="hero-heading"] a.bg-zinc-100 {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+section[aria-labelledby="hero-heading"] a.bg-canvas-elevated,
+section[aria-labelledby="hero-heading"] button#heroOpenProfileBtn {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+  color: #ffffff !important;
+}
+
+/* Ideology, Capabilities, Experience, Roadmap cards */
+#ideology .p-6,
+#capabilities .p-6,
+#experience .p-6,
+#roadmap .p-6,
+#testimonials .p-6 {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+}
+
+/* Footer & Connect */
+footer#connect {
+  background-color: var(--bw-black) !important;
+  border-top: 1px solid var(--bw-border) !important;
+}
+
+footer#connect .bg-canvas-surface {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+}
+
+#copyEmailFooterBtn {
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border) !important;
+  color: #ffffff !important;
+}
+
+footer#connect a[href^="mailto:"] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Modal */
 #caseStudyModalBackdrop,
 #profileModalBackdrop {
-  background-color: rgba(0, 0, 0, 0.8) !important;
+  background-color: rgba(0, 0, 0, 0.88) !important;
   backdrop-filter: blur(12px) !important;
 }
 
 #caseStudyModalBackdrop > div,
 #profileModalBackdrop > div {
-  background-color: var(--bg-surface) !important;
-  border: 1px solid var(--border-hover) !important;
-  color: var(--text-main) !important;
+  background-color: var(--bw-card) !important;
+  border: 1px solid var(--bw-border-bright) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9) !important;
+  color: #ffffff !important;
+}
+
+#caseStudyModalBackdrop button#modalStartBriefBtn {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
 }
