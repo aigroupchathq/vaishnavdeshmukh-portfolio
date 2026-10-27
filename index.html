@@ -373,7 +373,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="portfolio-editorial.css?v=20261026-button-visibility-v1" />
+    <link rel="stylesheet" href="portfolio-editorial.css?v=20261027-project-groups-v1" />
   </head>
 
   <body class="editorial-portfolio bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
@@ -699,13 +699,30 @@
             <input type="text" id="projectSearchInput" placeholder="Search projects..." class="w-full bg-transparent pl-9 pr-3 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-400 rounded-lg" aria-label="Search projects" autocomplete="off" />
           </div>
           <div class="flex items-center justify-between sm:justify-end gap-3 px-2 border-t sm:border-t-0 border-canvas-border pt-2 sm:pt-0">
-            <span id="searchMatchCount" class="text-zinc-500 text-[11px] whitespace-nowrap">16 projects</span>
+            <span id="searchMatchCount" class="text-zinc-500 text-[11px] whitespace-nowrap" aria-live="polite">16 projects</span>
             <button id="searchClearBtn" class="text-zinc-400 hover:text-white text-[11px] hidden cursor-pointer">Clear</button>
           </div>
         </div>
 
         <!-- Compact project grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="project-group-heading project-group-heading-live">
+            <div>
+              <span class="font-mono text-[11px] text-zinc-400 uppercase tracking-[0.16em]">01 · Working links</span>
+              <h3>Live projects</h3>
+              <p>Public demos checked and ready to open.</p>
+            </div>
+            <span class="project-group-count" data-project-group-count="live">11 demos</span>
+          </div>
+
+          <div class="project-group-heading project-group-heading-research">
+            <div>
+              <span class="font-mono text-[11px] text-zinc-400 uppercase tracking-[0.16em]">02 · Explorations</span>
+              <h3>Research &amp; prototypes</h3>
+              <p>Concepts, experiments, and work in progress.</p>
+            </div>
+            <span class="project-group-count" data-project-group-count="research">5 projects</span>
+          </div>
 
           <!-- Predictive Ward Logistics Engine -->
           <article class="project-bento-card" data-category="health">
@@ -738,7 +755,7 @@
           </article>
 
           <!-- The Unexplored Interior -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Cognitive Science · Interactive Inquiry
@@ -768,7 +785,7 @@
           </article>
 
           <!-- iTHINK: Attention & Flow Lab -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Cognitive Practice · Neuroscience Lab
@@ -792,13 +809,13 @@
 
             <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="ithink"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/ithinkstudio/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/ithinkstudio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="ithink"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/ithinkstudio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
               </div>
             </div>
           </article>
 
           <!-- CivicFlow: Highways Triage Engine -->
-          <article class="project-bento-card" data-category="civic">
+          <article class="project-bento-card" data-category="civic" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Civic Infrastructure · Municipal Triage
@@ -822,7 +839,7 @@
 
             <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="civicflow"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=CivicFlow" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="civicflow"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/civicflow.html" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="mailto:deshmukhvaishnav@gmail.com?subject=CivicFlow" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3 h-3"></i></a>
               </div>
             </div>
           </article>
@@ -888,7 +905,7 @@
           </article>
 
           <!-- The Observer: Thought & Awareness -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Cognitive Science · Metacognition
@@ -912,7 +929,7 @@
 
             <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="itsyou"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/its-you-ai/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/its-you-ai" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="itsyou"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://itsyou.ai.studio/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/its-you-ai" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
               </div>
             </div>
           </article>
@@ -978,7 +995,7 @@
           </article>
 
           <!-- Rulers Language (formerly Vision Intelligence) -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 AI Guidance · Prompt Studio
@@ -1008,7 +1025,7 @@
           </article>
 
           <!-- Datum ADAS -->
-          <article class="project-bento-card" data-category="automotive">
+          <article class="project-bento-card" data-category="automotive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Automotive Systems · Perception
@@ -1032,13 +1049,13 @@
 
             <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="datumadas"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="datumadas"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/datum-adas/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
               </div>
             </div>
           </article>
 
           <!-- Checkmate (Velum Labs) -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Human Decisions · Compatibility
@@ -1068,7 +1085,7 @@
           </article>
 
           <!-- Vedic Tree OS -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Education Systems · Institutional OS
@@ -1098,7 +1115,7 @@
           </article>
 
           <!-- The Driver of God -->
-          <article class="project-bento-card" data-category="cognitive">
+          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Interactive Philosophy · Audio
@@ -1122,13 +1139,13 @@
 
             <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="driver"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="driver"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/the-driver-of-god/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
               </div>
             </div>
           </article>
 
           <!-- Hidden Leaf Studio -->
-          <article class="project-bento-card" data-category="creative">
+          <article class="project-bento-card" data-category="creative" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Creative Tools · Bilingual Studio
@@ -1152,13 +1169,13 @@
 
             <div class="pt-4 border-t border-canvas-border flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="hiddenleaf"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
+                <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 text-zinc-200 hover:text-white font-medium cursor-pointer" data-project="hiddenleaf"><span>Case Study</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i></button> <span class="text-zinc-600">·</span> <a href="https://aigroupchathq.github.io/hidden-leaf-studio/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Live Demo</span><i data-lucide="external-link" class="w-3 h-3"></i></a> <span class="text-zinc-600">·</span> <a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white flex items-center gap-1"><span>Source</span><i data-lucide="github" class="w-3 h-3"></i></a>
               </div>
             </div>
           </article>
 
           <!-- Datum Atelier -->
-          <article class="project-bento-card" data-category="automotive">
+          <article class="project-bento-card" data-category="automotive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Automotive Systems · Provenance
@@ -3324,15 +3341,28 @@
         setupCopyButton("copyEmailFooterBtn", "copyEmailFooterText");
 
         // Project search
-        const cards = document.querySelectorAll(".project-bento-card");
+        const cards = document.querySelectorAll("#work .project-bento-card");
         const searchInput = document.getElementById("projectSearchInput");
         const searchClearBtn = document.getElementById("searchClearBtn");
         const searchMatchCount = document.getElementById("searchMatchCount");
+        const liveGroupHeading = document.querySelector(".project-group-heading-live");
+        const researchGroupHeading = document.querySelector(".project-group-heading-research");
+        const liveGroupCount = document.querySelector('[data-project-group-count="live"]');
+        const researchGroupCount = document.querySelector('[data-project-group-count="research"]');
+        const projectGrid = document.querySelector("#work > .grid");
+
+        if (projectGrid && liveGroupHeading && researchGroupHeading) {
+          const liveCards = [...cards].filter((card) => card.dataset.projectStatus === "live");
+          const researchCards = [...cards].filter((card) => card.dataset.projectStatus !== "live");
+          projectGrid.append(liveGroupHeading, ...liveCards, researchGroupHeading, ...researchCards);
+        }
 
         let activeQuery = "";
 
         function filterProjects() {
           let visibleCount = 0;
+          let visibleLiveCount = 0;
+          let visibleResearchCount = 0;
           const query = activeQuery.trim().toLowerCase();
 
           cards.forEach((card) => {
@@ -3342,13 +3372,25 @@
             if (matchesQuery) {
               card.style.display = "";
               visibleCount++;
+              if (card.dataset.projectStatus === "live") {
+                visibleLiveCount++;
+              } else {
+                visibleResearchCount++;
+              }
             } else {
               card.style.display = "none";
             }
           });
 
+          if (liveGroupHeading) liveGroupHeading.hidden = visibleLiveCount === 0;
+          if (researchGroupHeading) researchGroupHeading.hidden = visibleResearchCount === 0;
+          if (liveGroupCount) liveGroupCount.textContent = `${visibleLiveCount} ${visibleLiveCount === 1 ? "demo" : "demos"}`;
+          if (researchGroupCount) researchGroupCount.textContent = `${visibleResearchCount} ${visibleResearchCount === 1 ? "project" : "projects"}`;
+
           if (searchMatchCount) {
-            searchMatchCount.textContent = `Showing ${visibleCount} of ${cards.length} projects`;
+            searchMatchCount.textContent = query
+              ? `Showing ${visibleCount} of ${cards.length} projects`
+              : `${cards.length} projects`;
           }
 
           if (searchClearBtn) {
@@ -3380,6 +3422,8 @@
             if (searchInput) searchInput.focus();
           });
         }
+
+        filterProjects();
 
         // =====================================================================
         // 04. INTERACTIVE CARD TABS & VIEW DENSITY SWITCHER
@@ -3717,8 +3761,8 @@
             solution: "A local, on-device automotive perception concept exploring forward-collision awareness, lane boundary context, and kinematic safety metrics without streaming telemetry to third-party servers.",
             stack: ["Edge Computer Vision", "WebAssembly / C++ Core", "Kinematic Physics Engine", "Offline-First Storage", "Canvas Telemetry HUD"],
             impact: "An architecture exploration in restraint and on-device compute for mobility workflows. Exploratory prototype, not an active certified driver-assistance system.",
-            liveUrl: "",
-            liveLabel: "",
+            liveUrl: "https://aigroupchathq.github.io/datum-adas/",
+            liveLabel: "Open Datum ADAS",
             briefTag: "Automotive Systems & ADAS"
           },
           velum: {
@@ -3756,8 +3800,8 @@
             solution: "An interactive audiovisual experience harmonizing philosophical questions with generative Web Audio synthesis, interactive symbolic instruments, and contemplative narrative arcs.",
             stack: ["Web Audio API", "HTML5 Canvas", "Procedural Sound Synthesis", "Interactive SVG", "Vanilla JavaScript"],
             impact: "An open interactive philosophy laboratory exploring deep cognitive questions through sensory synthesis.",
-            liveUrl: "https://github.com/aigroupchathq/the-driver-of-god",
-            liveLabel: "Explore Project",
+            liveUrl: "https://aigroupchathq.github.io/the-driver-of-god/",
+            liveLabel: "Open The Driver of God",
             briefTag: "Applied Neuroscience & Cognitive Tools"
           },
           hiddenleaf: {
@@ -3769,8 +3813,8 @@
             solution: "A bespoke browser-based DAW and lyric workspace engineered for Hindi-English rap writing, featuring phoneme rhyme mapping, beat synchronization, and real-time pitch feedback.",
             stack: ["Web Audio API", "Phoneme Alignment Parser", "Devanagari Metrical Engine", "Canvas Spectrogram", "TypeScript"],
             impact: "A specialized studio tool bridging South Asian poetic meters with modern hip-hop rhythm analysis.",
-            liveUrl: "https://github.com/aigroupchathq/hidden-leaf-studio",
-            liveLabel: "View Studio Source",
+            liveUrl: "https://aigroupchathq.github.io/hidden-leaf-studio/",
+            liveLabel: "Open Hidden Leaf Studio",
             briefTag: "Spatial Interfaces & 3D WebGL (Three.js)"
           },
           datumatelier: {
