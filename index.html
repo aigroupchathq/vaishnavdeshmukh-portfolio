@@ -371,7 +371,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="portfolio-editorial.css?v=20261103-oled-black" />
+    <link rel="stylesheet" href="portfolio-editorial.css?v=20261103-deck-view" />
   </head>
 
   <body class="editorial-portfolio bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
@@ -677,33 +677,800 @@
       </section>
 
             <!-- 03: FEATURED WORK (SIMPLE CLEAN MINIMAL GRID) -->
+      <!-- 03: FEATURED WORK (INTERACTIVE FLUID TOUCH DECK SHOWCASE) -->
       <section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-canvas-border" aria-labelledby="work-heading">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
             <div class="font-mono text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">
-              <i data-lucide="briefcase" class="w-3.5 h-3.5 text-zinc-400"></i>
+              <i data-lucide="layers" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Selected Work</span>
             </div>
             <h2 id="work-heading" class="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
               Thoughtful software, built around <span class="font-serif italic font-normal text-zinc-400">real needs.</span>
             </h2>
           </div>
+
+          <!-- View Mode Toggle -->
+          <div class="flex items-center gap-3">
+            <div class="inline-flex items-center p-1 rounded-xl bg-canvas-surface border border-canvas-border font-mono text-xs">
+              <button id="viewDeckModeBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white text-black font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm" aria-label="Deck view mode">
+                <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                <span>Deck</span>
+              </button>
+              <button id="viewGridModeBtn" type="button" class="px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer" aria-label="Grid view mode">
+                <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+                <span>Grid</span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- Real-Time Search Bar -->
-        <div class="mb-6 p-2 rounded-xl bg-canvas-surface border border-canvas-border font-mono text-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-sm">
-          <div class="relative flex-1">
-            <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input type="text" id="projectSearchInput" placeholder="Search projects..." class="w-full bg-transparent pl-9 pr-3 py-2 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-400 rounded-lg" aria-label="Search projects" autocomplete="off" />
+        <!-- Filter & Search Controls Bar -->
+        <div class="mb-8 flex flex-col gap-3">
+          <!-- Filter Tabs -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar font-mono text-xs" role="tablist" aria-label="Filter projects">
+            <button class="filter-tab active px-3 py-1.5 rounded-lg border border-white bg-white text-black font-semibold whitespace-nowrap cursor-pointer transition-colors" data-filter="all">All (16)</button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="live">Live Demos (11)</button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="research">Research (5)</button>
+            <span class="text-zinc-600 px-1 select-none">|</span>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="cognitive">Cognitive</button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="civic">Civic</button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="automotive">Automotive</button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="health">Health</button>
+            <button class="filter-tab px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-surface text-zinc-400 hover:text-white whitespace-nowrap cursor-pointer transition-colors" data-filter="creative">Creative</button>
           </div>
-          <div class="flex items-center justify-between sm:justify-end gap-3 px-2 border-t sm:border-t-0 border-canvas-border pt-2 sm:pt-0">
-            <span id="searchMatchCount" class="text-zinc-500 text-[11px] whitespace-nowrap" aria-live="polite">16 projects</span>
-            <button id="searchClearBtn" class="text-zinc-400 hover:text-white text-[11px] hidden cursor-pointer">Clear</button>
+
+          <!-- Real-Time Search Bar -->
+          <div class="p-2 rounded-xl bg-canvas-surface border border-canvas-border font-mono text-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-sm">
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+              <input type="text" id="projectSearchInput" placeholder="Filter projects by title, stack, or domain..." class="w-full bg-transparent pl-9 pr-3 py-1.5 text-zinc-200 placeholder-zinc-500 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-400 rounded-lg" aria-label="Search projects" autocomplete="off" />
+            </div>
+            <div class="flex items-center justify-between sm:justify-end gap-3 px-2 border-t sm:border-t-0 border-canvas-border pt-2 sm:pt-0">
+              <span id="searchMatchCount" class="text-zinc-500 text-[11px] whitespace-nowrap" aria-live="polite">16 projects</span>
+              <button id="searchClearBtn" class="text-zinc-400 hover:text-white text-[11px] hidden cursor-pointer">Clear</button>
+            </div>
           </div>
         </div>
 
-        <!-- Compact project grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 1. INTERACTIVE DECK SHOWCASE (DEFAULT - NO LONG SCROLLING) -->
+        <div id="projectDeckContainer" class="projects-deck-viewport">
+          <!-- Top Deck Meta Bar -->
+          <div class="flex items-center justify-between mb-4 px-2">
+            <div class="flex items-center gap-2.5">
+              <span id="deckCounterBadge" class="font-mono text-xs px-2.5 py-1 rounded-md bg-zinc-900 border border-[#262626] text-white font-semibold tracking-wider">
+                01 / 16
+              </span>
+              <span id="deckLiveStatusBadge" class="inline-flex items-center gap-1.5 font-mono text-[11px] text-zinc-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="deckLiveStatusText">Live Demo</span>
+              </span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-mono text-zinc-500 hidden sm:inline mr-2">Swipe or drag card</span>
+              <button id="deckPrevBtn" type="button" class="deck-nav-btn" aria-label="Previous project card" title="Previous card (Left Arrow)">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button id="deckNextBtn" type="button" class="deck-nav-btn" aria-label="Next project card" title="Next card (Right Arrow)">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3D Deck Stack Stage -->
+          <div id="projectDeckStage" class="deck-stage" role="region" aria-label="Interactive project card deck">
+<!-- Deck Card 1: Predictive Ward Logistics Engine -->
+<article class="deck-card project-bento-card" data-deck-index="0" data-project="ward" data-category="health" data-project-status="research" data-stack-pos="0">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Healthcare Logistics · Concept Study
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-indigo-500/30 bg-indigo-950/40 text-indigo-300 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> Prototype</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Predictive Ward Logistics Engine
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="ward" title="Open case study for Predictive Ward Logistics Engine">
+        <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">HL7 FHIR v4</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">GS1-128</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">IndexedDB</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="ward">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="mailto:deshmukhvaishnav@gmail.com?subject=Ward%20Logistics" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 2: The Unexplored Interior -->
+<article class="deck-card project-bento-card" data-deck-index="1" data-project="consciousness" data-category="cognitive" data-project-status="live" data-stack-pos="1">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Cognitive Science · Interactive Inquiry
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        The Unexplored Interior
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="consciousness" title="Open case study for The Unexplored Interior">
+        <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">HTML Canvas</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Vanilla JS</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="consciousness">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 3: iTHINK: Attention & Flow Lab -->
+<article class="deck-card project-bento-card" data-deck-index="2" data-project="ithink" data-category="cognitive" data-project-status="live" data-stack-pos="2">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Cognitive Practice · Neuroscience Lab
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        iTHINK: Attention & Flow Lab
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="ithink" title="Open case study for iTHINK: Attention & Flow Lab">
+        <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Three.js</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">WebGL</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">TypeScript</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="ithink">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 4: CivicFlow: Highways Triage Engine -->
+<article class="deck-card project-bento-card" data-deck-index="3" data-project="civicflow" data-category="civic" data-project-status="live" data-stack-pos="3">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Civic Infrastructure · Municipal Triage
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        CivicFlow: Highways Triage Engine
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="civicflow" title="Open case study for CivicFlow: Highways Triage Engine">
+        <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">DBSCAN Spatial</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">GeoJSON</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Turf.js</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="civicflow">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/civicflow.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 5: AI Script Studio: Multi-Track DAW -->
+<article class="deck-card project-bento-card" data-deck-index="4" data-project="scriptstudio" data-category="creative" data-project-status="research" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Creative Technology · Generative Audio
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-indigo-500/30 bg-indigo-950/40 text-indigo-300 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> Prototype</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        AI Script Studio: Multi-Track DAW
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="scriptstudio" title="Open case study for AI Script Studio: Multi-Track DAW">
+        <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Canvas Timeline</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">TypeScript</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="scriptstudio">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://github.com/aigroupchathq/gstudio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Source</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 6: RoadTriage: Edge Defect Scanner -->
+<article class="deck-card project-bento-card" data-deck-index="5" data-project="roadtriage" data-category="civic" data-project-status="research" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Civic Infrastructure · Edge Vision
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-indigo-500/30 bg-indigo-950/40 text-indigo-300 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> Prototype</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        RoadTriage: Edge Defect Scanner
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="roadtriage" title="Open case study for RoadTriage: Edge Defect Scanner">
+        <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Computer Vision</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">TensorFlow.js</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">IndexedDB</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="roadtriage">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="mailto:deshmukhvaishnav@gmail.com?subject=RoadTriage" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 7: The Observer: Thought & Awareness -->
+<article class="deck-card project-bento-card" data-deck-index="6" data-project="itsyou" data-category="cognitive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Cognitive Science · Metacognition
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        The Observer: Thought & Awareness
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="itsyou" title="Open case study for The Observer: Thought & Awareness">
+        <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An interactive reflection interface examining mental models, decision-making habits, and attention patterns.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Interactive Narrative</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Canvas 2D</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Vanilla JS</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="itsyou">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://itsyou.ai.studio/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 8: BabyCarl: Circadian Telemetry -->
+<article class="deck-card project-bento-card" data-deck-index="7" data-project="babycarl" data-category="health" data-project-status="research" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Pediatric Health · Circadian Telemetry
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-indigo-500/30 bg-indigo-950/40 text-indigo-300 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> Prototype</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        BabyCarl: Circadian Telemetry
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="babycarl" title="Open case study for BabyCarl: Circadian Telemetry">
+        <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Circadian Telemetry</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Local Storage</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Tactile UX</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="babycarl">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 9: GroupChat HQ: Consensus Engine -->
+<article class="deck-card project-bento-card" data-deck-index="8" data-project="groupchat" data-category="creative" data-project-status="research" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Collaboration Systems · Semantic Sync
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-indigo-500/30 bg-indigo-950/40 text-indigo-300 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> Prototype</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        GroupChat HQ: Consensus Engine
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="groupchat" title="Open case study for GroupChat HQ: Consensus Engine">
+        <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Vector Embeddings</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Semantic Graphs</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">CRDT State</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="groupchat">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="mailto:deshmukhvaishnav@gmail.com?subject=GroupChat" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Inquire</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 10: Rulers Language -->
+<article class="deck-card project-bento-card" data-deck-index="9" data-project="vision" data-category="cognitive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          AI Guidance · Prompt Studio
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Rulers Language
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="vision" title="Open case study for Rulers Language">
+        <img src="assets/work-vision.svg" alt="Rulers Language" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Mission Paths</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Prompt Studio</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Original Illustrations</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="vision">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/rulers-language/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 11: Datum ADAS -->
+<article class="deck-card project-bento-card" data-deck-index="10" data-project="datumadas" data-category="automotive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Automotive Systems · Perception
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Datum ADAS
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="datumadas" title="Open case study for Datum ADAS">
+        <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Computer Vision</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">On-Device</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Kinematics</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="datumadas">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/datum-adas/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 12: Checkmate (Velum Labs) -->
+<article class="deck-card project-bento-card" data-deck-index="11" data-project="velum" data-category="cognitive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Human Decisions · Compatibility
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Checkmate (Velum Labs)
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="velum" title="Open case study for Checkmate (Velum Labs)">
+        <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Explainable Matching</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">React 19</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">TypeScript</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="velum">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 13: Vedic Tree OS -->
+<article class="deck-card project-bento-card" data-deck-index="12" data-project="vtsystem" data-category="cognitive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Education Systems · Institutional OS
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Vedic Tree OS
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="vtsystem" title="Open case study for Vedic Tree OS">
+        <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Multi-Tenant</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">RBAC Security</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">TypeScript</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="vtsystem">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 14: The Driver of God -->
+<article class="deck-card project-bento-card" data-deck-index="13" data-project="driver" data-category="cognitive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Interactive Philosophy · Audio
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        The Driver of God
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="driver" title="Open case study for The Driver of God">
+        <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Interactive Philosophy</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Canvas 2D</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="driver">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/the-driver-of-god/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 15: Hidden Leaf Studio -->
+<article class="deck-card project-bento-card" data-deck-index="14" data-project="hiddenleaf" data-category="creative" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Creative Tools · Bilingual Studio
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Hidden Leaf Studio
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="hiddenleaf" title="Open case study for Hidden Leaf Studio">
+        <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Web Audio API</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Phoneme Parser</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Rhythm Studio</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="hiddenleaf">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://aigroupchathq.github.io/hidden-leaf-studio/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Demo</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Deck Card 16: Datum Atelier -->
+<article class="deck-card project-bento-card" data-deck-index="15" data-project="datumatelier" data-category="automotive" data-project-status="live" data-stack-pos="hidden">
+  <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[11px] sm:text-xs text-zinc-400 font-semibold uppercase tracking-wider line-clamp-1">
+          Automotive Systems · Provenance
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Demo</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+        Datum Atelier
+      </h3>
+
+      <div class="inspect-card-trigger relative w-full h-36 sm:h-44 rounded-xl overflow-hidden border border-[#222222] bg-black my-2.5 cursor-pointer group" data-project="datumatelier" title="Open case study for Datum Atelier">
+        <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3 line-clamp-2">
+        An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.
+      </p>
+
+      <div class="flex items-center gap-1.5 flex-wrap mb-2">
+        <span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Vehicle Provenance</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Owner Records</span><span class="px-2 py-0.5 rounded bg-black/80 border border-[#262626] text-[10px] sm:text-[11px] font-mono text-zinc-400">Offline-First</span>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-xs mt-auto">
+      <div class="flex items-center gap-2.5">
+        <button type="button" class="inspect-modal-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] transition-all cursor-pointer font-medium" data-project="datumatelier">
+          <span>Case Study</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </button>
+        <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black hover:bg-zinc-200 font-mono text-xs font-semibold transition-all"><span>Live Site</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+      </div>
+      <div class="text-[11px] text-zinc-500 font-mono hidden sm:block">
+        Swipe / Drag Card →
+      </div>
+    </div>
+  </div>
+</article>
+          </div>
+
+          <!-- Scrubber Dots -->
+          <div id="deckDotsContainer" class="flex items-center justify-center gap-1.5 mt-6" role="tablist" aria-label="Deck cards scrubber"></div>
+        </div>
+
+        <!-- 2. GRID VIEW CONTAINER (ALTERNATIVE VIEW) -->
+        <div id="projectGridContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="project-group-heading project-group-heading-live">
             <div>
               <span class="font-mono text-[11px] text-zinc-400 uppercase tracking-[0.16em]">01 · Working links</span>
@@ -722,8 +1489,8 @@
             <span class="project-group-count" data-project-group-count="research">5 projects</span>
           </div>
 
-          <!-- Predictive Ward Logistics Engine -->
-          <article class="project-bento-card" data-category="health">
+
+<article class="project-bento-card" data-category="health">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Healthcare Logistics · Concept Study
@@ -752,8 +1519,7 @@
             </div>
           </article>
 
-          <!-- The Unexplored Interior -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Cognitive Science · Interactive Inquiry
@@ -782,8 +1548,7 @@
             </div>
           </article>
 
-          <!-- iTHINK: Attention & Flow Lab -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Cognitive Practice · Neuroscience Lab
@@ -812,8 +1577,7 @@
             </div>
           </article>
 
-          <!-- CivicFlow: Highways Triage Engine -->
-          <article class="project-bento-card" data-category="civic" data-project-status="live">
+<article class="project-bento-card" data-category="civic" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Civic Infrastructure · Municipal Triage
@@ -842,8 +1606,7 @@
             </div>
           </article>
 
-          <!-- AI Script Studio: Multi-Track DAW -->
-          <article class="project-bento-card" data-category="creative">
+<article class="project-bento-card" data-category="creative">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Creative Technology · Generative Audio
@@ -872,8 +1635,7 @@
             </div>
           </article>
 
-          <!-- RoadTriage: Edge Defect Scanner -->
-          <article class="project-bento-card" data-category="civic">
+<article class="project-bento-card" data-category="civic">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Civic Infrastructure · Edge Vision
@@ -902,8 +1664,7 @@
             </div>
           </article>
 
-          <!-- The Observer: Thought & Awareness -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Cognitive Science · Metacognition
@@ -932,8 +1693,7 @@
             </div>
           </article>
 
-          <!-- BabyCarl: Circadian Telemetry -->
-          <article class="project-bento-card" data-category="health">
+<article class="project-bento-card" data-category="health">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Pediatric Health · Circadian Telemetry
@@ -962,8 +1722,7 @@
             </div>
           </article>
 
-          <!-- GroupChat HQ: Consensus Engine -->
-          <article class="project-bento-card" data-category="creative">
+<article class="project-bento-card" data-category="creative">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Collaboration Systems · Semantic Sync
@@ -992,8 +1751,7 @@
             </div>
           </article>
 
-          <!-- Rulers Language (formerly Vision Intelligence) -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 AI Guidance · Prompt Studio
@@ -1022,8 +1780,7 @@
             </div>
           </article>
 
-          <!-- Datum ADAS -->
-          <article class="project-bento-card" data-category="automotive" data-project-status="live">
+<article class="project-bento-card" data-category="automotive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Automotive Systems · Perception
@@ -1052,8 +1809,7 @@
             </div>
           </article>
 
-          <!-- Checkmate (Velum Labs) -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Human Decisions · Compatibility
@@ -1082,8 +1838,7 @@
             </div>
           </article>
 
-          <!-- Vedic Tree OS -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Education Systems · Institutional OS
@@ -1112,8 +1867,7 @@
             </div>
           </article>
 
-          <!-- The Driver of God -->
-          <article class="project-bento-card" data-category="cognitive" data-project-status="live">
+<article class="project-bento-card" data-category="cognitive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Interactive Philosophy · Audio
@@ -1142,8 +1896,7 @@
             </div>
           </article>
 
-          <!-- Hidden Leaf Studio -->
-          <article class="project-bento-card" data-category="creative" data-project-status="live">
+<article class="project-bento-card" data-category="creative" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Creative Tools · Bilingual Studio
@@ -1172,8 +1925,7 @@
             </div>
           </article>
 
-          <!-- Datum Atelier -->
-          <article class="project-bento-card" data-category="automotive" data-project-status="live">
+<article class="project-bento-card" data-category="automotive" data-project-status="live">
             <div>
               <span class="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-1">
                 Automotive Systems · Provenance
@@ -1201,7 +1953,6 @@
               </div>
             </div>
           </article>
-
         </div>
       </section>
 
@@ -3339,7 +4090,21 @@
         setupCopyButton("copyEmailFooterBtn", "copyEmailFooterText");
 
         // Project search
-        const cards = document.querySelectorAll("#work .project-bento-card");
+        // =====================================================================
+        // 03. SELECTED WORK: FLUID TOUCH DECK & GRID ENGINE
+        // =====================================================================
+        const deckContainer = document.getElementById("projectDeckContainer");
+        const gridContainer = document.getElementById("projectGridContainer");
+        const viewDeckModeBtn = document.getElementById("viewDeckModeBtn");
+        const viewGridModeBtn = document.getElementById("viewGridModeBtn");
+        const deckStage = document.getElementById("projectDeckStage");
+        const deckCounterBadge = document.getElementById("deckCounterBadge");
+        const deckLiveStatusBadge = document.getElementById("deckLiveStatusBadge");
+        const deckLiveStatusText = document.getElementById("deckLiveStatusText");
+        const deckPrevBtn = document.getElementById("deckPrevBtn");
+        const deckNextBtn = document.getElementById("deckNextBtn");
+        const deckDotsContainer = document.getElementById("deckDotsContainer");
+        const filterTabs = document.querySelectorAll("#work .filter-tab");
         const searchInput = document.getElementById("projectSearchInput");
         const searchClearBtn = document.getElementById("searchClearBtn");
         const searchMatchCount = document.getElementById("searchMatchCount");
@@ -3347,66 +4112,372 @@
         const researchGroupHeading = document.querySelector(".project-group-heading-research");
         const liveGroupCount = document.querySelector('[data-project-group-count="live"]');
         const researchGroupCount = document.querySelector('[data-project-group-count="research"]');
-        const projectGrid = document.querySelector("#work > .grid");
 
-        if (projectGrid && liveGroupHeading && researchGroupHeading) {
-          const liveCards = [...cards].filter((card) => card.dataset.projectStatus === "live");
-          const researchCards = [...cards].filter((card) => card.dataset.projectStatus !== "live");
-          projectGrid.append(liveGroupHeading, ...liveCards, researchGroupHeading, ...researchCards);
+        const allDeckCards = Array.from(document.querySelectorAll("#projectDeckStage .deck-card"));
+        const allGridCards = Array.from(document.querySelectorAll("#projectGridContainer .project-bento-card"));
+
+        let currentDeckIndex = 0;
+        let activeFilter = "all";
+        let activeQuery = "";
+        let currentDeckList = [...allDeckCards];
+        let isDeckAnimating = false;
+
+        // View Mode Switcher (Deck vs Grid)
+        function setViewMode(mode) {
+          if (mode === "grid") {
+            if (deckContainer) deckContainer.classList.add("hidden");
+            if (gridContainer) gridContainer.classList.remove("hidden");
+            if (viewGridModeBtn) {
+              viewGridModeBtn.className = "px-3 py-1.5 rounded-lg bg-white text-black font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm";
+            }
+            if (viewDeckModeBtn) {
+              viewDeckModeBtn.className = "px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer";
+            }
+          } else {
+            if (gridContainer) gridContainer.classList.add("hidden");
+            if (deckContainer) deckContainer.classList.remove("hidden");
+            if (viewDeckModeBtn) {
+              viewDeckModeBtn.className = "px-3 py-1.5 rounded-lg bg-white text-black font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm";
+            }
+            if (viewGridModeBtn) {
+              viewGridModeBtn.className = "px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer";
+            }
+            updateDeckPositions();
+          }
+          if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+          }
         }
 
-        let activeQuery = "";
+        if (viewDeckModeBtn) viewDeckModeBtn.addEventListener("click", () => setViewMode("deck"));
+        if (viewGridModeBtn) viewGridModeBtn.addEventListener("click", () => setViewMode("grid"));
 
-        function filterProjects() {
-          let visibleCount = 0;
-          let visibleLiveCount = 0;
-          let visibleResearchCount = 0;
-          const query = activeQuery.trim().toLowerCase();
+        // Render Dots Scrubber
+        function renderDeckDots() {
+          if (!deckDotsContainer) return;
+          deckDotsContainer.innerHTML = "";
+          currentDeckList.forEach((_, idx) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = `deck-dot ${idx === currentDeckIndex ? "active" : ""}`;
+            dot.setAttribute("aria-label", `Go to card ${idx + 1}`);
+            dot.addEventListener("click", (e) => {
+              e.stopPropagation();
+              jumpToDeckIndex(idx);
+            });
+            deckDotsContainer.appendChild(dot);
+          });
+        }
 
-          cards.forEach((card) => {
-            const cardText = (card.textContent || "").toLowerCase();
-            const matchesQuery = query === "" || cardText.includes(query);
+        // Update 3D Stack positions
+        function updateDeckPositions() {
+          if (currentDeckList.length === 0) {
+            allDeckCards.forEach((c) => c.setAttribute("data-stack-pos", "hidden"));
+            if (deckCounterBadge) deckCounterBadge.textContent = "00 / 00";
+            if (deckLiveStatusText) deckLiveStatusText.textContent = "No matches";
+            if (deckDotsContainer) deckDotsContainer.innerHTML = "";
+            return;
+          }
 
-            if (matchesQuery) {
-              card.style.display = "";
-              visibleCount++;
-              if (card.dataset.projectStatus === "live") {
-                visibleLiveCount++;
-              } else {
-                visibleResearchCount++;
-              }
+          if (currentDeckIndex >= currentDeckList.length) {
+            currentDeckIndex = 0;
+          }
+
+          allDeckCards.forEach((card) => {
+            card.setAttribute("data-stack-pos", "hidden");
+          });
+
+          const total = currentDeckList.length;
+          currentDeckList.forEach((card, idx) => {
+            const relPos = (idx - currentDeckIndex + total) % total;
+            if (relPos === 0) {
+              card.setAttribute("data-stack-pos", "0");
+            } else if (relPos === 1) {
+              card.setAttribute("data-stack-pos", "1");
+            } else if (relPos === 2) {
+              card.setAttribute("data-stack-pos", "2");
+            } else if (relPos === 3) {
+              card.setAttribute("data-stack-pos", "3");
             } else {
-              card.style.display = "none";
+              card.setAttribute("data-stack-pos", "hidden");
             }
           });
 
+          // Update Counter
+          if (deckCounterBadge) {
+            deckCounterBadge.textContent = `${String(currentDeckIndex + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+          }
+
+          // Update Status
+          const topCard = currentDeckList[currentDeckIndex];
+          if (topCard && deckLiveStatusBadge && deckLiveStatusText) {
+            const isLive = topCard.dataset.projectStatus === "live";
+            const dotSpan = deckLiveStatusBadge.querySelector("span:first-child");
+            if (isLive) {
+              deckLiveStatusBadge.className = "inline-flex items-center gap-1.5 font-mono text-[11px] text-emerald-400";
+              if (dotSpan) dotSpan.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+              deckLiveStatusText.textContent = "Live Demo";
+            } else {
+              deckLiveStatusBadge.className = "inline-flex items-center gap-1.5 font-mono text-[11px] text-indigo-300";
+              if (dotSpan) dotSpan.className = "w-2 h-2 rounded-full bg-indigo-400";
+              deckLiveStatusText.textContent = "Research / Prototype";
+            }
+          }
+
+          // Update dots
+          const dots = deckDotsContainer ? deckDotsContainer.querySelectorAll(".deck-dot") : [];
+          dots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === currentDeckIndex);
+          });
+        }
+
+        function jumpToDeckIndex(idx) {
+          if (idx < 0 || idx >= currentDeckList.length) return;
+          currentDeckIndex = idx;
+          updateDeckPositions();
+        }
+
+        function nextDeckCard() {
+          if (isDeckAnimating || currentDeckList.length <= 1) return;
+          isDeckAnimating = true;
+
+          const topCard = currentDeckList[currentDeckIndex];
+          if (topCard) {
+            topCard.classList.add("swipe-out-left");
+          }
+
+          setTimeout(() => {
+            if (topCard) topCard.classList.remove("swipe-out-left");
+            currentDeckIndex = (currentDeckIndex + 1) % currentDeckList.length;
+            updateDeckPositions();
+            isDeckAnimating = false;
+          }, 180);
+        }
+
+        function prevDeckCard() {
+          if (isDeckAnimating || currentDeckList.length <= 1) return;
+          isDeckAnimating = true;
+
+          currentDeckIndex = (currentDeckIndex - 1 + currentDeckList.length) % currentDeckList.length;
+          updateDeckPositions();
+
+          const newTop = currentDeckList[currentDeckIndex];
+          if (newTop) {
+            newTop.classList.add("swipe-in-left");
+            setTimeout(() => {
+              newTop.classList.remove("swipe-in-left");
+              isDeckAnimating = false;
+            }, 360);
+          } else {
+            isDeckAnimating = false;
+          }
+        }
+
+        if (deckNextBtn) deckNextBtn.addEventListener("click", nextDeckCard);
+        if (deckPrevBtn) deckPrevBtn.addEventListener("click", prevDeckCard);
+
+        // Fluid Touch / Pointer Gesture Engine
+        if (deckStage) {
+          let startX = 0, startY = 0, currentX = 0, currentY = 0;
+          let isDragging = false;
+          let isHorizontal = null;
+          let activeTopCard = null;
+
+          deckStage.addEventListener("pointerdown", (e) => {
+            if (e.target.closest("button, a, input")) return;
+            if (currentDeckList.length <= 1 || isDeckAnimating) return;
+
+            activeTopCard = currentDeckList[currentDeckIndex];
+            if (!activeTopCard) return;
+
+            isDragging = true;
+            isHorizontal = null;
+            startX = e.clientX;
+            startY = e.clientY;
+            currentX = startX;
+            currentY = startY;
+
+            activeTopCard.classList.add("is-dragging");
+            try { activeTopCard.setPointerCapture(e.pointerId); } catch(err) {}
+          });
+
+          deckStage.addEventListener("pointermove", (e) => {
+            if (!isDragging || !activeTopCard) return;
+            currentX = e.clientX;
+            currentY = e.clientY;
+            const deltaX = currentX - startX;
+            const deltaY = currentY - startY;
+
+            if (isHorizontal === null) {
+              if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
+                isHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
+              }
+            }
+
+            if (!isHorizontal) return;
+
+            // Fluid real-time tilt & translation
+            const rot = deltaX * 0.04;
+            activeTopCard.style.transform = `translate3d(${deltaX}px, ${deltaY * 0.12}px, 0) rotate(${rot}deg)`;
+
+            // Progressive scaling of card behind
+            const nextIdx = (currentDeckIndex + 1) % currentDeckList.length;
+            const cardBehind = currentDeckList[nextIdx];
+            if (cardBehind && currentDeckList.length > 1) {
+              const progress = Math.min(Math.abs(deltaX) / 180, 1);
+              const scale = 0.95 + 0.05 * progress;
+              const translateY = -20 + 20 * progress;
+              cardBehind.style.transform = `translate3d(0, ${translateY}px, -40px) scale(${scale})`;
+              cardBehind.style.opacity = `${0.85 + 0.15 * progress}`;
+            }
+          });
+
+          const onPointerEnd = (e) => {
+            if (!isDragging || !activeTopCard) return;
+            isDragging = false;
+            activeTopCard.classList.remove("is-dragging");
+            try { activeTopCard.releasePointerCapture(e.pointerId); } catch(err) {}
+
+            const deltaX = currentX - startX;
+            const nextIdx = (currentDeckIndex + 1) % currentDeckList.length;
+            const cardBehind = currentDeckList[nextIdx];
+
+            if (isHorizontal && Math.abs(deltaX) > 75) {
+              activeTopCard.style.transform = "";
+              if (cardBehind) { cardBehind.style.transform = ""; cardBehind.style.opacity = ""; }
+              if (deltaX < 0) {
+                nextDeckCard();
+              } else {
+                prevDeckCard();
+              }
+            } else {
+              // Elastic spring back to center
+              activeTopCard.style.transform = "";
+              if (cardBehind) { cardBehind.style.transform = ""; cardBehind.style.opacity = ""; }
+            }
+            isHorizontal = null;
+            activeTopCard = null;
+          };
+
+          deckStage.addEventListener("pointerup", onPointerEnd);
+          deckStage.addEventListener("pointercancel", onPointerEnd);
+        }
+
+        // Global Keyboard Arrow Navigation
+        window.addEventListener("keydown", (e) => {
+          if (caseStudyModal && !caseStudyModal.classList.contains("hidden")) return;
+          if (document.activeElement && ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+
+          if (deckContainer && !deckContainer.classList.contains("hidden")) {
+            if (e.key === "ArrowRight") {
+              nextDeckCard();
+            } else if (e.key === "ArrowLeft") {
+              prevDeckCard();
+            }
+          }
+        });
+
+        // Combined Filter Function for Deck & Grid
+        function applyFilters() {
+          const query = activeQuery.trim().toLowerCase();
+
+          // 1. Filter Deck Cards
+          currentDeckList = allDeckCards.filter((card) => {
+            const category = (card.dataset.category || "").toLowerCase();
+            const status = card.dataset.projectStatus || "research";
+            const text = (card.textContent || "").toLowerCase();
+
+            const matchesQuery = query === "" || text.includes(query);
+            let matchesTab = true;
+            if (activeFilter === "live") {
+              matchesTab = status === "live";
+            } else if (activeFilter === "research") {
+              matchesTab = status !== "live";
+            } else if (activeFilter !== "all") {
+              matchesTab = category === activeFilter.toLowerCase();
+            }
+
+            return matchesQuery && matchesTab;
+          });
+
+          currentDeckIndex = 0;
+          renderDeckDots();
+          updateDeckPositions();
+
+          // 2. Filter Grid Cards
+          let gridVisibleCount = 0;
+          let visibleLiveCount = 0;
+          let visibleResearchCount = 0;
+
+          allGridCards.forEach((card) => {
+            const category = (card.dataset.category || "").toLowerCase();
+            const status = card.dataset.projectStatus || "research";
+            const text = (card.textContent || "").toLowerCase();
+
+            const matchesQuery = query === "" || text.includes(query);
+            let matchesTab = true;
+            if (activeFilter === "live") {
+              matchesTab = status === "live";
+            } else if (activeFilter === "research") {
+              matchesTab = status !== "live";
+            } else if (activeFilter !== "all") {
+              matchesTab = category === activeFilter.toLowerCase();
+            }
+
+            const isVisible = matchesQuery && matchesTab;
+            card.style.display = isVisible ? "" : "none";
+            if (isVisible) {
+              gridVisibleCount++;
+              if (status === "live") visibleLiveCount++;
+              else visibleResearchCount++;
+            }
+          });
+
+          // Headings inside grid
           if (liveGroupHeading) liveGroupHeading.hidden = visibleLiveCount === 0;
           if (researchGroupHeading) researchGroupHeading.hidden = visibleResearchCount === 0;
           if (liveGroupCount) liveGroupCount.textContent = `${visibleLiveCount} ${visibleLiveCount === 1 ? "demo" : "demos"}`;
           if (researchGroupCount) researchGroupCount.textContent = `${visibleResearchCount} ${visibleResearchCount === 1 ? "project" : "projects"}`;
 
+          // Match count & clear button
           if (searchMatchCount) {
-            searchMatchCount.textContent = query
-              ? `Showing ${visibleCount} of ${cards.length} projects`
-              : `${cards.length} projects`;
+            searchMatchCount.textContent = query || activeFilter !== "all"
+              ? `Showing ${currentDeckList.length} of ${allDeckCards.length} projects`
+              : `${allDeckCards.length} projects`;
           }
 
           if (searchClearBtn) {
-            searchClearBtn.classList.toggle("hidden", query === "");
+            searchClearBtn.classList.toggle("hidden", query === "" && activeFilter === "all");
           }
         }
 
+        // Filter Tabs Click Handlers
+        filterTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            filterTabs.forEach((t) => {
+              t.classList.remove("active", "border-white", "bg-white", "text-black", "font-semibold");
+              t.classList.add("border-canvas-border", "bg-canvas-surface", "text-zinc-400");
+            });
+            tab.classList.remove("border-canvas-border", "bg-canvas-surface", "text-zinc-400");
+            tab.classList.add("active", "border-white", "bg-white", "text-black", "font-semibold");
+
+            activeFilter = tab.dataset.filter || "all";
+            applyFilters();
+          });
+        });
+
+        // Search Handlers
         if (searchInput) {
           searchInput.addEventListener("input", (e) => {
             activeQuery = e.target.value;
-            filterProjects();
+            applyFilters();
           });
 
           searchInput.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
               searchInput.value = "";
               activeQuery = "";
-              filterProjects();
+              applyFilters();
               searchInput.blur();
             }
           });
@@ -3416,12 +4487,26 @@
           searchClearBtn.addEventListener("click", () => {
             if (searchInput) searchInput.value = "";
             activeQuery = "";
-            filterProjects();
+            activeFilter = "all";
+            filterTabs.forEach((t) => {
+              const isAll = t.dataset.filter === "all";
+              t.classList.toggle("active", isAll);
+              t.classList.toggle("border-white", isAll);
+              t.classList.toggle("bg-white", isAll);
+              t.classList.toggle("text-black", isAll);
+              t.classList.toggle("font-semibold", isAll);
+              t.classList.toggle("border-canvas-border", !isAll);
+              t.classList.toggle("bg-canvas-surface", !isAll);
+              t.classList.toggle("text-zinc-400", !isAll);
+            });
+            applyFilters();
             if (searchInput) searchInput.focus();
           });
         }
 
-        filterProjects();
+        // Initial deck setup
+        applyFilters();
+
 
         // =====================================================================
         // 04. INTERACTIVE CARD TABS & VIEW DENSITY SWITCHER
