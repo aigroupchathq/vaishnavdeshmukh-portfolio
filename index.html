@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vaishnav Deshmukh — Product, Design &amp; Systems</title>
-  <meta name="description" content="MSc Logistics engineer and creative developer bridging systems, logistics and creative code. Based in London, UK. Open to opportunities." />
+  <title>Vaishnav Deshmukh — Founder &amp; Systems Engineer</title>
+  <meta name="description" content="Founder of Datum Atelier, MSc Logistics engineer and creative developer bridging systems architecture, logistics strategy, and creative code. Based in London, UK." />
 
-  <!-- Open Graph -->
-  <meta property="og:title"       content="Vaishnav Deshmukh — Product, Design &amp; Systems" />
-  <meta property="og:description" content="MSc Logistics engineer and creative developer building tools that absorb operational friction and return genuine value. Based in London." />
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title"       content="Vaishnav Deshmukh — Founder of Datum Atelier · Systems &amp; Creative Code" />
+  <meta property="og:description" content="MSc Logistics engineer and founder building offline-first systems, telemetry architectures, and tactile interfaces. Based in London, UK." />
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/" />
   <meta name="twitter:card"       content="summary_large_image" />
-  <meta name="twitter:title"      content="Vaishnav Deshmukh — Product, Design &amp; Systems" />
+  <meta name="twitter:title"      content="Vaishnav Deshmukh — Founder &amp; Systems Engineer" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Syne + Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="portfolio-v2.css" />
+  <link rel="stylesheet" href="portfolio-v2.css?v=3" />
 </head>
 <body>
 
@@ -38,20 +38,23 @@
   ══════════════════════════════════════════════════════════ -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-left">
-      <div class="nav-monogram" aria-hidden="true">VD</div>
-      <span class="nav-name">Vaishnav Deshmukh</span>
+      <a href="#hero" class="nav-brand-link">
+        <div class="nav-monogram" aria-hidden="true">VD</div>
+        <span class="nav-name">Vaishnav Deshmukh</span>
+      </a>
     </div>
 
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#about">Arsenal</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="nav-available">
+      <a href="https://datumatelier.uk/" target="_blank" rel="noopener" class="nav-available" title="Visit Datum Atelier">
         <span class="nav-dot" aria-hidden="true"></span>
-        <span>Available for opportunities</span>
-      </div>
+        <span>Founder @ Datum Atelier</span>
+      </a>
       <button class="nav-hamburger" id="nav-hamburger"
               aria-label="Toggle menu" aria-expanded="false"
               aria-controls="nav-mobile-menu">
@@ -63,9 +66,12 @@
   <!-- Mobile Menu -->
   <div id="nav-mobile-menu" class="nav-mobile-menu" role="dialog" aria-label="Mobile navigation">
     <a href="#work">Work</a>
-    <a href="#about">About</a>
+    <a href="#about">Arsenal</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
+    <a href="https://datumatelier.uk/" target="_blank" rel="noopener" class="mobile-founder-link">
+      Founder @ Datum Atelier ↗
+    </a>
   </div>
 
   <!-- ══════════════════════════════════════════════════════════
@@ -73,7 +79,7 @@
   ══════════════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Introduction">
     <p class="hero-eyebrow">
-      LONDON, UK &nbsp;·&nbsp; OPEN TO WORK &nbsp;·&nbsp; MSC LOGISTICS &nbsp;·&nbsp; CREATIVE ENGINEERING
+      LONDON, UK &nbsp;·&nbsp; FOUNDER @ DATUM ATELIER &nbsp;·&nbsp; MSC LOGISTICS &nbsp;·&nbsp; CREATIVE ENGINEERING
     </p>
 
     <h1 class="hero-h1">
@@ -83,31 +89,34 @@
     </h1>
 
     <p class="hero-sub">
-      MSc Logistics engineer and creative developer building tools that absorb
-      operational friction and return genuine value. Based in London.
+      Founder of <a href="https://datumatelier.uk/" target="_blank" rel="noopener" class="hero-inline-link">Datum Atelier</a>, 
+      MSc Logistics engineer, and creative developer building offline-first architectures, 
+      telemetry engines, and tactile human interfaces. Based in London, UK.
     </p>
 
     <div class="hero-ctas">
-      <a href="#work" class="btn-ghost">View Work ↓</a>
-      <a href="https://www.linkedin.com/in/vaishnavdeshmukh" target="_blank" rel="noopener" class="btn-muted">Download CV →</a>
+      <a href="#work" class="btn-ghost">View Selected Work ↓</a>
+      <a href="https://datumatelier.uk/" target="_blank" rel="noopener" class="btn-founder">
+        Explore Datum Atelier ↗
+      </a>
+      <a href="#contact" class="btn-muted">Get in Touch →</a>
     </div>
 
     <!-- Ticker -->
     <div class="hero-ticker" aria-hidden="true">
       <div class="hero-ticker-track">
-        <span>PYTHON</span><span class="sep">·</span>
-        <span>SQL</span><span class="sep">·</span>
-        <span>POWER BI</span><span class="sep">·</span>
-        <span>SAP ERP</span><span class="sep">·</span>
-        <span>LEAN SIX SIGMA GREEN BELT</span><span class="sep">·</span>
-        <span>TYPESCRIPT</span><span class="sep">·</span>
-        <span>REACT</span><span class="sep">·</span>
-        <span>THREE.JS</span><span class="sep">·</span>
-        <span>LOCAL-FIRST AI</span><span class="sep">·</span>
-        <span>OFFLINE-FIRST</span><span class="sep">·</span>
-        <span>SUPPLY CHAIN OPTIMIZATION</span><span class="sep">·</span>
-        <span>DATUM ATELIER</span><span class="sep">·</span>
+        <span>DATUM ATELIER (FOUNDER)</span><span class="sep">·</span>
+        <span>DATUMATELIER.UK</span><span class="sep">·</span>
+        <span>OFFLINE-FIRST ARCHITECTURES</span><span class="sep">·</span>
+        <span>PYTHON &amp; SQL</span><span class="sep">·</span>
+        <span>SAP ERP &amp; LEAN SIX SIGMA</span><span class="sep">·</span>
+        <span>HL7 FHIR v4 TELEMETRY</span><span class="sep">·</span>
+        <span>TYPESCRIPT &amp; REACT</span><span class="sep">·</span>
+        <span>THREE.JS 3D WEBGL</span><span class="sep">·</span>
+        <span>CRANFIELD 1ST PLACE WIN</span><span class="sep">·</span>
         <span>BABYCARL</span><span class="sep">·</span>
+        <span>CIVICFLOW</span><span class="sep">·</span>
+        <span>AI GROUP CHAT</span><span class="sep">·</span>
         <span>LONDON 2024</span><span class="sep">·</span>
       </div>
     </div>
@@ -118,157 +127,582 @@
   ══════════════════════════════════════════════════════════ -->
   <section id="work" aria-labelledby="work-heading">
     <div class="section-inner">
-      <p class="section-eyebrow fade-up">01 / WORK</p>
-      <h2 class="section-heading fade-up" id="work-heading">Selected Work</h2>
+      <div class="work-header-wrap">
+        <div>
+          <p class="section-eyebrow fade-up">01 / WORK</p>
+          <h2 class="section-heading fade-up" id="work-heading">Selected Work &amp; Systems</h2>
+        </div>
+        <p class="section-lede fade-up">
+          18 curated projects spanning vehicle provenance, pediatric telemetry, 
+          spatial municipal triage, interactive neuroscience, and offline-first infrastructure.
+        </p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="work-filters fade-up" role="group" aria-label="Filter projects">
+        <button type="button" class="filter-pill active" data-filter="all">All Work (18)</button>
+        <button type="button" class="filter-pill" data-filter="live">Live Systems &amp; Demos (13)</button>
+        <button type="button" class="filter-pill" data-filter="concept">Concepts &amp; R&amp;D (5)</button>
+      </div>
 
       <ul class="work-list" role="list">
-
-        <!-- 1. Datum Atelier -->
-        <li class="fade-up">
-          <div class="work-row"
+        <!-- 01. Datum Atelier -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row founder-row"
                data-preview="assets/work-datumatelier.svg"
+               data-project="datumatelier"
                role="article">
             <span class="work-num">01</span>
             <div class="work-body">
-              <h3 class="work-title">Datum Atelier</h3>
-              <p class="work-desc">
-                Private, durable vehicle histories with owner-controlled records
-                and offline-first storage.
-              </p>
+              <div class="work-topline">
+                <span class="work-cat">Automotive Systems · Vehicle Provenance</span>
+                <span class="work-badge badge-live">FOUNDER PLATFORM</span>
+              </div>
+              <h3 class="work-title">
+                Datum Atelier
+                <span class="founder-star" title="Founder Project">✦</span>
+              </h3>
+              <p class="work-desc">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Vehicle Provenance</span><span class="tech-chip">Owner Records</span><span class="tech-chip">Offline-First</span><span class="tech-chip">TypeScript</span><span class="tech-chip">IndexedDB</span>
+              </div>
               <div class="work-links">
-                <a href="https://datumatelier.com" target="_blank" rel="noopener" class="work-link">Live Site ↗</a>
-                <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener" class="work-link">Source ↗</a>
+                <a href="https://datumatelier.uk/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Site ↗</a><a href="https://github.com/aigroupchathq/datum-intro" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="datumatelier">Case Study ↗</button>
               </div>
             </div>
             <div class="work-meta">
-              <span class="work-tag">Automotive Systems<br />Vehicle Provenance</span>
               <span class="work-year">2024</span>
               <span class="work-arrow">→</span>
             </div>
           </div>
         </li>
 
-        <!-- 2. BabyCarl -->
-        <li class="fade-up">
+        <!-- 02. BabyCarl -->
+        <li class="fade-up work-item" data-status="concept">
           <div class="work-row"
                data-preview="assets/work-babycarl.svg"
+               data-project="babycarl"
                role="article">
             <span class="work-num">02</span>
             <div class="work-body">
-              <h3 class="work-title">BabyCarl</h3>
-              <p class="work-desc">
-                Quiet biometric rhythm and sleep tracker for newborn parents.
-                Zero notification anxiety. Local storage.
-              </p>
+              <div class="work-topline">
+                <span class="work-cat">Pediatric Health · Circadian Telemetry</span>
+                <span class="work-badge badge-concept">PATENT-INSPIRED BIOMETRICS</span>
+              </div>
+              <h3 class="work-title">
+                BabyCarl
+                
+              </h3>
+              <p class="work-desc">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Circadian Telemetry</span><span class="tech-chip">Local Storage</span><span class="tech-chip">Tactile UX</span><span class="tech-chip">Offline-First</span>
+              </div>
               <div class="work-links">
-                <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl Inquiry" class="work-link">Inquire ↗</a>
+                <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl%20Inquiry" target="_blank" rel="noopener" class="work-link work-link-primary">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="babycarl">Case Study ↗</button>
               </div>
             </div>
             <div class="work-meta">
-              <span class="work-tag">Pediatric Health<br />Circadian Telemetry</span>
               <span class="work-year">2024</span>
               <span class="work-arrow">→</span>
             </div>
           </div>
         </li>
 
-        <!-- 3. lawpt -->
-        <li class="fade-up">
+        <!-- 03. Datum ADAS -->
+        <li class="fade-up work-item" data-status="live">
           <div class="work-row"
-               data-preview="assets/work-civicflow.svg"
+               data-preview="assets/work-datumadas.svg"
+               data-project="datumadas"
                role="article">
             <span class="work-num">03</span>
             <div class="work-body">
-              <h3 class="work-title">lawpt</h3>
-              <p class="work-desc">
-                Plain-language legal explainer built to reduce the advice gap
-                for people who cannot afford a solicitor.
-              </p>
+              <div class="work-topline">
+                <span class="work-cat">Automotive Systems · Perception</span>
+                <span class="work-badge badge-live">ON-DEVICE PERCEPTION</span>
+              </div>
+              <h3 class="work-title">
+                Datum ADAS
+                
+              </h3>
+              <p class="work-desc">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Computer Vision</span><span class="tech-chip">On-Device Kinematics</span><span class="tech-chip">YOLOv8</span><span class="tech-chip">Edge Vision</span>
+              </div>
               <div class="work-links">
-                <a href="civicflow.html" class="work-link">Live Demo ↗</a>
+                <a href="https://aigroupchathq.github.io/datum-adas/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/datum-adas" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="datumadas">Case Study ↗</button>
               </div>
             </div>
             <div class="work-meta">
-              <span class="work-tag">Civic Tech<br />Legal Access</span>
               <span class="work-year">2024</span>
               <span class="work-arrow">→</span>
             </div>
           </div>
         </li>
 
-        <!-- 4. Ai Group Chat -->
-        <li class="fade-up">
+        <!-- 04. iTHINK: Attention & Flow Lab -->
+        <li class="fade-up work-item" data-status="live">
           <div class="work-row"
-               data-preview="assets/work-groupchat.svg"
+               data-preview="assets/work-ithink.svg"
+               data-project="ithink"
                role="article">
             <span class="work-num">04</span>
             <div class="work-body">
-              <h3 class="work-title">Ai Group Chat</h3>
-              <p class="work-desc">
-                YouTube channel exploring multi-agent AI workflows, prompt
-                engineering, and creative coding for builders.
-              </p>
+              <div class="work-topline">
+                <span class="work-cat">Cognitive Practice · Neuroscience Lab</span>
+                <span class="work-badge badge-live">60 FPS 3D WEBGL</span>
+              </div>
+              <h3 class="work-title">
+                iTHINK: Attention & Flow Lab
+                
+              </h3>
+              <p class="work-desc">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Three.js</span><span class="tech-chip">WebGL 60 FPS</span><span class="tech-chip">TypeScript</span><span class="tech-chip">GLTF Shaders</span>
+              </div>
               <div class="work-links">
-                <a href="https://youtube.com/@aigroupchathq" target="_blank" rel="noopener" class="work-link">YouTube ↗</a>
+                <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/ithinkstudio" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="ithink">Case Study ↗</button>
               </div>
             </div>
             <div class="work-meta">
-              <span class="work-tag">Creative Technology<br />YouTube</span>
               <span class="work-year">2023–2024</span>
               <span class="work-arrow">→</span>
             </div>
           </div>
         </li>
 
-        <!-- 5. Cranfield Supply Chain Simulation -->
-        <li class="fade-up">
+        <!-- 05. CivicFlow & lawpt -->
+        <li class="fade-up work-item" data-status="live">
           <div class="work-row"
-               data-preview="assets/work-vision.svg"
+               data-preview="assets/work-civicflow.svg"
+               data-project="civicflow"
                role="article">
             <span class="work-num">05</span>
             <div class="work-body">
-              <h3 class="work-title">Cranfield Supply Chain Simulation — 1st Place</h3>
-              <p class="work-desc">
-                Won the Cranfield MSc Supply Chain simulation exercise.
-                Top team across cohort.
-              </p>
+              <div class="work-topline">
+                <span class="work-cat">Civic Infrastructure · Municipal Triage</span>
+                <span class="work-badge badge-live">MUNICIPAL TRIAGE</span>
+              </div>
+              <h3 class="work-title">
+                CivicFlow & lawpt
+                
+              </h3>
+              <p class="work-desc">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch, paired with lawpt plain-language legal explainers.</p>
+              <div class="work-tags">
+                <span class="tech-chip">DBSCAN Spatial</span><span class="tech-chip">GeoJSON</span><span class="tech-chip">Turf.js</span><span class="tech-chip">FastAPI / SQLite</span>
+              </div>
               <div class="work-links">
-                <span style="font-size:12px;color:var(--muted);letter-spacing:0.06em;">Academic Achievement</span>
+                <a href="civicflow.html" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="mailto:deshmukhvaishnav@gmail.com?subject=CivicFlow" target="_blank" rel="noopener" class="work-link">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="civicflow">Case Study ↗</button>
               </div>
             </div>
             <div class="work-meta">
-              <span class="work-tag">Supply Chain<br />Operations Research</span>
               <span class="work-year">2024</span>
               <span class="work-arrow">→</span>
             </div>
           </div>
         </li>
 
-        <!-- 6. Datum ADAS -->
-        <li class="fade-up">
+        <!-- 06. Ai Group Chat -->
+        <li class="fade-up work-item" data-status="live">
           <div class="work-row"
-               data-preview="assets/work-datumadas.svg"
+               data-preview="assets/work-groupchat.svg"
+               data-project="groupchat"
                role="article">
             <span class="work-num">06</span>
             <div class="work-body">
-              <h3 class="work-title">Datum ADAS</h3>
-              <p class="work-desc">
-                On-device automotive perception concept: forward-collision
-                awareness, lane context, kinematic safety.
-              </p>
+              <div class="work-topline">
+                <span class="work-cat">Creative Technology · YouTube & Research</span>
+                <span class="work-badge badge-live">MEDIA & R&D</span>
+              </div>
+              <h3 class="work-title">
+                Ai Group Chat
+                
+              </h3>
+              <p class="work-desc">Technical channel and research studio exploring multi-agent AI orchestration, deterministic prompt scaffolding, and creative code for software builders.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Multi-Agent AI</span><span class="tech-chip">Vector Embeddings</span><span class="tech-chip">Video Production</span><span class="tech-chip">Prompt Engineering</span>
+              </div>
               <div class="work-links">
-                <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener" class="work-link">Live Demo ↗</a>
-                <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener" class="work-link">Source ↗</a>
+                <a href="https://youtube.com/@aigroupchathq" target="_blank" rel="noopener" class="work-link work-link-primary">YouTube ↗</a><a href="mailto:deshmukhvaishnav@gmail.com?subject=Ai%20Group%20Chat" target="_blank" rel="noopener" class="work-link">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="groupchat">Case Study ↗</button>
               </div>
             </div>
             <div class="work-meta">
-              <span class="work-tag">Automotive Systems<br />Perception</span>
+              <span class="work-year">2023–2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 07. Cranfield Supply Chain Simulation -->
+        <li class="fade-up work-item" data-status="concept">
+          <div class="work-row"
+               data-preview="assets/work-vision.svg"
+               data-project="cranfield"
+               role="article">
+            <span class="work-num">07</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Supply Chain · Operations Research</span>
+                <span class="work-badge badge-concept">1ST PLACE AWARD</span>
+              </div>
+              <h3 class="work-title">
+                Cranfield Supply Chain Simulation
+                
+              </h3>
+              <p class="work-desc">Awarded 1st place across the entire Cranfield University MSc cohort. Modeled multi-echelon inventory, supplier lead-time variance, and lean replenishment loops under operational stress.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Operations Research</span><span class="tech-chip">Supply Chain Simulation</span><span class="tech-chip">Lean Six Sigma</span><span class="tech-chip">Inventory Optimization</span>
+              </div>
+              <div class="work-links">
+                <a href="mailto:deshmukhvaishnav@gmail.com?subject=Cranfield%20Supply%20Chain" target="_blank" rel="noopener" class="work-link work-link-primary">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="cranfield">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
               <span class="work-year">2024</span>
               <span class="work-arrow">→</span>
             </div>
           </div>
         </li>
 
+        <!-- 08. Predictive Ward Logistics Engine -->
+        <li class="fade-up work-item" data-status="concept">
+          <div class="work-row"
+               data-preview="assets/work-ward.svg"
+               data-project="ward"
+               role="article">
+            <span class="work-num">08</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Healthcare Logistics · Systems R&D</span>
+                <span class="work-badge badge-concept">HEALTHCARE LOGISTICS</span>
+              </div>
+              <h3 class="work-title">
+                Predictive Ward Logistics Engine
+                
+              </h3>
+              <p class="work-desc">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
+              <div class="work-tags">
+                <span class="tech-chip">HL7 FHIR v4</span><span class="tech-chip">Scan4Safety GS1-128</span><span class="tech-chip">IndexedDB</span><span class="tech-chip">BLE Telemetry</span>
+              </div>
+              <div class="work-links">
+                <a href="mailto:deshmukhvaishnav@gmail.com?subject=Ward%20Logistics" target="_blank" rel="noopener" class="work-link work-link-primary">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="ward">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 09. Rulers Language -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-vision.svg"
+               data-project="rulers"
+               role="article">
+            <span class="work-num">09</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">AI Guidance · Prompt Studio</span>
+                <span class="work-badge badge-live">AI METHODOLOGY</span>
+              </div>
+              <h3 class="work-title">
+                Rulers Language
+                
+              </h3>
+              <p class="work-desc">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result with rigorous boundary enforcement.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Mission Paths</span><span class="tech-chip">Prompt Studio</span><span class="tech-chip">Original Design</span><span class="tech-chip">Verification Rules</span>
+              </div>
+              <div class="work-links">
+                <a href="https://aigroupchathq.github.io/rulers-language/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/rulers-language" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="rulers">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 10. Checkmate (Velum Labs) -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-velum.svg"
+               data-project="velum"
+               role="article">
+            <span class="work-num">10</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Human Decisions · Compatibility</span>
+                <span class="work-badge badge-live">REASONING ENGINE</span>
+              </div>
+              <h3 class="work-title">
+                Checkmate (Velum Labs)
+                
+              </h3>
+              <p class="work-desc">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values and cognitive models.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Explainable Matching</span><span class="tech-chip">React 19</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Cognitive Ergonomics</span>
+              </div>
+              <div class="work-links">
+                <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/velum-labs" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="velum">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 11. The Observer: Thought & Awareness -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-observer.svg"
+               data-project="observer"
+               role="article">
+            <span class="work-num">11</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Cognitive Science · Metacognition</span>
+                <span class="work-badge badge-live">COGNITIVE SCIENCE</span>
+              </div>
+              <h3 class="work-title">
+                The Observer: Thought & Awareness
+                
+              </h3>
+              <p class="work-desc">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Interactive Narrative</span><span class="tech-chip">Canvas 2D</span><span class="tech-chip">Vanilla JS</span><span class="tech-chip">Philosophy</span>
+              </div>
+              <div class="work-links">
+                <a href="https://itsyou.ai.studio/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/its-you-ai" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="observer">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023–2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 12. The Unexplored Interior -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-itsyou.svg"
+               data-project="consciousness"
+               role="article">
+            <span class="work-num">12</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Cognitive Science · Interactive Inquiry</span>
+                <span class="work-badge badge-live">VISUAL INQUIRY</span>
+              </div>
+              <h3 class="work-title">
+                The Unexplored Interior
+                
+              </h3>
+              <p class="work-desc">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
+              <div class="work-tags">
+                <span class="tech-chip">HTML Canvas</span><span class="tech-chip">Web Audio API</span><span class="tech-chip">Vanilla JS</span><span class="tech-chip">Cognitive R&D</span>
+              </div>
+              <div class="work-links">
+                <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><button type="button" class="work-link cs-btn" data-project="consciousness">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 13. Hidden Leaf Studio -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-hiddenleaf.svg"
+               data-project="hiddenleaf"
+               role="article">
+            <span class="work-num">13</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Creative Tools · Bilingual Studio</span>
+                <span class="work-badge badge-live">AUDIO & LYRIC LAB</span>
+              </div>
+              <h3 class="work-title">
+                Hidden Leaf Studio
+                
+              </h3>
+              <p class="work-desc">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Web Audio API</span><span class="tech-chip">Phoneme Parser</span><span class="tech-chip">Rhythm Studio</span><span class="tech-chip">Bilingual UX</span>
+              </div>
+              <div class="work-links">
+                <a href="https://aigroupchathq.github.io/hidden-leaf-studio/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/hidden-leaf-studio" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="hiddenleaf">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023–2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 14. AI Script Studio: Multi-Track DAW -->
+        <li class="fade-up work-item" data-status="concept">
+          <div class="work-row"
+               data-preview="assets/work-scriptstudio.svg"
+               data-project="scriptstudio"
+               role="article">
+            <span class="work-num">14</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Creative Technology · Generative Audio</span>
+                <span class="work-badge badge-concept">BROWSER WORKSTATION</span>
+              </div>
+              <h3 class="work-title">
+                AI Script Studio: Multi-Track DAW
+                
+              </h3>
+              <p class="work-desc">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Web Audio API</span><span class="tech-chip">Canvas Timeline</span><span class="tech-chip">TypeScript</span><span class="tech-chip">AudioWorklet</span>
+              </div>
+              <div class="work-links">
+                <a href="https://github.com/aigroupchathq/gstudio" target="_blank" rel="noopener" class="work-link work-link-primary">Source ↗</a><button type="button" class="work-link cs-btn" data-project="scriptstudio">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 15. RoadTriage: Edge Defect Scanner -->
+        <li class="fade-up work-item" data-status="concept">
+          <div class="work-row"
+               data-preview="assets/work-roadtriage.svg"
+               data-project="roadtriage"
+               role="article">
+            <span class="work-num">15</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Civic Infrastructure · Edge Vision</span>
+                <span class="work-badge badge-concept">EDGE COMPUTER VISION</span>
+              </div>
+              <h3 class="work-title">
+                RoadTriage: Edge Defect Scanner
+                
+              </h3>
+              <p class="work-desc">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Computer Vision</span><span class="tech-chip">TensorFlow.js</span><span class="tech-chip">IndexedDB</span><span class="tech-chip">Municipal Flow</span>
+              </div>
+              <div class="work-links">
+                <a href="mailto:deshmukhvaishnav@gmail.com?subject=RoadTriage" target="_blank" rel="noopener" class="work-link work-link-primary">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="roadtriage">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 16. Vedic Tree OS -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-vtsystem.svg"
+               data-project="vtsystem"
+               role="article">
+            <span class="work-num">16</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Education Systems · Institutional OS</span>
+                <span class="work-badge badge-live">INSTITUTIONAL OS</span>
+              </div>
+              <h3 class="work-title">
+                Vedic Tree OS
+                
+              </h3>
+              <p class="work-desc">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Multi-Tenant</span><span class="tech-chip">RBAC Security</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Educational Flow</span>
+              </div>
+              <div class="work-links">
+                <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/vtsystem" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="vtsystem">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023–2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 17. The Driver of God -->
+        <li class="fade-up work-item" data-status="live">
+          <div class="work-row"
+               data-preview="assets/work-driver.svg"
+               data-project="driver"
+               role="article">
+            <span class="work-num">17</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Interactive Philosophy · Procedural Sound</span>
+                <span class="work-badge badge-live">AUDIOVISUAL INQUIRY</span>
+              </div>
+              <h3 class="work-title">
+                The Driver of God
+                
+              </h3>
+              <p class="work-desc">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Web Audio API</span><span class="tech-chip">Interactive Philosophy</span><span class="tech-chip">Canvas 2D</span><span class="tech-chip">Contemplative Tech</span>
+              </div>
+              <div class="work-links">
+                <a href="https://aigroupchathq.github.io/the-driver-of-god/" target="_blank" rel="noopener" class="work-link work-link-primary">Live Demo ↗</a><a href="https://github.com/aigroupchathq/the-driver-of-god" target="_blank" rel="noopener" class="work-link">Source ↗</a><button type="button" class="work-link cs-btn" data-project="driver">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 18. GroupChat HQ: Consensus Engine -->
+        <li class="fade-up work-item" data-status="concept">
+          <div class="work-row"
+               data-preview="assets/work-groupchat.svg"
+               data-project="consensus"
+               role="article">
+            <span class="work-num">18</span>
+            <div class="work-body">
+              <div class="work-topline">
+                <span class="work-cat">Collaboration Systems · Semantic Sync</span>
+                <span class="work-badge badge-concept">SEMANTIC CRDT STATE</span>
+              </div>
+              <h3 class="work-title">
+                GroupChat HQ: Consensus Engine
+                
+              </h3>
+              <p class="work-desc">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
+              <div class="work-tags">
+                <span class="tech-chip">Vector Embeddings</span><span class="tech-chip">Semantic Graphs</span><span class="tech-chip">CRDT State</span><span class="tech-chip">Consensus Algorithms</span>
+              </div>
+              <div class="work-links">
+                <a href="mailto:deshmukhvaishnav@gmail.com?subject=GroupChat%20Consensus" target="_blank" rel="noopener" class="work-link work-link-primary">Inquire ↗</a><button type="button" class="work-link cs-btn" data-project="consensus">Case Study ↗</button>
+              </div>
+            </div>
+            <div class="work-meta">
+              <span class="work-year">2023–2024</span>
+              <span class="work-arrow">→</span>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   </section>
@@ -287,44 +721,43 @@
           <p class="expertise-col-num">01</p>
           <h3 class="expertise-col-title">Core Engineering &amp; Logistics</h3>
           <ul class="expertise-list">
-            <li>SAP ERP</li>
-            <li>Lean Six Sigma Green Belt</li>
-            <li>Inventory Optimisation</li>
-            <li>Purchase Order Gap Analysis</li>
-            <li>Cranfield MSc Logistics</li>
-            <li>Behavioural Economics</li>
-            <li>Supply Chain Simulation</li>
-            <li>Operations Research</li>
+            <li>SAP ERP &amp; Supply Chain Integration</li>
+            <li>Lean Six Sigma Green Belt Certified</li>
+            <li>Inventory Multi-Echelon Optimization</li>
+            <li>Purchase Order Gap Analysis &amp; S&amp;OP</li>
+            <li>Cranfield MSc Logistics (1st Place Simulation)</li>
+            <li>Stochastic Behavioral Economics Modeling</li>
+            <li>HL7 FHIR v4 Healthcare Interoperability</li>
+            <li>Scan4Safety GS1-128 DataMatrix Barcodes</li>
           </ul>
         </div>
 
         <div class="expertise-col fade-up">
           <p class="expertise-col-num">02</p>
-          <h3 class="expertise-col-title">Software &amp; Tech Stack</h3>
+          <h3 class="expertise-col-title">Software &amp; System Stack</h3>
           <ul class="expertise-list">
-            <li>Python</li>
-            <li>SQL</li>
-            <li>Power BI</li>
-            <li>TypeScript · React</li>
-            <li>Three.js</li>
-            <li>Tailwind CSS</li>
-            <li>Local-first / Privacy Architecture</li>
-            <li>Offline-First · IndexedDB</li>
-            <li>Git · Tkinter</li>
+            <li>TypeScript · JavaScript (ESNext)</li>
+            <li>Python · FastAPI &amp; Analytical Pipelines</li>
+            <li>SQL (PostgreSQL, SQLite, PostGIS)</li>
+            <li>Offline-First IndexedDB &amp; Local Persistence</li>
+            <li>Three.js · WebGL 60 FPS GLTF Shaders</li>
+            <li>React 19 &amp; Modern Tailwind Architecture</li>
+            <li>Web Audio API &amp; AudioWorklet Synthesis</li>
+            <li>Git · Zero-Dependency Native Tooling</li>
           </ul>
         </div>
 
         <div class="expertise-col fade-up">
           <p class="expertise-col-num">03</p>
-          <h3 class="expertise-col-title">Creative &amp; Media</h3>
+          <h3 class="expertise-col-title">Creative, Media &amp; Product</h3>
           <ul class="expertise-list">
-            <li>Desi Hip-hop Lyricism</li>
-            <li>Hindi–English Rap Writing</li>
-            <li>Multi-agent AI Prompting</li>
-            <li>Video Production</li>
-            <li>Prompt Engineering</li>
-            <li>UI/UX Design</li>
-            <li>Figma</li>
+            <li>Founder &amp; Sovereign Product Design (Datum Atelier)</li>
+            <li>Ai Group Chat YouTube Technical Production</li>
+            <li>Deterministic LLM Prompt Scaffolding (Rulers Language)</li>
+            <li>Bilingual Hindi–English Metrical Rap Writing</li>
+            <li>Desi Hip-Hop Lyricism &amp; Syllabic Architecture</li>
+            <li>Tactile Cognitive UI &amp; Non-Coercive UX</li>
+            <li>Figma Component Design Systems</li>
           </ul>
         </div>
 
@@ -333,68 +766,178 @@
   </section>
 
   <!-- ══════════════════════════════════════════════════════════
-       EXPERIENCE / TIMELINE
+       EXPERIENCE / PROFESSIONAL FOUNDER & DEVELOPER TIMELINE
   ══════════════════════════════════════════════════════════ -->
   <section id="experience" aria-labelledby="exp-heading">
     <div class="section-inner">
       <p class="section-eyebrow fade-up">03 / TIMELINE</p>
-      <h2 class="section-heading fade-up" id="exp-heading">Experience</h2>
+      <h2 class="section-heading fade-up" id="exp-heading">Professional Journey</h2>
+      <p class="section-lede fade-up">
+        Track record as a founder, systems engineer, technical creator, and logistics researcher.
+      </p>
 
       <div class="timeline">
 
+        <!-- 1. Datum Atelier -->
+        <div class="timeline-item fade-up">
+          <p class="timeline-period">2024 – Present</p>
+          <h3 class="timeline-role">Founder &amp; Systems Architect</h3>
+          <p class="timeline-org">Datum Atelier &nbsp;·&nbsp; datumatelier.uk &nbsp;·&nbsp; London, UK</p>
+          <p class="timeline-desc">
+            Founding and architecting an independent, offline-first vehicle provenance platform. 
+            Directing sovereign owner-controlled maintenance records, digital handover workflows, 
+            local SQLite/IndexedDB caching, and distraction-free tactile workshop interfaces.
+          </p>
+          <div class="timeline-tags">
+            <span>Automotive Provenance</span>
+            <span>Offline-First</span>
+            <span>Cryptographic Handoff</span>
+            <span>TypeScript</span>
+          </div>
+        </div>
+
+        <!-- 2. Ai Group Chat -->
+        <div class="timeline-item fade-up">
+          <p class="timeline-period">2023 – Present</p>
+          <h3 class="timeline-role">Creator &amp; Technical Producer</h3>
+          <p class="timeline-org">Ai Group Chat &nbsp;·&nbsp; YouTube &amp; Research Studio &nbsp;·&nbsp; London, UK</p>
+          <p class="timeline-desc">
+            Creating technical media, reproducible code benchmarks, and architectural investigations 
+            into multi-agent LLM systems, deterministic prompt scaffolding, and creative code 
+            for software engineers and founders.
+          </p>
+          <div class="timeline-tags">
+            <span>Multi-Agent AI</span>
+            <span>Technical Media</span>
+            <span>Prompt Scaffolding</span>
+            <span>Community Building</span>
+          </div>
+        </div>
+
+        <!-- 3. Systems Architect & Prototype Engineer -->
         <div class="timeline-item fade-up">
           <p class="timeline-period">2024 – Present</p>
           <h3 class="timeline-role">Systems Architect &amp; Prototype Engineer</h3>
-          <p class="timeline-org">Personal Projects / Open Source &nbsp;·&nbsp; London, UK</p>
+          <p class="timeline-org">Personal R&amp;D &amp; Open Source &nbsp;·&nbsp; London, UK</p>
           <p class="timeline-desc">
-            Building prototypes across operational systems, civic infrastructure,
-            creative tools, and automotive products. Shipping offline-first,
-            privacy-respecting tools for real users.
+            Designing and shipping resilient, privacy-respecting prototypes across healthcare 
+            logistics telemetry (HL7 FHIR v4, GS1 Scan4Safety), edge computer vision triage (RoadTriage), 
+            and quiet pediatric circadian telemetry (BabyCarl).
           </p>
+          <div class="timeline-tags">
+            <span>HL7 FHIR v4</span>
+            <span>BLE Beacon Positioning</span>
+            <span>IndexedDB</span>
+            <span>Edge AI</span>
+          </div>
         </div>
 
+        <!-- 4. Civic Tech Researcher -->
+        <div class="timeline-item fade-up">
+          <p class="timeline-period">2022 – 2024</p>
+          <h3 class="timeline-role">Systems &amp; Spatial Interface Researcher</h3>
+          <p class="timeline-org">Civic Tech &amp; Municipal Flow R&amp;D &nbsp;·&nbsp; London, UK</p>
+          <p class="timeline-desc">
+            Researched municipal operations and public infrastructure reporting flows. 
+            Prototyped the CivicFlow triage system using automated geospatial clustering (DBSCAN) 
+            and perceptual photo deduplication to eliminate administrative overhead and duplicate contractor dispatches.
+          </p>
+          <div class="timeline-tags">
+            <span>Geospatial DBSCAN</span>
+            <span>Municipal Operations</span>
+            <span>Highways Triage</span>
+            <span>PostGIS</span>
+          </div>
+        </div>
+
+        <!-- 5. Cranfield MSc -->
         <div class="timeline-item fade-up">
           <p class="timeline-period">2022 – 2024</p>
           <h3 class="timeline-role">MSc Logistics &amp; Behavioural Economics</h3>
-          <p class="timeline-org">Cranfield University &nbsp;·&nbsp; UK</p>
+          <p class="timeline-org">Cranfield University &nbsp;·&nbsp; School of Management &nbsp;·&nbsp; UK</p>
           <p class="timeline-desc">
-            Research into supply chain optimisation, behavioural economics, and lean
-            systems. 1st place in the cohort-wide supply chain simulation exercise.
+            Graduate research into supply chain optimization, behavioral economics, and lean systems. 
+            Awarded 1st Place across the entire cohort in the comprehensive supply chain simulation, 
+            achieving highest service levels with optimal inventory buffer placement.
           </p>
+          <div class="timeline-tags">
+            <span>1st Place Winner</span>
+            <span>Lean Six Sigma</span>
+            <span>Inventory Optimization</span>
+            <span>Behavioral Economics</span>
+          </div>
         </div>
 
+        <!-- 6. Interactive 3D & Cognitive Tools -->
         <div class="timeline-item fade-up">
-          <p class="timeline-period">2021 – 2022</p>
-          <h3 class="timeline-role">Retail Operations</h3>
-          <p class="timeline-org">Sports Direct &nbsp;·&nbsp; UK</p>
+          <p class="timeline-period">2020 – 2022</p>
+          <h3 class="timeline-role">Interactive 3D &amp; Cognitive Tools Researcher</h3>
+          <p class="timeline-org">Creative Technology &amp; Open Prototypes &nbsp;·&nbsp; London, UK</p>
           <p class="timeline-desc">
-            Managed inventory flows, purchase order gap analysis, and operational
-            throughput in a high-volume retail environment.
+            Conducted exploratory R&amp;D into spatial mental models, browser audio engines, and human cognitive ergonomics. 
+            Created the iTHINK WebGL 3D neuroanatomy prototype with sustained 60 FPS shaders 
+            and researched low-latency Web Audio API Worklet architectures.
           </p>
-        </div>
-
-        <div class="timeline-item fade-up">
-          <p class="timeline-period">2018 – 2021</p>
-          <h3 class="timeline-role">BSc — Mumbai University</h3>
-          <p class="timeline-org">Mumbai University &nbsp;·&nbsp; Mumbai, India</p>
-          <p class="timeline-desc">
-            Foundation in quantitative methods, market behaviour, and systems thinking.
-          </p>
-        </div>
-
-        <div class="timeline-item fade-up">
-          <p class="timeline-period">Various</p>
-          <h3 class="timeline-role">Crew Trainer</h3>
-          <p class="timeline-org">McDonald's &nbsp;·&nbsp; UK</p>
-          <p class="timeline-desc">
-            Team training, standard operating procedures, and operational consistency
-            in a fast-paced QSR environment.
-          </p>
+          <div class="timeline-tags">
+            <span>Three.js WebGL</span>
+            <span>AudioWorklet</span>
+            <span>Cognitive Ergonomics</span>
+            <span>GLSL Shaders</span>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       CASE STUDY SLIDE-OVER DRAWER
+  ══════════════════════════════════════════════════════════ -->
+  <aside id="case-study-drawer" class="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer-panel" id="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-topline">
+          <span id="drawer-category" class="drawer-cat">Automotive Systems · Vehicle Provenance</span>
+          <span id="drawer-badge" class="work-badge badge-live">FOUNDER PLATFORM</span>
+        </div>
+        <button type="button" class="drawer-close" id="drawer-close" aria-label="Close case study drawer">
+          <span>✕</span> <span class="esc-hint">ESC</span>
+        </button>
+      </div>
+
+      <div class="drawer-body">
+        <h2 id="drawer-title" class="drawer-heading">Datum Atelier</h2>
+        <p id="drawer-domain" class="drawer-domain">AUTOMOTIVE SYSTEMS · PRIVACY-FIRST TELEMETRY · OFFLINE STORAGE</p>
+
+        <div class="drawer-section">
+          <h3 class="drawer-subhead">The Human &amp; Operational Problem</h3>
+          <div class="drawer-callout">
+            <p id="drawer-problem"></p>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <h3 class="drawer-subhead">Architectural Blueprint &amp; System Flow</h3>
+          <p id="drawer-architecture" class="drawer-text"></p>
+        </div>
+
+        <div class="drawer-section">
+          <h3 class="drawer-subhead">Key Technical Decisions</h3>
+          <ul id="drawer-decisions" class="drawer-decisions-list"></ul>
+        </div>
+
+        <div class="drawer-section">
+          <h3 class="drawer-subhead">Core Technology Stack</h3>
+          <div id="drawer-tags" class="work-tags"></div>
+        </div>
+
+        <div class="drawer-actions" id="drawer-actions">
+          <!-- Dynamic links injected via JS -->
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <!-- ══════════════════════════════════════════════════════════
        CONTACT / FOOTER
@@ -405,20 +948,26 @@
         Let's build something<br /><em>extraordinary.</em>
       </h2>
       <p class="contact-sub fade-up">
-        Open to full-time roles, freelance collaborations, and interesting problems.
+        Open to technical collaborations, founder discussions, and challenging systems problems.
       </p>
 
       <div class="contact-links fade-up">
         <div class="contact-link-item">
-          <span class="contact-link-label">Email</span>
+          <span class="contact-link-label">Direct Email</span>
           <a href="mailto:deshmukhvaishnav@gmail.com" class="contact-link-val">
             deshmukhvaishnav@gmail.com
           </a>
         </div>
         <div class="contact-link-item">
+          <span class="contact-link-label">Founder Platform</span>
+          <a href="https://datumatelier.uk/" target="_blank" rel="noopener" class="contact-link-val">
+            datumatelier.uk ↗
+          </a>
+        </div>
+        <div class="contact-link-item">
           <span class="contact-link-label">GitHub</span>
           <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener" class="contact-link-val">
-            aigroupchathq
+            github.com/aigroupchathq
           </a>
         </div>
         <div class="contact-link-item">
@@ -428,15 +977,15 @@
           </a>
         </div>
         <div class="contact-link-item">
-          <span class="contact-link-label">YouTube</span>
+          <span class="contact-link-label">YouTube Studio</span>
           <a href="https://youtube.com/@aigroupchathq" target="_blank" rel="noopener" class="contact-link-val">
-            Ai Group Chat
+            Ai Group Chat ↗
           </a>
         </div>
       </div>
 
       <div class="footer-bar">
-        <span class="footer-copy">© 2024 Vaishnav Deshmukh</span>
+        <span class="footer-copy">© 2024 Vaishnav Deshmukh &nbsp;·&nbsp; Datum Atelier</span>
         <div class="footer-right">
           <span class="footer-loc">London, UK</span>
           <span id="london-time" aria-live="polite" aria-label="London time"></span>
@@ -446,6 +995,6 @@
   </section>
 
   <!-- JS -->
-  <script src="portfolio-v2.js"></script>
+  <script src="portfolio-v2.js?v=3"></script>
 </body>
 </html>
