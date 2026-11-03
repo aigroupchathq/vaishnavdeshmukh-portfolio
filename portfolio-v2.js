@@ -13,7 +13,7 @@
     "domain": "AUTOMOTIVE SYSTEMS \u00b7 PRIVACY-FIRST TELEMETRY \u00b7 OFFLINE STORAGE",
     "category": "Automotive Systems \u00b7 Vehicle Provenance",
     "badge": "FOUNDER PLATFORM",
-    "year": "2024",
+    "year": "2026",
     "problem": "Vehicle service and maintenance histories are fragmented across proprietary dealer silos, vulnerable to odometer fraud, lost paper invoices, and unauthorized personal data aggregation.",
     "architecture": "A decentralized vehicle provenance ledger where vehicle owners maintain sovereign control over maintenance records, diagnostic telemetry, and ownership transfer. Designed offline-first using client-side encryption and local IndexedDB caching with digital certificate verification.",
     "techDecisions": [
@@ -51,7 +51,7 @@
     "domain": "PEDIATRIC HEALTH \u00b7 SLEEP TELEMETRY \u00b7 CALM UX",
     "category": "Pediatric Health \u00b7 Circadian Telemetry",
     "badge": "PATENT-INSPIRED BIOMETRICS",
-    "year": "2024",
+    "year": "2026",
     "problem": "Modern baby monitors bombard exhausted new parents with high-friction push notifications, anxiety-inducing graphs, and invasive cloud video streaming.",
     "architecture": "A gentle ambient telemetry interface that visualizes newborn sleep cycles, feeding intervals, and temperature trends through calm tactile typography and local-only SQLite/IndexedDB persistence.",
     "techDecisions": [
@@ -84,7 +84,7 @@
     "domain": "AUTOMOTIVE SYSTEMS \u00b7 REAL-TIME COMPUTER VISION \u00b7 KINEMATICS",
     "category": "Automotive Systems \u00b7 Perception",
     "badge": "ON-DEVICE PERCEPTION",
-    "year": "2024",
+    "year": "2026",
     "problem": "Modern vehicular safety suites depend on centralized cloud telemetry or high-latency processing, making edge response times sluggish under poor network connectivity.",
     "architecture": "Client-side perception pipeline running quantized neural object detection models in-browser with WebGL/WebGPU acceleration, calculating Time-to-Collision (TTC) and lane divergence locally.",
     "techDecisions": [
@@ -158,7 +158,7 @@
     "domain": "CIVIC TECH \u00b7 GEOSPATIAL CLUSTERING \u00b7 LEGAL REASONING",
     "category": "Civic Infrastructure \u00b7 Municipal Triage",
     "badge": "MUNICIPAL TRIAGE",
-    "year": "2024",
+    "year": "2026",
     "problem": "Local councils receive hundreds of duplicate citizen reports for the same pothole or broken streetlight, overwhelming dispatch coordinators and causing wasted contractor callouts.",
     "architecture": "Geographic clustering engine utilizing the DBSCAN algorithm over Turf.js and PostGIS coordinates to group nearby defect reports within a 15-meter radius and generate batch maintenance manifests.",
     "techDecisions": [
@@ -232,7 +232,7 @@
     "domain": "OPERATIONS RESEARCH \u00b7 INVENTORY OPTIMIZATION \u00b7 BEHAVIORAL LEAN",
     "category": "Supply Chain \u00b7 Operations Research",
     "badge": "1ST PLACE AWARD",
-    "year": "2024",
+    "year": "2026",
     "problem": "Supply chain networks suffer from severe bullwhip effects, stockouts, and capital paralysis when inventory buffers are placed reactively without stochastic demand modeling.",
     "architecture": "Designed a dynamic multi-echelon replenishment strategy balancing safety stock holding costs against stockout penalties during simulated geopolitical disruptions and supplier failures.",
     "techDecisions": [
@@ -265,7 +265,7 @@
     "domain": "NHS HEALTHCARE SYSTEMS \u00b7 OFFLINE-FIRST HL7 FHIR v4 \u00b7 SCAN4SAFETY GS1",
     "category": "Healthcare Logistics \u00b7 Systems R&D",
     "badge": "HEALTHCARE LOGISTICS",
-    "year": "2024",
+    "year": "2026",
     "problem": "Nurses in acute hospital wards spend up to 45 minutes every shift hunting for infusion pumps and telemetry monitors. When devices go missing, critical medication is delayed.",
     "architecture": "An offline-first progressive web application combining BLE beacon signal triangulation with local-first IndexedDB syncing. Caches NHS Trust floorplans and serializes telemetry into HL7 FHIR DeviceMetric resources.",
     "techDecisions": [
@@ -298,7 +298,7 @@
     "domain": "AI COGNITIVE ERGONOMICS \u00b7 PROMPT METRIC EVALUATION \u00b7 TEACHING LAB",
     "category": "AI Guidance \u00b7 Prompt Studio",
     "badge": "AI METHODOLOGY",
-    "year": "2024",
+    "year": "2026",
     "problem": "Users struggle with unguided LLM prompting, relying on conversational politeness or vague adjectives that produce hallucinated code and unverified assumptions.",
     "architecture": "A three-phase prompt methodology (Design, Implementation, Verification) that enforces strict negative boundaries, observable success metrics, and structured evidence capture.",
     "techDecisions": [
@@ -335,7 +335,7 @@
     "domain": "HUMAN DECISION SCIENCE \u00b7 RECIPROCAL MATCHING \u00b7 REACT 19",
     "category": "Human Decisions \u00b7 Compatibility",
     "badge": "REASONING ENGINE",
-    "year": "2024",
+    "year": "2026",
     "problem": "Dating and relationship applications exploit addictive slot-machine gamification, opaque algorithmic sorting, and superficial image swiping that degrades long-term decision making.",
     "architecture": "An explainable matching engine that evaluates mutual alignment across core ethical values, financial goals, and conflict resolution models with full algorithmic transparency.",
     "techDecisions": [
@@ -409,7 +409,7 @@
     "domain": "PERCEPTION THEORY \u00b7 PROCEDURAL AUDIO \u00b7 LIGHT SCULPTURE",
     "category": "Cognitive Science \u00b7 Interactive Inquiry",
     "badge": "VISUAL INQUIRY",
-    "year": "2023",
+    "year": "2026",
     "problem": "Abstract models of conscious attention, optical illusion, and sensory thresholding are difficult to grasp without interactive participatory visual experiments.",
     "architecture": "A suite of generative canvas shaders and synchronized Web Audio oscillators modeling focal attention, blind-spot phenomena, and optical saccade suppression.",
     "techDecisions": [
@@ -479,7 +479,7 @@
     "domain": "AUDIO WORKLET \u00b7 MULTI-TRACK ARRANGEMENT \u00b7 GENERATIVE VOICE",
     "category": "Creative Technology \u00b7 Generative Audio",
     "badge": "BROWSER WORKSTATION",
-    "year": "2023",
+    "year": "2026",
     "problem": "Video creators and podcasters waste hours jumping between text script editors and bloated desktop digital audio workstations (DAWs) to pace vocal delivery and sound design.",
     "architecture": "A unified browser-based audio workstation where text script blocks are directly linked to audio tracks on an interactive 60 FPS HTML5 Canvas timeline.",
     "techDecisions": [
@@ -512,7 +512,7 @@
     "domain": "EDGE COMPUTER VISION \u00b7 MUNICIPAL HIGHWAYS \u00b7 OFFLINE CACHING",
     "category": "Civic Infrastructure \u00b7 Edge Vision",
     "badge": "EDGE COMPUTER VISION",
-    "year": "2024",
+    "year": "2026",
     "problem": "Highway maintenance inspectors driving rural and council roads often lose 4G/5G signal, preventing standard cloud-dependent defect logging and photo analysis.",
     "architecture": "Mobile-first progressive web application leveraging client-side TensorFlow.js to classify road cracks and potholes locally from vehicle dashboard mounts, storing geotagged evidence in IndexedDB.",
     "techDecisions": [
@@ -582,7 +582,7 @@
     "domain": "CONTEMPLATIVE COMPUTING \u00b7 PROCEDURAL SOUND \u00b7 PHILOSOPHY",
     "category": "Interactive Philosophy \u00b7 Procedural Sound",
     "badge": "AUDIOVISUAL INQUIRY",
-    "year": "2023",
+    "year": "2026",
     "problem": "Digital interactions are overwhelmingly transactional, designed for compulsion and urgency rather than introspection, attention restoration, and philosophical contemplation.",
     "architecture": "An experimental meditative web interface where user mouse deceleration triggers procedural binaural audio harmonics and subtle geometric canvas distortions exploring agency and control.",
     "techDecisions": [
