@@ -24,9 +24,9 @@
         theme: {
           extend: {
             colors: {
-              'canvas-base': '#0b0c0e',
-              'canvas-surface': '#121316',
-              'canvas-elevated': '#1a1b1f',
+              'canvas-base': '#000000',
+              'canvas-surface': '#080808',
+              'canvas-elevated': '#121212',
               'canvas-accent': '#eeeae1',
               'canvas-accent-glow': 'rgba(238, 234, 225, 0.14)',
               'canvas-red': '#cfcbc2',
@@ -37,9 +37,9 @@
               'canvas-blue-light': '#e0e1e2',
               'canvas-amber': '#bdb9b0',
               'canvas-purple': '#aaa9a7',
-              'canvas-border': 'rgba(238, 234, 225, 0.08)',
-              'canvas-border-mid': 'rgba(238, 234, 225, 0.13)',
-              'canvas-border-strong': 'rgba(238, 234, 225, 0.24)'
+              'canvas-border': 'rgba(255, 255, 255, 0.08)',
+              'canvas-border-mid': 'rgba(255, 255, 255, 0.13)',
+              'canvas-border-strong': 'rgba(255, 255, 255, 0.24)'
             },
             fontFamily: {
               sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
@@ -56,10 +56,8 @@
 
     <style>
       body {
-        background-image:
-          radial-gradient(ellipse at 50% -18%, rgba(238, 234, 225, 0.075), transparent 42%),
-          linear-gradient(180deg, #121316 0%, #0b0c0e 44%, #090a0c 100%);
-        background-attachment: fixed;
+        background-color: #000000 !important;
+        background-image: none !important;
       }
       .project-bento-card {
         border-color: rgba(238, 234, 225, 0.12);
@@ -79,7 +77,7 @@
         min-width: 0;
         border-color: var(--project-border);
         border-radius: 1rem;
-        background-color: #121416;
+        background-color: #080808;
         background-image: none;
         box-shadow: inset 0 1px 0 var(--project-accent);
         filter: none;
@@ -115,7 +113,7 @@
         margin-top: 1rem;
         overflow: hidden;
         border-color: rgba(238, 234, 225, 0.14);
-        background: #0d0f11;
+        background: #000000;
       }
       #work .inspect-card-trigger:has(> div > img) > div:first-child {
         display: none;
@@ -209,7 +207,7 @@
         box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52), inset 0 1px rgba(255, 255, 255, 0.11);
       }
       #splashOverlay {
-        background: radial-gradient(ellipse at 50% 42%, #17181a 0%, #0b0c0e 62%, #08090a 100%);
+        background: #000000 !important;
         color: #eeeae1;
       }
       .bg-canvas-accent.text-white {
@@ -251,7 +249,7 @@
         animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
       }
       #splashOverlay {
-        background: #050505;
+        background: #000000 !important;
         color: #f5f5f5;
       }
       #splashCanvas {
@@ -373,7 +371,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="portfolio-editorial.css?v=20261027-project-groups-v1" />
+    <link rel="stylesheet" href="portfolio-editorial.css?v=20261103-oled-black" />
   </head>
 
   <body class="editorial-portfolio bg-canvas-base text-[#f1eee7] font-sans antialiased selection:bg-canvas-accent selection:text-white relative overflow-x-hidden min-h-screen">
