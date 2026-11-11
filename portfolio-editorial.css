@@ -1098,7 +1098,7 @@ body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-c
 body.editorial-portfolio #work > .grid > .project-bento-card.editorial-project-card > div:last-child button {
   min-width: 0;
   color: #dedede !important;
-  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-family: var(--font-body), sans-serif !important;
   font-size: 0.72rem !important;
   font-weight: 600;
   text-decoration: none !important;
@@ -1578,4 +1578,138 @@ body.editorial-portfolio #work .filter-tab.active {
   background-color: #141414 !important;
   border: 1px solid #333333 !important;
   color: #ffffff !important;
+}
+
+
+/* =====================================================================
+   AWARD-WINNING 10/10 EDITORIAL TYPOGRAPHY SYSTEM
+   (Syne 700/800 Display + Geist Neo-Grotesque + Optical Instrument Serif + JetBrains Mono)
+   ===================================================================== */
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Global Body Reset to Geist */
+html, body,
+.font-sans,
+[class*="font-sans"] {
+  font-family: var(--font-body) !important;
+  letter-spacing: -0.015em !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Sculpted Architectural Display Headings (Syne 700/800) */
+h1, h2, h3, h4,
+.font-display,
+#hero-heading,
+#work-heading,
+#ideology-heading,
+#capabilities-heading,
+#experience-heading,
+#roadmap-heading,
+#connect-heading,
+.deck-card h3,
+#work .project-bento-card h3,
+#modalProjectTitle {
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.08 !important;
+  text-rendering: geometricPrecision !important;
+}
+
+/* Master Hero Headline */
+#hero-heading {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.75rem, 7.5vw, 4.85rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 1.03 !important;
+}
+
+/* Major Section Titles */
+#work-heading,
+#ideology-heading,
+#capabilities-heading,
+#experience-heading,
+#roadmap-heading,
+#connect-heading {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.15rem, 5vw, 3.4rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.08 !important;
+}
+
+/* Project Titles on 3D Deck Cards & Bento Grid */
+.deck-card h3,
+#work .project-bento-card h3 {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.3rem, 2.3vw, 1.65rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.18 !important;
+}
+
+/* OPTICAL COMPENSATION: Inline Literary Serif Italics */
+.font-serif,
+[class*="font-serif"],
+h1 .font-serif,
+h2 .font-serif,
+h3 .font-serif,
+#hero-heading .font-serif {
+  font-family: var(--font-serif) !important;
+  font-size: 1.14em !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em !important;
+  line-height: inherit !important;
+  vertical-align: baseline;
+}
+
+/* Technical Monospace & Telemetry */
+.font-mono,
+[class*="font-mono"],
+time,
+code,
+.tabular-nums {
+  font-family: var(--font-mono) !important;
+  font-feature-settings: "tnum" 1, "zero" 1 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Category Kickers & Metadata Tags */
+.font-mono.uppercase,
+[class*="uppercase"][class*="font-mono"],
+[class*="tracking-wider"],
+[class*="tracking-widest"] {
+  letter-spacing: 0.1em !important;
+}
+
+/* Hero Subtitle / Lead Statement */
+#hero-heading + p,
+section[aria-labelledby="hero-heading"] > div > p {
+  font-family: var(--font-body) !important;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem) !important;
+  line-height: 1.7 !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Manifesto Narrative Box */
+#ideology .shadow-inner p,
+#ideology .shadow-inner {
+  font-family: var(--font-body) !important;
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem) !important;
+  line-height: 1.75 !important;
+  letter-spacing: -0.012em !important;
+}
+
+/* Button & Action Link Typography */
+button, a.inline-flex, .deck-action-primary, .deck-action-secondary {
+  letter-spacing: 0.015em;
 }
