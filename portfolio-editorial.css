@@ -1603,8 +1603,9 @@ html, body,
   text-rendering: optimizeLegibility !important;
 }
 
-/* Sculpted Architectural Display Headings (Syne 700/800) */
-h1, h2, h3, h4,
+/* Sculpted Architectural Display Headings (Syne 700/800) - exempting splash screen */
+h1:not(#scrambleName):not(.splash-name),
+h2, h3, h4,
 .font-display,
 #hero-heading,
 #work-heading,
@@ -1656,10 +1657,10 @@ h1, h2, h3, h4,
   line-height: 1.18 !important;
 }
 
-/* OPTICAL COMPENSATION: Inline Literary Serif Italics */
-.font-serif,
-[class*="font-serif"],
-h1 .font-serif,
+/* OPTICAL COMPENSATION: Inline Literary Serif Italics - exempting splash screen */
+.font-serif:not(.splash-role):not(#scrambleRole),
+[class*="font-serif"]:not(.splash-role):not(#scrambleRole),
+h1:not(#scrambleName) .font-serif,
 h2 .font-serif,
 h3 .font-serif,
 #hero-heading .font-serif {
@@ -1712,4 +1713,59 @@ section[aria-labelledby="hero-heading"] > div > p {
 /* Button & Action Link Typography */
 button, a.inline-flex, .deck-action-primary, .deck-action-secondary {
   letter-spacing: 0.015em;
+}
+
+
+/* =====================================================================
+   SPLASH SCREEN TYPOGRAPHY (Original High-Impact Aesthetic Restored)
+   ===================================================================== */
+#splashOverlay,
+#splashOverlay h1,
+#splashOverlay .splash-name,
+#splashOverlay #scrambleName,
+#splashOverlay .splash-cta,
+#splashOverlay .splash-skip,
+#splashOverlay button {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+#splashOverlay .splash-name,
+#splashOverlay #scrambleName {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.06em !important;
+  line-height: 1.08 !important;
+}
+
+#splashOverlay .splash-role,
+#splashOverlay #scrambleRole {
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.025em !important;
+  line-height: 1.4 !important;
+  vertical-align: baseline !important;
+}
+
+#splashOverlay .splash-cta,
+#splashOverlay #enterWorkspaceBtn {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+#splashOverlay .splash-skip,
+#splashOverlay #skipSplashBtn {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+}
+
+#splashOverlay .font-mono,
+#splashOverlay [class*="font-mono"] {
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 0.28em !important;
 }
