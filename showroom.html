@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alternative Portfolio Designs · Vaishnav Deshmukh</title>
+  
+  <!-- Typography & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --canvas: #000000;
+      --surface: #0a0a0a;
+      --surface-elevated: #141414;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-bright: rgba(255, 255, 255, 0.22);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Geist', sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background-color: #000000;
+      color: #f4f4f5;
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .font-display { font-family: var(--font-display); }
+    .font-serif { font-family: var(--font-serif); }
+    .font-mono { font-family: var(--font-mono); }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #000000; }
+    ::-webkit-scrollbar-thumb { background: #222222; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #444444; }
+
+    /* Horizon Reel Smooth Scrolling */
+    .horizon-reel {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .horizon-reel > * {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+    }
+
+    /* Monolith Split Hover Reveal */
+    .project-row:hover .reveal-thumb {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-zinc-100 flex flex-col">
+
+  <!-- TOP PERSISTENT CONTROL BAR -->
+  <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></div>
+      <a href="index.html" class="font-mono text-xs uppercase tracking-widest text-zinc-400 hover:text-white transition-all">← Back to Main Portfolio</a>
+      <span class="text-zinc-600">/</span>
+      <span class="text-xs font-medium text-zinc-300">Design Lab: Alternative Paradigms</span>
+    </div>
+
+    <!-- Interactive Concept Switcher Tabs -->
+    <div class="flex items-center bg-zinc-900/80 p-1 rounded-full border border-white/10">
+      <button id="btnAtelier" onclick="switchConcept('atelier')" class="concept-tab px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-black transition-all">
+        1. Spatial Atelier
+      </button>
+      <button id="btnMonolith" onclick="switchConcept('monolith')" class="concept-tab px-4 py-1.5 rounded-full text-xs font-medium text-zinc-400 hover:text-white transition-all">
+        2. Swiss Monolith
+      </button>
+      <button id="btnConsole" onclick="switchConcept('console')" class="concept-tab px-4 py-1.5 rounded-full text-xs font-medium text-zinc-400 hover:text-white transition-all">
+        3. Cybernetic Console
+      </button>
+      <button id="btnCompare" onclick="switchConcept('compare')" class="concept-tab px-4 py-1.5 rounded-full text-xs font-medium text-zinc-400 hover:text-white transition-all">
+        Side-by-Side Matrix
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <main class="flex-1 w-full max-w-7xl mx-auto p-6 md:p-10 flex flex-col justify-center">
+
+    <!-- CONCEPT 1: THE SPATIAL ATELIER -->
+    <div id="viewAtelier" class="concept-view flex flex-col gap-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6 gap-4">
+        <div>
+          <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">Direction 01 · Hallmark Atelier Theme</span>
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight mt-1 text-white">
+            The Spatial Atelier.
+          </h1>
+          <p class="text-zinc-400 text-sm mt-2 max-w-xl">
+            Dieter Rams hardware philosophy meets modern spatial interface design. Features continuous horizontal focal reels, physical dial indicators, and low-cognitive-load case study drawers.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 font-mono text-xs text-zinc-400 bg-zinc-950 px-4 py-2 rounded-lg border border-white/10">
+          <span class="text-zinc-500">HUD:</span>
+          <span>LONDON 21:52:01</span>
+          <span class="text-zinc-700">|</span>
+          <span class="text-emerald-400">LATENCY 8ms</span>
+          <span class="text-zinc-700">|</span>
+          <span class="text-zinc-300">16 REPOS</span>
+        </div>
+      </div>
+
+      <!-- Live Interactive Horizon Reel -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-xs uppercase tracking-wider text-zinc-400">Horizontal Horizon Reel</span>
+            <span class="text-[10px] font-mono bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded-full">Snap Drag</span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="scrollReel(-360)" class="h-8 w-8 rounded-full border border-white/10 bg-zinc-900 flex items-center justify-center hover:bg-zinc-800 text-zinc-300 hover:text-white transition-all">←</button>
+            <button onclick="scrollReel(360)" class="h-8 w-8 rounded-full border border-white/10 bg-zinc-900 flex items-center justify-center hover:bg-zinc-800 text-zinc-300 hover:text-white transition-all">→</button>
+          </div>
+        </div>
+
+        <div id="horizonReel" class="horizon-reel">
+          <!-- Card 1 -->
+          <div class="w-[340px] md:w-[380px] bg-zinc-950 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-white/30 transition-all shadow-2xl">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-emerald-400">Health Systems</span>
+                <span class="font-mono text-xs text-zinc-600">01 / 16</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug">Predictive Ward Logistics Engine</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                Hospital bed reallocation & clinical throughput model. Simulates bed turnover and surge capacity with zero alert fatigue.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Python SimPy</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">HL7 FHIR</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Discrete-Event</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+              <span class="font-mono text-[11px] text-zinc-500">CONCEPT STUDY</span>
+              <button onclick="alert('Dossier: Predictive Ward Logistics Engine architecture loaded.')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5">
+                <span>Dossier</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="w-[340px] md:w-[380px] bg-zinc-950 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-white/30 transition-all shadow-2xl">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-sky-400">Cognitive Science</span>
+                <span class="font-mono text-xs text-zinc-600">02 / 16</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug">The Unexplored Interior</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                Interactive spatial journey through human attention and mental models. Pure tactile canvas with zero-latency spatial audio.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">WebGL 3D</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Web Audio</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Canvas</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+              <span class="font-mono text-[11px] text-emerald-400 flex items-center gap-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                LIVE BUILD
+              </span>
+              <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5">
+                <span>Experience</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="w-[340px] md:w-[380px] bg-zinc-950 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-white/30 transition-all shadow-2xl">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-amber-400">Attention Lab</span>
+                <span class="font-mono text-xs text-zinc-600">03 / 16</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug">iTHINK: Neuroanatomy Lab</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                Interactive 3D cortical dissection atlas. Translates cognitive neuroscience and inhibitory reflex tasks into tangible interactive models.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Three.js</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">IIT Theory</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Shaders</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+              <span class="font-mono text-[11px] text-zinc-500">RESEARCH DEMO</span>
+              <button onclick="alert('iTHINK 3D Atlas Spec Opened')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5">
+                <span>Inspect</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="w-[340px] md:w-[380px] bg-zinc-950 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-white/30 transition-all shadow-2xl">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-violet-400">Civic Triage</span>
+                <span class="font-mono text-xs text-zinc-600">04 / 16</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug">CivicFlow: Highways Triage</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                Municipal infrastructure damage assessment with real-time GPS triangulation and offline field caching.
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">IndexedDB</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">GeoJSON</span>
+                <span class="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-300">Service Worker</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+              <span class="font-mono text-[11px] text-emerald-400">TRIAGE SIMULATOR</span>
+              <button onclick="alert('CivicFlow Incident Simulation Loaded')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5">
+                <span>Simulator</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT 2: THE SWISS MONOLITH -->
+    <div id="viewMonolith" class="concept-view hidden flex flex-col gap-8">
+      <div class="border-b border-white/10 pb-6">
+        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">Direction 02 · Impeccable "Typeset" & "Bolder"</span>
+        <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tight mt-1 text-white">
+          The Swiss Monolith.
+        </h1>
+        <p class="text-zinc-400 text-sm mt-2 max-w-2xl">
+          Pure international typographic style. An asymmetric 2-column broadsheet where the left pane pins author intent, while the right scrubs a typographic ledger that projects real-time negative space wireframes on hover.
+        </p>
+      </div>
+
+      <!-- Asymmetric 2-Column Broadsheet Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5 flex flex-col gap-6 sticky top-28">
+          <div class="p-6 bg-zinc-950 border border-white/10 rounded-xl">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Ideology & Mechanics</span>
+            <h2 class="font-display text-2xl font-bold mt-2 mb-3 text-zinc-100">
+              Interdependent Systems.
+            </h2>
+            <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+              I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a supply chain, and the cognitive load on a human mind. With a master's in logistics, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations.
+            </p>
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-zinc-400">
+              <span>LOCATION: LONDON</span>
+              <span class="text-white font-semibold">16 SELECTED PROJECTS</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Wireframe Box -->
+          <div id="wireframeBox" class="p-6 bg-zinc-900/60 border border-white/15 rounded-xl flex flex-col items-center justify-center min-h-[220px] text-center">
+            <div id="wireframeIcon" class="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center mb-3 text-zinc-400">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+            <h4 id="wireframeTitle" class="font-display font-bold text-white text-sm">Predictive Ward Logistics</h4>
+            <p id="wireframeDesc" class="font-mono text-[11px] text-zinc-400 mt-1 max-w-xs">Discrete-Event Bed Turnover Simulation · SimPy Engine</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col divide-y divide-white/10 border-y border-white/10">
+          <div onmouseenter="updateWireframe('Predictive Ward Logistics', 'Discrete-Event Bed Turnover Simulation · SimPy Engine')" class="project-row py-4 px-2 flex items-center justify-between hover:bg-zinc-900/50 cursor-pointer transition-all">
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-zinc-500">01</span>
+              <div>
+                <h3 class="font-display font-bold text-lg text-white">Predictive Ward Logistics Engine</h3>
+                <span class="font-mono text-[11px] text-zinc-400">Healthcare Logistics · Concept Study</span>
+              </div>
+            </div>
+            <span class="font-mono text-xs text-zinc-400">2026</span>
+          </div>
+
+          <div onmouseenter="updateWireframe('The Unexplored Interior', 'Consciousness Mechanism & Attention Navigator · WebGL 3D')" class="project-row py-4 px-2 flex items-center justify-between hover:bg-zinc-900/50 cursor-pointer transition-all">
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-zinc-500">02</span>
+              <div>
+                <h3 class="font-display font-bold text-lg text-white">The Unexplored Interior</h3>
+                <span class="font-mono text-[11px] text-emerald-400">Cognitive Science · Live Experience</span>
+              </div>
+            </div>
+            <span class="font-mono text-xs text-zinc-400">2026</span>
+          </div>
+
+          <div onmouseenter="updateWireframe('iTHINK Flow Lab', '3D Neuroanatomy Dissection & Sensory Regulation Atlas')" class="project-row py-4 px-2 flex items-center justify-between hover:bg-zinc-900/50 cursor-pointer transition-all">
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-zinc-500">03</span>
+              <div>
+                <h3 class="font-display font-bold text-lg text-white">iTHINK: Attention & Flow Lab</h3>
+                <span class="font-mono text-[11px] text-zinc-400">Cognitive Practice · Three.js Lab</span>
+              </div>
+            </div>
+            <span class="font-mono text-xs text-zinc-400">2025</span>
+          </div>
+
+          <div onmouseenter="updateWireframe('CivicFlow Triage', 'GPS Triage & Municipal Damage Categorization Engine')" class="project-row py-4 px-2 flex items-center justify-between hover:bg-zinc-900/50 cursor-pointer transition-all">
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-zinc-500">04</span>
+              <div>
+                <h3 class="font-display font-bold text-lg text-white">CivicFlow: Highways Triage</h3>
+                <span class="font-mono text-[11px] text-zinc-400">Civic Infrastructure · Field App</span>
+              </div>
+            </div>
+            <span class="font-mono text-xs text-zinc-400">2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT 3: THE CYBERNETIC CONSOLE -->
+    <div id="viewConsole" class="concept-view hidden flex flex-col gap-8">
+      <div class="border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-400">Direction 03 · Cybernetic Systems Console</span>
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight mt-1 text-white">
+            Systems Topology & Engine.
+          </h1>
+          <p class="text-zinc-400 text-sm mt-2 max-w-xl">
+            Live interactive network node map connecting Vaishnav's systems architecture. Built for high-stakes operational engineering with instant JSON telemetry and command palette shortcuts.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div class="lg:col-span-7 bg-zinc-950 border border-white/10 rounded-2xl p-4 flex flex-col relative overflow-hidden min-h-[380px]">
+          <div class="flex justify-between items-center mb-2 z-10">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400">System Dependency Node Graph</span>
+            <span class="font-mono text-[10px] text-zinc-500">Click any node to inspect telemetry</span>
+          </div>
+          <canvas id="consoleGraphCanvas" class="w-full h-[320px] rounded-xl bg-black cursor-crosshair"></canvas>
+        </div>
+
+        <div class="lg:col-span-5 bg-zinc-950 border border-white/10 rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-4">
+              <span class="font-mono text-xs uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                Active Node Inspector
+              </span>
+              <span id="activeNodeBadge" class="font-mono text-[10px] bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded">
+                SELECTED
+              </span>
+            </div>
+            
+            <h3 id="consoleNodeTitle" class="font-display font-bold text-xl text-white mb-2">Predictive Ward Logistics</h3>
+            <p id="consoleNodeSummary" class="text-xs text-zinc-400 leading-relaxed mb-4">
+              Simulates hospital bed allocation under surge constraints. Models queues and staff dispatch using discrete event formulas.
+            </p>
+
+            <div class="bg-black p-3 rounded-lg border border-white/5 font-mono text-[11px] text-zinc-300 space-y-1">
+              <div class="flex justify-between text-zinc-500"><span>FIELD:</span> <span class="text-zinc-200">HEALTH SYSTEMS</span></div>
+              <div class="flex justify-between text-zinc-500"><span>STAGE:</span> <span class="text-amber-300">CONCEPT STUDY</span></div>
+              <div class="flex justify-between text-zinc-500"><span>CORE STACK:</span> <span class="text-zinc-200">Python · SimPy · FHIR</span></div>
+              <div class="flex justify-between text-zinc-500"><span>LATENCY:</span> <span class="text-emerald-400">0.0ms (OFFLINE CACHED)</span></div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between mt-4">
+            <span class="font-mono text-[10px] text-zinc-500">Ctrl + K for Terminal</span>
+            <button onclick="alert('Raw system spec JSON copied to clipboard.')" class="px-3 py-1.5 rounded-lg bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all">
+              Copy Architecture Spec
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT 4: COMPARISON MATRIX -->
+    <div id="viewCompare" class="concept-view hidden flex flex-col gap-8">
+      <div class="border-b border-white/10 pb-6">
+        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">Architectural Evaluation</span>
+        <h1 class="font-display text-4xl font-extrabold tracking-tight mt-1 text-white">
+          Portfolio Paradigm Comparison Matrix.
+        </h1>
+        <p class="text-zinc-400 text-sm mt-2 max-w-2xl">
+          Side-by-side breakdown of the three alternative design directions against Hallmark anti-slop guidelines and Impeccable usability heuristics.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 bg-zinc-950 border border-white/10 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-2">Direction 01</div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">The Spatial Atelier</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+              Focuses on tactile hardware feel, continuous horizontal scrolling, and quiet, high-density physical dials.
+            </p>
+          </div>
+          <button onclick="switchConcept('atelier')" class="w-full py-2 rounded-xl bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all">
+            Preview Atelier
+          </button>
+        </div>
+
+        <div class="p-6 bg-zinc-950 border border-white/10 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-sky-400 uppercase tracking-widest mb-2">Direction 02</div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">The Swiss Monolith</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+              Basel editorial broadsheet with stark typographic contrast, pinned manifesto, and hover kinetic wireframe projection.
+            </p>
+          </div>
+          <button onclick="switchConcept('monolith')" class="w-full py-2 rounded-xl bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all">
+            Preview Monolith
+          </button>
+        </div>
+
+        <div class="p-6 bg-zinc-950 border border-white/10 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-amber-400 uppercase tracking-widest mb-2">Direction 03</div>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Cybernetic Console</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+              Interactive system topology network canvas, tactical HUD telemetry, and raw JSON specification exports.
+            </p>
+          </div>
+          <button onclick="switchConcept('console')" class="w-full py-2 rounded-xl bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all">
+            Preview Console
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function switchConcept(conceptId) {
+      document.querySelectorAll('.concept-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.concept-tab').forEach(el => {
+        el.classList.remove('bg-white', 'text-black');
+        el.classList.add('text-zinc-400');
+      });
+
+      if (conceptId === 'atelier') {
+        document.getElementById('viewAtelier').classList.remove('hidden');
+        document.getElementById('btnAtelier').classList.add('bg-white', 'text-black');
+        document.getElementById('btnAtelier').classList.remove('text-zinc-400');
+      } else if (conceptId === 'monolith') {
+        document.getElementById('viewMonolith').classList.remove('hidden');
+        document.getElementById('btnMonolith').classList.add('bg-white', 'text-black');
+        document.getElementById('btnMonolith').classList.remove('text-zinc-400');
+      } else if (conceptId === 'console') {
+        document.getElementById('viewConsole').classList.remove('hidden');
+        document.getElementById('btnConsole').classList.add('bg-white', 'text-black');
+        document.getElementById('btnConsole').classList.remove('text-zinc-400');
+        initTopologyCanvas();
+      } else if (conceptId === 'compare') {
+        document.getElementById('viewCompare').classList.remove('hidden');
+        document.getElementById('btnCompare').classList.add('bg-white', 'text-black');
+        document.getElementById('btnCompare').classList.remove('text-zinc-400');
+      }
+    }
+
+    function scrollReel(offset) {
+      const reel = document.getElementById('horizonReel');
+      if (reel) reel.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+
+    function updateWireframe(title, desc) {
+      const boxTitle = document.getElementById('wireframeTitle');
+      const boxDesc = document.getElementById('wireframeDesc');
+      if (boxTitle) boxTitle.textContent = title;
+      if (boxDesc) boxDesc.textContent = desc;
+    }
+
+    let topologyCanvas, topCtx, topAnim;
+    const nodes = [
+      { name: "Ward Logistics", x: 80, y: 140, vx: 0.3, vy: -0.2, color: "#10b981", desc: "Healthcare queue & bed allocation simulator." },
+      { name: "The Unexplored Interior", x: 220, y: 70, vx: -0.2, vy: 0.3, color: "#38bdf8", desc: "Spatial consciousness inquiry with zero-latency audio." },
+      { name: "iTHINK Atlas", x: 340, y: 160, vx: 0.2, vy: 0.2, color: "#f59e0b", desc: "3D cognitive dissection and neuroanatomy lab." },
+      { name: "CivicFlow", x: 190, y: 250, vx: -0.3, vy: -0.2, color: "#a855f7", desc: "Municipal infrastructure triage with offline caching." },
+      { name: "Datum ADAS", x: 440, y: 90, vx: -0.2, vy: -0.3, color: "#ec4899", desc: "Automotive sensor fusion and CAN-bus telemetry." }
+    ];
+
+    function initTopologyCanvas() {
+      topologyCanvas = document.getElementById("consoleGraphCanvas");
+      if (!topologyCanvas) return;
+      topCtx = topologyCanvas.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      topologyCanvas.width = topologyCanvas.offsetWidth * dpr;
+      topologyCanvas.height = topologyCanvas.offsetHeight * dpr;
+      topCtx.scale(dpr, dpr);
+
+      if (topAnim) cancelAnimationFrame(topAnim);
+      animateTopology();
+
+      topologyCanvas.onclick = function(e) {
+        const rect = topologyCanvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        nodes.forEach(n => {
+          const dist = Math.hypot(n.x - clickX, n.y - clickY);
+          if (dist < 30) {
+            document.getElementById('consoleNodeTitle').textContent = n.name;
+            document.getElementById('consoleNodeSummary').textContent = n.desc;
+          }
+        });
+      };
+    }
+
+    function animateTopology() {
+      if (!topCtx || !topologyCanvas) return;
+      const width = topologyCanvas.offsetWidth;
+      const height = topologyCanvas.offsetHeight;
+
+      topCtx.clearRect(0, 0, width, height);
+
+      topCtx.lineWidth = 1;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dist = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+          if (dist < 260) {
+            topCtx.strokeStyle = `rgba(255, 255, 255, ${0.18 - dist / 1800})`;
+            topCtx.beginPath();
+            topCtx.moveTo(nodes[i].x, nodes[i].y);
+            topCtx.lineTo(nodes[j].x, nodes[j].y);
+            topCtx.stroke();
+          }
+        }
+      }
+
+      nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 30 || n.x > width - 30) n.vx *= -1;
+        if (n.y < 30 || n.y > height - 30) n.vy *= -1;
+
+        topCtx.fillStyle = n.color;
+        topCtx.beginPath();
+        topCtx.arc(n.x, n.y, 6, 0, Math.PI * 2);
+        topCtx.fill();
+
+        topCtx.fillStyle = "#ffffff";
+        topCtx.font = "10px 'JetBrains Mono', monospace";
+        topCtx.fillText(n.name, n.x + 12, n.y + 4);
+      });
+
+      topAnim = requestAnimationFrame(animateTopology);
+    }
+  </script>
+
+</body>
+</html>
