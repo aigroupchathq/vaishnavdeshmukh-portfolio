@@ -154,34 +154,151 @@ aside[aria-label="Availability and local time"] {
   padding-top: 0.85rem !important;
 }
 
-.inspect-modal-btn {
+/* =====================================================================
+   HIGH-CONTRAST BUTTON SYSTEM & ZERO-HIDDEN-TEXT DISCIPLINE
+   ===================================================================== */
+
+/* 1. Primary Action Link (Solid White Pill with Crisp Black Text) */
+.deck-action-primary,
+a.deck-action-primary,
+#work a.deck-action-primary {
   background-color: #ffffff !important;
   color: #000000 !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 0.75rem !important;
   font-weight: 700 !important;
-  padding: 0.35rem 0.75rem !important;
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 8px !important;
+  border: 1px solid #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  text-decoration: none !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.deck-action-primary span,
+.deck-action-primary i,
+a.deck-action-primary span,
+a.deck-action-primary i,
+#work a.deck-action-primary span,
+#work a.deck-action-primary i {
+  color: #000000 !important;
+}
+
+.deck-action-primary:hover,
+a.deck-action-primary:hover,
+#work a.deck-action-primary:hover {
+  background-color: #e4e4e7 !important;
+  border-color: #e4e4e7 !important;
+  color: #000000 !important;
+  transform: scale(1.02) !important;
+}
+
+.deck-action-primary:active,
+a.deck-action-primary:active {
+  transform: scale(0.96) !important;
+}
+
+/* 2. Secondary Case Study Button (Elevated Charcoal with Crisp Off-White Text) */
+.inspect-modal-btn,
+button.inspect-modal-btn,
+.deck-action-secondary,
+button.deck-action-secondary {
+  background-color: #121212 !important;
+  color: #f4f4f5 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 8px !important;
+  border: 1px solid #2e2e2e !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  text-decoration: none !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.inspect-modal-btn span,
+button.inspect-modal-btn span,
+.deck-action-secondary span {
+  color: #f4f4f5 !important;
+}
+
+.inspect-modal-btn i,
+button.inspect-modal-btn i,
+.deck-action-secondary i {
+  color: #a1a1aa !important;
+}
+
+.inspect-modal-btn:hover,
+button.inspect-modal-btn:hover,
+.deck-action-secondary:hover {
+  background-color: #1e1e1e !important;
+  border-color: #4a4a4a !important;
+  color: #ffffff !important;
+  transform: scale(1.02) !important;
+}
+
+.inspect-modal-btn:hover span,
+button.inspect-modal-btn:hover span,
+.inspect-modal-btn:hover i,
+button.inspect-modal-btn:hover i {
+  color: #ffffff !important;
+}
+
+.inspect-modal-btn:active,
+button.inspect-modal-btn:active {
+  transform: scale(0.96) !important;
+}
+
+/* 3. Specs & Flip Buttons */
+.deck-flip-btn,
+.deck-flip-back-btn {
+  background-color: #141414 !important;
+  color: #d4d4d8 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+  padding: 0.3rem 0.65rem !important;
   border-radius: 6px !important;
+  border: 1px solid #333333 !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.35rem !important;
-  transition: background-color 0.15s ease !important;
+  text-decoration: none !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
-.inspect-modal-btn:hover {
-  background-color: #e4e4e7 !important;
-}
-
-#work .project-bento-card a {
-  color: #ffffff !important;
-  font-size: 0.75rem !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  text-decoration: underline !important;
-  text-underline-offset: 3px !important;
-}
-
-#work .project-bento-card a:hover {
+.deck-flip-btn span,
+.deck-flip-back-btn span {
   color: #d4d4d8 !important;
+}
+
+.deck-flip-btn:hover,
+.deck-flip-back-btn:hover {
+  background-color: #242424 !important;
+  border-color: #555555 !important;
+  color: #ffffff !important;
+  transform: scale(1.02) !important;
+}
+
+.deck-flip-btn:hover span,
+.deck-flip-back-btn:hover span {
+  color: #ffffff !important;
+}
+
+.deck-flip-btn:active,
+.deck-flip-back-btn:active {
+  transform: scale(0.96) !important;
 }
 
 /* ==========================================================================
@@ -1321,4 +1438,144 @@ body.editorial-portfolio #work > .grid > .project-bento-card > div:last-child > 
   background-color: #1a1a1a;
   border-color: #10b981;
   color: #10b981;
+}
+
+
+/* =====================================================================
+   APPLE iOS FLUIDITY, SPRING PHYSICS & TOUCH ERGONOMICS
+   ===================================================================== */
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+body {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* iOS Spring Easing for Deck Cards */
+.deck-card {
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.36s ease, filter 0.36s ease !important;
+  touch-action: pan-y !important;
+}
+
+.deck-card.is-dragging {
+  transition: none !important;
+  cursor: grabbing !important;
+}
+
+/* Stacking Layer Coordinates with Natural Perspective */
+.deck-card[data-stack-pos="0"] {
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  z-index: 30 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
+}
+
+.deck-card[data-stack-pos="1"] {
+  transform: translate3d(0, -18px, -30px) scale(0.95) !important;
+  z-index: 20 !important;
+  opacity: 0.88 !important;
+  filter: brightness(0.92) !important;
+  pointer-events: none !important;
+}
+
+.deck-card[data-stack-pos="2"] {
+  transform: translate3d(0, -34px, -60px) scale(0.90) !important;
+  z-index: 10 !important;
+  opacity: 0.62 !important;
+  filter: brightness(0.82) !important;
+  pointer-events: none !important;
+}
+
+.deck-card[data-stack-pos="3"] {
+  transform: translate3d(0, -48px, -90px) scale(0.85) !important;
+  z-index: 5 !important;
+  opacity: 0.35 !important;
+  filter: brightness(0.72) !important;
+  pointer-events: none !important;
+}
+
+.deck-card[data-stack-pos="hidden"] {
+  transform: translate3d(0, -62px, -120px) scale(0.80) !important;
+  z-index: 1 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* iOS-tuned Dismissal & Entry Transitions */
+.deck-card.swipe-out-left {
+  transform: translate3d(-120%, 30px, 0) rotate(-14deg) !important;
+  opacity: 0 !important;
+  transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.26s ease !important;
+}
+
+.deck-card.swipe-out-right {
+  transform: translate3d(120%, 30px, 0) rotate(14deg) !important;
+  opacity: 0 !important;
+  transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.26s ease !important;
+}
+
+/* Scrubber Dots with iOS Fluid Expansion */
+.deck-dot {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 9999px !important;
+  background-color: #27272a !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.deck-dot.active {
+  width: 28px !important;
+  background-color: #ffffff !important;
+}
+
+.deck-dot:hover:not(.active) {
+  background-color: #52525b !important;
+}
+
+/* Sticky Header Primary Button Contrast Fix */
+header.sticky a[href^="mailto:"],
+header.sticky a.bg-canvas-accent {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+header.sticky a[href^="mailto:"] span,
+header.sticky a[href^="mailto:"] i,
+header.sticky a.bg-canvas-accent span,
+header.sticky a.bg-canvas-accent i {
+  color: #000000 !important;
+}
+
+header.sticky #audioToggleBtn.audio-active {
+  background-color: #0d2016 !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+}
+
+header.sticky #audioToggleBtn.audio-active span,
+header.sticky #audioToggleBtn.audio-active i {
+  color: #10b981 !important;
+}
+
+/* Filter Tab High Contrast Selection */
+.filter-tab.active,
+body.editorial-portfolio #work .filter-tab.active {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Active Capability Filter Banner */
+#activeCapabilityBanner {
+  background-color: #141414 !important;
+  border: 1px solid #333333 !important;
+  color: #ffffff !important;
 }
