@@ -1,10 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Instrument+Serif:ital@1&amp;display=swap');
+      text {
+        font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      .telemetry {
+        font-family: 'JetBrains Mono', monospace !important;
+      }
+      .serif-accent {
+        font-family: 'Instrument Serif', Georgia, serif !important;
+        font-style: italic;
+      }
+    </style>
+  </defs>
+
   <rect width="960" height="600" fill="#080a0d"/>
   <path d="M38 38h884v524H38z" fill="none" stroke="#22262e"/>
   <text x="76" y="98" fill="#a1a1aa" font-family="monospace" font-size="14" letter-spacing="3">COGNITIVE SYSTEMS // COMPATIBILITY DECISION PLATFORM</text>
-  <text x="76" y="160" fill="#ffffff" font-family="Arial,sans-serif" font-size="36" font-weight="700">Checkmate (Velum Labs)</text>
-  <text x="76" y="199" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">Reciprocal, explainable relationship decisions</text>
-  <text x="76" y="226" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">focused on values and dealbreakers over swipe mechanics.</text>
+  <text x="76" y="160" fill="#ffffff" font-family="'Geist', -apple-system, sans-serif" font-size="36" font-weight="700">Checkmate (Velum Labs)</text>
+  <text x="76" y="199" fill="#a1a1aa" font-family="'Geist', -apple-system, sans-serif" font-size="17">Reciprocal, explainable relationship decisions</text>
+  <text x="76" y="226" fill="#a1a1aa" font-family="'Geist', -apple-system, sans-serif" font-size="17">focused on values and dealbreakers over swipe mechanics.</text>
   <path d="M76 267h270" stroke="#333842"/>
   <text x="76" y="300" fill="#e4e4e7" font-family="monospace" font-size="13" letter-spacing="2">MUTUALITY // DECISION VECTORS</text>
   

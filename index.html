@@ -41,6 +41,18 @@
   </script>
 
   <style>
+    :root {
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --ease-out-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+      --color-canvas: #000000;
+      --color-surface: #080808;
+      --color-surface-hover: #111113;
+      --color-border-subtle: rgba(255, 255, 255, 0.08);
+      --color-border-bright: rgba(255, 255, 255, 0.28);
+      --color-border-hover: rgba(255, 255, 255, 0.40);
+    }
+
     body {
       background-color: #000000;
       color: #f4f4f5;
@@ -48,15 +60,87 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: clip;
     }
-    .font-display { font-family: 'Syne', sans-serif; }
-    .font-serif { font-family: 'Instrument Serif', Georgia, serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-    /* Optical compensation on serif italics */
+    .font-display {
+      font-family: 'Syne', sans-serif;
+      letter-spacing: -0.035em;
+    }
     .font-serif {
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: 1.14em;
       vertical-align: baseline;
       display: inline-block;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-feature-settings: "tnum" 1, "zero" 1;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1;
+    }
+
+    /* Card Micro-interactions with Apple Spring Physics */
+    .elaya-card {
+      background-color: #080808;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: transform 0.35s var(--ease-spring),
+                  border-color 0.22s ease,
+                  box-shadow 0.35s var(--ease-spring),
+                  opacity 0.28s var(--ease-spring);
+      will-change: transform, border-color;
+    }
+    .elaya-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    .elaya-card img {
+      transition: transform 0.55s var(--ease-spring);
+    }
+
+    /* Button and Interactive Element Physics */
+    .btn-interactive {
+      transition: transform 0.22s var(--ease-spring),
+                  background-color 0.2s ease,
+                  border-color 0.2s ease,
+                  color 0.2s ease,
+                  box-shadow 0.22s var(--ease-spring);
+    }
+    .btn-interactive:hover {
+      transform: scale(1.02);
+    }
+    .btn-interactive:active {
+      transform: scale(0.97);
+    }
+
+    .elaya-tab {
+      transition: transform 0.22s var(--ease-spring),
+                  background-color 0.2s ease,
+                  border-color 0.2s ease,
+                  color 0.2s ease;
+    }
+    .elaya-tab:hover {
+      transform: scale(1.02);
+    }
+    .elaya-tab:active {
+      transform: scale(0.97);
+    }
+
+    /* Modal Animation Physics */
+    #caseStudyModalBackdrop {
+      transition: opacity 0.25s var(--ease-out-smooth);
+    }
+    #caseStudyModalBox {
+      transition: transform 0.32s var(--ease-spring), opacity 0.28s ease;
+    }
+    #caseStudyModalBackdrop.modal-open {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    #caseStudyModalBackdrop.modal-open #caseStudyModalBox {
+      transform: translateY(0) scale(1) !important;
+      opacity: 1 !important;
     }
 
     /* Custom Scrollbar */
@@ -104,48 +188,58 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 pointer-events-none"></div>
 
     <header class="relative z-10 flex justify-end">
-      <button id="skipSplashBtn" type="button" class="splash-skip rounded-full px-4 py-2 text-xs font-medium border border-white/20 bg-black/40 text-zinc-300 hover:text-white hover:border-white transition-colors cursor-pointer">
-        Skip intro <span class="ml-1 text-white/45">Esc</span>
+      <button id="skipSplashBtn" type="button" class="splash-skip btn-interactive rounded-full px-4 py-2 text-xs font-medium border border-white/20 bg-black/40 text-zinc-300 hover:text-white hover:border-white transition-colors cursor-pointer">
+        Skip intro (Esc)
       </button>
     </header>
 
-    <section class="splash-content relative z-10 my-auto flex w-full flex-col items-center px-2 py-16 text-center" aria-label="Portfolio introduction">
-      <p class="mb-5 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">A personal practice · London</p>
-      <h1 id="scrambleName" class="splash-name max-w-full text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white">
-        Vaishnav Deshmukh
-      </h1>
-      <p id="scrambleRole" class="splash-role mt-5 max-w-lg text-white/70">
-        Thoughtful software for complicated, very human problems.
-      </p>
-      <button id="enterWorkspaceBtn" type="button" aria-label="Explore the work" class="splash-cta mt-10 inline-flex items-center gap-3 rounded-full px-7 py-3.5 bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-all cursor-pointer shadow-2xl">
-        <span>Come take a look</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+    <main class="relative z-10 my-auto flex flex-col items-center justify-center px-4 text-center">
+      <div class="space-y-4 max-w-3xl">
+        <h1 class="splash-name text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white">
+          Vaishnav Deshmukh
+        </h1>
+        <p class="splash-role text-xl sm:text-2xl md:text-3xl text-zinc-300">
+          Product, Design &amp; Systems Architecture
+        </p>
+      </div>
+
+      <button id="enterWorkspaceBtn" type="button" aria-label="Explore the work" class="splash-cta btn-interactive mt-10 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white px-8 py-3.5 text-xs uppercase tracking-widest text-black hover:bg-zinc-200 cursor-pointer shadow-2xl">
+        <span>Explore the Work</span>
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
       </button>
-    </section>
+    </main>
+
+    <footer class="relative z-10 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
+      <span>GREATER LONDON, UK</span>
+      <span>SYSTEMS / LOGISTICS</span>
+    </footer>
   </div>
 
   <!-- =====================================================================
-       02: PERSISTENT NOTIFICATION & VIEW MODE SWITCHER BAR
+       02: TOP GLOBAL NAVIGATION & VIEW SWITCHER
        ===================================================================== -->
-  <div class="w-full bg-zinc-950 border-b border-white/10 px-4 sm:px-8 py-2.5 flex flex-wrap items-center justify-between text-xs font-mono text-zinc-400 gap-3">
-    <div class="flex items-center gap-2.5">
-      <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="text-zinc-200 font-semibold">Active: Split Stream (Elaya)</span>
-      <span class="text-zinc-700">|</span>
-      <span class="text-zinc-400 hidden sm:inline">True OLED Black (#000000)</span>
+  <header class="sticky top-0 z-40 w-full border-b border-white/10 bg-black/90 backdrop-blur-md px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="font-display font-bold text-white text-base tracking-tight">VD.</span>
+      <span class="text-zinc-500 font-mono text-xs hidden sm:inline">/</span>
+      <span class="text-zinc-400 font-mono text-xs hidden sm:inline">Systems Portfolio</span>
     </div>
-    <div class="flex items-center gap-4">
-      <button id="replayIntroBtn" class="text-zinc-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1">
-        <span>Replay Intro</span>
+
+    <div class="flex items-center gap-2 sm:gap-4 font-mono text-xs">
+      <button id="replayIntroBtn" type="button" class="text-zinc-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 px-2.5 py-1 rounded-md hover:bg-white/5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        <span class="hidden md:inline">Replay Intro</span>
       </button>
       <span class="text-zinc-700">|</span>
-      <a href="deck.html" class="text-zinc-400 hover:text-white transition-colors flex items-center gap-1">
+      <a href="deck.html" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1 px-2.5 py-1 rounded-md hover:bg-white/5">
         <span>3D Card Deck Mode →</span>
       </a>
       <span class="text-zinc-700">|</span>
-      <a href="showroom.html" class="text-emerald-400 hover:underline">Design Lab</a>
+      <a href="showroom.html" class="text-emerald-400 hover:underline px-2 py-1">Design Lab</a>
     </div>
-  </div>
+  </header>
 
   <!-- =====================================================================
        03: ELAYA UNIFIED SPLIT LAYOUT CONTAINER
@@ -156,7 +250,7 @@
       <!-- -----------------------------------------------------------------
            LEFT SIDEBAR (PINNED DESK / AUTHOR CONSOLE)
            ----------------------------------------------------------------- -->
-      <aside class="lg:col-span-5 lg:sticky lg:top-8 flex flex-col gap-8">
+      <aside class="lg:col-span-5 lg:sticky lg:top-20 flex flex-col gap-8">
         
         <!-- Identity & Status -->
         <div class="flex flex-col gap-4">
@@ -173,39 +267,39 @@
             Thoughtful software, built around real human needs.
           </p>
 
-          <p class="text-sm text-zinc-400 leading-relaxed max-w-md">
+          <p class="text-sm text-zinc-300 leading-relaxed max-w-md">
             I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a supply chain, and the cognitive load on a human mind. With a master's in logistics, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations.
           </p>
         </div>
 
         <!-- Primary CTA & Brief Launch -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <a href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief" class="px-6 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 shadow-xl">
+          <a href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief" class="btn-interactive px-6 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-zinc-200 flex items-center justify-center gap-2 shadow-xl">
             <span>Start a project brief</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
-          <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-full bg-zinc-900 border border-white/15 text-zinc-200 hover:text-white hover:border-white/30 font-mono text-xs transition-all flex items-center justify-center gap-2">
+          <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer" class="btn-interactive px-5 py-3.5 rounded-full bg-[#0d0d0f] border border-white/15 text-zinc-200 hover:text-white hover:border-white/35 font-mono text-xs flex items-center justify-center gap-2">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             <span>GitHub Profile</span>
           </a>
         </div>
 
         <!-- Telemetry & Location Grid -->
-        <div class="p-5 rounded-2xl bg-zinc-950 border border-white/10 font-mono text-xs flex flex-col gap-3">
+        <div class="p-5 rounded-2xl bg-[#080808] border border-white/10 font-mono text-xs flex flex-col gap-3 shadow-md">
           <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
-            <span class="text-zinc-500 uppercase tracking-wider text-[10px]">Location</span>
+            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Location</span>
             <span class="text-zinc-200">Greater London, UK</span>
           </div>
           <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
-            <span class="text-zinc-500 uppercase tracking-wider text-[10px]">Local Time</span>
-            <span id="londonClock" class="text-zinc-200 tabular-nums font-semibold">--:--:-- GMT</span>
+            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Local Time</span>
+            <span id="londonClock" class="text-zinc-100 tabular-nums font-semibold">--:--:-- GMT</span>
           </div>
           <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
-            <span class="text-zinc-500 uppercase tracking-wider text-[10px]">Selected Projects</span>
-            <span class="text-emerald-400 font-bold">16 Verified Artifacts</span>
+            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Selected Projects</span>
+            <span class="text-emerald-400 font-bold tabular-nums">16 Verified Artifacts</span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="text-zinc-500 uppercase tracking-wider text-[10px]">Direct Email</span>
+            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Direct Email</span>
             <a href="mailto:deshmukhvaishnav@gmail.com" class="text-zinc-300 hover:text-white transition-colors">deshmukhvaishnav@gmail.com</a>
           </div>
         </div>
@@ -213,19 +307,19 @@
         <!-- In-Page Quick Navigation -->
         <nav class="flex flex-col gap-2 font-mono text-xs text-zinc-400 border-l border-white/10 pl-4 py-2">
           <a href="#works" class="hover:text-white transition-colors flex items-center gap-2 text-white font-semibold">
-            <span class="text-zinc-600">01</span>
+            <span class="text-zinc-500 tabular-nums">01</span>
             <span>Selected Works (16)</span>
           </a>
-          <a href="#ideology" class="hover:text-white transition-colors flex items-center gap-2">
-            <span class="text-zinc-600">02</span>
+          <a href="#ideology" class="hover:text-white transition-colors flex items-center gap-2 text-zinc-400">
+            <span class="text-zinc-500 tabular-nums">02</span>
             <span>Systems Ideology</span>
           </a>
-          <a href="#capabilities" class="hover:text-white transition-colors flex items-center gap-2">
-            <span class="text-zinc-600">03</span>
+          <a href="#capabilities" class="hover:text-white transition-colors flex items-center gap-2 text-zinc-400">
+            <span class="text-zinc-500 tabular-nums">03</span>
             <span>Technical Arsenal</span>
           </a>
           <a href="deck.html" class="hover:text-white transition-colors flex items-center gap-2 text-zinc-400">
-            <span class="text-zinc-600">04</span>
+            <span class="text-zinc-500 tabular-nums">04</span>
             <span>Switch to 3D Card Deck Mode →</span>
           </a>
         </nav>
@@ -237,16 +331,16 @@
       <main class="lg:col-span-7 flex flex-col gap-16">
         
         <!-- SECTION 1: SELECTED WORKS (THE 2-COLUMN ELAYA GALLERY) -->
-        <section id="works" class="flex flex-col gap-6">
+        <section id="works" class="flex flex-col gap-6 scroll-mt-24">
           <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-white/10 pb-5 gap-4">
             <div>
-              <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">Showcase · 16 Curated Systems</span>
-              <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+              <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">Showcase · 16 Curated Systems</span>
+              <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-[-0.035em] mt-1">
                 Selected Works.
               </h2>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono text-zinc-400 bg-zinc-950 px-3 py-1 rounded-full border border-white/10" id="filterStatusBadge">
+              <span class="text-xs font-mono text-zinc-300 bg-[#080808] px-3.5 py-1.5 rounded-full border border-white/10 tabular-nums" id="filterStatusBadge">
                 Showing all 16 projects
               </span>
             </div>
@@ -254,35 +348,34 @@
 
           <!-- Dynamic Filter Bar & Search -->
           <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar font-mono text-xs">
-              <button onclick="filterElaya('all')" class="elaya-tab active px-3 py-1.5 rounded-lg bg-white text-black font-bold transition-all cursor-pointer">All (16)</button>
-              <button onclick="filterElaya('live')" class="elaya-tab px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 text-zinc-400 hover:text-white transition-all cursor-pointer">Live Demos (11)</button>
-              <button onclick="filterElaya('concept')" class="elaya-tab px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 text-zinc-400 hover:text-white transition-all cursor-pointer">Research (5)</button>
+            <div class="flex items-center gap-2 overflow-x-auto pb-1.5 no-scrollbar font-mono text-xs">
+              <button onclick="filterElaya('all')" id="tab-all" class="elaya-tab active px-3.5 py-1.5 rounded-lg bg-white text-black font-bold shadow-md cursor-pointer">All (16)</button>
+              <button onclick="filterElaya('live')" id="tab-live" class="elaya-tab px-3.5 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Live Demos (11)</button>
+              <button onclick="filterElaya('concept')" id="tab-concept" class="elaya-tab px-3.5 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Research (5)</button>
               <span class="text-zinc-600 select-none">|</span>
-              <button onclick="filterElaya('health')" class="elaya-tab px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 text-zinc-400 hover:text-white transition-all cursor-pointer">Health</button>
-              <button onclick="filterElaya('cognitive')" class="elaya-tab px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 text-zinc-400 hover:text-white transition-all cursor-pointer">Cognitive</button>
-              <button onclick="filterElaya('civic')" class="elaya-tab px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 text-zinc-400 hover:text-white transition-all cursor-pointer">Civic</button>
-              <button onclick="filterElaya('automotive')" class="elaya-tab px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 text-zinc-400 hover:text-white transition-all cursor-pointer">Auto</button>
+              <button onclick="filterElaya('health')" id="tab-health" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Health</button>
+              <button onclick="filterElaya('cognitive')" id="tab-cognitive" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Cognitive</button>
+              <button onclick="filterElaya('civic')" id="tab-civic" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Civic</button>
+              <button onclick="filterElaya('automotive')" id="tab-automotive" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Auto</button>
             </div>
 
             <!-- Search input -->
             <div class="relative w-full">
-              <input type="text" id="elayaSearchInput" placeholder="Filter projects by title, stack, or domain..." oninput="searchElaya(this.value)" class="w-full bg-zinc-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-white/40 font-mono transition-colors" />
+              <input type="text" id="elayaSearchInput" placeholder="Filter projects by title, stack, or domain..." oninput="searchElaya(this.value)" class="w-full bg-[#080808] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-white/40 font-mono transition-colors" />
             </div>
           </div>
 
           <!-- The 2-Column Works Grid -->
           <div id="elayaCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="ward" data-category="health" data-status="concept">
+            <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="ward" data-category="creative" data-status="concept">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('ward')">
-        <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('ward')">
+        <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-500"></span>
+    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
+      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
       Concept / Study
     </span>
     
@@ -292,33 +385,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Healthcare Logistics Concept Study</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('ward')">Predictive Ward Logistics Engine</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·H·e·a·l·t·h·c·a·r·e· ·L·o·g·i·s·t·i·c·s· ··· ·C·o·n·c·e·p·t· ·S·t·u·d·y·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('ward')">Predictive Ward Logistics Engine</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">HL7 FHIR v4</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">GS1-128</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">IndexedDB</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">HL7 FHIR v4</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">GS1-128</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">IndexedDB</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('ward')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('ward')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#01</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#01</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="consciousness" data-category="cognitive" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="consciousness" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('consciousness')">
-        <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('consciousness')">
+        <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -332,33 +424,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Cognitive Science Interactive Inquiry</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('consciousness')">The Unexplored Interior</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·I·n·t·e·r·a·c·t·i·v·e· ·I·n·q·u·i·r·y·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('consciousness')">The Unexplored Interior</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">HTML Canvas</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Web Audio API</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Vanilla JS</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">HTML Canvas</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vanilla JS</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('consciousness')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('consciousness')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#02</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#02</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="ithink" data-category="cognitive" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="ithink" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('ithink')">
-        <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('ithink')">
+        <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -372,33 +463,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Cognitive Practice Neuroscience Lab</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('ithink')">iTHINK: Attention & Flow Lab</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·g·n·i·t·i·v·e· ·P·r·a·c·t·i·c·e· ··· ·N·e·u·r·o·s·c·i·e·n·c·e· ·L·a·b·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('ithink')">iTHINK: Attention & Flow Lab</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Three.js</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">WebGL</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">TypeScript</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Three.js</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">WebGL</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('ithink')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('ithink')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#03</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#03</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="civicflow" data-category="civic" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="civicflow" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('civicflow')">
-        <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('civicflow')">
+        <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -412,37 +502,36 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Civic Infrastructure Municipal Triage</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('civicflow')">CivicFlow: Highways Triage Engine</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·M·u·n·i·c·i·p·a·l· ·T·r·i·a·g·e·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('civicflow')">CivicFlow: Highways Triage Engine</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">DBSCAN Spatial</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">GeoJSON</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Turf.js</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">DBSCAN Spatial</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">GeoJSON</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Turf.js</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('civicflow')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('civicflow')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#04</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#04</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="scriptstudio" data-category="creative" data-status="concept">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="scriptstudio" data-category="creative" data-status="concept">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('scriptstudio')">
-        <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('scriptstudio')">
+        <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-500"></span>
+    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
+      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
       Concept / Study
     </span>
     
@@ -452,37 +541,36 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Creative Technology Generative Audio</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('scriptstudio')">AI Script Studio: Multi-Track DAW</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·r·e·a·t·i·v·e· ·T·e·c·h·n·o·l·o·g·y· ··· ·G·e·n·e·r·a·t·i·v·e· ·A·u·d·i·o·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('scriptstudio')">AI Script Studio: Multi-Track DAW</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Web Audio API</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Canvas Timeline</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">TypeScript</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Canvas Timeline</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('scriptstudio')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('scriptstudio')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#05</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#05</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="roadtriage" data-category="civic" data-status="concept">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="roadtriage" data-category="creative" data-status="concept">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('roadtriage')">
-        <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('roadtriage')">
+        <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-500"></span>
+    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
+      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
       Concept / Study
     </span>
     
@@ -492,33 +580,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Civic Infrastructure Edge Vision</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('roadtriage')">RoadTriage: Edge Defect Scanner</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·E·d·g·e· ·V·i·s·i·o·n·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('roadtriage')">RoadTriage: Edge Defect Scanner</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Computer Vision</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">TensorFlow.js</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">IndexedDB</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Computer Vision</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TensorFlow.js</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">IndexedDB</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('roadtriage')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('roadtriage')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#06</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#06</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="itsyou" data-category="cognitive" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="itsyou" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('itsyou')">
-        <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('itsyou')">
+        <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -532,37 +619,36 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Cognitive Science Metacognition</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('itsyou')">The Observer: Thought & Awareness</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·M·e·t·a·c·o·g·n·i·t·i·o·n·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('itsyou')">The Observer: Thought & Awareness</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Interactive Narrative</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Canvas 2D</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Vanilla JS</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Interactive Narrative</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Canvas 2D</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vanilla JS</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('itsyou')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('itsyou')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#07</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#07</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="babycarl" data-category="health" data-status="concept">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="babycarl" data-category="creative" data-status="concept">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('babycarl')">
-        <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('babycarl')">
+        <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-500"></span>
+    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
+      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
       Concept / Study
     </span>
     
@@ -572,37 +658,36 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Pediatric Health Circadian Telemetry</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('babycarl')">BabyCarl: Circadian Telemetry</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·P·e·d·i·a·t·r·i·c· ·H·e·a·l·t·h· ··· ·C·i·r·c·a·d·i·a·n· ·T·e·l·e·m·e·t·r·y·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('babycarl')">BabyCarl: Circadian Telemetry</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Circadian Telemetry</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Local Storage</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Tactile UX</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Circadian Telemetry</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Local Storage</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Tactile UX</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('babycarl')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('babycarl')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#08</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#08</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="groupchat" data-category="creative" data-status="concept">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="groupchat" data-category="creative" data-status="concept">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('groupchat')">
-        <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('groupchat')">
+        <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-500"></span>
+    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
+      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
       Concept / Study
     </span>
     
@@ -612,33 +697,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Collaboration Systems Semantic Sync</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('groupchat')">GroupChat HQ: Consensus Engine</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·l·l·a·b·o·r·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·S·e·m·a·n·t·i·c· ·S·y·n·c·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('groupchat')">GroupChat HQ: Consensus Engine</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Vector Embeddings</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Semantic Graphs</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">CRDT State</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vector Embeddings</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Semantic Graphs</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">CRDT State</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('groupchat')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('groupchat')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#09</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#09</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="vision" data-category="creative" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="vision" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('vision')">
-        <img src="assets/work-vision.svg" alt="Rulers Language" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('vision')">
+        <img src="assets/work-vision.svg" alt="Rulers Language" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -652,33 +736,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">AI Guidance Prompt Studio</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('vision')">Rulers Language</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·A·I· ·G·u·i·d·a·n·c·e· ··· ·P·r·o·m·p·t· ·S·t·u·d·i·o·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('vision')">Rulers Language</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Mission Paths</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Prompt Studio</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Original Illustrations</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Mission Paths</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Prompt Studio</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Original Illustrations</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('vision')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('vision')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#10</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#10</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="datumadas" data-category="automotive" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="datumadas" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('datumadas')">
-        <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('datumadas')">
+        <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -692,33 +775,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Automotive Systems Perception</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('datumadas')">Datum ADAS</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·e·r·c·e·p·t·i·o·n·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('datumadas')">Datum ADAS</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Computer Vision</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">On-Device</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Kinematics</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Computer Vision</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">On-Device</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Kinematics</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('datumadas')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('datumadas')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#11</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#11</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="velum" data-category="creative" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="velum" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('velum')">
-        <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('velum')">
+        <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -732,33 +814,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Human Decisions Compatibility</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('velum')">Checkmate (Velum Labs)</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·H·u·m·a·n· ·D·e·c·i·s·i·o·n·s· ··· ·C·o·m·p·a·t·i·b·i·l·i·t·y·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('velum')">Checkmate (Velum Labs)</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Explainable Matching</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">React 19</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">TypeScript</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Explainable Matching</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">React 19</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('velum')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('velum')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#12</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#12</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="vtsystem" data-category="education" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="vtsystem" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('vtsystem')">
-        <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('vtsystem')">
+        <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -772,33 +853,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Education Systems Institutional OS</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('vtsystem')">Vedic Tree OS</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·E·d·u·c·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·I·n·s·t·i·t·u·t·i·o·n·a·l· ·O·S·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('vtsystem')">Vedic Tree OS</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Multi-Tenant</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">RBAC Security</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">TypeScript</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Multi-Tenant</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">RBAC Security</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('vtsystem')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('vtsystem')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#13</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#13</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="driver" data-category="creative" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="driver" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('driver')">
-        <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('driver')">
+        <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -812,33 +892,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Interactive Philosophy Audio</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('driver')">The Driver of God</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·I·n·t·e·r·a·c·t·i·v·e· ·P·h·i·l·o·s·o·p·h·y· ··· ·A·u·d·i·o·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('driver')">The Driver of God</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Web Audio API</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Interactive Philosophy</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Canvas 2D</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Interactive Philosophy</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Canvas 2D</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('driver')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('driver')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#14</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#14</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="hiddenleaf" data-category="creative" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="hiddenleaf" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('hiddenleaf')">
-        <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('hiddenleaf')">
+        <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -852,33 +931,32 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Creative Tools Bilingual Studio</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('hiddenleaf')">Hidden Leaf Studio</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·r·e·a·t·i·v·e· ·T·o·o·l·s· ··· ·B·i·l·i·n·g·u·a·l· ·S·t·u·d·i·o·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('hiddenleaf')">Hidden Leaf Studio</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Web Audio API</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Phoneme Parser</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Rhythm Studio</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Phoneme Parser</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Rhythm Studio</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('hiddenleaf')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('hiddenleaf')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#15</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#15</span>
           </div>
         </div>
       </div>
     </article>
-    
 
-    <article class="elaya-card group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300" data-project="datumatelier" data-category="automotive" data-status="live">
+    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="datumatelier" data-category="creative" data-status="live">
       <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black/60 overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('datumatelier')">
-        <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('datumatelier')">
+        <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
         <div class="absolute top-3.5 right-3.5">
           
     <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
@@ -892,89 +970,96 @@
       <!-- Card Information Body -->
       <div class="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">Automotive Systems Provenance</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('datumatelier')">Datum Atelier</h3>
-          <p class="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
+          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·r·o·v·e·n·a·n·c·e·</span>
+          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('datumatelier')">Datum Atelier</h3>
+          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
           <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Vehicle Provenance</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Owner Records</span><span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300">Offline-First</span>
+            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vehicle Provenance</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Owner Records</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Offline-First</span>
           </div>
         </div>
 
         <!-- Action Links -->
         <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('datumatelier')" class="px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+          <button type="button" onclick="openProjectDossier('datumatelier')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
             <span>Dossier</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </button>
           <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-600">#16</span>
+            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#16</span>
           </div>
         </div>
       </div>
     </article>
-    
           </div>
         </section>
 
         <!-- SECTION 2: SYSTEMS IDEOLOGY -->
-        <section id="ideology" class="p-8 rounded-3xl bg-zinc-950 border border-white/10 flex flex-col gap-6">
-          <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-500">02 · Engineering Philosophy</span>
-          <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Interdependent Systems: <span class="font-serif italic text-zinc-400">Flow, Ergonomics &amp; Tactile Feedback.</span>
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-300 leading-relaxed">
+        <section id="ideology" class="p-8 sm:p-10 rounded-3xl bg-[#080808] border border-white/10 flex flex-col gap-6 shadow-xl scroll-mt-24">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">02 · Engineering Ideology</span>
+            <span class="font-mono text-xs text-emerald-400 flex items-center gap-1.5">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+              Deterministic Systems
+            </span>
+          </div>
+
+          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.035em]">
+            Good software is an unwritten contract with human attention.
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-300 leading-relaxed font-sans">
             <p>
-              Software built for high-stakes environments (clinical wards, municipal works, logistics corridors) should not scream for attention or freeze when connectivity drops. Quiet software caches locally, triangulates passively, and stays responsive.
+              When a doctor reaches for an infusion pump in a windowless basement ward, or a logistics coordinator reroutes 40 HGVs around an M25 incident, software must not stutter, demand cloud reconnects, or present ambiguous iconography.
             </p>
             <p>
-              Guided by psychology and design fundamentals, I care deeply about how an interface feels in human hands—its cadence, mechanical tolerances, and micro-delight. My goal is to build tools that absorb operational friction and respect human focus.
+              Every system in this index was engineered from the edge backward: offline-first architectures, low cognitive overhead, zero-dependency telemetry, and tactile feedback loops designed to respect the physical limits of human working memory.
             </p>
           </div>
         </section>
 
         <!-- SECTION 3: TECHNICAL ARSENAL -->
-        <section id="capabilities" class="flex flex-col gap-6">
+        <section id="capabilities" class="flex flex-col gap-6 scroll-mt-24">
           <div class="border-b border-white/10 pb-4">
-            <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-500">03 · Technical Arsenal</span>
-            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
+            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">03 · Technical Arsenal</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.035em] mt-1">
               Capabilities &amp; Technologies.
             </h2>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
-            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex flex-col gap-1">
-              <span class="text-zinc-500 text-[10px]">REAL-TIME 3D</span>
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
+              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">REAL-TIME 3D</span>
               <span class="text-white font-semibold">Three.js / WebGL</span>
             </div>
-            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex flex-col gap-1">
-              <span class="text-zinc-500 text-[10px]">SIMULATION</span>
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
+              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">SIMULATION</span>
               <span class="text-white font-semibold">Python SimPy</span>
             </div>
-            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex flex-col gap-1">
-              <span class="text-zinc-500 text-[10px]">HEALTHCARE</span>
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
+              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">HEALTHCARE</span>
               <span class="text-white font-semibold">HL7 FHIR v4</span>
             </div>
-            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex flex-col gap-1">
-              <span class="text-zinc-500 text-[10px]">OFFLINE FIRST</span>
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
+              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">OFFLINE FIRST</span>
               <span class="text-white font-semibold">IndexedDB / SW</span>
             </div>
-            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex flex-col gap-1">
-              <span class="text-zinc-500 text-[10px]">AUDIO ENGINE</span>
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
+              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">AUDIO ENGINE</span>
               <span class="text-white font-semibold">Web Audio API</span>
             </div>
-            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex flex-col gap-1">
-              <span class="text-zinc-500 text-[10px]">AUTOMOTIVE</span>
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
+              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">AUTOMOTIVE</span>
               <span class="text-white font-semibold">CAN-Bus / Sensor Fusion</span>
             </div>
           </div>
         </section>
 
         <!-- SECTION 4: CONTACT & FOOTER -->
-        <footer id="contact" class="p-8 rounded-3xl bg-zinc-950 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <footer id="contact" class="p-8 rounded-3xl bg-[#080808] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div>
-            <h3 class="font-display text-xl font-bold text-white mb-1">Let's build something thoughtful.</h3>
+            <h3 class="font-display text-xl font-bold text-white mb-1 tracking-[-0.035em]">Let's build something thoughtful.</h3>
             <p class="text-xs text-zinc-400 font-mono">Greater London, UK · Open for advisory &amp; product engineering</p>
           </div>
-          <a href="mailto:deshmukhvaishnav@gmail.com" class="px-6 py-3 rounded-full bg-white text-black font-bold text-xs hover:bg-zinc-200 transition-all">
+          <a href="mailto:deshmukhvaishnav@gmail.com" class="btn-interactive px-6 py-3 rounded-full bg-white text-black font-bold text-xs hover:bg-zinc-200">
             Say hello →
           </a>
         </footer>
@@ -983,39 +1068,56 @@
     </div>
   </div>
 
+  <!-- Mobile Floating Quick-Jump Pill -->
+  <a href="#works" id="mobileJumpPill" class="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 px-5 py-2.5 rounded-full bg-white text-black text-xs font-mono font-bold shadow-2xl flex items-center gap-2 border border-white/40 btn-interactive" style="transition: transform 0.3s var(--ease-spring), opacity 0.3s ease;">
+    <span>View selected works (16) ↓</span>
+  </a>
+
   <!-- =====================================================================
-       04: CASE STUDY DOSSIER MODAL DRAWER
+       04: RESPONSIVE CASE STUDY DOSSIER MODAL DRAWER
        ===================================================================== -->
-  <div id="caseStudyModalBackdrop" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6" onclick="closeProjectDossier(event)">
-    <div class="bg-zinc-950 border border-white/20 rounded-3xl max-w-2xl w-full p-6 sm:p-8 flex flex-col max-h-[90vh] overflow-y-auto shadow-2xl relative" onclick="event.stopPropagation()">
+  <div id="caseStudyModalBackdrop" 
+       class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center p-0 sm:p-6 opacity-0"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="modalTitle"
+       onclick="closeProjectDossier(event)">
+
+    <div id="caseStudyModalBox"
+         class="bg-[#080808] border border-white/20 rounded-t-3xl sm:rounded-3xl max-w-2xl w-full p-6 sm:p-8 flex flex-col max-h-[85vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-8 sm:translate-y-4 scale-[0.98]"
+         onclick="event.stopPropagation()">
+      
+      <!-- Mobile Drag / Dismiss Handle -->
+      <div class="sm:hidden w-12 h-1.5 rounded-full bg-white/25 mx-auto mb-4 -mt-2"></div>
+
       <div class="flex justify-between items-start border-b border-white/10 pb-4 mb-6">
         <div>
-          <span id="modalCategory" class="font-mono text-xs uppercase tracking-wider text-emerald-400 block mb-1">Healthcare Systems</span>
-          <h2 id="modalTitle" class="font-display text-2xl sm:text-3xl font-extrabold text-white">Project Title</h2>
+          <span id="modalCategory" class="font-mono text-xs uppercase tracking-[0.16em] text-emerald-400 block mb-1">Healthcare Systems</span>
+          <h2 id="modalTitle" class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.035em]">Project Title</h2>
         </div>
-        <button onclick="closeProjectDossier()" class="h-8 w-8 rounded-full border border-white/20 bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center text-sm transition-all cursor-pointer">✕</button>
+        <button onclick="closeProjectDossier()" aria-label="Close dossier" class="btn-interactive h-8 w-8 rounded-full border border-white/20 bg-zinc-900 text-zinc-300 hover:text-white flex items-center justify-center text-sm cursor-pointer">✕</button>
       </div>
 
       <div class="flex flex-col gap-6 text-sm text-zinc-300 leading-relaxed">
         <div>
-          <h4 class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Problem Breakdown</h4>
-          <p id="modalProblem" class="bg-black/60 p-4 rounded-xl border border-white/5 text-xs text-zinc-300">Detailed problem statement...</p>
+          <h4 class="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400 mb-2">Problem Breakdown</h4>
+          <p id="modalProblem" class="bg-black p-4 rounded-xl border border-white/5 text-xs text-zinc-300 leading-relaxed">Detailed problem statement...</p>
         </div>
 
         <div>
-          <h4 class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">System Solution</h4>
-          <p id="modalSolution" class="bg-black/60 p-4 rounded-xl border border-white/5 text-xs text-zinc-300">Architectural solution...</p>
+          <h4 class="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400 mb-2">System Solution</h4>
+          <p id="modalSolution" class="bg-black p-4 rounded-xl border border-white/5 text-xs text-zinc-300 leading-relaxed">Architectural solution...</p>
         </div>
 
         <div>
-          <h4 class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Core Tech Stack</h4>
+          <h4 class="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400 mb-2">Core Tech Stack</h4>
           <div id="modalStack" class="flex flex-wrap gap-2"></div>
         </div>
       </div>
 
       <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
-        <span class="font-mono text-xs text-zinc-500">DOCUMENTARY TRUTH VERIFIED</span>
-        <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-zinc-200 transition-all flex items-center gap-1.5">
+        <span class="font-mono text-xs text-zinc-500 tabular-nums">DOCUMENTARY TRUTH VERIFIED</span>
+        <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-interactive px-5 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-zinc-200 flex items-center gap-1.5">
           <span>Open External Artifact</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
@@ -1024,14 +1126,14 @@
   </div>
 
   <!-- =====================================================================
-       05: CLIENT JAVASCRIPT ENGINE
+       05: CLIENT JAVASCRIPT ENGINE (APPLE SPRING MOTION & FILTERS)
        ===================================================================== -->
   <script>
     // All 16 Project Dossiers
     const projectDossiers = {
   "ward": {
     "title": "Predictive Ward Logistics Engine",
-    "category": "Healthcare Logistics Concept Study",
+    "category": "\u00b7H\u00b7e\u00b7a\u00b7l\u00b7t\u00b7h\u00b7c\u00b7a\u00b7r\u00b7e\u00b7 \u00b7L\u00b7o\u00b7g\u00b7i\u00b7s\u00b7t\u00b7i\u00b7c\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7C\u00b7o\u00b7n\u00b7c\u00b7e\u00b7p\u00b7t\u00b7 \u00b7S\u00b7t\u00b7u\u00b7d\u00b7y\u00b7",
     "status": "concept",
     "desc": "An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.",
     "problem": "Nurses in acute hospital wards spend up to 45 minutes every shift hunting for infusion pumps and telemetry monitors. When devices go missing, critical medication is delayed.",
@@ -1056,7 +1158,7 @@
   },
   "consciousness": {
     "title": "The Unexplored Interior",
-    "category": "Cognitive Science Interactive Inquiry",
+    "category": "\u00b7C\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7c\u00b7i\u00b7e\u00b7n\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7I\u00b7n\u00b7t\u00b7e\u00b7r\u00b7a\u00b7c\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7I\u00b7n\u00b7q\u00b7u\u00b7i\u00b7r\u00b7y\u00b7",
     "status": "live",
     "desc": "An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.",
     "problem": "Abstract models of conscious attention, optical illusion, and sensory thresholding are difficult to grasp without interactive participatory visual experiments.",
@@ -1081,7 +1183,7 @@
   },
   "ithink": {
     "title": "iTHINK: Attention & Flow Lab",
-    "category": "Cognitive Practice Neuroscience Lab",
+    "category": "\u00b7C\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7P\u00b7r\u00b7a\u00b7c\u00b7t\u00b7i\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7N\u00b7e\u00b7u\u00b7r\u00b7o\u00b7s\u00b7c\u00b7i\u00b7e\u00b7n\u00b7c\u00b7e\u00b7 \u00b7L\u00b7a\u00b7b\u00b7",
     "status": "live",
     "desc": "An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.",
     "problem": "Neuroscience models and cognitive attention theory are typically locked in static textbook diagrams or clunky academic software that fails to communicate volumetric relationships.",
@@ -1110,7 +1212,7 @@
   },
   "civicflow": {
     "title": "CivicFlow: Highways Triage Engine",
-    "category": "Civic Infrastructure Municipal Triage",
+    "category": "\u00b7C\u00b7i\u00b7v\u00b7i\u00b7c\u00b7 \u00b7I\u00b7n\u00b7f\u00b7r\u00b7a\u00b7s\u00b7t\u00b7r\u00b7u\u00b7c\u00b7t\u00b7u\u00b7r\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7M\u00b7u\u00b7n\u00b7i\u00b7c\u00b7i\u00b7p\u00b7a\u00b7l\u00b7 \u00b7T\u00b7r\u00b7i\u00b7a\u00b7g\u00b7e\u00b7",
     "status": "live",
     "desc": "A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.",
     "problem": "Local councils receive hundreds of duplicate citizen reports for the same pothole or broken streetlight, overwhelming dispatch coordinators and causing wasted contractor callouts.",
@@ -1139,7 +1241,7 @@
   },
   "scriptstudio": {
     "title": "AI Script Studio: Multi-Track DAW",
-    "category": "Creative Technology Generative Audio",
+    "category": "\u00b7C\u00b7r\u00b7e\u00b7a\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7T\u00b7e\u00b7c\u00b7h\u00b7n\u00b7o\u00b7l\u00b7o\u00b7g\u00b7y\u00b7 \u00b7\u00b7\u00b7 \u00b7G\u00b7e\u00b7n\u00b7e\u00b7r\u00b7a\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7A\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
     "status": "concept",
     "desc": "A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.",
     "problem": "Video creators and podcasters waste hours jumping between text script editors and bloated desktop digital audio workstations (DAWs) to pace vocal delivery and sound design.",
@@ -1164,7 +1266,7 @@
   },
   "roadtriage": {
     "title": "RoadTriage: Edge Defect Scanner",
-    "category": "Civic Infrastructure Edge Vision",
+    "category": "\u00b7C\u00b7i\u00b7v\u00b7i\u00b7c\u00b7 \u00b7I\u00b7n\u00b7f\u00b7r\u00b7a\u00b7s\u00b7t\u00b7r\u00b7u\u00b7c\u00b7t\u00b7u\u00b7r\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7E\u00b7d\u00b7g\u00b7e\u00b7 \u00b7V\u00b7i\u00b7s\u00b7i\u00b7o\u00b7n\u00b7",
     "status": "concept",
     "desc": "An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.",
     "problem": "Highway maintenance inspectors driving rural and council roads often lose 4G/5G signal, preventing standard cloud-dependent defect logging and photo analysis.",
@@ -1189,7 +1291,7 @@
   },
   "itsyou": {
     "title": "The Observer: Thought & Awareness",
-    "category": "Cognitive Science Metacognition",
+    "category": "\u00b7C\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7c\u00b7i\u00b7e\u00b7n\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7M\u00b7e\u00b7t\u00b7a\u00b7c\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7o\u00b7n\u00b7",
     "status": "live",
     "desc": "An interactive reflection interface examining mental models, decision-making habits, and attention patterns.",
     "problem": "People rarely observe their own cognitive biases, default reactive loops, or mental conditioning in everyday software interactions.",
@@ -1218,7 +1320,7 @@
   },
   "babycarl": {
     "title": "BabyCarl: Circadian Telemetry",
-    "category": "Pediatric Health Circadian Telemetry",
+    "category": "\u00b7P\u00b7e\u00b7d\u00b7i\u00b7a\u00b7t\u00b7r\u00b7i\u00b7c\u00b7 \u00b7H\u00b7e\u00b7a\u00b7l\u00b7t\u00b7h\u00b7 \u00b7\u00b7\u00b7 \u00b7C\u00b7i\u00b7r\u00b7c\u00b7a\u00b7d\u00b7i\u00b7a\u00b7n\u00b7 \u00b7T\u00b7e\u00b7l\u00b7e\u00b7m\u00b7e\u00b7t\u00b7r\u00b7y\u00b7",
     "status": "concept",
     "desc": "A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.",
     "problem": "Modern baby monitors bombard exhausted new parents with high-friction push notifications, anxiety-inducing graphs, and invasive cloud video streaming.",
@@ -1243,7 +1345,7 @@
   },
   "groupchat": {
     "title": "GroupChat HQ: Consensus Engine",
-    "category": "Collaboration Systems Semantic Sync",
+    "category": "\u00b7C\u00b7o\u00b7l\u00b7l\u00b7a\u00b7b\u00b7o\u00b7r\u00b7a\u00b7t\u00b7i\u00b7o\u00b7n\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7S\u00b7e\u00b7m\u00b7a\u00b7n\u00b7t\u00b7i\u00b7c\u00b7 \u00b7S\u00b7y\u00b7n\u00b7c\u00b7",
     "status": "concept",
     "desc": "A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.",
     "problem": "Most AI tutorials remain superficial prompt demonstrations without addressing state synchronization, consensus verification, or real-world software engineering constraints.",
@@ -1268,7 +1370,7 @@
   },
   "vision": {
     "title": "Rulers Language",
-    "category": "AI Guidance Prompt Studio",
+    "category": "\u00b7A\u00b7I\u00b7 \u00b7G\u00b7u\u00b7i\u00b7d\u00b7a\u00b7n\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7P\u00b7r\u00b7o\u00b7m\u00b7p\u00b7t\u00b7 \u00b7S\u00b7t\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
     "status": "live",
     "desc": "A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.",
     "problem": "Users struggle with unguided LLM prompting, relying on conversational politeness or vague adjectives that produce hallucinated code and unverified assumptions.",
@@ -1297,7 +1399,7 @@
   },
   "datumadas": {
     "title": "Datum ADAS",
-    "category": "Automotive Systems Perception",
+    "category": "\u00b7A\u00b7u\u00b7t\u00b7o\u00b7m\u00b7o\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7P\u00b7e\u00b7r\u00b7c\u00b7e\u00b7p\u00b7t\u00b7i\u00b7o\u00b7n\u00b7",
     "status": "live",
     "desc": "An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.",
     "problem": "Modern vehicular safety suites depend on centralized cloud telemetry or high-latency processing, making edge response times sluggish under poor network connectivity.",
@@ -1326,7 +1428,7 @@
   },
   "velum": {
     "title": "Checkmate (Velum Labs)",
-    "category": "Human Decisions Compatibility",
+    "category": "\u00b7H\u00b7u\u00b7m\u00b7a\u00b7n\u00b7 \u00b7D\u00b7e\u00b7c\u00b7i\u00b7s\u00b7i\u00b7o\u00b7n\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7C\u00b7o\u00b7m\u00b7p\u00b7a\u00b7t\u00b7i\u00b7b\u00b7i\u00b7l\u00b7i\u00b7t\u00b7y\u00b7",
     "status": "live",
     "desc": "A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.",
     "problem": "Dating and relationship applications exploit addictive slot-machine gamification, opaque algorithmic sorting, and superficial image swiping that degrades long-term decision making.",
@@ -1355,7 +1457,7 @@
   },
   "vtsystem": {
     "title": "Vedic Tree OS",
-    "category": "Education Systems Institutional OS",
+    "category": "\u00b7E\u00b7d\u00b7u\u00b7c\u00b7a\u00b7t\u00b7i\u00b7o\u00b7n\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7I\u00b7n\u00b7s\u00b7t\u00b7i\u00b7t\u00b7u\u00b7t\u00b7i\u00b7o\u00b7n\u00b7a\u00b7l\u00b7 \u00b7O\u00b7S\u00b7",
     "status": "live",
     "desc": "An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.",
     "problem": "Multi-campus educational institutions endure fractured administrative tools: attendance sheets in spreadsheets, fees in clunky ERPs, and learning logs lost across disconnected apps.",
@@ -1384,7 +1486,7 @@
   },
   "driver": {
     "title": "The Driver of God",
-    "category": "Interactive Philosophy Audio",
+    "category": "\u00b7I\u00b7n\u00b7t\u00b7e\u00b7r\u00b7a\u00b7c\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7P\u00b7h\u00b7i\u00b7l\u00b7o\u00b7s\u00b7o\u00b7p\u00b7h\u00b7y\u00b7 \u00b7\u00b7\u00b7 \u00b7A\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
     "status": "live",
     "desc": "An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.",
     "problem": "Digital interactions are overwhelmingly transactional, designed for compulsion and urgency rather than introspection, attention restoration, and philosophical contemplation.",
@@ -1413,7 +1515,7 @@
   },
   "hiddenleaf": {
     "title": "Hidden Leaf Studio",
-    "category": "Creative Tools Bilingual Studio",
+    "category": "\u00b7C\u00b7r\u00b7e\u00b7a\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7T\u00b7o\u00b7o\u00b7l\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7B\u00b7i\u00b7l\u00b7i\u00b7n\u00b7g\u00b7u\u00b7a\u00b7l\u00b7 \u00b7S\u00b7t\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
     "status": "live",
     "desc": "A Hindi\u2013English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.",
     "problem": "South Asian hip-hop lyricists blending Hindi, Urdu, and English struggle with conventional Western songwriting tools that fail to parse matra weight, conjunct consonants, or Devanagari meter.",
@@ -1442,7 +1544,7 @@
   },
   "datumatelier": {
     "title": "Datum Atelier",
-    "category": "Automotive Systems Provenance",
+    "category": "\u00b7A\u00b7u\u00b7t\u00b7o\u00b7m\u00b7o\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7P\u00b7r\u00b7o\u00b7v\u00b7e\u00b7n\u00b7a\u00b7n\u00b7c\u00b7e\u00b7",
     "status": "live",
     "desc": "An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.",
     "problem": "Vehicle service and maintenance histories are fragmented across proprietary dealer silos, vulnerable to odometer fraud, lost paper invoices, and unauthorized personal data aggregation.",
@@ -1471,7 +1573,7 @@
   }
 };
 
-    // Live London Clock
+    // Live London Clock with Tabular Numerals
     const londonClock = document.getElementById("londonClock");
     const formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Europe/London",
@@ -1486,7 +1588,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Modal Handlers
+    // Responsive Modal Handlers with Apple Spring Entrance
     function openProjectDossier(pid) {
       const d = projectDossiers[pid] || {
         title: pid.toUpperCase(),
@@ -1514,28 +1616,39 @@
         stackContainer.appendChild(span);
       });
 
-      document.getElementById("caseStudyModalBackdrop").classList.remove("hidden");
+      const backdrop = document.getElementById("caseStudyModalBackdrop");
+      backdrop.classList.remove("hidden");
+      // Force layout reflow before triggering spring transition
+      void backdrop.offsetWidth;
+      backdrop.classList.add("modal-open");
       document.body.style.overflow = "hidden";
     }
 
     function closeProjectDossier(e) {
-      document.getElementById("caseStudyModalBackdrop").classList.add("hidden");
-      document.body.style.overflow = "";
+      const backdrop = document.getElementById("caseStudyModalBackdrop");
+      if (!backdrop) return;
+      backdrop.classList.remove("modal-open");
+      setTimeout(() => {
+        backdrop.classList.add("hidden");
+        document.body.style.overflow = "";
+      }, 260);
     }
 
-    // Filtering & Search Logic
+    // Filtering & Instant Search Logic with Fluid State Updates
     let activeFilter = 'all';
     let searchQuery = '';
 
     function filterElaya(cat) {
       activeFilter = cat;
       document.querySelectorAll('.elaya-tab').forEach(t => {
-        t.classList.remove('bg-white', 'text-black', 'font-bold');
-        t.classList.add('bg-zinc-950', 'text-zinc-400');
+        t.classList.remove('bg-white', 'text-black', 'font-bold', 'shadow-md');
+        t.classList.add('bg-[#0d0d0f]', 'border', 'border-white/15', 'text-zinc-300');
       });
-      if (event && event.target) {
-        event.target.classList.add('bg-white', 'text-black', 'font-bold');
-        event.target.classList.remove('bg-zinc-950', 'text-zinc-400');
+      
+      const targetBtn = document.getElementById('tab-' + cat) || (window.event && window.event.currentTarget);
+      if (targetBtn) {
+        targetBtn.classList.remove('bg-[#0d0d0f]', 'border-white/15', 'text-zinc-300');
+        targetBtn.classList.add('bg-white', 'text-black', 'font-bold', 'shadow-md');
       }
       applyElayaFilters();
     }
@@ -1561,13 +1674,33 @@
         const matchesQuery = searchQuery === '' || text.includes(searchQuery);
 
         if (matchesCat && matchesQuery) {
-          c.classList.remove('hidden');
+          c.style.display = "";
           visible++;
         } else {
-          c.classList.add('hidden');
+          c.style.display = "none";
         }
       });
-      document.getElementById("filterStatusBadge").textContent = `Showing ${visible} projects`;
+      const badge = document.getElementById("filterStatusBadge");
+      if (badge) badge.textContent = `Showing ${visible} projects`;
+    }
+
+    // Mobile Jump Pill Auto-Hide past #works
+    const mobileJumpPill = document.getElementById("mobileJumpPill");
+    if (mobileJumpPill) {
+      window.addEventListener("scroll", () => {
+        const worksEl = document.getElementById("works");
+        if (!worksEl) return;
+        const rect = worksEl.getBoundingClientRect();
+        if (rect.top <= 120) {
+          mobileJumpPill.style.opacity = "0";
+          mobileJumpPill.style.pointerEvents = "none";
+          mobileJumpPill.style.transform = "translate(-50%, 16px)";
+        } else {
+          mobileJumpPill.style.opacity = "1";
+          mobileJumpPill.style.pointerEvents = "auto";
+          mobileJumpPill.style.transform = "translate(-50%, 0)";
+        }
+      }, { passive: true });
     }
 
     // =====================================================================
@@ -1643,8 +1776,14 @@
     if (replayIntroBtn) replayIntroBtn.addEventListener("click", launchSplash);
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && splashOverlay && splashOverlay.style.display !== "none") {
-        dismissSplash();
+      if (e.key === "Escape") {
+        if (splashOverlay && splashOverlay.style.display !== "none") {
+          dismissSplash();
+        }
+        const modalBackdrop = document.getElementById("caseStudyModalBackdrop");
+        if (modalBackdrop && !modalBackdrop.classList.contains("hidden")) {
+          closeProjectDossier();
+        }
       }
     });
 
