@@ -3,1563 +3,429 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Vaishnav Deshmukh — Systems Architecture &amp; Product Engineering</title>
-  <meta name="description" content="Personal portfolio and systems ledger of Vaishnav Deshmukh. Master's in logistics, systems architecture, offline-first prototypes, and edge infrastructure.">
+  <title>Vaishnav Deshmukh — Systems Architecture &amp; Interactive Portfolio Drive</title>
+  <meta name="description" content="Personal portfolio of Vaishnav Deshmukh. Scroll-driven 3D highway journey through 16 systems architecture artifacts across healthcare, cognition, civic infrastructure, and automotive provenance.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/">
   <meta name="theme-color" content="#050505">
 
-  <!-- Typography: Archivo, Inter, IBM Plex Mono, Caveat -->
+  <!-- Fonts matching Datum Atelier: Archivo, Inter, IBM Plex Mono, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Caveat:wght@500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Caveat:wght@500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* =========================================================================
-       01: DATUM ATELIER DESIGN SYSTEM TOKENS
-       ========================================================================= */
-    :root {
-      --bg: #050505;
-      --surf: #0E0E10;
-      --raised: #151518;
-      --hair: #1F1F23;
-      --hair2: #2E3039;
-      --ctl: #6E707A;
-      --text: #FFFFFF;
-      --sec: #A1A1AA;
-      --muted: #8A8A93;
-      --c-line: #C8102E;
-      --c-fill: #B3122E;
-      --c-text: #F0566A;
-      --r: 6px;
-      --fs-12: .75rem;
-      --fs-14: .875rem;
-      --fs-16: 1rem;
-      --fs-20: 1.25rem;
-      --fs-28: 1.75rem;
-      --fs-40: 2.5rem;
-      --fs-56: 3.5rem;
-      --display: "Archivo", system-ui, -apple-system, sans-serif;
-      --sans: "Inter", system-ui, -apple-system, sans-serif;
-      --mono: "IBM Plex Mono", ui-monospace, monospace;
-      --hand: "Caveat", cursive;
-      --wrap: 1160px;
-      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-      color-scheme: dark;
-    }
+  <link rel="stylesheet" href="portfolio-drive.css">
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <script>
+    /* Decide mode before first paint: 3D car scroll drive vs calm overview mode */
+    (function () {
+      var d = document.documentElement, ok = false;
+      try {
+        var c = document.createElement('canvas');
+        ok = !!(c.getContext('webgl2') || c.getContext('webgl'));
+      } catch (e) {}
+      var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var q = new URLSearchParams(location.search);
+      if (q.get('drive') === '1') rm = false;
+      if (q.get('drive') === '0' || q.get('mode') === 'overview') ok = false;
+      d.classList.add(ok && !rm ? 'drive' : 'still-mode');
+    })();
+  </script>
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: var(--fs-16);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
-      selection-background-color: var(--c-fill);
-      selection-color: #FFFFFF;
-    }
-
-    ::selection { background: var(--c-fill); color: #FFFFFF; }
-
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; color: inherit; background: none; border: none; }
-
-    /* Layout Container */
-    .wrap {
-      max-width: var(--wrap);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    @media (min-width: 768px) {
-      .wrap { padding: 0 36px; }
-    }
-
-    /* Typography Utilities */
-    h1, h2, h3, h4 { font-family: var(--display); line-height: 1.15; letter-spacing: -0.02em; }
-    .mono { font-family: var(--mono); }
-    .tabular { font-variant-numeric: tabular-nums; font-family: var(--mono); }
-    .label {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--c-text);
-      margin-bottom: 12px;
-    }
-    .c { color: var(--c-text); }
-    .value { font-family: var(--mono); font-size: var(--fs-14); color: var(--sec); margin-bottom: 16px; }
-    .lede { font-size: clamp(1rem, 1.6vw, 1.125rem); color: var(--sec); line-height: 1.65; max-width: 68ch; }
-    .lede.sm { font-size: var(--fs-14); }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 44px;
-      padding: 0 20px;
-      border-radius: var(--r);
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: var(--fs-14);
-      white-space: nowrap;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-spring);
-    }
-    .btn:hover { transform: scale(1.015); }
-    .btn:active { transform: scale(0.98); }
-    .btn.primary { background: var(--c-fill); color: #FFFFFF; }
-    .btn.primary:hover { background: #9A0F27; }
-    .btn.ghost { background: transparent; border: 1px solid var(--hair2); color: var(--text); }
-    .btn.ghost:hover { border-color: var(--ctl); background: var(--surf); }
-    .btn.sm { min-height: 36px; padding: 0 14px; font-size: var(--fs-12); }
-
-    /* Tags & Status Indicators */
-    .status {
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      border: 1px solid var(--hair2);
-      border-radius: var(--r);
-      padding: 5px 10px;
-      color: var(--sec);
-      white-space: nowrap;
-      background: var(--surf);
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      font-weight: 500;
-      border: 1px solid var(--hair2);
-      border-radius: var(--r);
-      padding: 3px 8px;
-      color: var(--sec);
-      white-space: nowrap;
-      background: var(--surf);
-    }
-    .tag.live {
-      border-color: var(--c-line);
-      color: var(--c-text);
-      background: rgba(200, 16, 46, 0.08);
-    }
-    .tag.live .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--c-text);
-      animation: livePulse 2s infinite ease-in-out;
-    }
-    @keyframes livePulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    /* =========================================================================
-       02: STICKY TOP HEADER
-       ========================================================================= */
-    .top {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(5, 5, 5, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--hair);
-    }
-    .top-row {
-      min-height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .brand {
-      display: flex;
-      align-items: baseline;
-      gap: 7px;
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 1.15rem;
-      letter-spacing: .02em;
-      white-space: nowrap;
-      position: relative;
-    }
-    .brand small {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: var(--fs-12);
-      letter-spacing: .16em;
-      color: var(--sec);
-    }
-    .nav-desk {
-      display: none;
-      align-items: center;
-      gap: 22px;
-      font-size: var(--fs-14);
-      color: var(--sec);
-      font-weight: 500;
-    }
-    .nav-desk a {
-      transition: color 0.2s ease;
-    }
-    .nav-desk a:hover { color: var(--text); }
-    @media (min-width: 900px) {
-      .nav-desk { display: flex; }
-    }
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* =========================================================================
-       03: HERO SECTION
-       ========================================================================= */
-    .hero {
-      padding: clamp(48px, 9vw, 96px) 0 clamp(40px, 6vw, 64px);
-      border-bottom: 1px solid var(--hair);
-    }
-    .hero-card {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.06;
-      max-width: 18ch;
-    }
-    .hero .cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    /* Ruled Telemetry Columns (Cols) */
-    .cols {
-      display: grid;
-      margin-top: 36px;
-      border-top: 1px solid var(--hair);
-    }
-    .cols > * {
-      padding: 18px 0 20px;
-      border-bottom: 1px solid var(--hair);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 0;
-    }
-    @media (min-width: 640px) {
-      .cols { gap: 0 28px; }
-      .cols.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cols.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .cols.c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    }
-    .cols .col-lbl {
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .cols .col-val {
-      font-family: var(--display);
-      font-size: var(--fs-16);
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* =========================================================================
-       04: SECTION 01 — THE LEDGER (RULED ROWS)
-       ========================================================================= */
-    .section {
-      padding: clamp(56px, 8vw, 88px) 0;
-      border-bottom: 1px solid var(--hair);
-    }
-    .section-header {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .section-header h2 {
-      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
-      font-weight: 700;
-    }
-
-    /* Filter & Search Bar */
-    .ledger-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 32px;
-      padding: 16px;
-      background: var(--surf);
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-    }
-    .filter-tags {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      no-scrollbar: true;
-    }
-    .filter-btn {
-      padding: 6px 14px;
-      border-radius: var(--r);
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      font-weight: 500;
-      background: var(--raised);
-      border: 1px solid var(--hair2);
-      color: var(--sec);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-    }
-    .filter-btn:hover { border-color: var(--ctl); color: var(--text); }
-    .filter-btn.active {
-      background: var(--text);
-      border-color: var(--text);
-      color: var(--bg);
-      font-weight: 600;
-    }
-    .search-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--hair2);
-      border-radius: var(--r);
-      padding: 10px 14px;
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-    .search-input:focus { border-color: var(--c-line); }
-    .search-input::placeholder { color: var(--muted); }
-
-    /* Ruled Ledger Table Rows */
-    .ledger-table {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--hair);
-    }
-    .ledger-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--hair);
-      transition: background-color 0.2s ease;
-    }
-    @media (min-width: 900px) {
-      .ledger-row {
-        grid-template-columns: 240px 1fr;
-        gap: 36px;
-      }
-    }
-    .row-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .row-num-tag {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .row-num {
-      font-family: var(--mono);
-      font-size: var(--fs-14);
-      font-weight: 600;
-      color: var(--sec);
-    }
-    .row-cat {
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .row-visual {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000000;
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-      overflow: hidden;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-    .visual-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s var(--ease-spring);
-    }
-    .row-visual:hover .visual-img {
-      transform: scale(1.035);
-    }
-    .visual-shim {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(5,5,5,0.7), transparent 60%);
-      pointer-events: none;
-    }
-    .row-content {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      min-width: 0;
-    }
-    .row-title {
-      font-size: clamp(1.3rem, 2.4vw, 1.75rem);
-      font-weight: 700;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
-    .row-title:hover { color: var(--c-text); }
-    .row-desc {
-      color: var(--sec);
-      font-size: var(--fs-14);
-      line-height: 1.6;
-    }
-    .row-breakdown {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      padding: 14px;
-      background: var(--surf);
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-      margin: 4px 0;
-    }
-    @media (min-width: 640px) {
-      .row-breakdown { grid-template-columns: 1fr 1fr; }
-    }
-    .bd-col {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .bd-lbl {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--c-text);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .bd-txt {
-      font-size: var(--fs-12);
-      color: var(--sec);
-      line-height: 1.5;
-    }
-    .row-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: auto;
-      padding-top: 10px;
-    }
-    @media (min-width: 640px) {
-      .row-footer {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-    .spec-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .spec-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      border: 1px solid var(--hair2);
-      background: var(--raised);
-      border-radius: var(--r);
-      padding: 2px 7px;
-      color: var(--sec);
-    }
-    .row-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* =========================================================================
-       05: SECTION 02 — VERIFICATION STANDARDS (.states)
-       ========================================================================= */
-    .states {
-      display: grid;
-      gap: 24px;
-      margin-top: 28px;
-    }
-    @media (min-width: 768px) {
-      .states { grid-template-columns: repeat(3, 1fr); }
-    }
-    .state {
-      padding: 24px;
-      background: var(--surf);
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .state ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: var(--fs-14);
-      color: var(--sec);
-    }
-    .state li::before {
-      content: "— ";
-      color: var(--muted);
-    }
-
-    /* =========================================================================
-       06: SECTION 03 — INSTRUMENT (HOLD REV)
-       ========================================================================= */
-    .instrument {
-      margin-top: 28px;
-      padding: clamp(20px, 4vw, 36px);
-      background: var(--surf);
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .instrument-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      width: 100%;
-    }
-    .instrument-dial {
-      position: relative;
-      width: min(100%, 460px);
-      aspect-ratio: 1 / 1;
-    }
-    .instrument-dial canvas {
-      position: absolute;
-      inset: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    .instrument-rev {
-      width: min(100%, 300px);
-      min-height: 60px;
-      border: 1px solid var(--c-line);
-      border-radius: var(--r);
-      background: var(--raised);
-      color: #FFFFFF;
-      font-family: var(--mono);
-      font-size: var(--fs-14);
-      font-weight: 600;
-      letter-spacing: .3em;
-      touch-action: none;
-      user-select: none;
-      -webkit-user-select: none;
-      cursor: pointer;
-      transition: background-color 0.15s ease, transform 0.1s ease;
-    }
-    .instrument-rev:hover { background: #1C1C20; }
-    .instrument-rev:active, .instrument-rev.down {
-      background: var(--c-fill);
-      color: #FFFFFF;
-      transform: scale(0.98);
-    }
-
-    /* =========================================================================
-       07: SECTION 05 — PHILOSOPHY & SIGNATURE
-       ========================================================================= */
-    .signature-card {
-      margin-top: 28px;
-      padding: clamp(24px, 4vw, 40px);
-      background: var(--surf);
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .signature-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-    @media (min-width: 768px) {
-      .signature-row { grid-template-columns: 1fr 1fr; }
-    }
-    .sig-hand {
-      font-family: var(--hand);
-      font-size: 2.2rem;
-      color: var(--text);
-      line-height: 1.1;
-      margin-top: 14px;
-    }
-    .sig-hand small {
-      display: block;
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      color: var(--sec);
-      letter-spacing: 0.1em;
-      margin-top: 4px;
-    }
-
-    /* =========================================================================
-       08: DOSSIER MODAL DRAWER
-       ========================================================================= */
-    #caseStudyModalBackdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    #caseStudyModalBackdrop.open {
-      display: flex;
-      opacity: 1;
-    }
-    .dossier-box {
-      background: var(--raised);
-      border: 1px solid var(--hair2);
-      border-radius: var(--r);
-      width: 100%;
-      max-width: 680px;
-      max-height: 88vh;
-      overflow-y: auto;
-      padding: clamp(20px, 4vw, 36px);
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      box-shadow: 0 32px 64px rgba(0,0,0,0.8);
-      position: relative;
-    }
-    .dossier-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--hair);
-      padding-bottom: 16px;
-    }
-    .dossier-sec {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .dossier-sec-lbl {
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      color: var(--c-text);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .dossier-sec-txt {
-      font-size: var(--fs-14);
-      color: var(--sec);
-      background: var(--surf);
-      border: 1px solid var(--hair);
-      border-radius: var(--r);
-      padding: 14px;
-      line-height: 1.6;
-    }
-    .dossier-foot {
-      border-top: 1px solid var(--hair);
-      padding-top: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 8px;
-    }
-
-    /* =========================================================================
-       09: FOOTER
-       ========================================================================= */
-    footer.bottom {
-      padding: 48px 0;
-      border-top: 1px solid var(--hair);
-      background: var(--bg);
-    }
-    .footer-row {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    @media (min-width: 768px) {
-      .footer-row {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 24px;
-      font-family: var(--mono);
-      font-size: var(--fs-12);
-      color: var(--sec);
-    }
-    .footer-links a:hover { color: var(--text); }
-  </style>
-
-  <!-- Piixpal Web Components -->
+  <!-- Latest Piixpal Web Components (from diiviikk5/Piixpal) -->
   <script src="piixpal.min.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- =======================================================================
-       HEADER / NAV
+       STICKY HEADER NAVIGATION
        ======================================================================= -->
   <header class="top">
     <div class="wrap top-row">
-      <a class="brand" href="/" aria-current="page">
+      <a class="brand" href="#stop-garage" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(0)">
         VAISHNAV <small>DESHMUKH</small>
-        <piix-pal pal="bitbug" edge="box" speed="0.8"></piix-pal>
+        <piix-pal pal="bitbug" edge="text" speed="0.75"></piix-pal>
       </a>
 
-      <nav class="nav-desk" aria-label="Primary">
-        <a href="#ledger">The Ledger</a>
-        <a href="#standards">Standards</a>
-        <a href="#instrument">Hold REV</a>
-        <a href="#arsenal">Arsenal</a>
-        <a href="#ideology">Ideology</a>
-        <a href="#contact">Contact</a>
-        <a href="deck.html" style="color: var(--text);">3D Deck Mode →</a>
+      <nav class="nav nav-desk" aria-label="Primary sections">
+        <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">Ethos</a>
+        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Health</a>
+        <a href="#stop-cognitive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(3)">Cognitive</a>
+        <a href="#stop-civic" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(4)">Civic</a>
+        <a href="#stop-automotive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(5)">Automotive</a>
+        <a href="#stop-studio" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(6)">AI &amp; Studio</a>
+        <button type="button" class="nav-link" onclick="openMatrix()">All 16 Works</button>
+        <a href="deck.html">3D Deck →</a>
       </nav>
 
       <div class="top-right">
-        <span class="status">Greater London, UK</span>
+        <span class="status tabular" id="londonClock">--:--:-- GMT</span>
+        <button type="button" class="pal-toggle" id="palToggleBtn" aria-pressed="true" title="Toggle Piixpal pixel companions" onclick="togglePals()">
+          <span>Pals: On</span>
+        </button>
+        <button type="button" class="btn ghost sm" id="modeToggleBtn" onclick="togglePortfolioViewMode && togglePortfolioViewMode()">Overview</button>
         <a class="btn primary sm" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">Start a brief</a>
       </div>
     </div>
+
+    <div class="nav-row">
+      <nav class="nav" aria-label="Primary sections mobile">
+        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Health</a>
+        <a href="#stop-cognitive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(3)">Cognitive</a>
+        <a href="#stop-civic" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(4)">Civic</a>
+        <a href="#stop-automotive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(5)">Automotive</a>
+        <a href="#stop-studio" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(6)">Studio</a>
+        <button type="button" class="nav-link" onclick="openMatrix()">All 16 Works</button>
+        <a href="deck.html">3D Deck</a>
+      </nav>
+    </div>
   </header>
 
-  <main id="main">
+  <!-- =======================================================================
+       FIXED 3D WORLD CANVAS (WINDING NIGHT ROAD + CODED 3D COUPÉ)
+       ======================================================================= -->
+  <div class="world" aria-hidden="true">
+    <canvas id="world"></canvas>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+  </div>
 
-    <!-- =====================================================================
-         HERO SECTION
-         ===================================================================== -->
-    <section class="hero">
-      <div class="wrap hero-card">
-        <span class="label">Systems Architecture &amp; Product Engineering</span>
+  <!-- Ignition Screen & Transition Veil -->
+  <div class="ignition" id="ignition" aria-hidden="true">
+    <span>Starting the drive</span>
+    <i></i>
+  </div>
+  <div class="veil" id="veil" aria-hidden="true"></div>
+
+  <!-- Piixpal Cursor Halo & Scroll Runner -->
+  <piix-cursor kind="glow" palette="#050505,#4a0d18,#C8102E,#E9E3D3" size="0.8" pixel="3"></piix-cursor>
+  <piix-pal pal="scrolly" color="#C8102E" side="bottom"></piix-pal>
+
+  <!-- =======================================================================
+       RIGHT-SIDE ROUTE RAIL MAP (9 WAYPOINTS)
+       ======================================================================= -->
+  <nav class="route" aria-label="Portfolio journey route">
+    <a href="#stop-garage" data-i="0"><i></i><span>00 · Start</span></a>
+    <a href="#stop-ethos" data-i="1"><i></i><span>01 · Ethos</span></a>
+    <a href="#stop-health" data-i="2"><i></i><span>02 · Health Systems</span></a>
+    <a href="#stop-cognitive" data-i="3"><i></i><span>03 · Cognitive Labs</span></a>
+    <a href="#stop-civic" data-i="4"><i></i><span>04 · Civic Spatial</span></a>
+    <a href="#stop-automotive" data-i="5"><i></i><span>05 · Automotive &amp; ADAS</span></a>
+    <a href="#stop-studio" data-i="6"><i></i><span>06 · AI &amp; Creative</span></a>
+    <a href="#stop-rev" data-i="7"><i></i><span>07 · Hold REV</span></a>
+    <a href="#stop-gate" data-i="8"><i></i><span>08 · Inquiries</span></a>
+  </nav>
+
+  <!-- Floating Car Road Sign: Skip the drive / Take the drive -->
+  <a class="skip-drive sign" href="#overview" role="button" aria-label="Skip the 3D drive and view full overview">
+    <svg class="sign-art" viewBox="0 0 48 18" width="64" height="24" aria-hidden="true" focusable="false">
+      <path class="road" d="M2 14H37"/>
+      <path class="life" d="M2 14H37" pathLength="1"/>
+      <path class="hop" d="M3 12C9 2.5 28 2.5 35 10" pathLength="1"/>
+      <path class="head" d="M34.2 6.5L35 10L31.6 9"/>
+      <path class="post" d="M41 8.6V16M46 8.6V16"/>
+      <path class="bar" d="M39.8 8.6H47.2"/>
+    </svg>
+    <span>Skip the drive</span>
+  </a>
+
+  <p class="scroll-hint" id="scroll-hint" aria-hidden="true">
+    <span>Scroll to drive</span>
+    <i></i>
+  </p>
+
+  <!-- =======================================================================
+       MAIN SCROLL-DRIVEN JOURNEY STOPS (9 WAYPOINTS)
+       ======================================================================= -->
+  <main id="main" tabindex="-1">
+
+    <button class="take-drive sign" type="button" hidden>
+      <svg class="sign-art" viewBox="0 0 48 18" width="64" height="24" aria-hidden="true" focusable="false">
+        <path class="road" d="M21 15.6H35"/>
+        <g class="car">
+          <path class="beam" d="M17.2 11.6L29 9.2V16.4Z"/>
+          <path class="body" d="M1.5 14.6L3 10.7L7.2 9.3H11.2L14.5 11.8L17 12.6L17.4 14.6Z"/>
+          <path class="glass" d="M7.6 10.3H10.8L13 11.9H6.4Z"/>
+          <circle class="wheel" cx="5.4" cy="15" r="1.9"/>
+          <circle class="wheel" cx="13.9" cy="15" r="1.9"/>
+        </g>
+        <path class="chev" d="M37.5 12.2L40.5 15.6L37.5 19M42.5 12.2L45.5 15.6L42.5 19"/>
+      </svg>
+      <span>Take the drive</span>
+    </button>
+
+    <!-- STOP 0: GARAGE / HERO -->
+    <section class="stop" id="stop-garage" data-t="0.0" data-side="left" data-cam="garage">
+      <div class="card hero-card">
+        <span class="label">Vaishnav Deshmukh · Greater London, UK</span>
         <h1>
           Software breaks.<br>
-          <span class="c">Interdependent systems hold.</span>
+          <span class="c"><piix-text effect="scan" palette="#E9E3D3,#F0566A,#C8102E">Interdependent</piix-text> systems hold.</span>
         </h1>
         <p class="value">A portfolio that tells you what's built, and what's proven.</p>
         <p class="lede">
-          I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a hospital ward, and the cognitive load on human attention. With a master's in logistics, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations.
+          With a master's in logistics, I approach software through physical tolerances, supply chain flow, and the cognitive load on human attention. Scroll to drive through all 16 verified systems artifacts.
         </p>
-        
-        <div class="cta-group">
-          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">Start a project brief</a>
-          <a class="btn ghost" href="#ledger">Inspect the 16 artifacts</a>
-          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
+
+        <div class="odo" id="odo" aria-label="Journey odometer reading in miles">
+          <i>0</i><i>1</i><i>6</i><i>0</i><i>0</i><i class="last">0</i>
+          <b>mi // 16 systems indexed</b>
         </div>
 
-        <div class="cols c4">
-          <div>
-            <span class="col-lbl">01 / Location</span>
-            <span class="col-val">Greater London, UK</span>
-          </div>
-          <div>
-            <span class="col-lbl">02 / Local Time</span>
-            <span class="col-val tabular" id="londonClock">--:--:-- GMT</span>
-          </div>
-          <div>
-            <span class="col-lbl">03 / Specialism</span>
-            <span class="col-val">Edge &amp; Offline Systems</span>
-          </div>
-          <div>
-            <span class="col-lbl">04 / Provenance</span>
-            <span class="col-val">16 Verified Dossiers</span>
-          </div>
+        <div class="cta">
+          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(2)">Start driving to the works ↓</button>
+          <button type="button" class="btn ghost" onclick="openMatrix()">Browse all 16 in index</button>
+          <a class="btn ghost" href="deck.html">3D Card Deck ↗</a>
         </div>
       </div>
     </section>
 
-    <!-- =====================================================================
-         SECTION 01: THE LEDGER
-         ===================================================================== -->
-    <section class="section" id="ledger">
-      <span id="works"></span>
-      <div class="wrap">
-        <div class="section-header">
-          <span class="label">Section 01 · Custodianship Ledger</span>
-          <h2>
-            16 Verified Engineering Artifacts.
-            <piix-pal pal="gecko" edge="box" speed="1.2"></piix-pal>
-          </h2>
-          <p class="lede">
-            Every system built with documentary evidence, real GitHub repositories, and zero fabricated claims.
-          </p>
-        </div>
-
-        <!-- Filter Controls -->
-        <div class="ledger-controls">
-          <div class="filter-tags">
-            <button type="button" class="filter-btn active" onclick="filterLedger('all', this)">All (16)</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('live', this)">Live Repos &amp; Demos (11)</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('concept', this)">Architectural Studies (5)</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('health', this)">Health</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('cognitive', this)">Cognitive</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('civic', this)">Civic</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('automotive', this)">Automotive</button>
-            <button type="button" class="filter-btn" onclick="filterLedger('creative', this)">Creative</button>
-          </div>
-          <input type="text" class="search-input" id="ledgerSearch" placeholder="Search systems by title, domain, or technology stack..." oninput="searchLedger(this.value)">
-        </div>
-
-        <!-- Ruled Ledger Table -->
-        <div class="ledger-table" id="ledgerTable">
-          <article class="ledger-row" data-project="ward" data-category="creative" data-status="concept">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#01</span>
-          <span class="tag">Concept / Specimen</span>
-        </div>
-        <span class="row-cat">·H·e·a·l·t·h·c·a·r·e· ·L·o·g·i·s·t·i·c·s· ··· ·C·o·n·c·e·p·t· ·S·t·u·d·y·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('ward')">
-        <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('ward')">Predictive Ward Logistics Engine</h3>
-        <p class="row-desc">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Nurses in acute hospital wards spend up to 45 minutes every shift hunting for infusion pumps and telemetry monitors. When devices go missing, critical medication is delay...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">An offline-first progressive web application combining BLE beacon signal triangulation with local-first IndexedDB syncing. Caches NHS Trust floorplans and serializes tele...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">HL7 FHIR v4</span><span class="spec-tag">GS1-128</span><span class="spec-tag">IndexedDB</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('ward')">Inspect Dossier →</button>
-            <a href="mailto:deshmukhvaishnav@gmail.com?subject=Ward%20Logistics" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="consciousness" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#02</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·I·n·t·e·r·a·c·t·i·v·e· ·I·n·q·u·i·r·y·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('consciousness')">
-        <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('consciousness')">The Unexplored Interior</h3>
-        <p class="row-desc">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Abstract models of conscious attention, optical illusion, and sensory thresholding are difficult to grasp without interactive participatory visual experiments....</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A suite of generative canvas shaders and synchronized Web Audio oscillators modeling focal attention, blind-spot phenomena, and optical saccade suppression....</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">HTML Canvas</span><span class="spec-tag">Web Audio API</span><span class="spec-tag">Vanilla JS</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('consciousness')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="ithink" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#03</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·C·o·g·n·i·t·i·v·e· ·P·r·a·c·t·i·c·e· ··· ·N·e·u·r·o·s·c·i·e·n·c·e· ·L·a·b·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('ithink')">
-        <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('ithink')">iTHINK: Attention & Flow Lab</h3>
-        <p class="row-desc">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Neuroscience models and cognitive attention theory are typically locked in static textbook diagrams or clunky academic software that fails to communicate volumetric relat...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A hardware-accelerated 3D exploration interface using Three.js and custom GLSL vertex shaders, allowing users to slice through cortical layers, inspect neurotransmitter p...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Three.js</span><span class="spec-tag">WebGL</span><span class="spec-tag">TypeScript</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('ithink')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="civicflow" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#04</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·M·u·n·i·c·i·p·a·l· ·T·r·i·a·g·e·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('civicflow')">
-        <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('civicflow')">CivicFlow: Highways Triage Engine</h3>
-        <p class="row-desc">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Local councils receive hundreds of duplicate citizen reports for the same pothole or broken streetlight, overwhelming dispatch coordinators and causing wasted contractor ...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">Geographic clustering engine utilizing the DBSCAN algorithm over Turf.js and PostGIS coordinates to group nearby defect reports within a 15-meter radius and generate batc...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">DBSCAN Spatial</span><span class="spec-tag">GeoJSON</span><span class="spec-tag">Turf.js</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('civicflow')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/civicflow.html" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="scriptstudio" data-category="creative" data-status="concept">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#05</span>
-          <span class="tag">Concept / Specimen</span>
-        </div>
-        <span class="row-cat">·C·r·e·a·t·i·v·e· ·T·e·c·h·n·o·l·o·g·y· ··· ·G·e·n·e·r·a·t·i·v·e· ·A·u·d·i·o·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('scriptstudio')">
-        <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('scriptstudio')">AI Script Studio: Multi-Track DAW</h3>
-        <p class="row-desc">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Video creators and podcasters waste hours jumping between text script editors and bloated desktop digital audio workstations (DAWs) to pace vocal delivery and sound desig...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A unified browser-based audio workstation where text script blocks are directly linked to audio tracks on an interactive 60 FPS HTML5 Canvas timeline....</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Web Audio API</span><span class="spec-tag">Canvas Timeline</span><span class="spec-tag">TypeScript</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('scriptstudio')">Inspect Dossier →</button>
-            <a href="https://github.com/aigroupchathq/gstudio" target="_blank" rel="noopener noreferrer" class="btn primary sm">Source ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="roadtriage" data-category="creative" data-status="concept">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#06</span>
-          <span class="tag">Concept / Specimen</span>
-        </div>
-        <span class="row-cat">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·E·d·g·e· ·V·i·s·i·o·n·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('roadtriage')">
-        <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('roadtriage')">RoadTriage: Edge Defect Scanner</h3>
-        <p class="row-desc">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Highway maintenance inspectors driving rural and council roads often lose 4G/5G signal, preventing standard cloud-dependent defect logging and photo analysis....</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">Mobile-first progressive web application leveraging client-side TensorFlow.js to classify road cracks and potholes locally from vehicle dashboard mounts, storing geotagge...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Computer Vision</span><span class="spec-tag">TensorFlow.js</span><span class="spec-tag">IndexedDB</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('roadtriage')">Inspect Dossier →</button>
-            <a href="mailto:deshmukhvaishnav@gmail.com?subject=RoadTriage" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="itsyou" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#07</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·M·e·t·a·c·o·g·n·i·t·i·o·n·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('itsyou')">
-        <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('itsyou')">The Observer: Thought & Awareness</h3>
-        <p class="row-desc">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">People rarely observe their own cognitive biases, default reactive loops, or mental conditioning in everyday software interactions....</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A self-guided contemplative narrative powered by pure Canvas 2D particle dynamics that mirror user input pacing, pauses, and cursor hesitation to foster self-awareness....</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Interactive Narrative</span><span class="spec-tag">Canvas 2D</span><span class="spec-tag">Vanilla JS</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('itsyou')">Inspect Dossier →</button>
-            <a href="https://itsyou.ai.studio/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="babycarl" data-category="creative" data-status="concept">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#08</span>
-          <span class="tag">Concept / Specimen</span>
-        </div>
-        <span class="row-cat">·P·e·d·i·a·t·r·i·c· ·H·e·a·l·t·h· ··· ·C·i·r·c·a·d·i·a·n· ·T·e·l·e·m·e·t·r·y·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('babycarl')">
-        <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('babycarl')">BabyCarl: Circadian Telemetry</h3>
-        <p class="row-desc">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Modern baby monitors bombard exhausted new parents with high-friction push notifications, anxiety-inducing graphs, and invasive cloud video streaming....</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A gentle ambient telemetry interface that visualizes newborn sleep cycles, feeding intervals, and temperature trends through calm tactile typography and local-only SQLite...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Circadian Telemetry</span><span class="spec-tag">Local Storage</span><span class="spec-tag">Tactile UX</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('babycarl')">Inspect Dossier →</button>
-            <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="groupchat" data-category="creative" data-status="concept">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#09</span>
-          <span class="tag">Concept / Specimen</span>
-        </div>
-        <span class="row-cat">·C·o·l·l·a·b·o·r·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·S·e·m·a·n·t·i·c· ·S·y·n·c·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('groupchat')">
-        <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('groupchat')">GroupChat HQ: Consensus Engine</h3>
-        <p class="row-desc">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Most AI tutorials remain superficial prompt demonstrations without addressing state synchronization, consensus verification, or real-world software engineering constraint...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">An educational laboratory and media channel creating production-grade multi-agent prototypes, exploring vector embeddings, consensus synthesis graphs, and developer workf...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Vector Embeddings</span><span class="spec-tag">Semantic Graphs</span><span class="spec-tag">CRDT State</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('groupchat')">Inspect Dossier →</button>
-            <a href="mailto:deshmukhvaishnav@gmail.com?subject=GroupChat" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="vision" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#10</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·A·I· ·G·u·i·d·a·n·c·e· ··· ·P·r·o·m·p·t· ·S·t·u·d·i·o·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('vision')">
-        <img src="assets/work-vision.svg" alt="Rulers Language" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('vision')">Rulers Language</h3>
-        <p class="row-desc">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Users struggle with unguided LLM prompting, relying on conversational politeness or vague adjectives that produce hallucinated code and unverified assumptions....</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A three-phase prompt methodology (Design, Implementation, Verification) that enforces strict negative boundaries, observable success metrics, and structured evidence capt...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Mission Paths</span><span class="spec-tag">Prompt Studio</span><span class="spec-tag">Original Illustrations</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('vision')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/rulers-language/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="datumadas" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#11</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·e·r·c·e·p·t·i·o·n·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('datumadas')">
-        <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('datumadas')">Datum ADAS</h3>
-        <p class="row-desc">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Modern vehicular safety suites depend on centralized cloud telemetry or high-latency processing, making edge response times sluggish under poor network connectivity....</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">Client-side perception pipeline running quantized neural object detection models in-browser with WebGL/WebGPU acceleration, calculating Time-to-Collision (TTC) and lane d...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Computer Vision</span><span class="spec-tag">On-Device</span><span class="spec-tag">Kinematics</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('datumadas')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/datum-adas/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="velum" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#12</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·H·u·m·a·n· ·D·e·c·i·s·i·o·n·s· ··· ·C·o·m·p·a·t·i·b·i·l·i·t·y·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('velum')">
-        <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('velum')">Checkmate (Velum Labs)</h3>
-        <p class="row-desc">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Dating and relationship applications exploit addictive slot-machine gamification, opaque algorithmic sorting, and superficial image swiping that degrades long-term decisi...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">An explainable matching engine that evaluates mutual alignment across core ethical values, financial goals, and conflict resolution models with full algorithmic transpare...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Explainable Matching</span><span class="spec-tag">React 19</span><span class="spec-tag">TypeScript</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('velum')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="vtsystem" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#13</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·E·d·u·c·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·I·n·s·t·i·t·u·t·i·o·n·a·l· ·O·S·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('vtsystem')">
-        <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('vtsystem')">Vedic Tree OS</h3>
-        <p class="row-desc">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Multi-campus educational institutions endure fractured administrative tools: attendance sheets in spreadsheets, fees in clunky ERPs, and learning logs lost across disconn...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A cohesive institutional operating system with multi-tenant role-based access control (RBAC), unifying fee reconciliation, attendance metrics, and qualitative student por...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Multi-Tenant</span><span class="spec-tag">RBAC Security</span><span class="spec-tag">TypeScript</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('vtsystem')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="driver" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#14</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·I·n·t·e·r·a·c·t·i·v·e· ·P·h·i·l·o·s·o·p·h·y· ··· ·A·u·d·i·o·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('driver')">
-        <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('driver')">The Driver of God</h3>
-        <p class="row-desc">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Digital interactions are overwhelmingly transactional, designed for compulsion and urgency rather than introspection, attention restoration, and philosophical contemplati...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">An experimental meditative web interface where user mouse deceleration triggers procedural binaural audio harmonics and subtle geometric canvas distortions exploring agen...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Web Audio API</span><span class="spec-tag">Interactive Philosophy</span><span class="spec-tag">Canvas 2D</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('driver')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/the-driver-of-god/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="hiddenleaf" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#15</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·C·r·e·a·t·i·v·e· ·T·o·o·l·s· ··· ·B·i·l·i·n·g·u·a·l· ·S·t·u·d·i·o·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('hiddenleaf')">
-        <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('hiddenleaf')">Hidden Leaf Studio</h3>
-        <p class="row-desc">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">South Asian hip-hop lyricists blending Hindi, Urdu, and English struggle with conventional Western songwriting tools that fail to parse matra weight, conjunct consonants,...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">An intelligent metronome and rhyme matrix parser that computes syllable weights across Hindi and English phonemes, matching rhyme cadences against customizable BPM drum l...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Web Audio API</span><span class="spec-tag">Phoneme Parser</span><span class="spec-tag">Rhythm Studio</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('hiddenleaf')">Inspect Dossier →</button>
-            <a href="https://aigroupchathq.github.io/hidden-leaf-studio/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-<article class="ledger-row" data-project="datumatelier" data-category="creative" data-status="live">
-      <div class="row-meta">
-        <div class="row-num-tag">
-          <span class="row-num">#16</span>
-          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
-        </div>
-        <span class="row-cat">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·r·o·v·e·n·a·n·c·e·</span>
-      </div>
-
-      <div class="row-visual" onclick="openProjectDossier('datumatelier')">
-        <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" class="visual-img" />
-        <div class="visual-shim"></div>
-      </div>
-
-      <div class="row-content">
-        <h3 class="row-title" onclick="openProjectDossier('datumatelier')">Datum Atelier</h3>
-        <p class="row-desc">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
-        
-        <div class="row-breakdown">
-          <div class="bd-col">
-            <span class="bd-lbl">Diagnosis</span>
-            <p class="bd-txt">Vehicle service and maintenance histories are fragmented across proprietary dealer silos, vulnerable to odometer fraud, lost paper invoices, and unauthorized personal dat...</p>
-          </div>
-          <div class="bd-col">
-            <span class="bd-lbl">Intervention</span>
-            <p class="bd-txt">A decentralized vehicle provenance ledger where vehicle owners maintain sovereign control over maintenance records, diagnostic telemetry, and ownership transfer. Designed...</p>
-          </div>
-        </div>
-
-        <div class="row-footer">
-          <div class="spec-tags">
-            <span class="spec-tag">Vehicle Provenance</span><span class="spec-tag">Owner Records</span><span class="spec-tag">Offline-First</span>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn ghost sm" onclick="openProjectDossier('datumatelier')">Inspect Dossier →</button>
-            <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Site ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 02: VERIFICATION STANDARDS (.states)
-         ===================================================================== -->
-    <section class="section" id="standards">
-      <div class="wrap">
-        <div class="section-header">
-          <span class="label">Documentary Truth</span>
-          <h2>Every artifact on this site is marked, like an entry in the record.</h2>
-          <p class="lede">Clear demarcations between production deployments, functional edge prototypes, and structural research.</p>
-        </div>
+    <!-- STOP 1: ENGINEERING ETHOS & DOCUMENTARY PROOF -->
+    <section class="stop" id="stop-ethos" data-t="0.125" data-side="right" data-cam="near">
+      <div class="card wide">
+        <span class="label">Stop 01 · Engineering Ethos</span>
+        <h2>Every artifact on this road is marked, like an entry in a chassis record.</h2>
+        <p class="lede sm">
+          I build from the physical edge backward: basement hospital wards without signal, rain-soaked highway carriageways, and offline browser environments where unreliable cloud roundtrips are unacceptable.
+        </p>
 
         <div class="states">
           <div class="state">
-            <span class="tag live"><i class="dot"></i>Live &amp; Deployed</span>
+            <span class="tag live"><i></i>11 Live Artifacts</span>
             <ul>
-              <li>The Unexplored Interior (Consciousness)</li>
-              <li>iTHINK Attention &amp; Flow Lab</li>
-              <li>CivicFlow Highways Triage Engine</li>
-              <li>Rulers Language AI Prompt Studio</li>
-              <li>Datum ADAS Safety Platform</li>
-              <li>Checkmate (Velum Labs)</li>
-              <li>Vedic Tree OS (VTSystem)</li>
-              <li>The Driver of God</li>
-              <li>Hidden Leaf Studio</li>
-              <li>Datum Atelier Provenance Engine</li>
+              <li>Deployed web applications &amp; interactive labs (Datum Atelier, CivicFlow, iTHINK, Rulers Language, Velum Labs, VTSystem)</li>
             </ul>
           </div>
-
           <div class="state">
-            <span class="tag">Architectural Prototypes</span>
+            <span class="tag">5 Prototypes &amp; Studies</span>
             <ul>
-              <li>Predictive Ward Logistics Engine</li>
-              <li>RoadTriage Edge Defect Scanner</li>
-              <li>GroupChat HQ Consensus Engine</li>
-              <li>AI Script Studio DAW</li>
+              <li>Architectural systems prototypes exploring hard physical/offline constraints (Ward Logistics, RoadTriage, GroupChat HQ, BabyCarl)</li>
             </ul>
           </div>
+        </div>
 
-          <div class="state">
-            <span class="tag">System Concepts &amp; Research</span>
-            <ul>
-              <li>BabyCarl Circadian Telemetry</li>
-              <li>Observer Effect Cognitive Mirror</li>
-              <li>Decentralized Handover Protocols</li>
-              <li>Deterministic Offline Sync Engines</li>
-            </ul>
-          </div>
+        <p class="signoff">Good software starts with noticing.<span>VD</span></p>
+      </div>
+    </section>
+
+    <!-- STOP 2: CLINICAL & HEALTHCARE SYSTEMS -->
+    <section class="stop" id="stop-health" data-t="0.25" data-side="left">
+      <div class="card wide">
+        <span class="label">Stop 02 · Healthcare Telemetry</span>
+        <h2>Zero-latency tools for clinical floors and basement corridors.</h2>
+        <p class="lede sm">Designed around ward bottlenecks, infusion pump wayfinding, and quiet newborn vital trends without cloud latency.</p>
+
+        <div class="doors">
+          <button type="button" class="door" onclick="openProjectDossier('ward')">
+        <div class="door-top">
+          <span class="who">#01 · HEALTH</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3>Predictive Ward Logistics Engine</h3>
+        <p>An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('babycarl')">
+        <div class="door-top">
+          <span class="who">#08 · HEALTH</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3>BabyCarl: Circadian Telemetry</h3>
+        <p>A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
         </div>
       </div>
     </section>
 
-    <!-- =====================================================================
-         SECTION 03: TACTICAL INTERLUDE (HOLD REV)
-         ===================================================================== -->
-    <section class="section" id="instrument">
-      <div class="wrap">
-        <div class="section-header">
-          <span class="label">Systems Interlude</span>
-          <h2>Hold REV.</h2>
-          <p class="lede sm">The needle answers and settles on its own. The odometer counts your time on this portfolio, on this device only.</p>
-        </div>
+    <!-- STOP 3: COGNITIVE & PERCEPTION LABS -->
+    <section class="stop" id="stop-cognitive" data-t="0.375" data-side="right">
+      <div class="card wide">
+        <span class="label">Stop 03 · Cognitive &amp; Perception Labs</span>
+        <h2>Respecting the physical bandwidth of human attention.</h2>
+        <p class="lede sm">Volumetric 3D neuroscience slicers, generative awareness shaders, and quiet psychological self-reflection engines.</p>
 
-        <div class="instrument">
+        <div class="doors">
+          <button type="button" class="door" onclick="openProjectDossier('consciousness')">
+        <div class="door-top">
+          <span class="who">#02 · COGNITIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>The Unexplored Interior</h3>
+        <p>An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('ithink')">
+        <div class="door-top">
+          <span class="who">#03 · COGNITIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>iTHINK: Attention & Flow Lab</h3>
+        <p>An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('itsyou')">
+        <div class="door-top">
+          <span class="who">#07 · COGNITIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>The Observer: Thought & Awareness</h3>
+        <p>An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 4: CIVIC & SPATIAL INFRASTRUCTURE -->
+    <section class="stop" id="stop-civic" data-t="0.50" data-side="left">
+      <div class="card wide">
+        <span class="label">Stop 04 · Civic Infrastructure</span>
+        <h2>Spatial deduplication and edge computer vision for public roads.</h2>
+        <p class="lede sm">Eliminating redundant dispatch contractor callouts via DBSCAN geospatial batching and offline WebGPU hazard scanning.</p>
+
+        <div class="doors">
+          <button type="button" class="door" onclick="openProjectDossier('civicflow')">
+        <div class="door-top">
+          <span class="who">#04 · CIVIC</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>CivicFlow: Highways Triage Engine</h3>
+        <p>A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('roadtriage')">
+        <div class="door-top">
+          <span class="who">#06 · CIVIC</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3>RoadTriage: Edge Defect Scanner</h3>
+        <p>An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 5: AUTOMOTIVE PROVENANCE & ADAS -->
+    <section class="stop" id="stop-automotive" data-t="0.625" data-side="right">
+      <div class="card wide">
+        <span class="label">Stop 05 · Automotive &amp; Provenance</span>
+        <h2>High-society vehicle stewardship, ADAS fusion &amp; driving philosophy.</h2>
+        <p class="lede sm">Including Datum Atelier itself — keeping a car's work, evidence and people together through every change of keeper.</p>
+
+        <div class="doors">
+          <button type="button" class="door" onclick="openProjectDossier('datumatelier')">
+        <div class="door-top">
+          <span class="who">#16 · AUTOMOTIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>Datum Atelier</h3>
+        <p>An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('datumadas')">
+        <div class="door-top">
+          <span class="who">#11 · AUTOMOTIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>Datum ADAS</h3>
+        <p>An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('driver')">
+        <div class="door-top">
+          <span class="who">#14 · CREATIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>The Driver of God</h3>
+        <p>An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 6: AI, AUDIO STUDIO & COLLABORATIVE TOOLS -->
+    <section class="stop" id="stop-studio" data-t="0.75" data-side="left">
+      <div class="card wide">
+        <span class="label">Stop 06 · AI, Audio DAWs &amp; Systems Suite</span>
+        <h2>Six tools for language precision, rhythm, consensus &amp; institutional scale.</h2>
+        <p class="lede sm">Multi-track Web Audio workspaces, prompt design languages, semantic group consensus graphs, and educational operating systems.</p>
+
+        <div class="doors">
+          <button type="button" class="door" onclick="openProjectDossier('vision')">
+        <div class="door-top">
+          <span class="who">#10 · CREATIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>Rulers Language</h3>
+        <p>A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('scriptstudio')">
+        <div class="door-top">
+          <span class="who">#05 · CREATIVE</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3>AI Script Studio: Multi-Track DAW</h3>
+        <p>A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('hiddenleaf')">
+        <div class="door-top">
+          <span class="who">#15 · CREATIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>Hidden Leaf Studio</h3>
+        <p>A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('groupchat')">
+        <div class="door-top">
+          <span class="who">#09 · CREATIVE</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3>GroupChat HQ: Consensus Engine</h3>
+        <p>A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('velum')">
+        <div class="door-top">
+          <span class="who">#12 · CREATIVE</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>Checkmate (Velum Labs)</h3>
+        <p>A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+<button type="button" class="door" onclick="openProjectDossier('vtsystem')">
+        <div class="door-top">
+          <span class="who">#13 · EDUCATION</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3>Vedic Tree OS</h3>
+        <p>An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
+        <span class="go">Inspect dossier →</span>
+      </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 7: TACTICAL INTERLUDE (HOLD REV) -->
+    <section class="stop" id="stop-rev" data-t="0.875" data-side="right" data-cam="close">
+      <div class="card">
+        <span class="label">Stop 07 · Systems Interlude</span>
+        <h2>Hold REV.</h2>
+        <p class="lede sm">
+          Notice the 3D ground tachometer painted beside the coupé on the tarmac: holding REV sweeps both instruments in real time.
+        </p>
+
+        <div class="instrument" id="instrument">
           <div class="instrument-stage">
             <div class="instrument-dial">
-              <canvas id="instrument-canvas" role="img" aria-label="Datum rev counter with an odometer counting time spent on this page"></canvas>
+              <canvas id="instrument-canvas" role="img" aria-label="Systems tachometer dial with session odometer"></canvas>
             </div>
             <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to rev the engine">REV</button>
             <piix-pal pal="pip" edge="box" speed="0.9"></piix-pal>
@@ -1568,106 +434,34 @@
       </div>
     </section>
 
-    <!-- =====================================================================
-         SECTION 04: TECHNICAL ARSENAL (.cols c3)
-         ===================================================================== -->
-    <section class="section" id="arsenal">
-      <div class="wrap">
-        <div class="section-header">
-          <span class="label">Section 04 · Technical Arsenal</span>
-          <h2>Disciplines &amp; Engineered Systems.</h2>
-          <p class="lede">Every capability honed through physical constraints, operational audits, and edge deployments.</p>
+    <!-- STOP 8: ARRIVAL GATE & INQUIRIES -->
+    <section class="stop last" id="stop-gate" data-t="1.0" data-side="left" data-cam="gate">
+      <div class="card wide">
+        <span class="label">Stop 08 · End of the Drive &amp; Inquiries</span>
+        <h2>Start a conversation, inspect the full matrix, or request a brief.</h2>
+        <p class="lede sm">
+          Greater London, UK · Available for advisory, systems architecture reviews, and high-integrity product engineering.
+        </p>
+
+        <div class="trio">
+          <div>
+            <h3>Full 16-Work Index</h3>
+            <p>Search and filter all 16 systems with full problem diagnosis and architecture specs.</p>
+          </div>
+          <div>
+            <h3>Source &amp; Repositories</h3>
+            <p>Explore public repositories and commits directly on GitHub under @aigroupchathq.</p>
+          </div>
+          <div>
+            <h3>Direct Correspondence</h3>
+            <p>Reach out directly to discuss roles, prototypes, or systems engineering problems.</p>
+          </div>
         </div>
 
-        <div class="cols c3">
-          <div>
-            <span class="col-lbl">REAL-TIME 3D &amp; SHADERS</span>
-            <span class="col-val">Three.js / WebGL / GLSL</span>
-            <p class="lede sm" style="margin-top: 6px;">Cortical slicing planes, GPU-accelerated spatial projections, and volumetric models.</p>
-          </div>
-          <div>
-            <span class="col-lbl">SYSTEMS SIMULATION</span>
-            <span class="col-val">Python SimPy / Queueing</span>
-            <p class="lede sm" style="margin-top: 6px;">Hospital infusion bed queues, road transit routing, and municipal defect batching.</p>
-          </div>
-          <div>
-            <span class="col-lbl">CLINICAL TELEMETRY</span>
-            <span class="col-val">HL7 FHIR v4 / GS1-128</span>
-            <p class="lede sm" style="margin-top: 6px;">Offline spatial wayfinding for critical devices in windowless hospital basements.</p>
-          </div>
-          <div>
-            <span class="col-lbl">OFFLINE FIRST</span>
-            <span class="col-val">IndexedDB / Service Workers</span>
-            <p class="lede sm" style="margin-top: 6px;">Zero-cloud dependencies when connection drops. Local state reconciliation via CRDTs.</p>
-          </div>
-          <div>
-            <span class="col-lbl">AUDIO DSP &amp; SYNTHESIS</span>
-            <span class="col-val">Web Audio API / Oscillators</span>
-            <p class="lede sm" style="margin-top: 6px;">Interactive psychoacoustic stimuli, harmonic tuning, and generative audio feedback.</p>
-          </div>
-          <div>
-            <span class="col-lbl">AUTOMOTIVE &amp; EDGE</span>
-            <span class="col-val">CAN-Bus / Sensor Fusion</span>
-            <p class="lede sm" style="margin-top: 6px;">Chassis telemetry, provenance verification ledgers, and edge telematics.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 05: PHILOSOPHY & SIGNATURE
-         ===================================================================== -->
-    <section class="section" id="ideology">
-      <div class="wrap">
-        <div class="section-header">
-          <span class="label">Section 05 · Philosophy</span>
-          <h2>Built around real human needs, at the edge.</h2>
-        </div>
-
-        <div class="signature-card">
-          <div class="signature-row">
-            <div>
-              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">The Physical Edge</h3>
-              <p class="lede sm">
-                When a nurse reaches for an infusion pump during a shift change, or a road inspector flags a subsidence fracture in pouring rain, software cannot afford a loading spinner, a session timeout, or ambiguous iconography. True engineering reliability begins where the cell tower signal drops.
-              </p>
-            </div>
-            <div>
-              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">The Human Attention Contract</h3>
-              <p class="lede sm">
-                Every software interface makes an unwritten claim on human working memory. By stripping bloated frameworks, respecting optical hierarchy, and grounding every feature in physical reality, we build systems that outlive transient design trends.
-              </p>
-            </div>
-          </div>
-
-          <div style="border-top: 1px solid var(--hair); padding-top: 20px; margin-top: 10px;">
-            <p class="sig-hand">
-              Vaishnav Deshmukh
-              <small>SYSTEMS ARCHITECT &amp; LOGISTICS SPECIALIST · LONDON, UK</small>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 06: CONTACT & INQUIRIES
-         ===================================================================== -->
-    <section class="section" id="contact">
-      <div class="wrap">
-        <div class="section-header">
-          <span class="label">Inquiries &amp; Advisory</span>
-          <h2>Start a conversation or project brief.</h2>
-          <p class="lede">Open for select advisory, systems architecture reviews, and high-integrity product engineering.</p>
-        </div>
-
-        <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px;">
-          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">
-            <span>deshmukhvaishnav@gmail.com →</span>
-          </a>
-          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">
-            <span>GitHub @aigroupchathq ↗</span>
-          </a>
+        <div class="cta">
+          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">deshmukhvaishnav@gmail.com →</a>
+          <button type="button" class="btn ghost" onclick="openMatrix()">Open All 16 Index</button>
+          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
         </div>
       </div>
     </section>
@@ -1678,65 +472,267 @@
        FOOTER
        ======================================================================= -->
   <footer class="bottom">
-    <div class="wrap footer-row">
+    <div class="wrap foot">
       <div>
-        <p style="font-family: var(--display); font-weight: 700; font-size: var(--fs-14);">VAISHNAV DESHMUKH · SYSTEMS ATELIER</p>
-        <p style="font-family: var(--mono); font-size: var(--fs-12); color: var(--muted); margin-top: 4px;">Greater London, UK · Machined Provenance &amp; Edge Infrastructure</p>
+        <a class="brand" href="#stop-garage">VAISHNAV <small>DESHMUKH</small></a>
+        <p style="margin-top: 10px;">
+          Product, Design &amp; Systems Architecture · Greater London, UK. Built with Three.js procedural driving physics and Piixpal open-source components.
+        </p>
+        <p class="note">Documentary truth strictly enforced: all 16 case studies correspond to authored repositories, studies, and prototypes.</p>
       </div>
-
-      <div class="footer-links">
-        <a href="#ledger">Ledger</a>
-        <a href="#standards">Standards</a>
-        <a href="#instrument">Instrument</a>
-        <a href="#arsenal">Arsenal</a>
-        <a href="deck.html">3D Deck</a>
-        <a href="mailto:deshmukhvaishnav@gmail.com">Direct Email</a>
+      <div>
+        <nav class="foot-links" aria-label="Footer navigation">
+          <button type="button" onclick="openMatrix()">All 16 Systems</button>
+          <a href="deck.html">3D Card Deck</a>
+          <a href="showroom.html">Design Showroom</a>
+          <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:deshmukhvaishnav@gmail.com">Email</a>
+        </nav>
+        <p class="mono" style="margin-top: 14px; font-size: 12px; color: var(--muted);">
+          &copy; 2026 Vaishnav Deshmukh · Driven by systems &amp; logistics
+        </p>
       </div>
     </div>
   </footer>
 
   <!-- =======================================================================
-       CASE STUDY DOSSIER MODAL DRAWER
+       DEEP PROJECT DOSSIER MODAL DRAWER
        ======================================================================= -->
-  <div id="caseStudyModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeProjectDossier(event)">
-    <div class="dossier-box" onclick="event.stopPropagation()">
-      <div class="dossier-head">
+  <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeProjectDossier()">
+    <div class="modal-panel" onclick="event.stopPropagation()">
+      <div class="modal-drag-bar"></div>
+
+      <div class="modal-head">
         <div>
-          <span id="modalCategory" class="label" style="margin-bottom: 6px;">Healthcare Systems</span>
-          <h2 id="modalTitle" style="font-size: 1.75rem;">Project Title</h2>
+          <span id="modalCategory" class="label" style="margin-bottom: 4px;">Domain</span>
+          <h2 id="modalTitle" style="font-size: clamp(1.35rem, 2.5vw, 1.9rem);">Project Title</h2>
+          <div style="margin-top: 10px;">
+            <piix-flap id="modalFlapCode" text="SYSTEM DOSSIER" theme="dark" style="font-size: 14px;"></piix-flap>
+          </div>
         </div>
         <button type="button" class="btn ghost sm" onclick="closeProjectDossier()" aria-label="Close dossier">✕</button>
       </div>
 
-      <div class="dossier-sec">
-        <span class="dossier-sec-lbl">Problem Diagnosis</span>
-        <p id="modalProblem" class="dossier-sec-txt">Detailed problem breakdown...</p>
+      <div class="modal-visual">
+        <img id="modalImage" src="assets/work-ward.svg" alt="" />
       </div>
 
-      <div class="dossier-sec">
-        <span class="dossier-sec-lbl">Architectural Intervention</span>
-        <p id="modalSolution" class="dossier-sec-txt">Engineering intervention...</p>
+      <div>
+        <span class="modal-sec-lbl">Problem Diagnosis</span>
+        <p id="modalProblem" class="modal-box"></p>
       </div>
 
-      <div class="dossier-sec">
-        <span class="dossier-sec-lbl">Technical Specification</span>
-        <div id="modalStack" class="spec-tags" style="margin-top: 4px;"></div>
+      <div>
+        <span class="modal-sec-lbl">Architectural Intervention</span>
+        <p id="modalSolution" class="modal-box"></p>
       </div>
 
-      <div class="dossier-foot">
-        <span class="mono" style="font-size: var(--fs-12); color: var(--muted);">DOCUMENTARY TRUTH VERIFIED</span>
-        <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn primary sm">Open Artifact ↗</a>
+      <div id="modalDecisionsWrap">
+        <span class="modal-sec-lbl">Key Engineering Decisions</span>
+        <ul id="modalDecisions" class="modal-decisions"></ul>
+      </div>
+
+      <div>
+        <span class="modal-sec-lbl">Core Tech Stack</span>
+        <div id="modalStack" class="spec-tags"></div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--hair); padding-top: 16px;">
+        <span class="mono" style="font-size: 11px; color: var(--muted);">DOCUMENTARY TRUTH VERIFIED</span>
+        <div id="modalLinks" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
       </div>
     </div>
   </div>
 
-  <!-- Client Script Engine -->
+  <!-- =======================================================================
+       ALL 16 ARTIFACTS SEARCHABLE MATRIX MODAL
+       ======================================================================= -->
+  <div id="matrixModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="matrixTitle" onclick="closeMatrix()">
+    <div class="modal-panel wide" onclick="event.stopPropagation()">
+      <div class="modal-drag-bar"></div>
+
+      <div class="modal-head">
+        <div>
+          <span class="label" style="margin-bottom: 4px;">Complete Custodianship Index</span>
+          <h2 id="matrixTitle" style="font-size: 1.65rem;">All 16 Verified Systems Artifacts</h2>
+        </div>
+        <button type="button" class="btn ghost sm" onclick="closeMatrix()" aria-label="Close matrix">✕</button>
+      </div>
+
+      <div class="matrix-controls">
+        <div class="filter-strip">
+          <button type="button" class="filter-btn active" onclick="filterMatrix('all', this)">All (16)</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('live', this)">Live (11)</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('concept', this)">Concept (5)</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('health', this)">Health</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('cognitive', this)">Cognitive</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('civic', this)">Civic</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('automotive', this)">Automotive</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('creative', this)">AI &amp; Studio</button>
+        </div>
+        <input type="text" class="search-input" id="matrixSearchInput" placeholder="Search by project title, domain, or stack..." oninput="searchMatrix(this.value)">
+      </div>
+
+      <div class="matrix-grid" id="matrixGrid">
+        <button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('ward')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#01 · Healthcare Logistics · Concept Study</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Predictive Ward Logistics Engine</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
+        <div class="spec-tags"><span class="spec-tag">HL7 FHIR v4</span> <span class="spec-tag">GS1-128</span> <span class="spec-tag">IndexedDB</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('consciousness')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#02 · Cognitive Science · Interactive Inquiry</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">The Unexplored Interior</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
+        <div class="spec-tags"><span class="spec-tag">HTML Canvas</span> <span class="spec-tag">Web Audio API</span> <span class="spec-tag">Vanilla JS</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('ithink')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#03 · Cognitive Practice · Neuroscience Lab</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">iTHINK: Attention & Flow Lab</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
+        <div class="spec-tags"><span class="spec-tag">Three.js</span> <span class="spec-tag">WebGL</span> <span class="spec-tag">TypeScript</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="civic" data-status="live" onclick="closeMatrix(); openProjectDossier('civicflow')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#04 · Civic Infrastructure · Municipal Triage</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">CivicFlow: Highways Triage Engine</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
+        <div class="spec-tags"><span class="spec-tag">DBSCAN Spatial</span> <span class="spec-tag">GeoJSON</span> <span class="spec-tag">Turf.js</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('scriptstudio')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#05 · Creative Technology · Generative Audio</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">AI Script Studio: Multi-Track DAW</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
+        <div class="spec-tags"><span class="spec-tag">Web Audio API</span> <span class="spec-tag">Canvas Timeline</span> <span class="spec-tag">TypeScript</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="civic" data-status="concept" onclick="closeMatrix(); openProjectDossier('roadtriage')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#06 · Civic Infrastructure · Edge Vision</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">RoadTriage: Edge Defect Scanner</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
+        <div class="spec-tags"><span class="spec-tag">Computer Vision</span> <span class="spec-tag">TensorFlow.js</span> <span class="spec-tag">IndexedDB</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('itsyou')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#07 · Cognitive Science · Metacognition</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">The Observer: Thought & Awareness</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
+        <div class="spec-tags"><span class="spec-tag">Interactive Narrative</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Vanilla JS</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('babycarl')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#08 · Pediatric Health · Circadian Telemetry</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">BabyCarl: Circadian Telemetry</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
+        <div class="spec-tags"><span class="spec-tag">Circadian Telemetry</span> <span class="spec-tag">Local Storage</span> <span class="spec-tag">Tactile UX</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('groupchat')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#09 · Collaboration Systems · Semantic Sync</span>
+          <span class="tag">Specimen</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">GroupChat HQ: Consensus Engine</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
+        <div class="spec-tags"><span class="spec-tag">Vector Embeddings</span> <span class="spec-tag">Semantic Graphs</span> <span class="spec-tag">CRDT State</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('vision')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#10 · AI Guidance · Prompt Studio</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Rulers Language</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
+        <div class="spec-tags"><span class="spec-tag">Mission Paths</span> <span class="spec-tag">Prompt Studio</span> <span class="spec-tag">Original Illustrations</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumadas')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#11 · Automotive Systems · Perception</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Datum ADAS</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
+        <div class="spec-tags"><span class="spec-tag">Computer Vision</span> <span class="spec-tag">On-Device</span> <span class="spec-tag">Kinematics</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('velum')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#12 · Human Decisions · Compatibility</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Checkmate (Velum Labs)</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
+        <div class="spec-tags"><span class="spec-tag">Explainable Matching</span> <span class="spec-tag">React 19</span> <span class="spec-tag">TypeScript</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="education" data-status="live" onclick="closeMatrix(); openProjectDossier('vtsystem')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#13 · Education Systems · Institutional OS</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Vedic Tree OS</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
+        <div class="spec-tags"><span class="spec-tag">Multi-Tenant</span> <span class="spec-tag">RBAC Security</span> <span class="spec-tag">TypeScript</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('driver')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#14 · Interactive Philosophy · Audio</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">The Driver of God</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
+        <div class="spec-tags"><span class="spec-tag">Web Audio API</span> <span class="spec-tag">Interactive Philosophy</span> <span class="spec-tag">Canvas 2D</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('hiddenleaf')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#15 · Creative Tools · Bilingual Studio</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Hidden Leaf Studio</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
+        <div class="spec-tags"><span class="spec-tag">Web Audio API</span> <span class="spec-tag">Phoneme Parser</span> <span class="spec-tag">Rhythm Studio</span></div>
+      </button>
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumatelier')">
+        <div class="door-top" style="width: 100%;">
+          <span class="mono" style="font-size: 11px; color: var(--c-text);">#16 · Automotive Systems · Provenance</span>
+          <span class="tag live"><i></i>Live</span>
+        </div>
+        <h3 style="font-size: 1.08rem;">Datum Atelier</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
+        <div class="spec-tags"><span class="spec-tag">Vehicle Provenance</span> <span class="spec-tag">Owner Records</span> <span class="spec-tag">Offline-First</span></div>
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       UI STATE & INTERACTION ENGINE
+       ======================================================================= -->
   <script>
-    // Project Dossiers Data
-    const projectDossiers = {
+    const PROJECT_DOSSIERS = {
   "ward": {
+    "index": "01",
+    "code": "SYS-01 // WARD",
     "title": "Predictive Ward Logistics Engine",
-    "category": "\u00b7H\u00b7e\u00b7a\u00b7l\u00b7t\u00b7h\u00b7c\u00b7a\u00b7r\u00b7e\u00b7 \u00b7L\u00b7o\u00b7g\u00b7i\u00b7s\u00b7t\u00b7i\u00b7c\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7C\u00b7o\u00b7n\u00b7c\u00b7e\u00b7p\u00b7t\u00b7 \u00b7S\u00b7t\u00b7u\u00b7d\u00b7y\u00b7",
+    "category": "Healthcare Logistics \u00b7 Concept Study",
+    "domain": "health",
     "status": "concept",
     "desc": "An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.",
     "problem": "Nurses in acute hospital wards spend up to 45 minutes every shift hunting for infusion pumps and telemetry monitors. When devices go missing, critical medication is delayed.",
@@ -1760,8 +756,11 @@
     "img": "assets/work-ward.svg"
   },
   "consciousness": {
+    "index": "02",
+    "code": "SYS-02 // CONSCIOUSNESS",
     "title": "The Unexplored Interior",
-    "category": "\u00b7C\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7c\u00b7i\u00b7e\u00b7n\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7I\u00b7n\u00b7t\u00b7e\u00b7r\u00b7a\u00b7c\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7I\u00b7n\u00b7q\u00b7u\u00b7i\u00b7r\u00b7y\u00b7",
+    "category": "Cognitive Science \u00b7 Interactive Inquiry",
+    "domain": "cognitive",
     "status": "live",
     "desc": "An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.",
     "problem": "Abstract models of conscious attention, optical illusion, and sensory thresholding are difficult to grasp without interactive participatory visual experiments.",
@@ -1785,8 +784,11 @@
     "img": "assets/work-itsyou.svg"
   },
   "ithink": {
+    "index": "03",
+    "code": "SYS-03 // ITHINK",
     "title": "iTHINK: Attention & Flow Lab",
-    "category": "\u00b7C\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7P\u00b7r\u00b7a\u00b7c\u00b7t\u00b7i\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7N\u00b7e\u00b7u\u00b7r\u00b7o\u00b7s\u00b7c\u00b7i\u00b7e\u00b7n\u00b7c\u00b7e\u00b7 \u00b7L\u00b7a\u00b7b\u00b7",
+    "category": "Cognitive Practice \u00b7 Neuroscience Lab",
+    "domain": "cognitive",
     "status": "live",
     "desc": "An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.",
     "problem": "Neuroscience models and cognitive attention theory are typically locked in static textbook diagrams or clunky academic software that fails to communicate volumetric relationships.",
@@ -1814,8 +816,11 @@
     "img": "assets/work-ithink.svg"
   },
   "civicflow": {
+    "index": "04",
+    "code": "SYS-04 // CIVICFLOW",
     "title": "CivicFlow: Highways Triage Engine",
-    "category": "\u00b7C\u00b7i\u00b7v\u00b7i\u00b7c\u00b7 \u00b7I\u00b7n\u00b7f\u00b7r\u00b7a\u00b7s\u00b7t\u00b7r\u00b7u\u00b7c\u00b7t\u00b7u\u00b7r\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7M\u00b7u\u00b7n\u00b7i\u00b7c\u00b7i\u00b7p\u00b7a\u00b7l\u00b7 \u00b7T\u00b7r\u00b7i\u00b7a\u00b7g\u00b7e\u00b7",
+    "category": "Civic Infrastructure \u00b7 Municipal Triage",
+    "domain": "civic",
     "status": "live",
     "desc": "A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.",
     "problem": "Local councils receive hundreds of duplicate citizen reports for the same pothole or broken streetlight, overwhelming dispatch coordinators and causing wasted contractor callouts.",
@@ -1843,8 +848,11 @@
     "img": "assets/work-civicflow.svg"
   },
   "scriptstudio": {
+    "index": "05",
+    "code": "SYS-05 // SCRIPTSTUDIO",
     "title": "AI Script Studio: Multi-Track DAW",
-    "category": "\u00b7C\u00b7r\u00b7e\u00b7a\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7T\u00b7e\u00b7c\u00b7h\u00b7n\u00b7o\u00b7l\u00b7o\u00b7g\u00b7y\u00b7 \u00b7\u00b7\u00b7 \u00b7G\u00b7e\u00b7n\u00b7e\u00b7r\u00b7a\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7A\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
+    "category": "Creative Technology \u00b7 Generative Audio",
+    "domain": "creative",
     "status": "concept",
     "desc": "A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.",
     "problem": "Video creators and podcasters waste hours jumping between text script editors and bloated desktop digital audio workstations (DAWs) to pace vocal delivery and sound design.",
@@ -1868,8 +876,11 @@
     "img": "assets/work-scriptstudio.svg"
   },
   "roadtriage": {
+    "index": "06",
+    "code": "SYS-06 // ROADTRIAGE",
     "title": "RoadTriage: Edge Defect Scanner",
-    "category": "\u00b7C\u00b7i\u00b7v\u00b7i\u00b7c\u00b7 \u00b7I\u00b7n\u00b7f\u00b7r\u00b7a\u00b7s\u00b7t\u00b7r\u00b7u\u00b7c\u00b7t\u00b7u\u00b7r\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7E\u00b7d\u00b7g\u00b7e\u00b7 \u00b7V\u00b7i\u00b7s\u00b7i\u00b7o\u00b7n\u00b7",
+    "category": "Civic Infrastructure \u00b7 Edge Vision",
+    "domain": "civic",
     "status": "concept",
     "desc": "An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.",
     "problem": "Highway maintenance inspectors driving rural and council roads often lose 4G/5G signal, preventing standard cloud-dependent defect logging and photo analysis.",
@@ -1893,8 +904,11 @@
     "img": "assets/work-roadtriage.svg"
   },
   "itsyou": {
+    "index": "07",
+    "code": "SYS-07 // ITSYOU",
     "title": "The Observer: Thought & Awareness",
-    "category": "\u00b7C\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7c\u00b7i\u00b7e\u00b7n\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7M\u00b7e\u00b7t\u00b7a\u00b7c\u00b7o\u00b7g\u00b7n\u00b7i\u00b7t\u00b7i\u00b7o\u00b7n\u00b7",
+    "category": "Cognitive Science \u00b7 Metacognition",
+    "domain": "cognitive",
     "status": "live",
     "desc": "An interactive reflection interface examining mental models, decision-making habits, and attention patterns.",
     "problem": "People rarely observe their own cognitive biases, default reactive loops, or mental conditioning in everyday software interactions.",
@@ -1922,8 +936,11 @@
     "img": "assets/work-observer.svg"
   },
   "babycarl": {
+    "index": "08",
+    "code": "SYS-08 // BABYCARL",
     "title": "BabyCarl: Circadian Telemetry",
-    "category": "\u00b7P\u00b7e\u00b7d\u00b7i\u00b7a\u00b7t\u00b7r\u00b7i\u00b7c\u00b7 \u00b7H\u00b7e\u00b7a\u00b7l\u00b7t\u00b7h\u00b7 \u00b7\u00b7\u00b7 \u00b7C\u00b7i\u00b7r\u00b7c\u00b7a\u00b7d\u00b7i\u00b7a\u00b7n\u00b7 \u00b7T\u00b7e\u00b7l\u00b7e\u00b7m\u00b7e\u00b7t\u00b7r\u00b7y\u00b7",
+    "category": "Pediatric Health \u00b7 Circadian Telemetry",
+    "domain": "health",
     "status": "concept",
     "desc": "A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.",
     "problem": "Modern baby monitors bombard exhausted new parents with high-friction push notifications, anxiety-inducing graphs, and invasive cloud video streaming.",
@@ -1947,8 +964,11 @@
     "img": "assets/work-babycarl.svg"
   },
   "groupchat": {
+    "index": "09",
+    "code": "SYS-09 // GROUPCHAT",
     "title": "GroupChat HQ: Consensus Engine",
-    "category": "\u00b7C\u00b7o\u00b7l\u00b7l\u00b7a\u00b7b\u00b7o\u00b7r\u00b7a\u00b7t\u00b7i\u00b7o\u00b7n\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7S\u00b7e\u00b7m\u00b7a\u00b7n\u00b7t\u00b7i\u00b7c\u00b7 \u00b7S\u00b7y\u00b7n\u00b7c\u00b7",
+    "category": "Collaboration Systems \u00b7 Semantic Sync",
+    "domain": "creative",
     "status": "concept",
     "desc": "A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.",
     "problem": "Most AI tutorials remain superficial prompt demonstrations without addressing state synchronization, consensus verification, or real-world software engineering constraints.",
@@ -1972,8 +992,11 @@
     "img": "assets/work-groupchat.svg"
   },
   "vision": {
+    "index": "10",
+    "code": "SYS-10 // VISION",
     "title": "Rulers Language",
-    "category": "\u00b7A\u00b7I\u00b7 \u00b7G\u00b7u\u00b7i\u00b7d\u00b7a\u00b7n\u00b7c\u00b7e\u00b7 \u00b7\u00b7\u00b7 \u00b7P\u00b7r\u00b7o\u00b7m\u00b7p\u00b7t\u00b7 \u00b7S\u00b7t\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
+    "category": "AI Guidance \u00b7 Prompt Studio",
+    "domain": "creative",
     "status": "live",
     "desc": "A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.",
     "problem": "Users struggle with unguided LLM prompting, relying on conversational politeness or vague adjectives that produce hallucinated code and unverified assumptions.",
@@ -2001,8 +1024,11 @@
     "img": "assets/work-vision.svg"
   },
   "datumadas": {
+    "index": "11",
+    "code": "SYS-11 // DATUMADAS",
     "title": "Datum ADAS",
-    "category": "\u00b7A\u00b7u\u00b7t\u00b7o\u00b7m\u00b7o\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7P\u00b7e\u00b7r\u00b7c\u00b7e\u00b7p\u00b7t\u00b7i\u00b7o\u00b7n\u00b7",
+    "category": "Automotive Systems \u00b7 Perception",
+    "domain": "automotive",
     "status": "live",
     "desc": "An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.",
     "problem": "Modern vehicular safety suites depend on centralized cloud telemetry or high-latency processing, making edge response times sluggish under poor network connectivity.",
@@ -2030,8 +1056,11 @@
     "img": "assets/work-datumadas.svg"
   },
   "velum": {
+    "index": "12",
+    "code": "SYS-12 // VELUM",
     "title": "Checkmate (Velum Labs)",
-    "category": "\u00b7H\u00b7u\u00b7m\u00b7a\u00b7n\u00b7 \u00b7D\u00b7e\u00b7c\u00b7i\u00b7s\u00b7i\u00b7o\u00b7n\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7C\u00b7o\u00b7m\u00b7p\u00b7a\u00b7t\u00b7i\u00b7b\u00b7i\u00b7l\u00b7i\u00b7t\u00b7y\u00b7",
+    "category": "Human Decisions \u00b7 Compatibility",
+    "domain": "creative",
     "status": "live",
     "desc": "A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.",
     "problem": "Dating and relationship applications exploit addictive slot-machine gamification, opaque algorithmic sorting, and superficial image swiping that degrades long-term decision making.",
@@ -2059,8 +1088,11 @@
     "img": "assets/work-velum.svg"
   },
   "vtsystem": {
+    "index": "13",
+    "code": "SYS-13 // VTSYSTEM",
     "title": "Vedic Tree OS",
-    "category": "\u00b7E\u00b7d\u00b7u\u00b7c\u00b7a\u00b7t\u00b7i\u00b7o\u00b7n\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7I\u00b7n\u00b7s\u00b7t\u00b7i\u00b7t\u00b7u\u00b7t\u00b7i\u00b7o\u00b7n\u00b7a\u00b7l\u00b7 \u00b7O\u00b7S\u00b7",
+    "category": "Education Systems \u00b7 Institutional OS",
+    "domain": "education",
     "status": "live",
     "desc": "An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.",
     "problem": "Multi-campus educational institutions endure fractured administrative tools: attendance sheets in spreadsheets, fees in clunky ERPs, and learning logs lost across disconnected apps.",
@@ -2088,8 +1120,11 @@
     "img": "assets/work-vtsystem.svg"
   },
   "driver": {
+    "index": "14",
+    "code": "SYS-14 // DRIVER",
     "title": "The Driver of God",
-    "category": "\u00b7I\u00b7n\u00b7t\u00b7e\u00b7r\u00b7a\u00b7c\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7P\u00b7h\u00b7i\u00b7l\u00b7o\u00b7s\u00b7o\u00b7p\u00b7h\u00b7y\u00b7 \u00b7\u00b7\u00b7 \u00b7A\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
+    "category": "Interactive Philosophy \u00b7 Audio",
+    "domain": "creative",
     "status": "live",
     "desc": "An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.",
     "problem": "Digital interactions are overwhelmingly transactional, designed for compulsion and urgency rather than introspection, attention restoration, and philosophical contemplation.",
@@ -2117,8 +1152,11 @@
     "img": "assets/work-driver.svg"
   },
   "hiddenleaf": {
+    "index": "15",
+    "code": "SYS-15 // HIDDENLEAF",
     "title": "Hidden Leaf Studio",
-    "category": "\u00b7C\u00b7r\u00b7e\u00b7a\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7T\u00b7o\u00b7o\u00b7l\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7B\u00b7i\u00b7l\u00b7i\u00b7n\u00b7g\u00b7u\u00b7a\u00b7l\u00b7 \u00b7S\u00b7t\u00b7u\u00b7d\u00b7i\u00b7o\u00b7",
+    "category": "Creative Tools \u00b7 Bilingual Studio",
+    "domain": "creative",
     "status": "live",
     "desc": "A Hindi\u2013English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.",
     "problem": "South Asian hip-hop lyricists blending Hindi, Urdu, and English struggle with conventional Western songwriting tools that fail to parse matra weight, conjunct consonants, or Devanagari meter.",
@@ -2146,8 +1184,11 @@
     "img": "assets/work-hiddenleaf.svg"
   },
   "datumatelier": {
+    "index": "16",
+    "code": "SYS-16 // DATUMATELIER",
     "title": "Datum Atelier",
-    "category": "\u00b7A\u00b7u\u00b7t\u00b7o\u00b7m\u00b7o\u00b7t\u00b7i\u00b7v\u00b7e\u00b7 \u00b7S\u00b7y\u00b7s\u00b7t\u00b7e\u00b7m\u00b7s\u00b7 \u00b7\u00b7\u00b7 \u00b7P\u00b7r\u00b7o\u00b7v\u00b7e\u00b7n\u00b7a\u00b7n\u00b7c\u00b7e\u00b7",
+    "category": "Automotive Systems \u00b7 Provenance",
+    "domain": "automotive",
     "status": "live",
     "desc": "An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.",
     "problem": "Vehicle service and maintenance histories are fragmented across proprietary dealer silos, vulnerable to odometer fraud, lost paper invoices, and unauthorized personal data aggregation.",
@@ -2176,107 +1217,156 @@
   }
 };
 
-    // London Clock
-    const londonClock = document.getElementById("londonClock");
-    const formatter = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/London",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
+    /* Live London Clock */
+    const londonClock = document.getElementById('londonClock');
+    const timeFmt = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
       hour12: false
     });
-    function updateClock() {
-      if (londonClock) londonClock.textContent = formatter.format(new Date()) + " GMT";
+    function tickClock() {
+      if (londonClock) londonClock.textContent = timeFmt.format(new Date()) + ' GMT';
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    setInterval(tickClock, 1000);
+    tickClock();
 
-    // Dossier Modal
+    /* Piixpal Toggle Persistence */
+    const palToggleBtn = document.getElementById('palToggleBtn');
+    function applyPalState(enabled) {
+      document.body.classList.toggle('pals-off', !enabled);
+      if (palToggleBtn) {
+        palToggleBtn.setAttribute('aria-pressed', String(enabled));
+        palToggleBtn.innerHTML = `<span>Pals: ${enabled ? 'On' : 'Off'}</span>`;
+      }
+    }
+    function togglePals() {
+      const next = document.body.classList.contains('pals-off');
+      try { localStorage.setItem('vd_pals', next ? '1' : '0'); } catch (e) {}
+      applyPalState(next);
+    }
+    try {
+      if (localStorage.getItem('vd_pals') === '0') applyPalState(false);
+    } catch (e) {}
+
+    /* Project Dossier Modal Handlers */
     function openProjectDossier(pid) {
-      const d = projectDossiers[pid] || {
-        title: pid.toUpperCase(),
-        category: "System Concept",
-        problem: "Architectural challenge requiring high-integrity systems engineering and user-centered ergonomics.",
-        solution: "Production prototype engineered with offline resilience, low cognitive load, and deterministic performance.",
-        tags: ["TypeScript", "Systems Architecture"],
-        links: [{ href: "https://github.com/aigroupchathq" }]
-      };
+      const d = PROJECT_DOSSIERS[pid];
+      if (!d) return;
+      document.getElementById('modalCategory').textContent = `#${d.index} · ${d.category}`;
+      document.getElementById('modalTitle').textContent = d.title;
+      document.getElementById('modalImage').src = d.img;
+      document.getElementById('modalImage').alt = d.title;
+      document.getElementById('modalProblem').textContent = d.problem;
+      document.getElementById('modalSolution').textContent = d.solution;
 
-      document.getElementById("modalTitle").textContent = d.title;
-      document.getElementById("modalCategory").textContent = d.category;
-      document.getElementById("modalProblem").textContent = d.problem;
-      document.getElementById("modalSolution").textContent = d.solution;
-      
-      const link = (d.links && d.links[0] && d.links[0].href) ? d.links[0].href : "https://github.com/aigroupchathq";
-      document.getElementById("modalExternalLink").href = link;
+      const flap = document.getElementById('modalFlapCode');
+      if (flap) flap.setAttribute('text', d.code);
 
-      const stackContainer = document.getElementById("modalStack");
-      stackContainer.innerHTML = "";
-      (d.tags || []).forEach(s => {
-        const span = document.createElement("span");
-        span.className = "spec-tag";
-        span.textContent = s;
-        stackContainer.appendChild(span);
+      const decWrap = document.getElementById('modalDecisionsWrap');
+      const decList = document.getElementById('modalDecisions');
+      decList.innerHTML = '';
+      if (d.decisions && d.decisions.length > 0) {
+        decWrap.style.display = '';
+        d.decisions.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          decList.appendChild(li);
+        });
+      } else {
+        decWrap.style.display = 'none';
+      }
+
+      const stackWrap = document.getElementById('modalStack');
+      stackWrap.innerHTML = '';
+      (d.tags || []).forEach(tag => {
+        const s = document.createElement('span');
+        s.className = 'spec-tag';
+        s.textContent = tag;
+        stackWrap.appendChild(s);
       });
 
-      const backdrop = document.getElementById("caseStudyModalBackdrop");
-      backdrop.classList.add("open");
-      document.body.style.overflow = "hidden";
+      const linksWrap = document.getElementById('modalLinks');
+      linksWrap.innerHTML = '';
+      (d.links || []).forEach((lnk, idx) => {
+        const a = document.createElement('a');
+        a.href = lnk.href || '#';
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = idx === 0 ? 'btn primary sm' : 'btn ghost sm';
+        a.textContent = `${lnk.label || 'Open'} ↗`;
+        linksWrap.appendChild(a);
+      });
+
+      const backdrop = document.getElementById('caseStudyModalBackdrop');
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeProjectDossier() {
-      const backdrop = document.getElementById("caseStudyModalBackdrop");
-      if (!backdrop) return;
-      backdrop.classList.remove("open");
-      document.body.style.overflow = "";
+      const backdrop = document.getElementById('caseStudyModalBackdrop');
+      if (backdrop) backdrop.classList.remove('open');
+      document.body.style.overflow = '';
     }
 
-    // Filter & Search Logic
-    let activeFilter = 'all';
-    let searchQuery = '';
+    /* All 16 Matrix Modal Handlers */
+    let activeMatrixCat = 'all';
+    let matrixQuery = '';
 
-    function filterLedger(cat, btn) {
-      activeFilter = cat;
+    function openMatrix() {
+      const backdrop = document.getElementById('matrixModalBackdrop');
+      if (backdrop) backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMatrix() {
+      const backdrop = document.getElementById('matrixModalBackdrop');
+      if (backdrop) backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function filterMatrix(cat, btn) {
+      activeMatrixCat = cat;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
-      applyFilters();
+      applyMatrixFilters();
     }
 
-    function searchLedger(q) {
-      searchQuery = q.toLowerCase().trim();
-      applyFilters();
+    function searchMatrix(q) {
+      matrixQuery = q.toLowerCase().trim();
+      applyMatrixFilters();
     }
 
-    function applyFilters() {
-      const rows = document.querySelectorAll('.ledger-row');
-      rows.forEach(r => {
-        const rCat = r.dataset.category || '';
-        const rStatus = r.dataset.status || '';
-        const text = r.textContent.toLowerCase();
+    function applyMatrixFilters() {
+      document.querySelectorAll('.matrix-card').forEach(card => {
+        const dom = card.dataset.domain || '';
+        const st = card.dataset.status || '';
+        const txt = card.textContent.toLowerCase();
 
-        let matchesCat = true;
-        if (activeFilter === 'live') matchesCat = rStatus === 'live';
-        else if (activeFilter === 'concept') matchesCat = rStatus !== 'live';
-        else if (activeFilter !== 'all') matchesCat = rCat.includes(activeFilter);
+        let okCat = true;
+        if (activeMatrixCat === 'live') okCat = st === 'live';
+        else if (activeMatrixCat === 'concept') okCat = st !== 'live';
+        else if (activeMatrixCat !== 'all') okCat = dom.includes(activeMatrixCat);
 
-        const matchesQuery = searchQuery === '' || text.includes(searchQuery);
-
-        if (matchesCat && matchesQuery) {
-          r.style.display = "";
-        } else {
-          r.style.display = "none";
-        }
+        const okQuery = matrixQuery === '' || txt.includes(matrixQuery);
+        card.style.display = (okCat && okQuery) ? '' : 'none';
       });
     }
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
         closeProjectDossier();
+        closeMatrix();
       }
     });
   </script>
 
-  <!-- Datum Instrument Dial (Hold REV) Engine -->
-  <script src="instrument.js"></script>
+  <!-- Datum REV Instrument Dial + 3D Highway Drive Engine -->
+  <script src="instrument.js" defer></script>
+  <script type="module">
+    import { startPortfolioDrive } from './drive-engine.js';
+    startPortfolioDrive();
+  </script>
 </body>
 </html>
