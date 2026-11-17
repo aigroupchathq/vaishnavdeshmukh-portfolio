@@ -565,14 +565,14 @@ function buildRoadAndScenery(scene, stops, maxAniso = 1) {
     g.add(titleSign);
 
     const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', {
-      font: '500 46px "IBM Plex Mono", monospace',
-      width: 4.2,
-      color: 'rgba(255,255,255,0.55)',
+      font: '500 50px Poppins, sans-serif',
+      width: 4.4,
+      color: 'rgba(255,255,255,0.62)',
       flatGround: true,
       anisotropy: maxAniso,
       registry: fontCallbacks
     });
-    floorSign.position.set(0, 0.055, -2.2);
+    floorSign.position.set(0, 0.055, -3.5);
     g.add(floorSign);
 
     propsGroup.add(g);
@@ -1060,8 +1060,8 @@ export function startPortfolioDrive() {
   const camConfigs = {
     base: mobile ? { h: 25, d: 18, ahead: -4.2 } : { h: 28, d: 18, ahead: 3 },
     garage: mobile ? { h: 22, d: 16, ahead: -4.4 } : { h: 21, d: 15, ahead: 1 },
-    near: mobile ? { h: 24, d: 17, ahead: -3.8 } : { h: 25, d: 16, ahead: 2 },
-    close: mobile ? { h: 22, d: 16, ahead: -3.2 } : { h: 25, d: 16, ahead: 1 },
+    near: mobile ? { h: 25, d: 18, ahead: -3.2 } : { h: 25, d: 16, ahead: 2 },
+    close: mobile ? { h: 27, d: 20, ahead: 0.6 } : { h: 25, d: 16, ahead: 1 },
     gate: mobile ? { h: 25, d: 18, ahead: -4.2 } : { h: 27, d: 19, ahead: 2 },
     overview: mobile ? { h: 52, d: 28, ahead: 0 } : { h: 46, d: 26, ahead: 9 }
   };
@@ -1126,8 +1126,8 @@ export function startPortfolioDrive() {
       if (!st.card) return;
       const cardH = st.card.offsetHeight;
       if (isMob) {
-        const dockClear = 84;
-        const minTop = Math.max(Math.round(winH * 0.44), 286);
+        const dockClear = 76;
+        const minTop = winH <= 740 ? Math.max(Math.round(winH * 0.42), 232) : Math.max(Math.round(winH * 0.44), 286);
         const stickTop = Math.max(64, Math.min(Math.round(winH - dockClear - cardH), winH - dockClear - 120));
         const finalTop = cardH + minTop <= winH - dockClear ? Math.max(minTop, winH - dockClear - cardH) : stickTop;
         const extra = Math.max(0, Math.round(cardH - (winH - 64 - dockClear)));
@@ -1748,9 +1748,9 @@ export function startPortfolioDrive() {
       const st = mainStops[i];
       const f = smoothstep(0, 0.05, 0.05 - loopDist(unitT, st.t));
       if (f > 0 && st.focus) {
-        const fw = mobile ? 0.45 : 0.85;
+        const fw = mobile ? (st.id === 'rev' ? 0.24 : 0.10) : 0.85;
         lookVec.x += (st.focus.x - carSample.pos.x) * f * fw;
-        lookVec.y += (st.focus.y - carSample.pos.y) * f * 0.45;
+        lookVec.y += (st.focus.y - carSample.pos.y) * f * (mobile ? 0.25 : 0.45);
         lookVec.z += (st.focus.z - carSample.pos.z) * f * fw;
       }
     }

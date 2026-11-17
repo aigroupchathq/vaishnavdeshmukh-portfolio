@@ -219,8 +219,8 @@
         </div>
 
         <div class="atlas-foot">
-          <div class="atlas-telemetry" id="atlasTelemetry"><strong>SEC 00</strong> // t=0.00 · 000M · EL +1.8M · HDG 071°</div>
-          <button type="button" class="btn primary sm" id="atlasDriveBtn" onclick="drivePortfolioFromOverview(activeOverviewIdx)">Drive Sector ↗</button>
+          <div class="atlas-telemetry" id="atlasTelemetry"><strong>SEC 00</strong><span class="tel-extra"> // t=0.00</span> · 000M · +1.8M · 071°</div>
+          <button type="button" class="btn primary sm" id="atlasDriveBtn" onclick="drivePortfolioFromOverview(activeOverviewIdx)">Drive <span class="tel-extra">SEC </span>00 ↗</button>
         </div>
       </aside>
 
@@ -422,7 +422,7 @@
   </nav>
 
   <!-- Piixpal Monochrome Companions (Survey Map + Stop 02 + Garage Floor) -->
-  <piix-pal pal="penguin" on="#circuitAtlas .atlas-head" edge="box" scale="2" aria-hidden="true"></piix-pal>
+  <piix-pal pal="penguin" on="#circuitAtlas .atlas-foot" edge="box" scale="1.75" aria-hidden="true"></piix-pal>
   <piix-pal pal="lurk" on="#stop-perception" at="0.88" scale="2" aria-hidden="true"></piix-pal>
   <piix-pal pal="roomba" on="footer.bottom" edge="box" scale="2" aria-hidden="true"></piix-pal>
 
@@ -475,7 +475,7 @@
             <button type="button" class="split-tab" id="tab-arch" role="tab" aria-selected="false" aria-controls="panel-arch" onclick="switchSplitTab('arch')">How it works</button>
             <button type="button" class="split-tab" id="tab-archive" role="tab" aria-selected="false" aria-controls="panel-archive" onclick="switchSplitTab('archive')">Archive (16)</button>
           </div>
-          <button type="button" id="modalCloseBtn" class="split-close-btn" onclick="closeSplitInspector()" aria-label="Close inspector">Esc ✕</button>
+          <button type="button" id="modalCloseBtn" class="split-close-btn" onclick="closeSplitInspector()" aria-label="Close inspector"><span class="esc-hint" aria-hidden="true">Esc</span> <span aria-hidden="true">✕</span></button>
         </div>
 
         <div class="split-body">
@@ -1293,6 +1293,8 @@
 
     function switchSplitTab(tabName) {
       currentSplitTab = tabName;
+      const bd = document.getElementById('caseStudyModalBackdrop');
+      if (bd) bd.dataset.tab = tabName;
       ['brief', 'arch', 'archive'].forEach(t => {
         const btn = document.getElementById(`tab-${t}`);
         const panel = document.getElementById(`panel-${t}`);
@@ -1313,6 +1315,7 @@
       const backdrop = document.getElementById('caseStudyModalBackdrop');
       backdrop.setAttribute('aria-hidden', 'false');
       backdrop.classList.add('open');
+      document.body.classList.add('sheet-open');
       document.body.style.overflow = 'hidden';
       if (initialTab !== 'archive') {
         const closeBtn = document.getElementById('modalCloseBtn');
@@ -1341,6 +1344,7 @@
       if (!backdrop || !backdrop.classList.contains('open')) return;
       backdrop.classList.remove('open');
       backdrop.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sheet-open');
       document.body.style.overflow = '';
       if (lastFocusedBeforeInspector && typeof lastFocusedBeforeInspector.focus === 'function') {
         lastFocusedBeforeInspector.focus();
@@ -1484,10 +1488,10 @@
       const tel = document.getElementById('atlasTelemetry');
       if (tel) {
         const elS = (st.world.y >= 0 ? '+' : '') + st.world.y.toFixed(1) + 'M';
-        tel.innerHTML = `<strong>SEC ${st.code}</strong> // t=${st.t.toFixed(2)} · ${String(st.distM).padStart(3, '0')}M · EL ${elS} · HDG ${String(st.headingDeg).padStart(3, '0')}°`;
+        tel.innerHTML = `<strong>SEC ${st.code}</strong><span class="tel-extra"> // t=${st.t.toFixed(2)}</span> · ${String(st.distM).padStart(3, '0')}M · ${elS} · ${String(st.headingDeg).padStart(3, '0')}°`;
       }
       const btn = document.getElementById('atlasDriveBtn');
-      if (btn) btn.textContent = `Drive SEC ${st.code} ↗`;
+      if (btn) btn.innerHTML = `Drive <span class="tel-extra">SEC </span>${st.code} ↗`;
       const dLbl = document.getElementById('dockSectorLbl');
       if (dLbl && document.documentElement.classList.contains('still-mode')) {
         dLbl.textContent = `${st.code} · ${st.name}`;
@@ -1599,7 +1603,8 @@
     try {
       const rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
       const saved = localStorage.getItem('vd_pals');
-      applyPalState(saved !== null ? saved === '1' : !rm);
+      const forcePals = new URLSearchParams(location.search).get('pals');
+      applyPalState(forcePals !== null ? forcePals === '1' : (saved !== null ? saved === '1' : !rm));
     } catch (e) {
       applyPalState(true);
     }
