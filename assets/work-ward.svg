@@ -15,26 +15,26 @@
   </defs>
 
   <rect width="1440" height="590" fill="#000000"/>
-  <path d="M52 48h1336v494H52z" fill="none" stroke="#2e323b"/>
-  <text x="88" y="105" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="16" letter-spacing="3">HEALTH SYSTEMS / FIELD STUDY 01</text>
+  <path d="M52 48h1336v494H52z" fill="none" stroke="#323232"/>
+  <text x="88" y="105" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="16" letter-spacing="3">HEALTH SYSTEMS / FIELD STUDY 01</text>
   <text x="88" y="184" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="39" font-weight="600">Find what you need.</text>
-  <text x="88" y="222" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="19">A floor plan shaped around the search</text>
-  <text x="88" y="250" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="19">for essential mobile equipment.</text>
-  <path d="M88 292h320" stroke="#3a3f4b"/>
-  <text x="88" y="326" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="14" letter-spacing="2">SPATIAL WAYFINDING</text>
+  <text x="88" y="222" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="19">A floor plan shaped around the search</text>
+  <text x="88" y="250" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="19">for essential mobile equipment.</text>
+  <path d="M88 292h320" stroke="#3f3f3f"/>
+  <text x="88" y="326" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="14" letter-spacing="2">SPATIAL WAYFINDING</text>
   <g transform="translate(500 86)" fill="none" stroke="#ffffff" stroke-width="2">
     <path d="M0 0h846v410H0z"/>
     <path d="M0 128h846M0 282h846M205 0v128m203 0v154m205-282v128m0 154v128m-410-128v128m614-410v128"/>
-    <path d="M20 148h175v116H20zm203-128h172v88H223zm203 148h175v93H426zm208 154h190v88H634z" fill="#161820"/>
-    <path d="M24 278h798" stroke="#2e323b" stroke-dasharray="7 8"/>
+    <path d="M20 148h175v116H20zm203-128h172v88H223zm203 148h175v93H426zm208 154h190v88H634z" fill="#181818"/>
+    <path d="M24 278h798" stroke="#323232" stroke-dasharray="7 8"/>
   </g>
-  <g fill="#e4e4e7">
+  <g fill="#e4e4e4">
     <circle cx="610" cy="165" r="8"/><circle cx="813" cy="165" r="8"/><circle cx="1017" cy="165" r="8"/>
     <circle cx="813" cy="320" r="8"/><circle cx="1222" cy="320" r="8"/>
   </g>
   <circle cx="813" cy="320" r="25" fill="none" stroke="#ffffff" stroke-width="2"/>
-  <circle cx="813" cy="320" r="39" fill="none" stroke="#e4e4e7" stroke-width="1" stroke-dasharray="3 5"/>
+  <circle cx="813" cy="320" r="39" fill="none" stroke="#e4e4e4" stroke-width="1" stroke-dasharray="3 5"/>
   <path d="M813 359v63h118" fill="none" stroke="#ffffff" stroke-width="2"/>
-  <rect x="931" y="403" width="208" height="42" rx="21" fill="#1c1e26"/>
+  <rect x="931" y="403" width="208" height="42" rx="21" fill="#1e1e1e"/>
   <text x="957" y="430" fill="#ffffff" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="14" letter-spacing="1">EQUIPMENT LOCATION</text>
 </svg>

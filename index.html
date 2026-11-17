@@ -7,12 +7,12 @@
   <meta name="description" content="Personal portfolio of Vaishnav Deshmukh in London. Sixteen software projects and practical studies across clinical tools, attention, civic roads, and car records.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#000000">
 
-  <!-- Fonts: Archivo, Inter, IBM Plex Mono, Caveat -->
+  <!-- Fonts: Archivo, Inter, IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Caveat:wght@500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="portfolio-drive.css">
 
@@ -50,7 +50,7 @@
       <nav class="nav nav-desk" aria-label="Primary sections">
         <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">How I work</a>
         <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Work</a>
-        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Hold REV</a>
+        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Sweep test</a>
         <button type="button" class="nav-link" onclick="openMatrix(this)">All 16</button>
         <a href="deck.html">Deck →</a>
       </nav>
@@ -65,7 +65,7 @@
       <nav class="nav" aria-label="Primary sections mobile">
         <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">How I work</a>
         <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Work</a>
-        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Hold REV</a>
+        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Sweep test</a>
         <button type="button" class="nav-link" onclick="openMatrix(this)">All 16</button>
         <a href="deck.html">Deck →</a>
       </nav>
@@ -73,7 +73,7 @@
   </header>
 
   <!-- =======================================================================
-       FIXED 3D WORLD CANVAS (WINDING NIGHT ROAD + 3D COUPÉ)
+       FIXED 3D WORLD CANVAS (WINDING NIGHT ROAD + MONOCHROME COUPÉ)
        ======================================================================= -->
   <div class="world" aria-hidden="true">
     <canvas id="world"></canvas>
@@ -83,13 +83,13 @@
 
   <!-- Ignition Screen & Transition Veil -->
   <div class="ignition" id="ignition" aria-hidden="true">
-    <span>Starting the drive</span>
+    <span>Initializing 3D route</span>
     <i></i>
   </div>
   <div class="veil" id="veil" aria-hidden="true"></div>
 
-  <!-- Piixpal bottom hairline scroll runner -->
-  <piix-pal pal="scrolly" color="#C8102E" side="bottom"></piix-pal>
+  <!-- Piixpal bottom monochrome scroll track -->
+  <piix-pal pal="scrolly" color="#FFFFFF" side="bottom"></piix-pal>
 
   <!-- =======================================================================
        RIGHT-SIDE ROUTE RAIL MAP (9 WAYPOINTS)
@@ -102,21 +102,18 @@
     <a href="#stop-civic" data-i="4"><i></i><span>04 · Civic roads</span></a>
     <a href="#stop-automotive" data-i="5"><i></i><span>05 · Automotive</span></a>
     <a href="#stop-studio" data-i="6"><i></i><span>06 · Audio &amp; AI</span></a>
-    <a href="#stop-rev" data-i="7"><i></i><span>07 · Hold REV</span></a>
+    <a href="#stop-rev" data-i="7"><i></i><span>07 · Sweep test</span></a>
     <a href="#stop-gate" data-i="8"><i></i><span>08 · Say hello</span></a>
   </nav>
 
-  <!-- Floating Road Sign: Skip the drive / Take the drive -->
-  <a class="skip-drive sign" href="#overview" role="button" aria-label="Skip the 3D drive and view full page">
-    <svg class="sign-art" viewBox="0 0 48 18" width="64" height="24" aria-hidden="true" focusable="false">
-      <path class="road" d="M2 14H37"/>
-      <path class="life" d="M2 14H37" pathLength="1"/>
-      <path class="hop" d="M3 12C9 2.5 28 2.5 35 10" pathLength="1"/>
-      <path class="head" d="M34.2 6.5L35 10L31.6 9"/>
-      <path class="post" d="M41 8.6V16M46 8.6V16"/>
-      <path class="bar" d="M39.8 8.6H47.2"/>
+  <!-- Floating View Mode Sign: Full page / 3D Drive -->
+  <a class="skip-drive sign" href="#overview" role="button" aria-label="Switch to flat full page overview">
+    <svg class="sign-art" viewBox="0 0 36 16" width="36" height="16" aria-hidden="true" focusable="false">
+      <rect x="2" y="2" width="14" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <rect x="2" y="9" width="14" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M21 8H33M29 4L33 8L29 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span>Skip the drive</span>
+    <span>Flat overview</span>
   </a>
 
   <p class="scroll-hint" id="scroll-hint" aria-hidden="true">
@@ -130,18 +127,11 @@
   <main id="main" tabindex="-1">
 
     <button class="take-drive sign" type="button" hidden>
-      <svg class="sign-art" viewBox="0 0 48 18" width="64" height="24" aria-hidden="true" focusable="false">
-        <path class="road" d="M21 15.6H35"/>
-        <g class="car">
-          <path class="beam" d="M17.2 11.6L29 9.2V16.4Z"/>
-          <path class="body" d="M1.5 14.6L3 10.7L7.2 9.3H11.2L14.5 11.8L17 12.6L17.4 14.6Z"/>
-          <path class="glass" d="M7.6 10.3H10.8L13 11.9H6.4Z"/>
-          <circle class="wheel" cx="5.4" cy="15" r="1.9"/>
-          <circle class="wheel" cx="13.9" cy="15" r="1.9"/>
-        </g>
-        <path class="chev" d="M37.5 12.2L40.5 15.6L37.5 19M42.5 12.2L45.5 15.6L42.5 19"/>
+      <svg class="sign-art" viewBox="0 0 36 16" width="36" height="16" aria-hidden="true" focusable="false">
+        <path d="M2 13L11 3L21 13" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M23 8H34M30 4L34 8L30 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>Take the drive</span>
+      <span>Return to 3D drive</span>
     </button>
 
     <!-- STOP 0: START / HERO -->
@@ -157,14 +147,16 @@
           I’m drawn to the small frictions people learn to live with: a misplaced piece of hospital equipment, a confusing council form, or a tool that asks too much. Scroll to drive through sixteen projects and studies.
         </p>
 
-        <div class="odo" id="odo" aria-label="Journey distance in miles">
-          <i>0</i><i>1</i><i>6</i><i>0</i><i>0</i><i class="last">0</i>
-          <b>mi // sixteen projects</b>
+        <div class="hero-index-strip" aria-label="Portfolio index summary">
+          <span><strong>16</strong> Works</span>
+          <span><strong>11</strong> Live Links</span>
+          <span><strong>05</strong> Design Studies</span>
+          <span><strong>09</strong> Chapters</span>
         </div>
 
         <div class="cta">
-          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(2)">Drive to the work ↓</button>
-          <button type="button" class="btn ghost" onclick="openMatrix(this)">See all 16 at once</button>
+          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(2)">Explore the work ↓</button>
+          <button type="button" class="btn ghost" onclick="openMatrix(this)">Browse all 16</button>
           <a class="btn ghost" href="deck.html">Card Deck ↗</a>
         </div>
       </div>
@@ -194,7 +186,7 @@
           </div>
         </div>
 
-        <p class="signoff">Good software starts with noticing.<span>VD</span></p>
+        <p class="method-note">Notice the bottleneck · Subtract clutter · Ship honest state</p>
       </div>
     </section>
 
@@ -370,21 +362,21 @@
       </div>
     </section>
 
-    <!-- STOP 7: INTERLUDE (HOLD REV) -->
+    <!-- STOP 7: DRIVE & BEAM SWEEP TEST -->
     <section class="stop" id="stop-rev" data-t="0.875" data-side="right" data-cam="close">
       <div class="card">
-        <span class="label">07 · An interlude</span>
-        <h2>Hold REV.</h2>
+        <span class="label">07 · Sweep Test</span>
+        <h2>Beam &amp; Pace Control.</h2>
         <p class="lede sm">
-          The needle answers and settles back on its own. Your drive count lives on this device only.
+          Hold to sweep the monochrome beam across the highway grid and push output toward 100%. Cycles stay local to this browser.
         </p>
 
         <div class="instrument" id="instrument">
           <div class="instrument-stage">
             <div class="instrument-dial">
-              <canvas id="instrument-canvas" role="img" aria-label="Rev counter dial"></canvas>
+              <canvas id="instrument-canvas" role="img" aria-label="Monochrome beam output dial"></canvas>
             </div>
-            <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to rev the engine">REV</button>
+            <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to sweep beam output">HOLD TO SWEEP</button>
           </div>
         </div>
       </div>
@@ -458,47 +450,95 @@
   </footer>
 
   <!-- =======================================================================
-       DEEP PROJECT NOTES MODAL
+       TABBED PROJECT DOSSIER INSPECTOR MODAL
        ======================================================================= -->
   <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeProjectDossier()">
     <div class="modal-panel" onclick="event.stopPropagation()">
       <div class="modal-drag-bar"></div>
 
+      <div class="drawer-topbar">
+        <div class="drawer-crumb-group">
+          <button type="button" id="drawerBackToMatrixBtn" class="drawer-mini-btn" onclick="switchDossierToMatrix()">← All 16</button>
+          <span id="modalCategory" class="label" style="margin-bottom: 0;">#01 · Domain</span>
+        </div>
+        <div class="drawer-step-group">
+          <button type="button" id="drawerPrevBtn" class="drawer-mini-btn" onclick="stepProject(-1)" aria-label="Previous project">← Prev</button>
+          <span class="drawer-pos" id="drawerPosLbl">01 / 16</span>
+          <button type="button" id="drawerNextBtn" class="drawer-mini-btn" onclick="stepProject(1)" aria-label="Next project">Next →</button>
+          <button type="button" id="modalCloseBtn" class="drawer-mini-btn" onclick="closeProjectDossier()" aria-label="Close project notes">✕</button>
+        </div>
+      </div>
+
+      <!-- Chapter Sibling Project Switcher Tabs -->
+      <div class="drawer-siblings" id="drawerSiblingTabs" role="tablist" aria-label="Chapter sibling projects"></div>
+
       <div class="modal-head">
         <div>
-          <span id="modalCategory" class="label" style="margin-bottom: 4px;">Domain</span>
-          <h2 id="modalTitle" style="font-size: clamp(1.35rem, 2.5vw, 1.9rem);">Project Title</h2>
+          <h2 id="modalTitle" style="font-size: clamp(1.3rem, 2.4vw, 1.85rem);">Project Title</h2>
+          <p id="modalSubtitle" class="lede sm" style="margin-top: 6px; max-width: 62ch;"></p>
         </div>
-        <button type="button" id="modalCloseBtn" class="btn ghost sm" onclick="closeProjectDossier()" aria-label="Close project notes">✕</button>
+        <span class="tag" id="modalStatusBadge">Study</span>
       </div>
 
-      <div class="modal-visual">
-        <img id="modalImage" src="assets/work-ward.svg" alt="" />
+      <!-- Structured Section Tabs inside the Popup -->
+      <div class="dossier-tabs" role="tablist" aria-label="Case study sections">
+        <button type="button" class="dossier-tab" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" onclick="switchDossierTab('overview')">01 · Overview</button>
+        <button type="button" class="dossier-tab" id="tab-architecture" role="tab" aria-selected="false" aria-controls="panel-architecture" onclick="switchDossierTab('architecture')">02 · How it works</button>
+        <button type="button" class="dossier-tab" id="tab-specs" role="tab" aria-selected="false" aria-controls="panel-specs" onclick="switchDossierTab('specs')">03 · Stack &amp; specs</button>
       </div>
 
-      <div>
-        <span class="modal-sec-lbl">The problem</span>
-        <p id="modalProblem" class="modal-box"></p>
+      <!-- Tab 1: Overview & Monochrome Wireframe -->
+      <div id="panel-overview" class="dossier-tabpanel" role="tabpanel" aria-labelledby="tab-overview">
+        <div class="dossier-overview-grid">
+          <div class="modal-visual">
+            <img id="modalImage" src="assets/work-ward.svg" alt="" />
+          </div>
+          <div class="dossier-overview-copy">
+            <div>
+              <span class="modal-sec-lbl">The problem</span>
+              <p id="modalProblem" class="modal-box"></p>
+            </div>
+            <div id="modalLinksOverview" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <span class="modal-sec-lbl">How it works</span>
-        <p id="modalSolution" class="modal-box"></p>
+      <!-- Tab 2: System Mechanics & Technical Notes -->
+      <div id="panel-architecture" class="dossier-tabpanel" role="tabpanel" aria-labelledby="tab-architecture" hidden>
+        <div>
+          <span class="modal-sec-lbl">How it works</span>
+          <p id="modalSolution" class="modal-box"></p>
+        </div>
+        <div id="modalDecisionsWrap">
+          <span class="modal-sec-lbl">Design &amp; technical notes</span>
+          <ul id="modalDecisions" class="modal-decisions"></ul>
+        </div>
       </div>
 
-      <div id="modalDecisionsWrap">
-        <span class="modal-sec-lbl">Design &amp; technical notes</span>
-        <ul id="modalDecisions" class="modal-decisions"></ul>
-      </div>
-
-      <div>
-        <span class="modal-sec-lbl">Built with</span>
-        <div id="modalStack" class="spec-tags"></div>
-      </div>
-
-      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--hair); padding-top: 16px;">
-        <span class="mono" id="modalStatusLabel" style="font-size: 11px; color: var(--muted);">PROJECT STATUS</span>
-        <div id="modalLinks" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+      <!-- Tab 3: Specs, Tags & Links -->
+      <div id="panel-specs" class="dossier-tabpanel" role="tabpanel" aria-labelledby="tab-specs" hidden>
+        <div class="dossier-spec-grid">
+          <div class="dossier-spec-cell">
+            <span class="modal-sec-lbl" style="margin-bottom: 2px;">Status</span>
+            <strong id="modalStatusLabel">Design Study</strong>
+          </div>
+          <div class="dossier-spec-cell">
+            <span class="modal-sec-lbl" style="margin-bottom: 2px;">Domain</span>
+            <strong id="modalDomainName">Systems</strong>
+          </div>
+          <div class="dossier-spec-cell">
+            <span class="modal-sec-lbl" style="margin-bottom: 2px;">Index Code</span>
+            <strong id="modalCodeText" class="mono">WORK-01</strong>
+          </div>
+        </div>
+        <div>
+          <span class="modal-sec-lbl">Built with</span>
+          <div id="modalStack" class="spec-tags"></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--hair); padding-top: 12px;">
+          <div id="modalLinksSpecs" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+          <button type="button" class="drawer-mini-btn" id="copyDossierLinkBtn" onclick="copyCurrentProjectLink()">Copy project link</button>
+        </div>
       </div>
     </div>
   </div>
@@ -512,28 +552,28 @@
 
       <div class="modal-head">
         <div>
-          <span class="label" style="margin-bottom: 4px;">Complete List</span>
-          <h2 id="matrixTitle" style="font-size: 1.65rem;">All 16 Projects &amp; Studies</h2>
+          <span class="label" style="margin-bottom: 4px;">Complete Index</span>
+          <h2 id="matrixTitle" style="font-size: 1.6rem;">All 16 Projects &amp; Studies</h2>
         </div>
         <button type="button" id="matrixCloseBtn" class="btn ghost sm" onclick="closeMatrix()" aria-label="Close project list">✕</button>
       </div>
 
       <div class="matrix-controls">
-        <div class="filter-strip">
-          <button type="button" class="filter-btn active" onclick="filterMatrix('all', this)">All (16)</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('live', this)">Live (11)</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('concept', this)">Studies (5)</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('health', this)">Clinical</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('cognitive', this)">Perception</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('civic', this)">Civic</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('automotive', this)">Automotive</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('creative', this)">Audio &amp; AI</button>
+        <div class="filter-strip" role="tablist" aria-label="Filter projects by status or domain">
+          <button type="button" class="filter-btn active" role="tab" aria-selected="true" onclick="filterMatrix('all', this)">All (16)</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('live', this)">Live (11)</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('concept', this)">Studies (5)</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('health', this)">Clinical</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('cognitive', this)">Perception</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('civic', this)">Civic</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('automotive', this)">Automotive</button>
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('creative', this)">Audio &amp; AI</button>
         </div>
         <input type="text" class="search-input" id="matrixSearchInput" placeholder="Filter by title, domain, or stack..." oninput="searchMatrix(this.value)">
       </div>
 
       <div class="matrix-grid" id="matrixGrid">
-        <button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('ward', this)">
+        <button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="openProjectFromMatrix('ward')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#01 · Healthcare Concept Study</span>
           <span class="door-status">Study</span>
@@ -542,7 +582,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Offline-first floorplan tool for tracing hospital infusion pumps in basement corridors without cloud reliance.</p>
         <div class="spec-tags"><span class="spec-tag">HL7 FHIR</span> <span class="spec-tag">GS1-128</span> <span class="spec-tag">IndexedDB</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('consciousness', this)">
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="openProjectFromMatrix('consciousness')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#02 · Cognitive Science Interactive</span>
           <span class="door-status is-live">Live</span>
@@ -551,7 +591,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Self-guided visual awareness and attention demos inspired by theories of perception.</p>
         <div class="spec-tags"><span class="spec-tag">HTML Canvas</span> <span class="spec-tag">Web Audio</span> <span class="spec-tag">Vanilla JS</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('ithink', this)">
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="openProjectFromMatrix('ithink')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#03 · Cognitive Practice 3D Lab</span>
           <span class="door-status is-live">Live</span>
@@ -560,7 +600,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser prototype combining interactive 3D brain models with paced attention exercises and reflection prompts.</p>
         <div class="spec-tags"><span class="spec-tag">Three.js</span> <span class="spec-tag">WebGL</span> <span class="spec-tag">TypeScript</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="civic" data-status="live" onclick="closeMatrix(); openProjectDossier('civicflow', this)">
+<button type="button" class="matrix-card" data-domain="civic" data-status="live" onclick="openProjectFromMatrix('civicflow')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#04 · Civic Infrastructure Road Triage</span>
           <span class="door-status is-live">Live</span>
@@ -569,7 +609,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Spatial clustering demo that groups duplicate public pothole reports on council maps before dispatch.</p>
         <div class="spec-tags"><span class="spec-tag">DBSCAN</span> <span class="spec-tag">GeoJSON</span> <span class="spec-tag">Turf.js</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('scriptstudio', this)">
+<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="openProjectFromMatrix('scriptstudio')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#05 · Audio & Writing Study</span>
           <span class="door-status">Study</span>
@@ -578,7 +618,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser script and sound editor connecting written lines directly to pacing blocks on an audio timeline.</p>
         <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Canvas Timeline</span> <span class="spec-tag">TypeScript</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="civic" data-status="concept" onclick="closeMatrix(); openProjectDossier('roadtriage', this)">
+<button type="button" class="matrix-card" data-domain="civic" data-status="concept" onclick="openProjectFromMatrix('roadtriage')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#06 · Civic Infrastructure Field Capture</span>
           <span class="door-status">Study</span>
@@ -587,7 +627,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Mobile inspection concept for tagging road surface defects offline while checking routes.</p>
         <div class="spec-tags"><span class="spec-tag">Field Vision</span> <span class="spec-tag">TensorFlow.js</span> <span class="spec-tag">IndexedDB</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('itsyou', this)">
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="openProjectFromMatrix('itsyou')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#07 · Interactive Reflection Live</span>
           <span class="door-status is-live">Live</span>
@@ -596,7 +636,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.</p>
         <div class="spec-tags"><span class="spec-tag">Interactive UI</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Vanilla JS</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('babycarl', this)">
+<button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="openProjectFromMatrix('babycarl')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#08 · Pediatric Health Concept Study</span>
           <span class="door-status">Study</span>
@@ -605,7 +645,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Gentle newborn feed and sleep tracker shaped for tired parents with dim night contrast and zero alert spam.</p>
         <div class="spec-tags"><span class="spec-tag">Circadian Log</span> <span class="spec-tag">Local Storage</span> <span class="spec-tag">Mobile UX</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('groupchat', this)">
+<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="openProjectFromMatrix('groupchat')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#09 · Collaboration Study</span>
           <span class="door-status">Study</span>
@@ -614,7 +654,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Concept turning busy group chat threads into a clear map of open questions and agreed decisions.</p>
         <div class="spec-tags"><span class="spec-tag">Decision Map</span> <span class="spec-tag">Semantic Sync</span> <span class="spec-tag">CRDT State</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('vision', this)">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('vision')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#10 · AI Guidance Prompt Studio</span>
           <span class="door-status is-live">Live</span>
@@ -623,7 +663,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Practical guide to working with AI: pick a path, shape clear instructions, verify outputs, and cut fluff.</p>
         <div class="spec-tags"><span class="spec-tag">Mission Paths</span> <span class="spec-tag">Prompt Studio</span> <span class="spec-tag">Illustrations</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumadas', this)">
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="openProjectFromMatrix('datumadas')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#11 · Automotive Driver Safety</span>
           <span class="door-status is-live">Live</span>
@@ -632,7 +672,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser safety interface exploring low-clutter following distance cues and peripheral hazard awareness.</p>
         <div class="spec-tags"><span class="spec-tag">Driver UI</span> <span class="spec-tag">Kinematics</span> <span class="spec-tag">Browser Demo</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('velum', this)">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('velum')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#12 · Decisions Compatibility</span>
           <span class="door-status is-live">Live</span>
@@ -641,7 +681,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Structured compatibility tool comparing practical expectations and core values clearly, without swipe tricks.</p>
         <div class="spec-tags"><span class="spec-tag">React</span> <span class="spec-tag">TypeScript</span> <span class="spec-tag">Decision UI</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="education" data-status="live" onclick="closeMatrix(); openProjectDossier('vtsystem', this)">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('vtsystem')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#13 · Education Operations OS</span>
           <span class="door-status is-live">Live</span>
@@ -650,7 +690,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.</p>
         <div class="spec-tags"><span class="spec-tag">Multi-Tenant</span> <span class="spec-tag">RBAC</span> <span class="spec-tag">TypeScript</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('driver', this)">
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="openProjectFromMatrix('driver')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#14 · Interactive Audio Inquiry</span>
           <span class="door-status is-live">Live</span>
@@ -659,7 +699,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.</p>
         <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Inquiry</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('hiddenleaf', this)">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('hiddenleaf')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#15 · Creative Tools Bilingual Studio</span>
           <span class="door-status is-live">Live</span>
@@ -668,7 +708,7 @@
         <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Hindi–English lyric writing workspace counting Hindi matras, rhyme flows, and built-in beat loops.</p>
         <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Syllable Parser</span> <span class="spec-tag">Lyric Studio</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumatelier', this)">
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="openProjectFromMatrix('datumatelier')">
         <div class="door-top" style="width: 100%;">
           <span class="mono" style="font-size: 11px; color: var(--muted);">#16 · Automotive Service Records</span>
           <span class="door-status is-live">Live</span>
@@ -865,7 +905,7 @@
     "code": "WORK-07 // ITSYOU",
     "title": "The Observer: Thought & Awareness",
     "category": "Interactive Reflection Live",
-    "domain": "creative",
+    "domain": "cognitive",
     "status": "live",
     "desc": "Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.",
     "problem": "Habit and reflection apps frequently rely on gamified streaks and push alerts instead of leaving room to pause and think.",
@@ -1049,7 +1089,7 @@
     "code": "WORK-13 // VTSYSTEM",
     "title": "Vedic Tree OS",
     "category": "Education Operations OS",
-    "domain": "education",
+    "domain": "creative",
     "status": "live",
     "desc": "Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.",
     "problem": "Multi-branch schools manage operations across scattered spreadsheets, manual fee ledgers, and ad-hoc parent message groups.",
@@ -1081,7 +1121,7 @@
     "code": "WORK-14 // DRIVER",
     "title": "The Driver of God",
     "category": "Interactive Audio Inquiry",
-    "domain": "creative",
+    "domain": "automotive",
     "status": "live",
     "desc": "Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.",
     "problem": "Most interfaces reward constant clicking and speed instead of offering quiet space to slow down.",
@@ -1173,6 +1213,14 @@
     "img": "assets/work-datumatelier.svg"
   }
 };
+    const PROJECT_ORDER = Object.keys(PROJECT_DOSSIERS);
+    const CHAPTER_GROUPS = {
+      health: ['ward', 'babycarl'],
+      cognitive: ['consciousness', 'ithink', 'itsyou'],
+      civic: ['civicflow', 'roadtriage'],
+      automotive: ['datumatelier', 'datumadas', 'driver'],
+      creative: ['vision', 'scriptstudio', 'hiddenleaf', 'groupchat', 'velum', 'vtsystem']
+    };
 
     /* Live London Clock */
     const londonClock = document.getElementById('londonClock');
@@ -1219,23 +1267,94 @@
       }
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-    /* Focus Return Tracking for Accessible Modals */
+    /* Keep Piixpal runner & companion strictly monochrome inside their shadow roots */
+    function syncMonochromePals() {
+      const hosts = document.querySelectorAll('[data-piixpal], [data-piixpal-ui]');
+      let found = 0;
+      hosts.forEach(host => {
+        if (host.shadowRoot) {
+          found++;
+          if (!host.shadowRoot.getElementById('mono-pal-style')) {
+            const st = document.createElement('style');
+            st.id = 'mono-pal-style';
+            st.textContent = 'canvas { filter: grayscale(1) contrast(1.25) !important; }';
+            host.shadowRoot.appendChild(st);
+          }
+        }
+      });
+      return found > 0;
+    }
+    if (!syncMonochromePals()) {
+      const palObs = new MutationObserver(() => {
+        syncMonochromePals();
+      });
+      palObs.observe(document.body, { childList: true });
+    }
+
+    /* Tabbed Dossier Inspector + Focus Return */
     let lastFocusedBeforeDossier = null;
     let lastFocusedBeforeMatrix = null;
+    let currentDossierId = PROJECT_ORDER[0];
+    let currentDossierTab = 'overview';
 
-    function openProjectDossier(pid, triggerEl) {
+    function switchDossierTab(tabName) {
+      currentDossierTab = tabName;
+      ['overview', 'architecture', 'specs'].forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        const panel = document.getElementById(`panel-${t}`);
+        const active = t === tabName;
+        if (btn) btn.setAttribute('aria-selected', String(active));
+        if (panel) panel.hidden = !active;
+      });
+    }
+
+    function renderChapterSiblingTabs(activePid, domainKey) {
+      const wrap = document.getElementById('drawerSiblingTabs');
+      if (!wrap) return;
+      const list = CHAPTER_GROUPS[domainKey] || PROJECT_ORDER;
+      wrap.innerHTML = '';
+      list.forEach(sid => {
+        const sd = PROJECT_DOSSIERS[sid];
+        if (!sd) return;
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'drawer-sibling-tab';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(sid === activePid));
+        b.textContent = `#${sd.index} ${sd.title}`;
+        b.onclick = () => openProjectDossier(sid, null, true);
+        wrap.appendChild(b);
+      });
+    }
+
+    function openProjectDossier(pid, triggerEl, keepTab = false) {
       const d = PROJECT_DOSSIERS[pid];
       if (!d) return;
-      if (!document.getElementById('matrixModalBackdrop').classList.contains('open')) {
-        lastFocusedBeforeDossier = triggerEl || document.activeElement;
+      currentDossierId = pid;
+      if (triggerEl && !document.getElementById('matrixModalBackdrop').classList.contains('open')) {
+        lastFocusedBeforeDossier = triggerEl;
       }
+
+      const posIdx = PROJECT_ORDER.indexOf(pid);
+      document.getElementById('drawerPosLbl').textContent = `${String(posIdx + 1).padStart(2, '0')} / ${PROJECT_ORDER.length}`;
       document.getElementById('modalCategory').textContent = `#${d.index} · ${d.category}`;
       document.getElementById('modalTitle').textContent = d.title;
+      document.getElementById('modalSubtitle').textContent = d.desc;
       document.getElementById('modalImage').src = d.img;
       document.getElementById('modalImage').alt = d.title;
       document.getElementById('modalProblem').textContent = d.problem;
       document.getElementById('modalSolution').textContent = d.solution;
-      document.getElementById('modalStatusLabel').textContent = d.status === 'live' ? 'STATUS: LIVE WORKING LINK' : 'STATUS: DESIGN STUDY';
+      document.getElementById('modalDomainName').textContent = d.category;
+      document.getElementById('modalCodeText').textContent = d.code;
+      document.getElementById('modalStatusLabel').textContent = d.status === 'live' ? 'Live working link' : 'Design study';
+
+      const statusBadge = document.getElementById('modalStatusBadge');
+      if (statusBadge) {
+        statusBadge.className = d.status === 'live' ? 'tag live' : 'tag';
+        statusBadge.innerHTML = d.status === 'live' ? '<i></i>Live' : 'Study';
+      }
+
+      renderChapterSiblingTabs(pid, d.domain);
 
       const decWrap = document.getElementById('modalDecisionsWrap');
       const decList = document.getElementById('modalDecisions');
@@ -1260,23 +1379,70 @@
         stackWrap.appendChild(s);
       });
 
-      const linksWrap = document.getElementById('modalLinks');
-      linksWrap.innerHTML = '';
-      (d.links || []).forEach((lnk, idx) => {
-        const a = document.createElement('a');
-        a.href = lnk.href || '#';
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.className = idx === 0 ? 'btn primary sm' : 'btn ghost sm';
-        a.textContent = `${lnk.label || 'Open'} ↗`;
-        linksWrap.appendChild(a);
+      ['modalLinksOverview', 'modalLinksSpecs'].forEach(containerId => {
+        const linksWrap = document.getElementById(containerId);
+        if (!linksWrap) return;
+        linksWrap.innerHTML = '';
+        (d.links || []).forEach((lnk, idx) => {
+          const a = document.createElement('a');
+          a.href = lnk.href || '#';
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.className = idx === 0 ? 'btn primary sm' : 'btn ghost sm';
+          a.textContent = `${lnk.label || 'Open'} ↗`;
+          linksWrap.appendChild(a);
+        });
+        if (containerId === 'modalLinksOverview') {
+          const archBtn = document.createElement('button');
+          archBtn.type = 'button';
+          archBtn.className = 'btn ghost sm';
+          archBtn.textContent = 'How it works →';
+          archBtn.onclick = () => switchDossierTab('architecture');
+          linksWrap.appendChild(archBtn);
+        }
       });
 
+      if (!keepTab) switchDossierTab('overview');
+      const copyBtn = document.getElementById('copyDossierLinkBtn');
+      if (copyBtn) copyBtn.textContent = 'Copy project link';
+
       const backdrop = document.getElementById('caseStudyModalBackdrop');
+      const wasOpen = backdrop.classList.contains('open');
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
-      const closeBtn = document.getElementById('modalCloseBtn');
-      if (closeBtn) closeBtn.focus();
+      if (!wasOpen) {
+        const closeBtn = document.getElementById('modalCloseBtn');
+        if (closeBtn) closeBtn.focus();
+      }
+    }
+
+    function stepProject(delta) {
+      const idx = PROJECT_ORDER.indexOf(currentDossierId);
+      const nextIdx = (idx + delta + PROJECT_ORDER.length) % PROJECT_ORDER.length;
+      openProjectDossier(PROJECT_ORDER[nextIdx], null, true);
+    }
+
+    function openProjectFromMatrix(pid) {
+      const m = document.getElementById('matrixModalBackdrop');
+      if (m) m.classList.remove('open');
+      lastFocusedBeforeDossier = lastFocusedBeforeMatrix;
+      openProjectDossier(pid, null, false);
+    }
+
+    function switchDossierToMatrix() {
+      const backdrop = document.getElementById('caseStudyModalBackdrop');
+      if (backdrop) backdrop.classList.remove('open');
+      openMatrix(lastFocusedBeforeDossier);
+    }
+
+    function copyCurrentProjectLink() {
+      const url = `${location.origin}${location.pathname}#work-${currentDossierId}`;
+      const btn = document.getElementById('copyDossierLinkBtn');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          if (btn) btn.textContent = 'Copied ✓';
+        }).catch(() => {});
+      }
     }
 
     function closeProjectDossier() {
@@ -1284,9 +1450,11 @@
       if (!backdrop || !backdrop.classList.contains('open')) return;
       backdrop.classList.remove('open');
       document.body.style.overflow = '';
-      if (lastFocusedBeforeDossier && typeof lastFocusedBeforeDossier.focus === 'function') {
-        lastFocusedBeforeDossier.focus();
-        lastFocusedBeforeDossier = null;
+      const restoreEl = lastFocusedBeforeDossier || lastFocusedBeforeMatrix;
+      lastFocusedBeforeDossier = null;
+      lastFocusedBeforeMatrix = null;
+      if (restoreEl && typeof restoreEl.focus === 'function') {
+        restoreEl.focus();
       }
     }
 
@@ -1317,8 +1485,14 @@
 
     function filterMatrix(cat, btn) {
       activeMatrixCat = cat;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      if (btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      }
       applyMatrixFilters();
     }
 
@@ -1344,14 +1518,29 @@
     }
 
     window.addEventListener('keydown', e => {
+      const dossierOpen = document.getElementById('caseStudyModalBackdrop').classList.contains('open');
+      const activeTag = document.activeElement ? document.activeElement.tagName : '';
       if (e.key === 'Escape') {
         closeProjectDossier();
         closeMatrix();
+        return;
+      }
+      if (dossierOpen && activeTag !== 'INPUT' && activeTag !== 'TEXTAREA') {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); stepProject(-1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); stepProject(1); }
+        else if (e.key === '1') switchDossierTab('overview');
+        else if (e.key === '2') switchDossierTab('architecture');
+        else if (e.key === '3') switchDossierTab('specs');
       }
     });
+
+    if (location.hash && location.hash.startsWith('#work-')) {
+      const targetId = location.hash.replace('#work-', '');
+      if (PROJECT_DOSSIERS[targetId]) openProjectDossier(targetId, null);
+    }
   </script>
 
-  <!-- Datum REV Instrument + 3D Highway Drive Engine -->
+  <!-- Monochrome Sweep Instrument + 3D Highway Drive Engine -->
   <script src="instrument.js" defer></script>
   <script type="module">
     import { startPortfolioDrive } from './drive-engine.js';

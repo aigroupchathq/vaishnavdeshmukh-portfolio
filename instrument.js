@@ -199,11 +199,11 @@
       return '600 ' + size.toFixed(1) + 'px "Palatino Linotype", "Book Antiqua", Georgia, serif';
     };
 
-    /* ---- Mileage Spine instrument: flat obsidian face, hairline rim, no chrome, glass or shadow ---- */
+    /* ---- Pure monochrome architectural sweep dial: zero color noise ---- */
     var SP = {
-      rim: '#121316', face: '#08090A', hair: '#24262E', hair2: '#2E3039',
-      white: '#FFFFFF', secondary: '#A1A1AA', muted: '#8A8A93',
-      gold: '#FFFFFF', crimson: '#E06C75', tile: '#181A1F', ink: '#08090A'
+      rim: '#0C0D0F', face: '#040405', hair: '#242529', hair2: '#32343A',
+      white: '#FFFFFF', secondary: '#D4D4D8', muted: '#71717A',
+      gold: '#FFFFFF', crimson: '#FFFFFF', peak: 'rgba(255, 255, 255, 0.92)', tile: '#141518', ink: '#040405'
     };
     var DISPLAY = '"Archivo", system-ui, sans-serif';
     var FIGURES = '"IBM Plex Mono", ui-monospace, monospace';
@@ -257,7 +257,7 @@
       var lbl = faceR * 0.06;
       f.font = '500 ' + lbl.toFixed(1) + 'px ' + FIGURES;
       f.fillStyle = SP.muted;
-      spaced(f, 'RPM × 1000', cx, cy + faceR * 0.36, lbl * 0.22);
+      spaced(f, 'BEAM OUTPUT %', cx, cy + faceR * 0.36, lbl * 0.20);
     };
 
     /* ---- hub: one flat disc with a gold centre ---- */
@@ -371,22 +371,22 @@
     };
 
   /* ================================================================
-     Dial only: hold REV, release, settle. No drivetrain, no readouts.
+     Monochrome beam & load test gauge: hold to sweep, release to settle.
      ================================================================ */
   var canvas = document.getElementById('instrument-canvas');
   var rev = document.getElementById('instrument-rev');
   if (!canvas || !rev) return;
 
   var tach = new Gauge(canvas, {
-    start: 0, end: 8000, major: 1000, mid: 500, minor: 100, numDiv: 1000,
-    a0: d2r(135), sweep: d2r(270), redline: 6800,
-    numRadius: 0.64, numSize: 0.145,
+    start: 0, end: 100, major: 20, mid: 10, minor: 2, numDiv: 1,
+    a0: d2r(135), sweep: d2r(270), redline: 80,
+    numRadius: 0.64, numSize: 0.135,
     wordmark: false, wordmarkK: 0.28, label: '', labelK: 0.50, labelSize: 0.072,
     mantraK: 0.40,
     odometer: true, odoK: 0.645, odoCaption: false, odoLabelK: 0.762
   });
 
-  var REV_TARGET = 7250;
+  var REV_TARGET = 92;
   var state = { rpm: 0, rev: false, seconds: 0 };
   var raf = 0;
   var last = 0;
@@ -430,7 +430,7 @@
 
     tach.target = state.rpm;
     tach.step(dt);
-    tach.spin(dt, reduceMotion ? 0 : state.rpm / 60, 1);
+    tach.spin(dt, reduceMotion ? 0 : state.rpm * 1.2, 1);
     paint();
 
     if (!state.rev && Math.abs(tach.val) < 0.6 && Math.abs(tach.vel) < 0.6) {

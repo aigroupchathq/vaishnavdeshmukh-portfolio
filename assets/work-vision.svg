@@ -15,30 +15,30 @@
   </defs>
 
   <rect width="960" height="600" fill="#000000"/>
-  <path d="M38 38h884v524H38z" fill="none" stroke="#2e323b"/>
-  <text x="76" y="98" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">AI PRACTICE / VISION INTELLIGENCE</text>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#323232"/>
+  <text x="76" y="98" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">AI PRACTICE / VISION INTELLIGENCE</text>
   <text x="76" y="159" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="38" font-weight="600">Make the request clearer.</text>
-  <text x="76" y="199" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="17">Plan thoughtfully, build within boundaries,</text>
-  <text x="76" y="226" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="17">and check what the result actually proves.</text>
-  <path d="M76 267h306" stroke="#c6c1ce"/>
-  <text x="76" y="300" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">GUIDANCE, NOT GUARANTEES</text>
+  <text x="76" y="199" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">Plan thoughtfully, build within boundaries,</text>
+  <text x="76" y="226" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">and check what the result actually proves.</text>
+  <path d="M76 267h306" stroke="#c4c4c4"/>
+  <text x="76" y="300" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">GUIDANCE, NOT GUARANTEES</text>
   <g transform="translate(437 95)">
-    <path d="M0 20q0-12 12-12h358v356H0z" fill="#0e1015" stroke="#2e323b"/>
-    <text x="33" y="54" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">CHOOSE A WORK MODE</text>
-    <path d="M33 77h303" stroke="#d0ccc4"/>
-    <rect x="33" y="101" width="303" height="56" fill="#000000" stroke="#2e323b"/>
-    <circle cx="57" cy="129" r="8" fill="#a1a1aa"/>
+    <path d="M0 20q0-12 12-12h358v356H0z" fill="#101010" stroke="#323232"/>
+    <text x="33" y="54" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">CHOOSE A WORK MODE</text>
+    <path d="M33 77h303" stroke="#cccccc"/>
+    <rect x="33" y="101" width="303" height="56" fill="#000000" stroke="#323232"/>
+    <circle cx="57" cy="129" r="8" fill="#a2a2a2"/>
     <text x="80" y="125" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="16" font-weight="600">Design</text>
-    <text x="80" y="143" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="11">Explore options and trade-offs</text>
-    <rect x="33" y="171" width="303" height="56" fill="#161820" stroke="#2e323b"/>
-    <circle cx="57" cy="199" r="8" fill="#8b7354"/>
+    <text x="80" y="143" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="11">Explore options and trade-offs</text>
+    <rect x="33" y="171" width="303" height="56" fill="#181818" stroke="#323232"/>
+    <circle cx="57" cy="199" r="8" fill="#A1A1AA"/>
     <text x="80" y="195" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="16" font-weight="600">Implementation</text>
-    <text x="80" y="213" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="11">Build within approved boundaries</text>
-    <rect x="33" y="241" width="303" height="56" fill="#161820" stroke="#2e323b"/>
-    <circle cx="57" cy="269" r="8" fill="#66537f"/>
+    <text x="80" y="213" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="11">Build within approved boundaries</text>
+    <rect x="33" y="241" width="303" height="56" fill="#181818" stroke="#323232"/>
+    <circle cx="57" cy="269" r="8" fill="#8E8E98"/>
     <text x="80" y="265" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="16" font-weight="600">Verification</text>
-    <text x="80" y="283" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="11">Check one claim against evidence</text>
-    <path d="M33 319h303" stroke="#d0ccc4"/>
-    <text x="33" y="344" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="11">Prompts and lessons stay in this browser.</text>
+    <text x="80" y="283" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="11">Check one claim against evidence</text>
+    <path d="M33 319h303" stroke="#cccccc"/>
+    <text x="33" y="344" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="11">Prompts and lessons stay in this browser.</text>
   </g>
 </svg>

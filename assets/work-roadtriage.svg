@@ -15,15 +15,15 @@
   </defs>
 
   <rect width="960" height="600" fill="#000000"/>
-  <path d="M38 38h884v524H38z" fill="none" stroke="#2e323b"/>
-  <text x="76" y="98" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">CIVIC INFRASTRUCTURE / FIELD NOTE</text>
+  <path d="M38 38h884v524H38z" fill="none" stroke="#323232"/>
+  <text x="76" y="98" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">CIVIC INFRASTRUCTURE / FIELD NOTE</text>
   <text x="76" y="160" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="38" font-weight="600">See the road as a crew does.</text>
-  <text x="76" y="199" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="17">A mobile concept for spotting, reviewing</text>
-  <text x="76" y="226" fill="#d4d4d8" font-family="'Inter', -apple-system, sans-serif" font-size="17">and recording surface defects.</text>
-  <path d="M76 267h270" stroke="#2e323b"/>
-  <text x="76" y="300" fill="#a1a1aa" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">FIELD CAPTURE / HUMAN REVIEW</text>
-  <path d="M400 95h480v402H400z" fill="#1c1e26"/>
-  <path d="M486 96h310l108 401H378z" fill="#262a34"/>
+  <text x="76" y="199" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">A mobile concept for spotting, reviewing</text>
+  <text x="76" y="226" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">and recording surface defects.</text>
+  <path d="M76 267h270" stroke="#323232"/>
+  <text x="76" y="300" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">FIELD CAPTURE / HUMAN REVIEW</text>
+  <path d="M400 95h480v402H400z" fill="#1e1e1e"/>
+  <path d="M486 96h310l108 401H378z" fill="#2a2a2a"/>
   <path d="M629 120 593 497" stroke="#ffffff" stroke-width="6" stroke-dasharray="22 20"/>
   <path d="m513 360 18-23 7 12 22-39 11 13 20-27 12 10 15-23 10 9 15-17" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M522 354h145v84H522z" fill="none" stroke="#ffffff" stroke-width="2"/>
@@ -31,5 +31,5 @@
   <circle cx="522" cy="354" r="6" fill="#ffffff"/>
   <rect x="730" y="368" width="126" height="58" rx="4" fill="#000000"/>
   <text x="745" y="391" fill="#ffffff" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12" letter-spacing="1">SURFACE NOTE</text>
-  <path d="M746 405h88" stroke="#b8b4ac"/>
+  <path d="M746 405h88" stroke="#b4b4b4"/>
 </svg>

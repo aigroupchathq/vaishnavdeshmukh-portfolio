@@ -148,9 +148,9 @@ function createPrng(seed = 1) {
   };
 }
 
-const PARCHMENT = new THREE.Color('#E9E3D3');
-const CRIMSON = new THREE.Color('#C8102E');
-const BG_COLOR = new THREE.Color('#050505');
+const CHALK = new THREE.Color('#FFFFFF');
+const SILVER = new THREE.Color('#A1A1AA');
+const BG_COLOR = new THREE.Color('#040405');
 
 const worldUniforms = {
   uCarPos: { value: new THREE.Vector3() },
@@ -184,7 +184,7 @@ const SHADER_COMMON = `
     return 1.0 - clamp(f / w, 0.0, 1.0);
   }
   vec3 fogMix(vec3 c) {
-    return mix(c, vec3(0.0196), smoothstep(uFogNear, uFogFar, vDepth));
+    return mix(c, vec3(0.0157), smoothstep(uFogNear, uFogFar, vDepth));
   }
 `;
 
@@ -214,8 +214,8 @@ function makeAsphaltMaterial() {
     fragmentShader: SHADER_COMMON + `
       void main() {
         float h = fract(sin(dot(floor(vW.xz * 7.5), vec2(12.9898, 78.233))) * 43758.5453);
-        vec3 base = vec3(0.048, 0.049, 0.056) * (0.86 + 0.28 * h);
-        vec3 lit = base + vec3(0.11, 0.10, 0.09) * beamFactor(vW);
+        vec3 base = vec3(0.044) * (0.86 + 0.28 * h);
+        vec3 lit = base + vec3(0.115) * beamFactor(vW);
         gl_FragColor = vec4(fogMix(lit), 1.0);
       }
     `
@@ -237,8 +237,8 @@ function makeCenterDashMaterial() {
         float dash = step(fract(s / 6.0), 0.52);
         if (dash < 0.5) discard;
         float b = beamFactor(vW);
-        vec3 col = mix(vec3(0.75, 0.72, 0.66), vec3(0.96, 0.94, 0.88), clamp(b, 0.0, 1.0));
-        gl_FragColor = vec4(fogMix(col), 0.35 + 0.55 * clamp(b, 0.0, 1.0));
+        vec3 col = mix(vec3(0.68), vec3(0.98), clamp(b, 0.0, 1.0));
+        gl_FragColor = vec4(fogMix(col), 0.35 + 0.58 * clamp(b, 0.0, 1.0));
       }
     `
   });
@@ -255,26 +255,26 @@ function makeTerrainMaterial() {
         float cy = lineAA(vW.y * 0.5, 1.05);
         float distFade = 1.0 - smoothstep(26.0, 95.0, vDepth);
         float grid = max(max(gx, gz) * 0.14, cy * 0.08) * distFade;
-        vec3 base = vec3(0.024, 0.025, 0.030) + vec3(0.91, 0.89, 0.83) * grid;
-        vec3 lit = base + vec3(0.09, 0.08, 0.07) * beamFactor(vW);
+        vec3 base = vec3(0.022) + vec3(0.90) * grid;
+        vec3 lit = base + vec3(0.085) * beamFactor(vW);
         gl_FragColor = vec4(fogMix(lit), 1.0);
       }
     `
   });
 }
 
-function createInkGroup(geo, colorHex = '#151518', { angle = 24, mat = null } = {}) {
+function createInkGroup(geo, colorHex = '#151518', { angle = 24, mat = null, edgeHex = '#FFFFFF', edgeOpacity = 0.65 } = {}) {
   const g = new THREE.Group();
   const fill = mat || new THREE.MeshLambertMaterial({ color: colorHex, flatShading: true });
   g.add(new THREE.Mesh(geo, fill));
   g.add(new THREE.LineSegments(
     new THREE.EdgesGeometry(geo, angle),
-    new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.72 })
+    new THREE.LineBasicMaterial({ color: edgeHex, transparent: true, opacity: edgeOpacity })
   ));
   return g;
 }
 
-function createSignSprite(text, { font = '700 68px Archivo, sans-serif', color = '#E9E3D3', width = 4.2, flatGround = false } = {}) {
+function createSignSprite(text, { font = '700 68px Archivo, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false } = {}) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const lines = text.split('\n');
@@ -360,7 +360,7 @@ function buildRoadAndScenery(scene, stops) {
   dashMesh.renderOrder = 2;
   scene.add(dashMesh);
 
-  const lineMat = new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.86 });
+  const lineMat = new THREE.LineBasicMaterial({ color: CHALK, transparent: true, opacity: 0.85 });
   for (const pts of [edgeL, edgeR]) {
     scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat));
   }
@@ -391,7 +391,7 @@ function buildRoadAndScenery(scene, stops) {
     propsGroup.add(pad);
     const outline = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.PlaneGeometry(w, len), 1),
-      new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.55 })
+      new THREE.LineBasicMaterial({ color: SILVER, transparent: true, opacity: 0.55 })
     );
     outline.rotation.copy(pad.rotation);
     outline.position.copy(pad.position).setY(pt.y + 0.055);
@@ -405,7 +405,7 @@ function buildRoadAndScenery(scene, stops) {
     }
   };
 
-  /* Stop 0: Hero Garage Atelier Portal (t = 0.0) */
+  /* Stop 0: Hero Architectural Portal (t = 0.0) */
   {
     sampleRoad(0, s);
     const g = new THREE.Group();
@@ -415,26 +415,26 @@ function buildRoadAndScenery(scene, stops) {
 
     const wallGeo = new THREE.BoxGeometry(0.24, 3.2, 8);
     for (const sx of [-3.5, 3.5]) {
-      const m = createInkGroup(wallGeo, '#121216');
+      const m = createInkGroup(wallGeo, '#101012');
       m.position.set(sx, 1.6, -1);
       g.add(m);
     }
-    const backWall = createInkGroup(new THREE.BoxGeometry(7.2, 3.2, 0.24), '#121216');
+    const backWall = createInkGroup(new THREE.BoxGeometry(7.2, 3.2, 0.24), '#101012');
     backWall.position.set(0, 1.6, -5);
     g.add(backWall);
 
     const archPts = [new THREE.Vector3(-3.6, 3.2, 3), new THREE.Vector3(0, 4.7, 3), new THREE.Vector3(3.6, 3.2, 3)];
-    const archMat = new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.72 });
+    const archMat = new THREE.LineBasicMaterial({ color: CHALK, transparent: true, opacity: 0.72 });
     for (const zOff of [0, -8]) {
       const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(archPts), archMat);
       line.position.z = zOff;
       g.add(line);
     }
-    const titleSign = createSignSprite('VAISHNAV DESHMUKH', { font: '800 72px Archivo, sans-serif', width: 5.4 });
+    const titleSign = createSignSprite('VAISHNAV DESHMUKH', { font: '800 72px Archivo, sans-serif', width: 5.4, color: '#FFFFFF' });
     titleSign.position.set(0, 4.3, 0.4);
     g.add(titleSign);
 
-    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', { font: '500 50px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(233,227,211,0.6)', flatGround: true });
+    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', { font: '500 50px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(255,255,255,0.58)', flatGround: true });
     floorSign.position.set(0, 0.04, -3.5);
     g.add(floorSign);
 
@@ -443,18 +443,18 @@ function buildRoadAndScenery(scene, stops) {
     addCorridorSpan(anchor.clone().addScaledVector(s.flat, -5), anchor.clone(), 3.8, s.pos.y);
   }
 
-  /* Stop 1: Ethos Posts (t = 0.13) */
+  /* Stop 1: Method Waymarkers (t = 0.13) */
   if (stops.find(st => st.id === 'ethos')) {
     const st = stops.find(x => x.id === 'ethos');
     const dir = -st.screen;
     const labels = [['01', 'NOTICE FIRST'], ['02', 'CLEAR HIERARCHY'], ['03', 'OFFLINE-FIRST'], ['04', 'SHOW EVIDENCE']];
     labels.forEach(([num, txt], idx) => {
       const pt = sideOffset(st.t - 0.08 + idx * 0.025, dir, ROAD_HALF_WIDTH + 1.5);
-      const post = createInkGroup(new THREE.CylinderGeometry(0.08, 0.1, 1.8, 6), '#18181d');
+      const post = createInkGroup(new THREE.CylinderGeometry(0.08, 0.1, 1.8, 6), '#161618');
       post.position.copy(pt.p).setY(pt.y + 0.9);
       propsGroup.add(post);
 
-      const sign = createSignSprite(`${num} · ${txt}`, { font: '500 54px Caveat, cursive', width: 3.4, color: idx === 3 ? '#F0566A' : '#E9E3D3' });
+      const sign = createSignSprite(`${num} // ${txt}`, { font: '600 48px "IBM Plex Mono", monospace', width: 3.6, color: idx === 3 ? '#FFFFFF' : '#D4D4D8' });
       sign.position.copy(pt.p).add(new THREE.Vector3(pt.right.x * 0.6, 2.2, pt.right.z * 0.6));
       sign.rotation.y = pt.yaw + (dir > 0 ? Math.PI : 0);
       propsGroup.add(sign);
@@ -486,35 +486,35 @@ function buildRoadAndScenery(scene, stops) {
 
     const colGeo = new THREE.BoxGeometry(0.32, 3.4, 0.32);
     for (const px of [-2.2, 2.2]) {
-      const col = createInkGroup(colGeo, '#18181c');
+      const col = createInkGroup(colGeo, '#141416');
       col.position.set(px, 1.7, 0);
       frame.add(col);
     }
-    const headerBar = createInkGroup(new THREE.BoxGeometry(4.8, 0.28, 0.36), spec.accent ? '#B3122E' : '#24242a');
+    const headerBar = createInkGroup(new THREE.BoxGeometry(4.8, 0.28, 0.36), spec.accent ? '#E4E4E7' : '#242428');
     headerBar.position.set(0, 3.45, 0);
     frame.add(headerBar);
 
-    /* Beacon cube / prism */
+    /* Monochrome prism marker */
     const beacon = new THREE.Mesh(
       new THREE.OctahedronGeometry(0.55, 0),
-      new THREE.MeshBasicMaterial({ color: spec.accent ? CRIMSON : PARCHMENT, wireframe: true })
+      new THREE.MeshBasicMaterial({ color: spec.accent ? CHALK : SILVER, wireframe: true })
     );
     beacon.position.set(0, 2.1, 0);
     frame.add(beacon);
 
-    const pl = new THREE.PointLight(spec.accent ? '#ff5a6e' : '#ffe6bf', 6, 14, 1.6);
+    const pl = new THREE.PointLight(spec.accent ? '#ffffff' : '#d4d4d8', 5.5, 14, 1.6);
     pl.position.set(0, 2.8, 0.5);
     frame.add(pl);
 
     propsGroup.add(frame);
 
-    const lbl = createSignSprite(spec.label, { font: '700 66px Archivo, sans-serif', width: 4.5, color: '#E9E3D3' });
+    const lbl = createSignSprite(spec.label, { font: '700 66px Archivo, sans-serif', width: 4.5, color: '#FFFFFF' });
     lbl.position.copy(pt.p).setY(pt.y + 4.3);
     lbl.rotation.y = pt.yaw + (dir > 0 ? Math.PI : 0);
     propsGroup.add(lbl);
   });
 
-  /* Stop 7: Hold REV 3D Ground Dial (stop-rev) */
+  /* Stop 7: Beam & Throttle Sweep Pad (stop-rev / systems test) */
   if (stops.find(st => st.id === 'rev')) {
     const st = stops.find(x => x.id === 'rev');
     const pt = sideOffset(st.t, -st.screen, ROAD_HALF_WIDTH + 6.4);
@@ -527,7 +527,7 @@ function buildRoadAndScenery(scene, stops) {
 
     const r = 3.4;
     const ringPts = [];
-    const redPts = [];
+    const peakPts = [];
     const a0 = Math.PI * 1.25;
     const sweep = Math.PI * 1.5;
     for (let i = 0; i <= 80; i++) {
@@ -535,14 +535,14 @@ function buildRoadAndScenery(scene, stops) {
       const a = a0 - u * sweep;
       const v = new THREE.Vector3(Math.cos(a) * r, 0, -Math.sin(a) * r);
       ringPts.push(v);
-      if (u >= 0.8) redPts.push(new THREE.Vector3(Math.cos(a) * (r + 0.25), 0, -Math.sin(a) * (r + 0.25)));
+      if (u >= 0.78) peakPts.push(new THREE.Vector3(Math.cos(a) * (r + 0.28), 0, -Math.sin(a) * (r + 0.28)));
     }
-    dialGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts), new THREE.LineBasicMaterial({ color: PARCHMENT })));
-    dialGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(redPts), new THREE.LineBasicMaterial({ color: CRIMSON })));
+    dialGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts), new THREE.LineBasicMaterial({ color: SILVER })));
+    dialGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(peakPts), new THREE.LineBasicMaterial({ color: CHALK })));
 
-    const needleGeo = new THREE.PlaneGeometry(0.18, r - 0.3);
+    const needleGeo = new THREE.PlaneGeometry(0.16, r - 0.3);
     needleGeo.translate(0, (r - 0.3) / 2, 0);
-    const needle = new THREE.Mesh(needleGeo, new THREE.MeshBasicMaterial({ color: CRIMSON }));
+    const needle = new THREE.Mesh(needleGeo, new THREE.MeshBasicMaterial({ color: CHALK }));
     needle.rotation.x = -Math.PI / 2;
 
     const pivot = new THREE.Group();
@@ -550,14 +550,14 @@ function buildRoadAndScenery(scene, stops) {
     pivot.position.y = 0.03;
     dialGroup.add(pivot);
 
-    const hub = new THREE.Mesh(new THREE.CircleGeometry(0.35, 16), new THREE.MeshBasicMaterial({ color: PARCHMENT }));
+    const hub = new THREE.Mesh(new THREE.CircleGeometry(0.32, 16), new THREE.MeshBasicMaterial({ color: CHALK }));
     hub.rotation.x = -Math.PI / 2;
     hub.position.y = 0.04;
     dialGroup.add(hub);
 
-    const revText = createSignSprite('HOLD REV', { font: '700 96px "IBM Plex Mono", monospace', width: 2.2, flatGround: true, color: 'rgba(233,227,211,0.75)' });
-    revText.position.set(0, 0.01, 2.0);
-    dialGroup.add(revText);
+    const testText = createSignSprite('BEAM // PACE', { font: '700 84px "IBM Plex Mono", monospace', width: 2.5, flatGround: true, color: 'rgba(255,255,255,0.75)' });
+    testText.position.set(0, 0.01, 2.0);
+    dialGroup.add(testText);
 
     propsGroup.add(dialGroup);
     dialPivot = pivot;
@@ -574,18 +574,18 @@ function buildRoadAndScenery(scene, stops) {
 
     const pillarGeo = new THREE.BoxGeometry(0.9, 3.6, 0.9);
     for (const px of [-4.2, 4.2]) {
-      const p = createInkGroup(pillarGeo, '#16161a');
+      const p = createInkGroup(pillarGeo, '#141416');
       p.position.set(px, 1.8, 0);
       arch.add(p);
     }
-    const crossBar = createInkGroup(new THREE.BoxGeometry(9.4, 0.45, 0.55), '#B3122E');
+    const crossBar = createInkGroup(new THREE.BoxGeometry(9.4, 0.45, 0.55), '#E4E4E7');
     crossBar.position.set(0, 3.8, 0);
     arch.add(crossBar);
 
     propsGroup.add(arch);
     anchors['gate'] = arch.position.clone();
 
-    const gateLbl = createSignSprite('ALL 16 WORKS · CONTACT', { font: '800 76px Archivo, sans-serif', width: 5.4, color: '#E9E3D3' });
+    const gateLbl = createSignSprite('ALL 16 WORKS · CONTACT', { font: '800 76px Archivo, sans-serif', width: 5.4, color: '#FFFFFF' });
     gateLbl.position.copy(arch.position).add(new THREE.Vector3(0, 5.2, 0));
     gateLbl.rotation.y = arch.rotation.y + Math.PI;
     propsGroup.add(gateLbl);
@@ -677,13 +677,13 @@ function buildRoadAndScenery(scene, stops) {
     scene.add(new THREE.Mesh(mergedFill, new THREE.MeshLambertMaterial({ color: '#141519', flatShading: true })));
 
     const mergedLines = mergeGeos(treeEdges);
-    scene.add(new THREE.LineSegments(mergedLines, new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.46 })));
+    scene.add(new THREE.LineSegments(mergedLines, new THREE.LineBasicMaterial({ color: SILVER, transparent: true, opacity: 0.42 })));
   }
 
   return { anchors, getDial: () => ({ pivot: dialPivot, a0: dialA0, sweep: dialSweep }) };
 }
 
-/* Coded 3D Rosso Corsa Sports Coupé */
+/* Monochrome Obsidian & Silver Architectural Coupé */
 function extrudeSide(pts, width, bevel = 0.06) {
   const shape = new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y)));
   const geo = new THREE.ExtrudeGeometry(shape, { depth: width, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 1, steps: 1 });
@@ -697,24 +697,33 @@ function createSportsCar() {
   const bodySusp = new THREE.Group();
   root.add(bodySusp);
 
-  const carCrimson = CRIMSON.clone().multiplyScalar(0.84);
   const bodyGeo = extrudeSide([
     [-2.15, 0.34], [2.12, 0.34], [2.22, 0.56], [2.14, 0.72],
     [0.62, 0.86], [-1.55, 0.9], [-2.12, 0.86], [-2.22, 0.6]
   ], 1.72);
-  bodySusp.add(createInkGroup(bodyGeo, '#B3122E', { angle: 20, mat: new THREE.MeshLambertMaterial({ color: carCrimson, flatShading: true }) }));
+  bodySusp.add(createInkGroup(bodyGeo, '#18181b', {
+    angle: 20,
+    mat: new THREE.MeshLambertMaterial({ color: '#1b1c20', flatShading: true }),
+    edgeHex: '#FFFFFF',
+    edgeOpacity: 0.88
+  }));
 
   const cabinGeo = extrudeSide([[0.62, 0.86], [-0.05, 1.32], [-1.0, 1.36], [-1.62, 0.9]], 1.44, 0.04);
-  bodySusp.add(createInkGroup(cabinGeo, '#0b0c10', { angle: 20, mat: new THREE.MeshLambertMaterial({ color: '#0b0c10', flatShading: true }) }));
+  bodySusp.add(createInkGroup(cabinGeo, '#060608', {
+    angle: 20,
+    mat: new THREE.MeshLambertMaterial({ color: '#070709', flatShading: true }),
+    edgeHex: '#D4D4D8',
+    edgeOpacity: 0.75
+  }));
 
-  /* Parchment chrome beltline trim */
-  const trim = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.03, 3.92), new THREE.MeshBasicMaterial({ color: '#E9E3D3' }));
+  /* Crisp white beltline trim */
+  const trim = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.03, 3.92), new THREE.MeshBasicMaterial({ color: '#FFFFFF' }));
   trim.position.set(0, 0.62, 0.02);
   bodySusp.add(trim);
 
-  /* Headlights + Taillights */
-  const headMat = new THREE.MeshBasicMaterial({ color: '#fff4dc' });
-  const tailMat = new THREE.MeshBasicMaterial({ color: '#ff2a3d' });
+  /* Xenon Headlights + Optic Silver Tail Lightbar */
+  const headMat = new THREE.MeshBasicMaterial({ color: '#ffffff' });
+  const tailMat = new THREE.MeshBasicMaterial({ color: '#d4d4d8' });
   for (const s of [-1, 1]) {
     const hl = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.1, 0.06), headMat);
     hl.position.set(s * 0.58, 0.55, 2.27);
@@ -726,26 +735,26 @@ function createSportsCar() {
   }
 
   /* Rear Wing */
-  const wing = createInkGroup(new THREE.BoxGeometry(1.62, 0.05, 0.34), '#1a1a1f');
+  const wing = createInkGroup(new THREE.BoxGeometry(1.62, 0.05, 0.34), '#141416');
   wing.position.set(0, 1.05, -1.96);
   bodySusp.add(wing);
 
   /* 4 Rotating Wheels */
   const wheelGeo = new THREE.CylinderGeometry(0.36, 0.36, 0.28, 12);
   wheelGeo.rotateZ(Math.PI / 2);
-  const wheelMat = new THREE.MeshLambertMaterial({ color: '#0a0a0c', flatShading: true });
+  const wheelMat = new THREE.MeshLambertMaterial({ color: '#08080a', flatShading: true });
   const wheels = [];
   for (const [wx, wz] of [[-0.86, 1.36], [0.86, 1.36], [-0.86, -1.32], [0.86, -1.32]]) {
-    const w = createInkGroup(wheelGeo, '#0a0a0c', { angle: 12, mat: wheelMat });
+    const w = createInkGroup(wheelGeo, '#08080a', { angle: 12, mat: wheelMat, edgeHex: '#A1A1AA', edgeOpacity: 0.7 });
     w.position.set(wx, 0.36, wz);
     root.add(w);
     wheels.push({ node: w, r: 0.36 });
   }
 
-  /* Headlight SpotLights & Asphalt Beam Cone Texture */
+  /* Cool White Xenon SpotLights & Beam Cone */
   const lights = [];
   for (const s of [-1, 1]) {
-    const spot = new THREE.SpotLight('#ffe6bf', 0, 34, 0.44, 0.6, 1.2);
+    const spot = new THREE.SpotLight('#ffffff', 0, 36, 0.44, 0.6, 1.15);
     spot.position.set(s * 0.6, 0.65, 2.2);
     spot.target.position.set(s * 0.9, 0, 14);
     root.add(spot, spot.target);
@@ -757,8 +766,8 @@ function createSportsCar() {
   beamCanvas.height = 128;
   const bCtx = beamCanvas.getContext('2d');
   const grad = bCtx.createLinearGradient(0, 0, 0, 128);
-  grad.addColorStop(0, 'rgba(255, 236, 200, 0.52)');
-  grad.addColorStop(1, 'rgba(255, 236, 200, 0)');
+  grad.addColorStop(0, 'rgba(255, 255, 255, 0.56)');
+  grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
   bCtx.fillStyle = grad;
   bCtx.beginPath();
   bCtx.moveTo(26, 0); bCtx.lineTo(38, 0); bCtx.lineTo(64, 128); bCtx.lineTo(0, 128);
@@ -777,7 +786,7 @@ function createSportsCar() {
   /* Contact Shadow Underchassis */
   const shadowPlane = new THREE.Mesh(
     new THREE.PlaneGeometry(2.3, 4.9),
-    new THREE.MeshBasicMaterial({ color: '#000000', transparent: true, opacity: 0.6, depthWrite: false })
+    new THREE.MeshBasicMaterial({ color: '#000000', transparent: true, opacity: 0.68, depthWrite: false })
   );
   shadowPlane.rotation.x = -Math.PI / 2;
   shadowPlane.position.y = 0.03;
@@ -794,7 +803,7 @@ function createSportsCar() {
       bodySusp.position.y = Math.sin(time * (14 + rpm * 16)) * 0.008 * (0.3 + rpm);
       lights.forEach(l => l.intensity = 10 * beam);
       beamCone.material.opacity = 0.38 * beam;
-      tailMat.color.setHex(rpm > 0.2 ? 0xff4254 : 0xc8102e);
+      tailMat.color.setHex(rpm > 0.2 ? 0xffffff : 0xa1a1aa);
     }
   };
 }
@@ -830,7 +839,7 @@ export function startPortfolioDrive() {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(BG_COLOR, 50, 120);
-  scene.add(new THREE.HemisphereLight('#c9c4b8', '#050505', 1.1));
+  scene.add(new THREE.HemisphereLight('#e4e4e7', '#040405', 1.1));
   const dirLight = new THREE.DirectionalLight('#ffffff', 0.95);
   dirLight.position.set(-30, 50, -20);
   scene.add(dirLight);
@@ -1108,7 +1117,7 @@ export function startPortfolioDrive() {
       lean = THREE.MathUtils.lerp(lean, targetLean, expDamp(5, dt));
 
       revLevel += ((revDown ? 1 : 0) - revLevel) * Math.min(1, dt * (revDown ? 9 : 4.5));
-      const desiredBeam = (started ? 1.0 : 0.28) + revLevel * 0.25;
+      const desiredBeam = (started ? 1.0 : 0.28) + revLevel * 0.55;
       beamStrength = THREE.MathUtils.lerp(beamStrength, desiredBeam, expDamp(4, dt));
 
       car.update(dt, {
