@@ -1,1135 +1,1738 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en-GB">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Vaishnav Deshmukh · Product, Design &amp; Systems Architecture Portfolio. London, UK." />
-  <meta property="og:title" content="Vaishnav Deshmukh · Product, Design &amp; Systems" />
-  <meta property="og:description" content="Good software starts with noticing. Interdependent systems: flow, ergonomics, and tactile feedback." />
-  <meta property="og:url" content="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/" />
-  <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/" />
-  <title>Vaishnav Deshmukh · Product, Design &amp; Systems</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vaishnav Deshmukh — Systems Architecture &amp; Product Engineering</title>
+  <meta name="description" content="Personal portfolio and systems ledger of Vaishnav Deshmukh. Master's in logistics, systems architecture, offline-first prototypes, and edge infrastructure.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/">
+  <meta name="theme-color" content="#050505">
 
-  <!-- Typography: Syne, Geist, Instrument Serif, JetBrains Mono, Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Instrument+Serif:ital,wght@0,400;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-            serif: ['Instrument Serif', 'Georgia', 'serif'],
-            splash: ['Plus Jakarta Sans', 'sans-serif'],
-          },
-          colors: {
-            'canvas': '#000000',
-            'surface': '#080808',
-            'surface-card': '#0c0c0e',
-            'border-subtle': 'rgba(255, 255, 255, 0.08)',
-            'border-bright': 'rgba(255, 255, 255, 0.22)',
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Typography: Archivo, Inter, IBM Plex Mono, Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Caveat:wght@500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================================================================
+       01: DATUM ATELIER DESIGN SYSTEM TOKENS
+       ========================================================================= */
     :root {
+      --bg: #050505;
+      --surf: #0E0E10;
+      --raised: #151518;
+      --hair: #1F1F23;
+      --hair2: #2E3039;
+      --ctl: #6E707A;
+      --text: #FFFFFF;
+      --sec: #A1A1AA;
+      --muted: #8A8A93;
+      --c-line: #C8102E;
+      --c-fill: #B3122E;
+      --c-text: #F0566A;
+      --r: 6px;
+      --fs-12: .75rem;
+      --fs-14: .875rem;
+      --fs-16: 1rem;
+      --fs-20: 1.25rem;
+      --fs-28: 1.75rem;
+      --fs-40: 2.5rem;
+      --fs-56: 3.5rem;
+      --display: "Archivo", system-ui, -apple-system, sans-serif;
+      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --hand: "Caveat", cursive;
+      --wrap: 1160px;
       --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-spring-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
-      --ease-out-smooth: cubic-bezier(0.25, 1, 0.5, 1);
-      --color-canvas: #000000;
-      --color-surface: #080808;
-      --color-surface-hover: #111113;
-      --color-border-subtle: rgba(255, 255, 255, 0.08);
-      --color-border-bright: rgba(255, 255, 255, 0.28);
-      --color-border-hover: rgba(255, 255, 255, 0.40);
+      color-scheme: dark;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background-color: #000000;
-      color: #f4f4f5;
-      font-family: 'Geist', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: var(--fs-16);
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: clip;
+      selection-background-color: var(--c-fill);
+      selection-color: #FFFFFF;
     }
-    .font-display {
-      font-family: 'Syne', sans-serif;
-      letter-spacing: -0.035em;
+
+    ::selection { background: var(--c-fill); color: #FFFFFF; }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: none; }
+
+    /* Layout Container */
+    .wrap {
+      max-width: var(--wrap);
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    .font-serif {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: 1.14em;
-      vertical-align: baseline;
+    @media (min-width: 768px) {
+      .wrap { padding: 0 36px; }
+    }
+
+    /* Typography Utilities */
+    h1, h2, h3, h4 { font-family: var(--display); line-height: 1.15; letter-spacing: -0.02em; }
+    .mono { font-family: var(--mono); }
+    .tabular { font-variant-numeric: tabular-nums; font-family: var(--mono); }
+    .label {
       display: inline-block;
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-text);
+      margin-bottom: 12px;
     }
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace;
-      font-feature-settings: "tnum" 1, "zero" 1;
+    .c { color: var(--c-text); }
+    .value { font-family: var(--mono); font-size: var(--fs-14); color: var(--sec); margin-bottom: 16px; }
+    .lede { font-size: clamp(1rem, 1.6vw, 1.125rem); color: var(--sec); line-height: 1.65; max-width: 68ch; }
+    .lede.sm { font-size: var(--fs-14); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: var(--r);
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: var(--fs-14);
+      white-space: nowrap;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-spring);
     }
-    .tabular-nums {
-      font-variant-numeric: tabular-nums;
-      font-feature-settings: "tnum" 1;
+    .btn:hover { transform: scale(1.015); }
+    .btn:active { transform: scale(0.98); }
+    .btn.primary { background: var(--c-fill); color: #FFFFFF; }
+    .btn.primary:hover { background: #9A0F27; }
+    .btn.ghost { background: transparent; border: 1px solid var(--hair2); color: var(--text); }
+    .btn.ghost:hover { border-color: var(--ctl); background: var(--surf); }
+    .btn.sm { min-height: 36px; padding: 0 14px; font-size: var(--fs-12); }
+
+    /* Tags & Status Indicators */
+    .status {
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      border: 1px solid var(--hair2);
+      border-radius: var(--r);
+      padding: 5px 10px;
+      color: var(--sec);
+      white-space: nowrap;
+      background: var(--surf);
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      font-weight: 500;
+      border: 1px solid var(--hair2);
+      border-radius: var(--r);
+      padding: 3px 8px;
+      color: var(--sec);
+      white-space: nowrap;
+      background: var(--surf);
+    }
+    .tag.live {
+      border-color: var(--c-line);
+      color: var(--c-text);
+      background: rgba(200, 16, 46, 0.08);
+    }
+    .tag.live .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-text);
+      animation: livePulse 2s infinite ease-in-out;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
-    /* Card Micro-interactions with Apple Spring Physics */
-    .elaya-card {
-      background-color: #080808;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      transition: transform 0.35s var(--ease-spring),
-                  border-color 0.22s ease,
-                  box-shadow 0.35s var(--ease-spring),
-                  opacity 0.28s var(--ease-spring);
-      will-change: transform, border-color;
+    /* =========================================================================
+       02: STICKY TOP HEADER
+       ========================================================================= */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(5, 5, 5, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hair);
     }
-    .elaya-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.35);
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    .top-row {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
-    .elaya-card img {
-      transition: transform 0.55s var(--ease-spring);
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      position: relative;
+    }
+    .brand small {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: var(--fs-12);
+      letter-spacing: .16em;
+      color: var(--sec);
+    }
+    .nav-desk {
+      display: none;
+      align-items: center;
+      gap: 22px;
+      font-size: var(--fs-14);
+      color: var(--sec);
+      font-weight: 500;
+    }
+    .nav-desk a {
+      transition: color 0.2s ease;
+    }
+    .nav-desk a:hover { color: var(--text); }
+    @media (min-width: 900px) {
+      .nav-desk { display: flex; }
+    }
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    /* Button and Interactive Element Physics */
-    .btn-interactive {
-      transition: transform 0.22s var(--ease-spring),
-                  background-color 0.2s ease,
-                  border-color 0.2s ease,
-                  color 0.2s ease,
-                  box-shadow 0.22s var(--ease-spring);
+    /* =========================================================================
+       03: HERO SECTION
+       ========================================================================= */
+    .hero {
+      padding: clamp(48px, 9vw, 96px) 0 clamp(40px, 6vw, 64px);
+      border-bottom: 1px solid var(--hair);
     }
-    .btn-interactive:hover {
-      transform: scale(1.02);
+    .hero-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    .btn-interactive:active {
-      transform: scale(0.97);
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.06;
+      max-width: 18ch;
+    }
+    .hero .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
     }
 
-    .elaya-tab {
-      transition: transform 0.22s var(--ease-spring),
-                  background-color 0.2s ease,
-                  border-color 0.2s ease,
-                  color 0.2s ease;
+    /* Ruled Telemetry Columns (Cols) */
+    .cols {
+      display: grid;
+      margin-top: 36px;
+      border-top: 1px solid var(--hair);
     }
-    .elaya-tab:hover {
-      transform: scale(1.02);
+    .cols > * {
+      padding: 18px 0 20px;
+      border-bottom: 1px solid var(--hair);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
     }
-    .elaya-tab:active {
-      transform: scale(0.97);
+    @media (min-width: 640px) {
+      .cols { gap: 0 28px; }
+      .cols.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cols.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .cols.c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    .cols .col-lbl {
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .cols .col-val {
+      font-family: var(--display);
+      font-size: var(--fs-16);
+      font-weight: 600;
+      color: var(--text);
     }
 
-    /* Modal Animation Physics */
+    /* =========================================================================
+       04: SECTION 01 — THE LEDGER (RULED ROWS)
+       ========================================================================= */
+    .section {
+      padding: clamp(56px, 8vw, 88px) 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+      font-weight: 700;
+    }
+
+    /* Filter & Search Bar */
+    .ledger-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+      padding: 16px;
+      background: var(--surf);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+    }
+    .filter-tags {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      no-scrollbar: true;
+    }
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: var(--r);
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      font-weight: 500;
+      background: var(--raised);
+      border: 1px solid var(--hair2);
+      color: var(--sec);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover { border-color: var(--ctl); color: var(--text); }
+    .filter-btn.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--bg);
+      font-weight: 600;
+    }
+    .search-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--hair2);
+      border-radius: var(--r);
+      padding: 10px 14px;
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .search-input:focus { border-color: var(--c-line); }
+    .search-input::placeholder { color: var(--muted); }
+
+    /* Ruled Ledger Table Rows */
+    .ledger-table {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--hair);
+    }
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--hair);
+      transition: background-color 0.2s ease;
+    }
+    @media (min-width: 900px) {
+      .ledger-row {
+        grid-template-columns: 240px 1fr;
+        gap: 36px;
+      }
+    }
+    .row-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .row-num-tag {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .row-num {
+      font-family: var(--mono);
+      font-size: var(--fs-14);
+      font-weight: 600;
+      color: var(--sec);
+    }
+    .row-cat {
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .row-visual {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      overflow: hidden;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .visual-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s var(--ease-spring);
+    }
+    .row-visual:hover .visual-img {
+      transform: scale(1.035);
+    }
+    .visual-shim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,5,5,0.7), transparent 60%);
+      pointer-events: none;
+    }
+    .row-content {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+    .row-title {
+      font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .row-title:hover { color: var(--c-text); }
+    .row-desc {
+      color: var(--sec);
+      font-size: var(--fs-14);
+      line-height: 1.6;
+    }
+    .row-breakdown {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 14px;
+      background: var(--surf);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      margin: 4px 0;
+    }
+    @media (min-width: 640px) {
+      .row-breakdown { grid-template-columns: 1fr 1fr; }
+    }
+    .bd-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .bd-lbl {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--c-text);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .bd-txt {
+      font-size: var(--fs-12);
+      color: var(--sec);
+      line-height: 1.5;
+    }
+    .row-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+    @media (min-width: 640px) {
+      .row-footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .spec-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .spec-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      border: 1px solid var(--hair2);
+      background: var(--raised);
+      border-radius: var(--r);
+      padding: 2px 7px;
+      color: var(--sec);
+    }
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* =========================================================================
+       05: SECTION 02 — VERIFICATION STANDARDS (.states)
+       ========================================================================= */
+    .states {
+      display: grid;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    @media (min-width: 768px) {
+      .states { grid-template-columns: repeat(3, 1fr); }
+    }
+    .state {
+      padding: 24px;
+      background: var(--surf);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .state ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: var(--fs-14);
+      color: var(--sec);
+    }
+    .state li::before {
+      content: "— ";
+      color: var(--muted);
+    }
+
+    /* =========================================================================
+       06: SECTION 03 — INSTRUMENT (HOLD REV)
+       ========================================================================= */
+    .instrument {
+      margin-top: 28px;
+      padding: clamp(20px, 4vw, 36px);
+      background: var(--surf);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .instrument-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+    .instrument-dial {
+      position: relative;
+      width: min(100%, 460px);
+      aspect-ratio: 1 / 1;
+    }
+    .instrument-dial canvas {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .instrument-rev {
+      width: min(100%, 300px);
+      min-height: 60px;
+      border: 1px solid var(--c-line);
+      border-radius: var(--r);
+      background: var(--raised);
+      color: #FFFFFF;
+      font-family: var(--mono);
+      font-size: var(--fs-14);
+      font-weight: 600;
+      letter-spacing: .3em;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+    .instrument-rev:hover { background: #1C1C20; }
+    .instrument-rev:active, .instrument-rev.down {
+      background: var(--c-fill);
+      color: #FFFFFF;
+      transform: scale(0.98);
+    }
+
+    /* =========================================================================
+       07: SECTION 05 — PHILOSOPHY & SIGNATURE
+       ========================================================================= */
+    .signature-card {
+      margin-top: 28px;
+      padding: clamp(24px, 4vw, 40px);
+      background: var(--surf);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .signature-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    @media (min-width: 768px) {
+      .signature-row { grid-template-columns: 1fr 1fr; }
+    }
+    .sig-hand {
+      font-family: var(--hand);
+      font-size: 2.2rem;
+      color: var(--text);
+      line-height: 1.1;
+      margin-top: 14px;
+    }
+    .sig-hand small {
+      display: block;
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      color: var(--sec);
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    /* =========================================================================
+       08: DOSSIER MODAL DRAWER
+       ========================================================================= */
     #caseStudyModalBackdrop {
-      transition: opacity 0.25s var(--ease-out-smooth);
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
-    #caseStudyModalBox {
-      transition: transform 0.32s var(--ease-spring), opacity 0.28s ease;
+    #caseStudyModalBackdrop.open {
+      display: flex;
+      opacity: 1;
     }
-    #caseStudyModalBackdrop.modal-open {
-      opacity: 1 !important;
-      pointer-events: auto !important;
+    .dossier-box {
+      background: var(--raised);
+      border: 1px solid var(--hair2);
+      border-radius: var(--r);
+      width: 100%;
+      max-width: 680px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: clamp(20px, 4vw, 36px);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.8);
+      position: relative;
     }
-    #caseStudyModalBackdrop.modal-open #caseStudyModalBox {
-      transform: translateY(0) scale(1) !important;
-      opacity: 1 !important;
+    .dossier-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 16px;
+    }
+    .dossier-sec {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dossier-sec-lbl {
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      color: var(--c-text);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .dossier-sec-txt {
+      font-size: var(--fs-14);
+      color: var(--sec);
+      background: var(--surf);
+      border: 1px solid var(--hair);
+      border-radius: var(--r);
+      padding: 14px;
+      line-height: 1.6;
+    }
+    .dossier-foot {
+      border-top: 1px solid var(--hair);
+      padding-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #000000; }
-    ::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #404040; }
-
-    /* Focus Rings */
-    :focus-visible {
-      outline: 2px solid #ffffff !important;
-      outline-offset: 3px !important;
+    /* =========================================================================
+       09: FOOTER
+       ========================================================================= */
+    footer.bottom {
+      padding: 48px 0;
+      border-top: 1px solid var(--hair);
+      background: var(--bg);
     }
-
-    /* Splash Screen Typography (Preserve user-preferred Plus Jakarta Sans 600) */
-    #splashOverlay {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
+    .footer-row {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
-    #splashOverlay .splash-name {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
-      font-weight: 600 !important;
-      letter-spacing: -0.06em !important;
+    @media (min-width: 768px) {
+      .footer-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
-    #splashOverlay .splash-role {
-      font-family: 'Instrument Serif', Georgia, serif !important;
-      font-size: clamp(1.25rem, 2.5vw, 1.5rem) !important;
-      font-style: italic !important;
-      font-weight: 400 !important;
-      letter-spacing: 0.025em !important;
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+      font-family: var(--mono);
+      font-size: var(--fs-12);
+      color: var(--sec);
     }
-    #splashOverlay .splash-cta,
-    #splashOverlay .splash-skip {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
-      font-weight: 600 !important;
-    }
+    .footer-links a:hover { color: var(--text); }
   </style>
+
+  <!-- Piixpal Web Components -->
+  <script src="piixpal.min.js"></script>
 </head>
-<body class="bg-black text-zinc-100 min-h-screen selection:bg-white selection:text-black relative">
+<body>
 
-  <!-- =====================================================================
-       01: CINEMATIC SYSTEM BOOT SPLASH SCREEN OVERLAY
-       ===================================================================== -->
-  <div id="splashOverlay" role="dialog" aria-modal="true" aria-label="Portfolio introduction" class="fixed inset-0 z-[9999] flex min-h-screen flex-col overflow-hidden bg-black px-6 py-5 text-white transition-opacity duration-500 select-none sm:px-10 sm:py-7">
-    <canvas id="splashCanvas" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></canvas>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 pointer-events-none"></div>
-
-    <header class="relative z-10 flex justify-end">
-      <button id="skipSplashBtn" type="button" class="splash-skip btn-interactive rounded-full px-4 py-2 text-xs font-medium border border-white/20 bg-black/40 text-zinc-300 hover:text-white hover:border-white transition-colors cursor-pointer">
-        Skip intro (Esc)
-      </button>
-    </header>
-
-    <main class="relative z-10 my-auto flex flex-col items-center justify-center px-4 text-center">
-      <div class="space-y-4 max-w-3xl">
-        <h1 class="splash-name text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white">
-          Vaishnav Deshmukh
-        </h1>
-        <p class="splash-role text-xl sm:text-2xl md:text-3xl text-zinc-300">
-          Product, Design &amp; Systems Architecture
-        </p>
-      </div>
-
-      <button id="enterWorkspaceBtn" type="button" aria-label="Explore the work" class="splash-cta btn-interactive mt-10 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white px-8 py-3.5 text-xs uppercase tracking-widest text-black hover:bg-zinc-200 cursor-pointer shadow-2xl">
-        <span>Explore the Work</span>
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </button>
-    </main>
-
-    <footer class="relative z-10 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
-      <span>GREATER LONDON, UK</span>
-      <span>SYSTEMS / LOGISTICS</span>
-    </footer>
-  </div>
-
-  <!-- =====================================================================
-       02: TOP GLOBAL NAVIGATION & VIEW SWITCHER
-       ===================================================================== -->
-  <header class="sticky top-0 z-40 w-full border-b border-white/10 bg-black/90 backdrop-blur-md px-4 sm:px-8 py-3.5 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <span class="font-display font-bold text-white text-base tracking-tight">VD.</span>
-      <span class="text-zinc-500 font-mono text-xs hidden sm:inline">/</span>
-      <span class="text-zinc-400 font-mono text-xs hidden sm:inline">Systems Portfolio</span>
-    </div>
-
-    <div class="flex items-center gap-2 sm:gap-4 font-mono text-xs">
-      <button id="replayIntroBtn" type="button" class="text-zinc-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 px-2.5 py-1 rounded-md hover:bg-white/5">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-        <span class="hidden md:inline">Replay Intro</span>
-      </button>
-      <span class="text-zinc-700">|</span>
-      <a href="deck.html" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1 px-2.5 py-1 rounded-md hover:bg-white/5">
-        <span>3D Card Deck Mode →</span>
+  <!-- =======================================================================
+       HEADER / NAV
+       ======================================================================= -->
+  <header class="top">
+    <div class="wrap top-row">
+      <a class="brand" href="/" aria-current="page">
+        VAISHNAV <small>DESHMUKH</small>
+        <piix-pal pal="bitbug" edge="box" speed="0.8"></piix-pal>
       </a>
-      <span class="text-zinc-700">|</span>
-      <a href="showroom.html" class="text-emerald-400 hover:underline px-2 py-1">Design Lab</a>
+
+      <nav class="nav-desk" aria-label="Primary">
+        <a href="#ledger">The Ledger</a>
+        <a href="#standards">Standards</a>
+        <a href="#instrument">Hold REV</a>
+        <a href="#arsenal">Arsenal</a>
+        <a href="#ideology">Ideology</a>
+        <a href="#contact">Contact</a>
+        <a href="deck.html" style="color: var(--text);">3D Deck Mode →</a>
+      </nav>
+
+      <div class="top-right">
+        <span class="status">Greater London, UK</span>
+        <a class="btn primary sm" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">Start a brief</a>
+      </div>
     </div>
   </header>
 
-  <!-- =====================================================================
-       03: ELAYA UNIFIED SPLIT LAYOUT CONTAINER
-       ===================================================================== -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-      
-      <!-- -----------------------------------------------------------------
-           LEFT SIDEBAR (PINNED DESK / AUTHOR CONSOLE)
-           ----------------------------------------------------------------- -->
-      <aside class="lg:col-span-5 lg:sticky lg:top-20 flex flex-col gap-8">
+  <main id="main">
+
+    <!-- =====================================================================
+         HERO SECTION
+         ===================================================================== -->
+    <section class="hero">
+      <div class="wrap hero-card">
+        <span class="label">Systems Architecture &amp; Product Engineering</span>
+        <h1>
+          Software breaks.<br>
+          <span class="c">Interdependent systems hold.</span>
+        </h1>
+        <p class="value">A portfolio that tells you what's built, and what's proven.</p>
+        <p class="lede">
+          I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a hospital ward, and the cognitive load on human attention. With a master's in logistics, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations.
+        </p>
         
-        <!-- Identity & Status -->
-        <div class="flex flex-col gap-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-emerald-400 w-fit">
-            <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Available for select projects &amp; concepts</span>
-          </div>
-
-          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.04em] leading-[1.04]">
-            Vaishnav<br />Deshmukh
-          </h1>
-
-          <p class="font-serif italic text-2xl text-zinc-300 leading-snug">
-            Thoughtful software, built around real human needs.
-          </p>
-
-          <p class="text-sm text-zinc-300 leading-relaxed max-w-md">
-            I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a supply chain, and the cognitive load on a human mind. With a master's in logistics, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations.
-          </p>
+        <div class="cta-group">
+          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">Start a project brief</a>
+          <a class="btn ghost" href="#ledger">Inspect the 16 artifacts</a>
+          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
         </div>
 
-        <!-- Primary CTA & Brief Launch -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <a href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief" class="btn-interactive px-6 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-zinc-200 flex items-center justify-center gap-2 shadow-xl">
-            <span>Start a project brief</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
-          <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer" class="btn-interactive px-5 py-3.5 rounded-full bg-[#0d0d0f] border border-white/15 text-zinc-200 hover:text-white hover:border-white/35 font-mono text-xs flex items-center justify-center gap-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            <span>GitHub Profile</span>
-          </a>
-        </div>
-
-        <!-- Telemetry & Location Grid -->
-        <div class="p-5 rounded-2xl bg-[#080808] border border-white/10 font-mono text-xs flex flex-col gap-3 shadow-md">
-          <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
-            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Location</span>
-            <span class="text-zinc-200">Greater London, UK</span>
-          </div>
-          <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
-            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Local Time</span>
-            <span id="londonClock" class="text-zinc-100 tabular-nums font-semibold">--:--:-- GMT</span>
-          </div>
-          <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
-            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Selected Projects</span>
-            <span class="text-emerald-400 font-bold tabular-nums">16 Verified Artifacts</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="text-zinc-400 uppercase tracking-[0.14em] text-[10px]">Direct Email</span>
-            <a href="mailto:deshmukhvaishnav@gmail.com" class="text-zinc-300 hover:text-white transition-colors">deshmukhvaishnav@gmail.com</a>
-          </div>
-        </div>
-
-        <!-- In-Page Quick Navigation -->
-        <nav class="flex flex-col gap-2 font-mono text-xs text-zinc-400 border-l border-white/10 pl-4 py-2">
-          <a href="#works" class="hover:text-white transition-colors flex items-center gap-2 text-white font-semibold">
-            <span class="text-zinc-500 tabular-nums">01</span>
-            <span>Selected Works (16)</span>
-          </a>
-          <a href="#ideology" class="hover:text-white transition-colors flex items-center gap-2 text-zinc-400">
-            <span class="text-zinc-500 tabular-nums">02</span>
-            <span>Systems Ideology</span>
-          </a>
-          <a href="#capabilities" class="hover:text-white transition-colors flex items-center gap-2 text-zinc-400">
-            <span class="text-zinc-500 tabular-nums">03</span>
-            <span>Technical Arsenal</span>
-          </a>
-          <a href="deck.html" class="hover:text-white transition-colors flex items-center gap-2 text-zinc-400">
-            <span class="text-zinc-500 tabular-nums">04</span>
-            <span>Switch to 3D Card Deck Mode →</span>
-          </a>
-        </nav>
-      </aside>
-
-      <!-- -----------------------------------------------------------------
-           RIGHT MAIN BODY (#works GALLERY & SYSTEMS STREAM)
-           ----------------------------------------------------------------- -->
-      <main class="lg:col-span-7 flex flex-col gap-16">
-        
-        <!-- SECTION 1: SELECTED WORKS (THE 2-COLUMN ELAYA GALLERY) -->
-        <section id="works" class="flex flex-col gap-6 scroll-mt-24">
-          <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-white/10 pb-5 gap-4">
-            <div>
-              <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">Showcase · 16 Curated Systems</span>
-              <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-[-0.035em] mt-1">
-                Selected Works.
-              </h2>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-mono text-zinc-300 bg-[#080808] px-3.5 py-1.5 rounded-full border border-white/10 tabular-nums" id="filterStatusBadge">
-                Showing all 16 projects
-              </span>
-            </div>
-          </div>
-
-          <!-- Dynamic Filter Bar & Search -->
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-2 overflow-x-auto pb-1.5 no-scrollbar font-mono text-xs">
-              <button onclick="filterElaya('all')" id="tab-all" class="elaya-tab active px-3.5 py-1.5 rounded-lg bg-white text-black font-bold shadow-md cursor-pointer">All (16)</button>
-              <button onclick="filterElaya('live')" id="tab-live" class="elaya-tab px-3.5 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Live Demos (11)</button>
-              <button onclick="filterElaya('concept')" id="tab-concept" class="elaya-tab px-3.5 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Research (5)</button>
-              <span class="text-zinc-600 select-none">|</span>
-              <button onclick="filterElaya('health')" id="tab-health" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Health</button>
-              <button onclick="filterElaya('cognitive')" id="tab-cognitive" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Cognitive</button>
-              <button onclick="filterElaya('civic')" id="tab-civic" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Civic</button>
-              <button onclick="filterElaya('automotive')" id="tab-automotive" class="elaya-tab px-3 py-1.5 rounded-lg bg-[#0d0d0f] border border-white/15 text-zinc-300 hover:text-white hover:border-white/35 font-medium cursor-pointer">Auto</button>
-            </div>
-
-            <!-- Search input -->
-            <div class="relative w-full">
-              <input type="text" id="elayaSearchInput" placeholder="Filter projects by title, stack, or domain..." oninput="searchElaya(this.value)" class="w-full bg-[#080808] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-white/40 font-mono transition-colors" />
-            </div>
-          </div>
-
-          <!-- The 2-Column Works Grid -->
-          <div id="elayaCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="ward" data-category="creative" data-status="concept">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('ward')">
-        <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
-      Concept / Study
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·H·e·a·l·t·h·c·a·r·e· ·L·o·g·i·s·t·i·c·s· ··· ·C·o·n·c·e·p·t· ·S·t·u·d·y·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('ward')">Predictive Ward Logistics Engine</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">HL7 FHIR v4</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">GS1-128</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">IndexedDB</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('ward')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#01</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="consciousness" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('consciousness')">
-        <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·I·n·t·e·r·a·c·t·i·v·e· ·I·n·q·u·i·r·y·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('consciousness')">The Unexplored Interior</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">HTML Canvas</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vanilla JS</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('consciousness')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#02</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="ithink" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('ithink')">
-        <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·g·n·i·t·i·v·e· ·P·r·a·c·t·i·c·e· ··· ·N·e·u·r·o·s·c·i·e·n·c·e· ·L·a·b·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('ithink')">iTHINK: Attention & Flow Lab</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Three.js</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">WebGL</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('ithink')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#03</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="civicflow" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('civicflow')">
-        <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·M·u·n·i·c·i·p·a·l· ·T·r·i·a·g·e·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('civicflow')">CivicFlow: Highways Triage Engine</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">DBSCAN Spatial</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">GeoJSON</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Turf.js</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('civicflow')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#04</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="scriptstudio" data-category="creative" data-status="concept">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('scriptstudio')">
-        <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
-      Concept / Study
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·r·e·a·t·i·v·e· ·T·e·c·h·n·o·l·o·g·y· ··· ·G·e·n·e·r·a·t·i·v·e· ·A·u·d·i·o·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('scriptstudio')">AI Script Studio: Multi-Track DAW</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Canvas Timeline</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('scriptstudio')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#05</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="roadtriage" data-category="creative" data-status="concept">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('roadtriage')">
-        <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
-      Concept / Study
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·E·d·g·e· ·V·i·s·i·o·n·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('roadtriage')">RoadTriage: Edge Defect Scanner</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Computer Vision</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TensorFlow.js</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">IndexedDB</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('roadtriage')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#06</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="itsyou" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('itsyou')">
-        <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·M·e·t·a·c·o·g·n·i·t·i·o·n·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('itsyou')">The Observer: Thought & Awareness</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Interactive Narrative</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Canvas 2D</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vanilla JS</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('itsyou')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#07</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="babycarl" data-category="creative" data-status="concept">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('babycarl')">
-        <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
-      Concept / Study
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·P·e·d·i·a·t·r·i·c· ·H·e·a·l·t·h· ··· ·C·i·r·c·a·d·i·a·n· ·T·e·l·e·m·e·t·r·y·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('babycarl')">BabyCarl: Circadian Telemetry</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Circadian Telemetry</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Local Storage</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Tactile UX</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('babycarl')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#08</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="groupchat" data-category="creative" data-status="concept">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('groupchat')">
-        <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/60 text-zinc-300">
-      <span class="h-1.5 w-1.5 rounded-full bg-zinc-400"></span>
-      Concept / Study
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·o·l·l·a·b·o·r·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·S·e·m·a·n·t·i·c· ·S·y·n·c·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('groupchat')">GroupChat HQ: Consensus Engine</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vector Embeddings</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Semantic Graphs</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">CRDT State</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('groupchat')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#09</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="vision" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('vision')">
-        <img src="assets/work-vision.svg" alt="Rulers Language" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·A·I· ·G·u·i·d·a·n·c·e· ··· ·P·r·o·m·p·t· ·S·t·u·d·i·o·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('vision')">Rulers Language</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Mission Paths</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Prompt Studio</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Original Illustrations</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('vision')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#10</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="datumadas" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('datumadas')">
-        <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·e·r·c·e·p·t·i·o·n·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('datumadas')">Datum ADAS</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Computer Vision</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">On-Device</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Kinematics</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('datumadas')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#11</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="velum" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('velum')">
-        <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·H·u·m·a·n· ·D·e·c·i·s·i·o·n·s· ··· ·C·o·m·p·a·t·i·b·i·l·i·t·y·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('velum')">Checkmate (Velum Labs)</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Explainable Matching</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">React 19</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('velum')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#12</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="vtsystem" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('vtsystem')">
-        <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·E·d·u·c·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·I·n·s·t·i·t·u·t·i·o·n·a·l· ·O·S·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('vtsystem')">Vedic Tree OS</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Multi-Tenant</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">RBAC Security</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">TypeScript</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('vtsystem')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#13</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="driver" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('driver')">
-        <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·I·n·t·e·r·a·c·t·i·v·e· ·P·h·i·l·o·s·o·p·h·y· ··· ·A·u·d·i·o·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('driver')">The Driver of God</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Interactive Philosophy</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Canvas 2D</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('driver')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#14</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="hiddenleaf" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('hiddenleaf')">
-        <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·C·r·e·a·t·i·v·e· ·T·o·o·l·s· ··· ·B·i·l·i·n·g·u·a·l· ·S·t·u·d·i·o·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('hiddenleaf')">Hidden Leaf Studio</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Web Audio API</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Phoneme Parser</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Rhythm Studio</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('hiddenleaf')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#15</span>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="elaya-card group relative flex flex-col justify-between bg-[#080808] border border-white/10 rounded-2xl overflow-hidden hover:border-white/35" data-project="datumatelier" data-category="creative" data-status="live">
-      <!-- Widescreen Media Visual Container -->
-      <div class="relative w-full h-[220px] sm:h-[250px] bg-black overflow-hidden flex items-center justify-center border-b border-white/5 cursor-pointer" onclick="openProjectDossier('datumatelier')">
-        <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.035]" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80 pointer-events-none"></div>
-        <div class="absolute top-3.5 right-3.5">
-          
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400">
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      Live Demo
-    </span>
-    
-        </div>
-      </div>
-
-      <!-- Card Information Body -->
-      <div class="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 block mb-1.5">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·r·o·v·e·n·a·n·c·e·</span>
-          <h3 class="font-display text-xl font-bold text-white mb-2 leading-snug tracking-[-0.035em] group-hover:text-zinc-200 transition-colors cursor-pointer" onclick="openProjectDossier('datumatelier')">Datum Atelier</h3>
-          <p class="text-xs text-zinc-300 leading-relaxed line-clamp-2 mb-4">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            <span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Vehicle Provenance</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Owner Records</span><span class="font-mono text-[10px] px-2.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-200">Offline-First</span>
-          </div>
-        </div>
-
-        <!-- Action Links -->
-        <div class="flex items-center justify-between border-t border-white/5 pt-3.5 mt-auto">
-          <button type="button" onclick="openProjectDossier('datumatelier')" class="btn-interactive px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:bg-zinc-200 flex items-center gap-1.5 cursor-pointer shadow-sm">
-            <span>Dossier</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="font-mono text-[11px] text-zinc-500 tabular-nums font-semibold">#16</span>
-          </div>
-        </div>
-      </div>
-    </article>
-          </div>
-        </section>
-
-        <!-- SECTION 2: SYSTEMS IDEOLOGY -->
-        <section id="ideology" class="p-8 sm:p-10 rounded-3xl bg-[#080808] border border-white/10 flex flex-col gap-6 shadow-xl scroll-mt-24">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
-            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">02 · Engineering Ideology</span>
-            <span class="font-mono text-xs text-emerald-400 flex items-center gap-1.5">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-              Deterministic Systems
-            </span>
-          </div>
-
-          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.035em]">
-            Good software is an unwritten contract with human attention.
-          </h3>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-zinc-300 leading-relaxed font-sans">
-            <p>
-              When a doctor reaches for an infusion pump in a windowless basement ward, or a logistics coordinator reroutes 40 HGVs around an M25 incident, software must not stutter, demand cloud reconnects, or present ambiguous iconography.
-            </p>
-            <p>
-              Every system in this index was engineered from the edge backward: offline-first architectures, low cognitive overhead, zero-dependency telemetry, and tactile feedback loops designed to respect the physical limits of human working memory.
-            </p>
-          </div>
-        </section>
-
-        <!-- SECTION 3: TECHNICAL ARSENAL -->
-        <section id="capabilities" class="flex flex-col gap-6 scroll-mt-24">
-          <div class="border-b border-white/10 pb-4">
-            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">03 · Technical Arsenal</span>
-            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.035em] mt-1">
-              Capabilities &amp; Technologies.
-            </h2>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
-              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">REAL-TIME 3D</span>
-              <span class="text-white font-semibold">Three.js / WebGL</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
-              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">SIMULATION</span>
-              <span class="text-white font-semibold">Python SimPy</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
-              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">HEALTHCARE</span>
-              <span class="text-white font-semibold">HL7 FHIR v4</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
-              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">OFFLINE FIRST</span>
-              <span class="text-white font-semibold">IndexedDB / SW</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
-              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">AUDIO ENGINE</span>
-              <span class="text-white font-semibold">Web Audio API</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex flex-col gap-1 shadow-sm">
-              <span class="text-zinc-400 text-[10px] tracking-[0.14em]">AUTOMOTIVE</span>
-              <span class="text-white font-semibold">CAN-Bus / Sensor Fusion</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 4: CONTACT & FOOTER -->
-        <footer id="contact" class="p-8 rounded-3xl bg-[#080808] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+        <div class="cols c4">
           <div>
-            <h3 class="font-display text-xl font-bold text-white mb-1 tracking-[-0.035em]">Let's build something thoughtful.</h3>
-            <p class="text-xs text-zinc-400 font-mono">Greater London, UK · Open for advisory &amp; product engineering</p>
+            <span class="col-lbl">01 / Location</span>
+            <span class="col-val">Greater London, UK</span>
           </div>
-          <a href="mailto:deshmukhvaishnav@gmail.com" class="btn-interactive px-6 py-3 rounded-full bg-white text-black font-bold text-xs hover:bg-zinc-200">
-            Say hello →
+          <div>
+            <span class="col-lbl">02 / Local Time</span>
+            <span class="col-val tabular" id="londonClock">--:--:-- GMT</span>
+          </div>
+          <div>
+            <span class="col-lbl">03 / Specialism</span>
+            <span class="col-val">Edge &amp; Offline Systems</span>
+          </div>
+          <div>
+            <span class="col-lbl">04 / Provenance</span>
+            <span class="col-val">16 Verified Dossiers</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 01: THE LEDGER
+         ===================================================================== -->
+    <section class="section" id="ledger">
+      <span id="works"></span>
+      <div class="wrap">
+        <div class="section-header">
+          <span class="label">Section 01 · Custodianship Ledger</span>
+          <h2>
+            16 Verified Engineering Artifacts.
+            <piix-pal pal="gecko" edge="box" speed="1.2"></piix-pal>
+          </h2>
+          <p class="lede">
+            Every system built with documentary evidence, real GitHub repositories, and zero fabricated claims.
+          </p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="ledger-controls">
+          <div class="filter-tags">
+            <button type="button" class="filter-btn active" onclick="filterLedger('all', this)">All (16)</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('live', this)">Live Repos &amp; Demos (11)</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('concept', this)">Architectural Studies (5)</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('health', this)">Health</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('cognitive', this)">Cognitive</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('civic', this)">Civic</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('automotive', this)">Automotive</button>
+            <button type="button" class="filter-btn" onclick="filterLedger('creative', this)">Creative</button>
+          </div>
+          <input type="text" class="search-input" id="ledgerSearch" placeholder="Search systems by title, domain, or technology stack..." oninput="searchLedger(this.value)">
+        </div>
+
+        <!-- Ruled Ledger Table -->
+        <div class="ledger-table" id="ledgerTable">
+          <article class="ledger-row" data-project="ward" data-category="creative" data-status="concept">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#01</span>
+          <span class="tag">Concept / Specimen</span>
+        </div>
+        <span class="row-cat">·H·e·a·l·t·h·c·a·r·e· ·L·o·g·i·s·t·i·c·s· ··· ·C·o·n·c·e·p·t· ·S·t·u·d·y·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('ward')">
+        <img src="assets/work-ward.svg" alt="Predictive Ward Logistics Engine" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('ward')">Predictive Ward Logistics Engine</h3>
+        <p class="row-desc">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Nurses in acute hospital wards spend up to 45 minutes every shift hunting for infusion pumps and telemetry monitors. When devices go missing, critical medication is delay...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">An offline-first progressive web application combining BLE beacon signal triangulation with local-first IndexedDB syncing. Caches NHS Trust floorplans and serializes tele...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">HL7 FHIR v4</span><span class="spec-tag">GS1-128</span><span class="spec-tag">IndexedDB</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('ward')">Inspect Dossier →</button>
+            <a href="mailto:deshmukhvaishnav@gmail.com?subject=Ward%20Logistics" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="consciousness" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#02</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·I·n·t·e·r·a·c·t·i·v·e· ·I·n·q·u·i·r·y·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('consciousness')">
+        <img src="assets/work-itsyou.svg" alt="The Unexplored Interior" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('consciousness')">The Unexplored Interior</h3>
+        <p class="row-desc">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Abstract models of conscious attention, optical illusion, and sensory thresholding are difficult to grasp without interactive participatory visual experiments....</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A suite of generative canvas shaders and synchronized Web Audio oscillators modeling focal attention, blind-spot phenomena, and optical saccade suppression....</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">HTML Canvas</span><span class="spec-tag">Web Audio API</span><span class="spec-tag">Vanilla JS</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('consciousness')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/consciousness-mechanism/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="ithink" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#03</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·C·o·g·n·i·t·i·v·e· ·P·r·a·c·t·i·c·e· ··· ·N·e·u·r·o·s·c·i·e·n·c·e· ·L·a·b·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('ithink')">
+        <img src="assets/work-ithink.svg" alt="iTHINK: Attention & Flow Lab" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('ithink')">iTHINK: Attention & Flow Lab</h3>
+        <p class="row-desc">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Neuroscience models and cognitive attention theory are typically locked in static textbook diagrams or clunky academic software that fails to communicate volumetric relat...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A hardware-accelerated 3D exploration interface using Three.js and custom GLSL vertex shaders, allowing users to slice through cortical layers, inspect neurotransmitter p...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Three.js</span><span class="spec-tag">WebGL</span><span class="spec-tag">TypeScript</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('ithink')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/ithink/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="civicflow" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#04</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·M·u·n·i·c·i·p·a·l· ·T·r·i·a·g·e·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('civicflow')">
+        <img src="assets/work-civicflow.svg" alt="CivicFlow: Highways Triage Engine" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('civicflow')">CivicFlow: Highways Triage Engine</h3>
+        <p class="row-desc">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Local councils receive hundreds of duplicate citizen reports for the same pothole or broken streetlight, overwhelming dispatch coordinators and causing wasted contractor ...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">Geographic clustering engine utilizing the DBSCAN algorithm over Turf.js and PostGIS coordinates to group nearby defect reports within a 15-meter radius and generate batc...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">DBSCAN Spatial</span><span class="spec-tag">GeoJSON</span><span class="spec-tag">Turf.js</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('civicflow')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/civicflow.html" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="scriptstudio" data-category="creative" data-status="concept">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#05</span>
+          <span class="tag">Concept / Specimen</span>
+        </div>
+        <span class="row-cat">·C·r·e·a·t·i·v·e· ·T·e·c·h·n·o·l·o·g·y· ··· ·G·e·n·e·r·a·t·i·v·e· ·A·u·d·i·o·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('scriptstudio')">
+        <img src="assets/work-scriptstudio.svg" alt="AI Script Studio: Multi-Track DAW" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('scriptstudio')">AI Script Studio: Multi-Track DAW</h3>
+        <p class="row-desc">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Video creators and podcasters waste hours jumping between text script editors and bloated desktop digital audio workstations (DAWs) to pace vocal delivery and sound desig...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A unified browser-based audio workstation where text script blocks are directly linked to audio tracks on an interactive 60 FPS HTML5 Canvas timeline....</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Web Audio API</span><span class="spec-tag">Canvas Timeline</span><span class="spec-tag">TypeScript</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('scriptstudio')">Inspect Dossier →</button>
+            <a href="https://github.com/aigroupchathq/gstudio" target="_blank" rel="noopener noreferrer" class="btn primary sm">Source ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="roadtriage" data-category="creative" data-status="concept">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#06</span>
+          <span class="tag">Concept / Specimen</span>
+        </div>
+        <span class="row-cat">·C·i·v·i·c· ·I·n·f·r·a·s·t·r·u·c·t·u·r·e· ··· ·E·d·g·e· ·V·i·s·i·o·n·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('roadtriage')">
+        <img src="assets/work-roadtriage.svg" alt="RoadTriage: Edge Defect Scanner" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('roadtriage')">RoadTriage: Edge Defect Scanner</h3>
+        <p class="row-desc">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Highway maintenance inspectors driving rural and council roads often lose 4G/5G signal, preventing standard cloud-dependent defect logging and photo analysis....</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">Mobile-first progressive web application leveraging client-side TensorFlow.js to classify road cracks and potholes locally from vehicle dashboard mounts, storing geotagge...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Computer Vision</span><span class="spec-tag">TensorFlow.js</span><span class="spec-tag">IndexedDB</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('roadtriage')">Inspect Dossier →</button>
+            <a href="mailto:deshmukhvaishnav@gmail.com?subject=RoadTriage" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="itsyou" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#07</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·C·o·g·n·i·t·i·v·e· ·S·c·i·e·n·c·e· ··· ·M·e·t·a·c·o·g·n·i·t·i·o·n·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('itsyou')">
+        <img src="assets/work-observer.svg" alt="The Observer: Thought & Awareness" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('itsyou')">The Observer: Thought & Awareness</h3>
+        <p class="row-desc">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">People rarely observe their own cognitive biases, default reactive loops, or mental conditioning in everyday software interactions....</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A self-guided contemplative narrative powered by pure Canvas 2D particle dynamics that mirror user input pacing, pauses, and cursor hesitation to foster self-awareness....</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Interactive Narrative</span><span class="spec-tag">Canvas 2D</span><span class="spec-tag">Vanilla JS</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('itsyou')">Inspect Dossier →</button>
+            <a href="https://itsyou.ai.studio/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="babycarl" data-category="creative" data-status="concept">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#08</span>
+          <span class="tag">Concept / Specimen</span>
+        </div>
+        <span class="row-cat">·P·e·d·i·a·t·r·i·c· ·H·e·a·l·t·h· ··· ·C·i·r·c·a·d·i·a·n· ·T·e·l·e·m·e·t·r·y·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('babycarl')">
+        <img src="assets/work-babycarl.svg" alt="BabyCarl: Circadian Telemetry" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('babycarl')">BabyCarl: Circadian Telemetry</h3>
+        <p class="row-desc">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Modern baby monitors bombard exhausted new parents with high-friction push notifications, anxiety-inducing graphs, and invasive cloud video streaming....</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A gentle ambient telemetry interface that visualizes newborn sleep cycles, feeding intervals, and temperature trends through calm tactile typography and local-only SQLite...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Circadian Telemetry</span><span class="spec-tag">Local Storage</span><span class="spec-tag">Tactile UX</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('babycarl')">Inspect Dossier →</button>
+            <a href="mailto:deshmukhvaishnav@gmail.com?subject=BabyCarl" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="groupchat" data-category="creative" data-status="concept">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#09</span>
+          <span class="tag">Concept / Specimen</span>
+        </div>
+        <span class="row-cat">·C·o·l·l·a·b·o·r·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·S·e·m·a·n·t·i·c· ·S·y·n·c·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('groupchat')">
+        <img src="assets/work-groupchat.svg" alt="GroupChat HQ: Consensus Engine" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('groupchat')">GroupChat HQ: Consensus Engine</h3>
+        <p class="row-desc">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Most AI tutorials remain superficial prompt demonstrations without addressing state synchronization, consensus verification, or real-world software engineering constraint...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">An educational laboratory and media channel creating production-grade multi-agent prototypes, exploring vector embeddings, consensus synthesis graphs, and developer workf...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Vector Embeddings</span><span class="spec-tag">Semantic Graphs</span><span class="spec-tag">CRDT State</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('groupchat')">Inspect Dossier →</button>
+            <a href="mailto:deshmukhvaishnav@gmail.com?subject=GroupChat" target="_blank" rel="noopener noreferrer" class="btn primary sm">Inquire ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="vision" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#10</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·A·I· ·G·u·i·d·a·n·c·e· ··· ·P·r·o·m·p·t· ·S·t·u·d·i·o·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('vision')">
+        <img src="assets/work-vision.svg" alt="Rulers Language" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('vision')">Rulers Language</h3>
+        <p class="row-desc">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Users struggle with unguided LLM prompting, relying on conversational politeness or vague adjectives that produce hallucinated code and unverified assumptions....</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A three-phase prompt methodology (Design, Implementation, Verification) that enforces strict negative boundaries, observable success metrics, and structured evidence capt...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Mission Paths</span><span class="spec-tag">Prompt Studio</span><span class="spec-tag">Original Illustrations</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('vision')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/rulers-language/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="datumadas" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#11</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·e·r·c·e·p·t·i·o·n·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('datumadas')">
+        <img src="assets/work-datumadas.svg" alt="Datum ADAS" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('datumadas')">Datum ADAS</h3>
+        <p class="row-desc">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Modern vehicular safety suites depend on centralized cloud telemetry or high-latency processing, making edge response times sluggish under poor network connectivity....</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">Client-side perception pipeline running quantized neural object detection models in-browser with WebGL/WebGPU acceleration, calculating Time-to-Collision (TTC) and lane d...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Computer Vision</span><span class="spec-tag">On-Device</span><span class="spec-tag">Kinematics</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('datumadas')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/datum-adas/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="velum" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#12</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·H·u·m·a·n· ·D·e·c·i·s·i·o·n·s· ··· ·C·o·m·p·a·t·i·b·i·l·i·t·y·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('velum')">
+        <img src="assets/work-velum.svg" alt="Checkmate (Velum Labs)" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('velum')">Checkmate (Velum Labs)</h3>
+        <p class="row-desc">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Dating and relationship applications exploit addictive slot-machine gamification, opaque algorithmic sorting, and superficial image swiping that degrades long-term decisi...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">An explainable matching engine that evaluates mutual alignment across core ethical values, financial goals, and conflict resolution models with full algorithmic transpare...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Explainable Matching</span><span class="spec-tag">React 19</span><span class="spec-tag">TypeScript</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('velum')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/velum-labs/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="vtsystem" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#13</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·E·d·u·c·a·t·i·o·n· ·S·y·s·t·e·m·s· ··· ·I·n·s·t·i·t·u·t·i·o·n·a·l· ·O·S·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('vtsystem')">
+        <img src="assets/work-vtsystem.svg" alt="Vedic Tree OS" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('vtsystem')">Vedic Tree OS</h3>
+        <p class="row-desc">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Multi-campus educational institutions endure fractured administrative tools: attendance sheets in spreadsheets, fees in clunky ERPs, and learning logs lost across disconn...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A cohesive institutional operating system with multi-tenant role-based access control (RBAC), unifying fee reconciliation, attendance metrics, and qualitative student por...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Multi-Tenant</span><span class="spec-tag">RBAC Security</span><span class="spec-tag">TypeScript</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('vtsystem')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/vtsystem/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="driver" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#14</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·I·n·t·e·r·a·c·t·i·v·e· ·P·h·i·l·o·s·o·p·h·y· ··· ·A·u·d·i·o·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('driver')">
+        <img src="assets/work-driver.svg" alt="The Driver of God" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('driver')">The Driver of God</h3>
+        <p class="row-desc">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Digital interactions are overwhelmingly transactional, designed for compulsion and urgency rather than introspection, attention restoration, and philosophical contemplati...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">An experimental meditative web interface where user mouse deceleration triggers procedural binaural audio harmonics and subtle geometric canvas distortions exploring agen...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Web Audio API</span><span class="spec-tag">Interactive Philosophy</span><span class="spec-tag">Canvas 2D</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('driver')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/the-driver-of-god/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="hiddenleaf" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#15</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·C·r·e·a·t·i·v·e· ·T·o·o·l·s· ··· ·B·i·l·i·n·g·u·a·l· ·S·t·u·d·i·o·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('hiddenleaf')">
+        <img src="assets/work-hiddenleaf.svg" alt="Hidden Leaf Studio" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('hiddenleaf')">Hidden Leaf Studio</h3>
+        <p class="row-desc">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">South Asian hip-hop lyricists blending Hindi, Urdu, and English struggle with conventional Western songwriting tools that fail to parse matra weight, conjunct consonants,...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">An intelligent metronome and rhyme matrix parser that computes syllable weights across Hindi and English phonemes, matching rhyme cadences against customizable BPM drum l...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Web Audio API</span><span class="spec-tag">Phoneme Parser</span><span class="spec-tag">Rhythm Studio</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('hiddenleaf')">Inspect Dossier →</button>
+            <a href="https://aigroupchathq.github.io/hidden-leaf-studio/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+<article class="ledger-row" data-project="datumatelier" data-category="creative" data-status="live">
+      <div class="row-meta">
+        <div class="row-num-tag">
+          <span class="row-num">#16</span>
+          <span class="tag live"><i class="dot"></i>Live Demo / Repo</span>
+        </div>
+        <span class="row-cat">·A·u·t·o·m·o·t·i·v·e· ·S·y·s·t·e·m·s· ··· ·P·r·o·v·e·n·a·n·c·e·</span>
+      </div>
+
+      <div class="row-visual" onclick="openProjectDossier('datumatelier')">
+        <img src="assets/work-datumatelier.svg" alt="Datum Atelier" loading="lazy" class="visual-img" />
+        <div class="visual-shim"></div>
+      </div>
+
+      <div class="row-content">
+        <h3 class="row-title" onclick="openProjectDossier('datumatelier')">Datum Atelier</h3>
+        <p class="row-desc">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
+        
+        <div class="row-breakdown">
+          <div class="bd-col">
+            <span class="bd-lbl">Diagnosis</span>
+            <p class="bd-txt">Vehicle service and maintenance histories are fragmented across proprietary dealer silos, vulnerable to odometer fraud, lost paper invoices, and unauthorized personal dat...</p>
+          </div>
+          <div class="bd-col">
+            <span class="bd-lbl">Intervention</span>
+            <p class="bd-txt">A decentralized vehicle provenance ledger where vehicle owners maintain sovereign control over maintenance records, diagnostic telemetry, and ownership transfer. Designed...</p>
+          </div>
+        </div>
+
+        <div class="row-footer">
+          <div class="spec-tags">
+            <span class="spec-tag">Vehicle Provenance</span><span class="spec-tag">Owner Records</span><span class="spec-tag">Offline-First</span>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="btn ghost sm" onclick="openProjectDossier('datumatelier')">Inspect Dossier →</button>
+            <a href="https://datumatelier.uk/" target="_blank" rel="noopener noreferrer" class="btn primary sm">Live Site ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 02: VERIFICATION STANDARDS (.states)
+         ===================================================================== -->
+    <section class="section" id="standards">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="label">Documentary Truth</span>
+          <h2>Every artifact on this site is marked, like an entry in the record.</h2>
+          <p class="lede">Clear demarcations between production deployments, functional edge prototypes, and structural research.</p>
+        </div>
+
+        <div class="states">
+          <div class="state">
+            <span class="tag live"><i class="dot"></i>Live &amp; Deployed</span>
+            <ul>
+              <li>The Unexplored Interior (Consciousness)</li>
+              <li>iTHINK Attention &amp; Flow Lab</li>
+              <li>CivicFlow Highways Triage Engine</li>
+              <li>Rulers Language AI Prompt Studio</li>
+              <li>Datum ADAS Safety Platform</li>
+              <li>Checkmate (Velum Labs)</li>
+              <li>Vedic Tree OS (VTSystem)</li>
+              <li>The Driver of God</li>
+              <li>Hidden Leaf Studio</li>
+              <li>Datum Atelier Provenance Engine</li>
+            </ul>
+          </div>
+
+          <div class="state">
+            <span class="tag">Architectural Prototypes</span>
+            <ul>
+              <li>Predictive Ward Logistics Engine</li>
+              <li>RoadTriage Edge Defect Scanner</li>
+              <li>GroupChat HQ Consensus Engine</li>
+              <li>AI Script Studio DAW</li>
+            </ul>
+          </div>
+
+          <div class="state">
+            <span class="tag">System Concepts &amp; Research</span>
+            <ul>
+              <li>BabyCarl Circadian Telemetry</li>
+              <li>Observer Effect Cognitive Mirror</li>
+              <li>Decentralized Handover Protocols</li>
+              <li>Deterministic Offline Sync Engines</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 03: TACTICAL INTERLUDE (HOLD REV)
+         ===================================================================== -->
+    <section class="section" id="instrument">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="label">Systems Interlude</span>
+          <h2>Hold REV.</h2>
+          <p class="lede sm">The needle answers and settles on its own. The odometer counts your time on this portfolio, on this device only.</p>
+        </div>
+
+        <div class="instrument">
+          <div class="instrument-stage">
+            <div class="instrument-dial">
+              <canvas id="instrument-canvas" role="img" aria-label="Datum rev counter with an odometer counting time spent on this page"></canvas>
+            </div>
+            <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to rev the engine">REV</button>
+            <piix-pal pal="pip" edge="box" speed="0.9"></piix-pal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 04: TECHNICAL ARSENAL (.cols c3)
+         ===================================================================== -->
+    <section class="section" id="arsenal">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="label">Section 04 · Technical Arsenal</span>
+          <h2>Disciplines &amp; Engineered Systems.</h2>
+          <p class="lede">Every capability honed through physical constraints, operational audits, and edge deployments.</p>
+        </div>
+
+        <div class="cols c3">
+          <div>
+            <span class="col-lbl">REAL-TIME 3D &amp; SHADERS</span>
+            <span class="col-val">Three.js / WebGL / GLSL</span>
+            <p class="lede sm" style="margin-top: 6px;">Cortical slicing planes, GPU-accelerated spatial projections, and volumetric models.</p>
+          </div>
+          <div>
+            <span class="col-lbl">SYSTEMS SIMULATION</span>
+            <span class="col-val">Python SimPy / Queueing</span>
+            <p class="lede sm" style="margin-top: 6px;">Hospital infusion bed queues, road transit routing, and municipal defect batching.</p>
+          </div>
+          <div>
+            <span class="col-lbl">CLINICAL TELEMETRY</span>
+            <span class="col-val">HL7 FHIR v4 / GS1-128</span>
+            <p class="lede sm" style="margin-top: 6px;">Offline spatial wayfinding for critical devices in windowless hospital basements.</p>
+          </div>
+          <div>
+            <span class="col-lbl">OFFLINE FIRST</span>
+            <span class="col-val">IndexedDB / Service Workers</span>
+            <p class="lede sm" style="margin-top: 6px;">Zero-cloud dependencies when connection drops. Local state reconciliation via CRDTs.</p>
+          </div>
+          <div>
+            <span class="col-lbl">AUDIO DSP &amp; SYNTHESIS</span>
+            <span class="col-val">Web Audio API / Oscillators</span>
+            <p class="lede sm" style="margin-top: 6px;">Interactive psychoacoustic stimuli, harmonic tuning, and generative audio feedback.</p>
+          </div>
+          <div>
+            <span class="col-lbl">AUTOMOTIVE &amp; EDGE</span>
+            <span class="col-val">CAN-Bus / Sensor Fusion</span>
+            <p class="lede sm" style="margin-top: 6px;">Chassis telemetry, provenance verification ledgers, and edge telematics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 05: PHILOSOPHY & SIGNATURE
+         ===================================================================== -->
+    <section class="section" id="ideology">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="label">Section 05 · Philosophy</span>
+          <h2>Built around real human needs, at the edge.</h2>
+        </div>
+
+        <div class="signature-card">
+          <div class="signature-row">
+            <div>
+              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">The Physical Edge</h3>
+              <p class="lede sm">
+                When a nurse reaches for an infusion pump during a shift change, or a road inspector flags a subsidence fracture in pouring rain, software cannot afford a loading spinner, a session timeout, or ambiguous iconography. True engineering reliability begins where the cell tower signal drops.
+              </p>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">The Human Attention Contract</h3>
+              <p class="lede sm">
+                Every software interface makes an unwritten claim on human working memory. By stripping bloated frameworks, respecting optical hierarchy, and grounding every feature in physical reality, we build systems that outlive transient design trends.
+              </p>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--hair); padding-top: 20px; margin-top: 10px;">
+            <p class="sig-hand">
+              Vaishnav Deshmukh
+              <small>SYSTEMS ARCHITECT &amp; LOGISTICS SPECIALIST · LONDON, UK</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 06: CONTACT & INQUIRIES
+         ===================================================================== -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="label">Inquiries &amp; Advisory</span>
+          <h2>Start a conversation or project brief.</h2>
+          <p class="lede">Open for select advisory, systems architecture reviews, and high-integrity product engineering.</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px;">
+          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">
+            <span>deshmukhvaishnav@gmail.com →</span>
           </a>
-        </footer>
+          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">
+            <span>GitHub @aigroupchathq ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-      </main>
+  </main>
+
+  <!-- =======================================================================
+       FOOTER
+       ======================================================================= -->
+  <footer class="bottom">
+    <div class="wrap footer-row">
+      <div>
+        <p style="font-family: var(--display); font-weight: 700; font-size: var(--fs-14);">VAISHNAV DESHMUKH · SYSTEMS ATELIER</p>
+        <p style="font-family: var(--mono); font-size: var(--fs-12); color: var(--muted); margin-top: 4px;">Greater London, UK · Machined Provenance &amp; Edge Infrastructure</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#ledger">Ledger</a>
+        <a href="#standards">Standards</a>
+        <a href="#instrument">Instrument</a>
+        <a href="#arsenal">Arsenal</a>
+        <a href="deck.html">3D Deck</a>
+        <a href="mailto:deshmukhvaishnav@gmail.com">Direct Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =======================================================================
+       CASE STUDY DOSSIER MODAL DRAWER
+       ======================================================================= -->
+  <div id="caseStudyModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeProjectDossier(event)">
+    <div class="dossier-box" onclick="event.stopPropagation()">
+      <div class="dossier-head">
+        <div>
+          <span id="modalCategory" class="label" style="margin-bottom: 6px;">Healthcare Systems</span>
+          <h2 id="modalTitle" style="font-size: 1.75rem;">Project Title</h2>
+        </div>
+        <button type="button" class="btn ghost sm" onclick="closeProjectDossier()" aria-label="Close dossier">✕</button>
+      </div>
+
+      <div class="dossier-sec">
+        <span class="dossier-sec-lbl">Problem Diagnosis</span>
+        <p id="modalProblem" class="dossier-sec-txt">Detailed problem breakdown...</p>
+      </div>
+
+      <div class="dossier-sec">
+        <span class="dossier-sec-lbl">Architectural Intervention</span>
+        <p id="modalSolution" class="dossier-sec-txt">Engineering intervention...</p>
+      </div>
+
+      <div class="dossier-sec">
+        <span class="dossier-sec-lbl">Technical Specification</span>
+        <div id="modalStack" class="spec-tags" style="margin-top: 4px;"></div>
+      </div>
+
+      <div class="dossier-foot">
+        <span class="mono" style="font-size: var(--fs-12); color: var(--muted);">DOCUMENTARY TRUTH VERIFIED</span>
+        <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn primary sm">Open Artifact ↗</a>
+      </div>
     </div>
   </div>
 
-  <!-- Mobile Floating Quick-Jump Pill -->
-  <a href="#works" id="mobileJumpPill" class="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 px-5 py-2.5 rounded-full bg-white text-black text-xs font-mono font-bold shadow-2xl flex items-center gap-2 border border-white/40 btn-interactive" style="transition: transform 0.3s var(--ease-spring), opacity 0.3s ease;">
-    <span>View selected works (16) ↓</span>
-  </a>
-
-  <!-- =====================================================================
-       04: RESPONSIVE CASE STUDY DOSSIER MODAL DRAWER
-       ===================================================================== -->
-  <div id="caseStudyModalBackdrop" 
-       class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center p-0 sm:p-6 opacity-0"
-       role="dialog"
-       aria-modal="true"
-       aria-labelledby="modalTitle"
-       onclick="closeProjectDossier(event)">
-
-    <div id="caseStudyModalBox"
-         class="bg-[#080808] border border-white/20 rounded-t-3xl sm:rounded-3xl max-w-2xl w-full p-6 sm:p-8 flex flex-col max-h-[85vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-8 sm:translate-y-4 scale-[0.98]"
-         onclick="event.stopPropagation()">
-      
-      <!-- Mobile Drag / Dismiss Handle -->
-      <div class="sm:hidden w-12 h-1.5 rounded-full bg-white/25 mx-auto mb-4 -mt-2"></div>
-
-      <div class="flex justify-between items-start border-b border-white/10 pb-4 mb-6">
-        <div>
-          <span id="modalCategory" class="font-mono text-xs uppercase tracking-[0.16em] text-emerald-400 block mb-1">Healthcare Systems</span>
-          <h2 id="modalTitle" class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.035em]">Project Title</h2>
-        </div>
-        <button onclick="closeProjectDossier()" aria-label="Close dossier" class="btn-interactive h-8 w-8 rounded-full border border-white/20 bg-zinc-900 text-zinc-300 hover:text-white flex items-center justify-center text-sm cursor-pointer">✕</button>
-      </div>
-
-      <div class="flex flex-col gap-6 text-sm text-zinc-300 leading-relaxed">
-        <div>
-          <h4 class="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400 mb-2">Problem Breakdown</h4>
-          <p id="modalProblem" class="bg-black p-4 rounded-xl border border-white/5 text-xs text-zinc-300 leading-relaxed">Detailed problem statement...</p>
-        </div>
-
-        <div>
-          <h4 class="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400 mb-2">System Solution</h4>
-          <p id="modalSolution" class="bg-black p-4 rounded-xl border border-white/5 text-xs text-zinc-300 leading-relaxed">Architectural solution...</p>
-        </div>
-
-        <div>
-          <h4 class="font-mono text-xs uppercase tracking-[0.16em] text-zinc-400 mb-2">Core Tech Stack</h4>
-          <div id="modalStack" class="flex flex-wrap gap-2"></div>
-        </div>
-      </div>
-
-      <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
-        <span class="font-mono text-xs text-zinc-500 tabular-nums">DOCUMENTARY TRUTH VERIFIED</span>
-        <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-interactive px-5 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-zinc-200 flex items-center gap-1.5">
-          <span>Open External Artifact</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       05: CLIENT JAVASCRIPT ENGINE (APPLE SPRING MOTION & FILTERS)
-       ===================================================================== -->
+  <!-- Client Script Engine -->
   <script>
-    // All 16 Project Dossiers
+    // Project Dossiers Data
     const projectDossiers = {
   "ward": {
     "title": "Predictive Ward Logistics Engine",
@@ -1573,7 +2176,7 @@
   }
 };
 
-    // Live London Clock with Tabular Numerals
+    // London Clock
     const londonClock = document.getElementById("londonClock");
     const formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Europe/London",
@@ -1588,14 +2191,14 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Responsive Modal Handlers with Apple Spring Entrance
+    // Dossier Modal
     function openProjectDossier(pid) {
       const d = projectDossiers[pid] || {
         title: pid.toUpperCase(),
         category: "System Concept",
         problem: "Architectural challenge requiring high-integrity systems engineering and user-centered ergonomics.",
         solution: "Production prototype engineered with offline resilience, low cognitive load, and deterministic performance.",
-        tags: ["TypeScript", "Systems Architecture", "Tailwind CSS"],
+        tags: ["TypeScript", "Systems Architecture"],
         links: [{ href: "https://github.com/aigroupchathq" }]
       };
 
@@ -1611,192 +2214,69 @@
       stackContainer.innerHTML = "";
       (d.tags || []).forEach(s => {
         const span = document.createElement("span");
-        span.className = "font-mono text-xs px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200";
+        span.className = "spec-tag";
         span.textContent = s;
         stackContainer.appendChild(span);
       });
 
       const backdrop = document.getElementById("caseStudyModalBackdrop");
-      backdrop.classList.remove("hidden");
-      // Force layout reflow before triggering spring transition
-      void backdrop.offsetWidth;
-      backdrop.classList.add("modal-open");
+      backdrop.classList.add("open");
       document.body.style.overflow = "hidden";
     }
 
-    function closeProjectDossier(e) {
+    function closeProjectDossier() {
       const backdrop = document.getElementById("caseStudyModalBackdrop");
       if (!backdrop) return;
-      backdrop.classList.remove("modal-open");
-      setTimeout(() => {
-        backdrop.classList.add("hidden");
-        document.body.style.overflow = "";
-      }, 260);
+      backdrop.classList.remove("open");
+      document.body.style.overflow = "";
     }
 
-    // Filtering & Instant Search Logic with Fluid State Updates
+    // Filter & Search Logic
     let activeFilter = 'all';
     let searchQuery = '';
 
-    function filterElaya(cat) {
+    function filterLedger(cat, btn) {
       activeFilter = cat;
-      document.querySelectorAll('.elaya-tab').forEach(t => {
-        t.classList.remove('bg-white', 'text-black', 'font-bold', 'shadow-md');
-        t.classList.add('bg-[#0d0d0f]', 'border', 'border-white/15', 'text-zinc-300');
-      });
-      
-      const targetBtn = document.getElementById('tab-' + cat) || (window.event && window.event.currentTarget);
-      if (targetBtn) {
-        targetBtn.classList.remove('bg-[#0d0d0f]', 'border-white/15', 'text-zinc-300');
-        targetBtn.classList.add('bg-white', 'text-black', 'font-bold', 'shadow-md');
-      }
-      applyElayaFilters();
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      applyFilters();
     }
 
-    function searchElaya(q) {
+    function searchLedger(q) {
       searchQuery = q.toLowerCase().trim();
-      applyElayaFilters();
+      applyFilters();
     }
 
-    function applyElayaFilters() {
-      const cards = document.querySelectorAll('.elaya-card');
-      let visible = 0;
-      cards.forEach(c => {
-        const cCat = c.dataset.category || '';
-        const cStatus = c.dataset.status || '';
-        const text = c.textContent.toLowerCase();
+    function applyFilters() {
+      const rows = document.querySelectorAll('.ledger-row');
+      rows.forEach(r => {
+        const rCat = r.dataset.category || '';
+        const rStatus = r.dataset.status || '';
+        const text = r.textContent.toLowerCase();
 
         let matchesCat = true;
-        if (activeFilter === 'live') matchesCat = cStatus === 'live';
-        else if (activeFilter === 'concept') matchesCat = cStatus !== 'live';
-        else if (activeFilter !== 'all') matchesCat = cCat.includes(activeFilter);
+        if (activeFilter === 'live') matchesCat = rStatus === 'live';
+        else if (activeFilter === 'concept') matchesCat = rStatus !== 'live';
+        else if (activeFilter !== 'all') matchesCat = rCat.includes(activeFilter);
 
         const matchesQuery = searchQuery === '' || text.includes(searchQuery);
 
         if (matchesCat && matchesQuery) {
-          c.style.display = "";
-          visible++;
+          r.style.display = "";
         } else {
-          c.style.display = "none";
+          r.style.display = "none";
         }
       });
-      const badge = document.getElementById("filterStatusBadge");
-      if (badge) badge.textContent = `Showing ${visible} projects`;
     }
-
-    // Mobile Jump Pill Auto-Hide past #works
-    const mobileJumpPill = document.getElementById("mobileJumpPill");
-    if (mobileJumpPill) {
-      window.addEventListener("scroll", () => {
-        const worksEl = document.getElementById("works");
-        if (!worksEl) return;
-        const rect = worksEl.getBoundingClientRect();
-        if (rect.top <= 120) {
-          mobileJumpPill.style.opacity = "0";
-          mobileJumpPill.style.pointerEvents = "none";
-          mobileJumpPill.style.transform = "translate(-50%, 16px)";
-        } else {
-          mobileJumpPill.style.opacity = "1";
-          mobileJumpPill.style.pointerEvents = "auto";
-          mobileJumpPill.style.transform = "translate(-50%, 0)";
-        }
-      }, { passive: true });
-    }
-
-    // =====================================================================
-    // CINEMATIC SYSTEM BOOT SPLASH SCREEN ENGINE
-    // =====================================================================
-    const splashOverlay = document.getElementById("splashOverlay");
-    const splashCanvas = document.getElementById("splashCanvas");
-    const enterWorkspaceBtn = document.getElementById("enterWorkspaceBtn");
-    const skipSplashBtn = document.getElementById("skipSplashBtn");
-    const replayIntroBtn = document.getElementById("replayIntroBtn");
-
-    let canvasCtx = null;
-    let animId = null;
-
-    function initSplashCanvas() {
-      if (!splashCanvas) return;
-      const dpr = window.devicePixelRatio || 1;
-      splashCanvas.width = window.innerWidth * dpr;
-      splashCanvas.height = window.innerHeight * dpr;
-      canvasCtx = splashCanvas.getContext("2d");
-      canvasCtx.scale(dpr, dpr);
-    }
-
-    function renderSplash() {
-      if (!canvasCtx || !splashCanvas) return;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      canvasCtx.clearRect(0, 0, w, h);
-
-      // Subtle dynamic grid
-      canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.04)";
-      canvasCtx.lineWidth = 1;
-      const step = 48;
-      for (let x = 0; x < w; x += step) {
-        canvasCtx.beginPath();
-        canvasCtx.moveTo(x, 0);
-        canvasCtx.lineTo(x, h);
-        canvasCtx.stroke();
-      }
-      for (let y = 0; y < h; y += step) {
-        canvasCtx.beginPath();
-        canvasCtx.moveTo(0, y);
-        canvasCtx.lineTo(w, y);
-        canvasCtx.stroke();
-      }
-
-      animId = requestAnimationFrame(renderSplash);
-    }
-
-    function dismissSplash() {
-      if (!splashOverlay) return;
-      try { sessionStorage.setItem("splash_dismissed", "true"); } catch(e) {}
-      splashOverlay.classList.add("opacity-0", "pointer-events-none");
-      document.body.style.overflow = "";
-      setTimeout(() => {
-        if (animId) cancelAnimationFrame(animId);
-        splashOverlay.style.display = "none";
-      }, 500);
-    }
-
-    function launchSplash() {
-      if (!splashOverlay) return;
-      splashOverlay.style.display = "flex";
-      splashOverlay.classList.remove("opacity-0", "pointer-events-none");
-      document.body.style.overflow = "hidden";
-      initSplashCanvas();
-      if (animId) cancelAnimationFrame(animId);
-      renderSplash();
-    }
-
-    if (enterWorkspaceBtn) enterWorkspaceBtn.addEventListener("click", dismissSplash);
-    if (skipSplashBtn) skipSplashBtn.addEventListener("click", dismissSplash);
-    if (replayIntroBtn) replayIntroBtn.addEventListener("click", launchSplash);
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        if (splashOverlay && splashOverlay.style.display !== "none") {
-          dismissSplash();
-        }
-        const modalBackdrop = document.getElementById("caseStudyModalBackdrop");
-        if (modalBackdrop && !modalBackdrop.classList.contains("hidden")) {
-          closeProjectDossier();
-        }
+        closeProjectDossier();
       }
     });
-
-    // Boot check
-    if (sessionStorage.getItem("splash_dismissed") === "true" || window.location.hash) {
-      if (splashOverlay) {
-        splashOverlay.style.display = "none";
-        splashOverlay.classList.add("opacity-0", "pointer-events-none");
-      }
-      document.body.style.overflow = "";
-    } else {
-      launchSplash();
-    }
   </script>
+
+  <!-- Datum Instrument Dial (Hold REV) Engine -->
+  <script src="instrument.js"></script>
 </body>
 </html>
