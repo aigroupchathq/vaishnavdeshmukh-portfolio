@@ -43,73 +43,140 @@ function mergeGeos(geoms) {
   return merged;
 }
 
-/* Winding Night Highway Spline (450m descent across valley) */
-const elevAtZ = z => 22 - z * 0.048;
+/* Endless Closed-Loop Undulating Valley Circuit (~523m C^2 periodic spline) */
 const SPLINE_PTS = [
-  [0, -6], [0, 6], [7, 24], [-6, 44], [-14, 66], [-4, 88],
-  [12, 106], [17, 128], [6, 150], [-12, 168], [-17, 190], [-6, 212],
-  [11, 230], [16, 252], [4, 274], [-13, 292], [-15, 314], [-2, 334],
-  [13, 352], [14, 374], [2, 394], [-6, 414], [0, 432]
-].map(([x, z]) => new THREE.Vector3(x, elevAtZ(z), z));
+  [0.0, 1.8, -87.0], [20.53, 2.97, -89.94], [39.76, 3.22, -82.57], [52.65, 2.73, -66.02],
+  [56.61, 1.89, -45.14], [53.42, 1.06, -25.73], [48.38, 0.44, -11.04], [47.0, 0.0, 0.0],
+  [51.42, -0.44, 11.74], [58.89, -1.06, 28.36], [63.43, -1.89, 50.58], [59.47, -2.73, 74.58],
+  [45.23, -3.22, 93.93], [23.57, -2.97, 103.25], [0.0, -1.8, 101.0], [-20.51, 0.15, 89.87],
+  [-35.93, 2.41, 74.61], [-47.12, 4.29, 59.08], [-55.97, 5.13, 44.63], [-63.3, 4.57, 30.49],
+  [-68.19, 2.68, 15.56], [-69.0, 0.0, 0.0], [-65.15, -2.68, -14.87], [-57.83, -4.57, -27.85],
+  [-49.14, -5.13, -39.19], [-40.29, -4.29, -50.52], [-30.46, -2.41, -63.24], [-17.48, -0.15, -76.57]
+].map(([x, y, z]) => new THREE.Vector3(x, y, z));
 
-const roadCurve = new THREE.CatmullRomCurve3(SPLINE_PTS, false, 'centripetal', 0.5);
-roadCurve.arcLengthDivisions = 2000;
+const roadCurve = new THREE.CatmullRomCurve3(SPLINE_PTS, true, 'centripetal', 0.5);
+roadCurve.arcLengthDivisions = 2400;
 const ROAD_LENGTH = roadCurve.getLength();
 const UP = new THREE.Vector3(0, 1, 0);
 
+function wrapUnit(t) {
+  const u = t % 1;
+  return u < 0 ? u + 1 : u;
+}
+
+function loopDist(a, b) {
+  const d = wrapUnit(a - b);
+  return d > 0.5 ? 1 - d : d;
+}
+
 function sampleRoad(t, out = {}) {
-  const clamped = THREE.MathUtils.clamp(t, 0, 1);
-  out.pos = roadCurve.getPointAt(clamped, out.pos || new THREE.Vector3());
-  out.tan = roadCurve.getTangentAt(clamped, out.tan || new THREE.Vector3());
+  const u = wrapUnit(t);
+  out.pos = roadCurve.getPointAt(u, out.pos || new THREE.Vector3());
+  out.tan = roadCurve.getTangentAt(u, out.tan || new THREE.Vector3());
   out.flat = (out.flat || new THREE.Vector3()).set(out.tan.x, 0, out.tan.z).normalize();
   out.right = (out.right || new THREE.Vector3()).crossVectors(out.flat, UP).normalize();
   return out;
 }
 
-/* Corridor distance cache for sculpting valley cleanly away from tarmac & stops */
-const CORRIDOR_CELL = 6;
+/* Build-time 2D spatial hash compiled into an O(1) bilinear Corridor LUT */
+const CORRIDOR_CELL = 8;
 const corridorBins = new Map();
 const ROAD_HALF_WIDTH = 3.1;
+const LUT_MIN = -160;
+const LUT_MAX = 160;
+const LUT_SPAN = LUT_MAX - LUT_MIN;
+const LUT_N = 224;
+const LUT_STEP = LUT_SPAN / (LUT_N - 1);
+const lutDist = new Float32Array(LUT_N * LUT_N);
+const lutRoadY = new Float32Array(LUT_N * LUT_N);
+let lutBuilt = false;
 
 function addCorridorSample(x, y, z, half) {
-  const bin = Math.floor(z / CORRIDOR_CELL);
-  if (!corridorBins.has(bin)) corridorBins.set(bin, []);
-  corridorBins.get(bin).push({ x, y, z, half });
+  const kx = Math.floor(x / CORRIDOR_CELL);
+  const kz = Math.floor(z / CORRIDOR_CELL);
+  const key = (kx + 512) * 2048 + (kz + 512);
+  let bucket = corridorBins.get(key);
+  if (!bucket) {
+    bucket = [];
+    corridorBins.set(key, bucket);
+  }
+  bucket.push({ x, y, z, half });
+  lutBuilt = false;
 }
 
 {
   const s = {};
-  for (let i = 0; i <= 1400; i++) {
-    sampleRoad(i / 1400, s);
+  for (let i = 0; i < 1600; i++) {
+    sampleRoad(i / 1600, s);
     addCorridorSample(s.pos.x, s.pos.y, s.pos.z, ROAD_HALF_WIDTH);
   }
 }
 
 function addCorridorSpan(a, b, half, yOverride) {
-  const steps = Math.ceil(a.distanceTo(b) / 0.8);
+  const steps = Math.max(1, Math.ceil(a.distanceTo(b) / 0.8));
   for (let i = 0; i <= steps; i++) {
     const p = a.clone().lerp(b, i / steps);
     addCorridorSample(p.x, yOverride ?? p.y, p.z, half);
   }
 }
 
-function queryCorridor(x, z, range = 40) {
-  let minD = Infinity;
+function exactCorridorPoint(x, z, range = 30) {
+  let minD = range;
   let y = 0;
-  const sBin = Math.floor((z - range) / CORRIDOR_CELL);
-  const eBin = Math.floor((z + range) / CORRIDOR_CELL);
-  for (let b = sBin; b <= eBin; b++) {
-    const items = corridorBins.get(b);
-    if (!items) continue;
-    for (const c of items) {
-      const d = Math.hypot(c.x - x, c.z - z) - c.half;
-      if (d < minD) {
-        minD = d;
-        y = c.y;
+  const rCells = Math.ceil(range / CORRIDOR_CELL);
+  const cx = Math.floor(x / CORRIDOR_CELL);
+  const cz = Math.floor(z / CORRIDOR_CELL);
+  for (let ix = cx - rCells; ix <= cx + rCells; ix++) {
+    for (let iz = cz - rCells; iz <= cz + rCells; iz++) {
+      const bucket = corridorBins.get((ix + 512) * 2048 + (iz + 512));
+      if (!bucket) continue;
+      for (let k = 0; k < bucket.length; k++) {
+        const c = bucket[k];
+        const d = Math.hypot(c.x - x, c.z - z) - c.half;
+        if (d < minD) {
+          minD = d;
+          y = c.y;
+        }
       }
     }
   }
   return { d: minD, y };
+}
+
+function bakeCorridorLUT() {
+  for (let iz = 0; iz < LUT_N; iz++) {
+    const z = LUT_MIN + iz * LUT_STEP;
+    const rowOff = iz * LUT_N;
+    for (let ix = 0; ix < LUT_N; ix++) {
+      const x = LUT_MIN + ix * LUT_STEP;
+      const res = exactCorridorPoint(x, z, 30);
+      lutDist[rowOff + ix] = res.d;
+      lutRoadY[rowOff + ix] = res.y;
+    }
+  }
+  lutBuilt = true;
+}
+
+const lutRes = { d: 30, y: 0 };
+function queryCorridor(x, z) {
+  if (!lutBuilt) bakeCorridorLUT();
+  const gx = THREE.MathUtils.clamp((x - LUT_MIN) / LUT_STEP, 0, LUT_N - 1.001);
+  const gz = THREE.MathUtils.clamp((z - LUT_MIN) / LUT_STEP, 0, LUT_N - 1.001);
+  const x0 = gx | 0;
+  const z0 = gz | 0;
+  const fx = gx - x0;
+  const fz = gz - z0;
+  const i00 = z0 * LUT_N + x0;
+  const i10 = i00 + 1;
+  const i01 = i00 + LUT_N;
+  const i11 = i01 + 1;
+  const w00 = (1 - fx) * (1 - fz);
+  const w10 = fx * (1 - fz);
+  const w01 = (1 - fx) * fz;
+  const w11 = fx * fz;
+  lutRes.d = lutDist[i00] * w00 + lutDist[i10] * w10 + lutDist[i01] * w01 + lutDist[i11] * w11;
+  lutRes.y = lutRoadY[i00] * w00 + lutRoadY[i10] * w10 + lutRoadY[i01] * w01 + lutRoadY[i11] * w11;
+  return lutRes;
 }
 
 function hash2(x, z) {
@@ -135,7 +202,8 @@ function terrainHeight(x, z) {
   const corr = queryCorridor(x, z);
   const ridge = (valueNoise(x * 0.045, z * 0.045) - 0.5) * 9
               + (valueNoise(x * 0.12 + 7, z * 0.12) - 0.5) * 3;
-  const raw = elevAtZ(z) + ridge + Math.max(0, Math.abs(x) - 30) * 0.18;
+  const radialOut = Math.max(0, Math.hypot(x * 0.9, z * 0.85) - 96) * 0.18;
+  const raw = corr.y + ridge + Math.max(0, corr.d - 8) * 0.12 + radialOut;
   const blend = smoothstep(1.2, 15, corr.d);
   return THREE.MathUtils.lerp(corr.y - 0.3, raw, blend);
 }
@@ -223,8 +291,9 @@ function makeAsphaltMaterial() {
 }
 
 function makeCenterDashMaterial() {
+  const dashLoopLen = Math.max(6, Math.round(ROAD_LENGTH / 6.0) * 6.0);
   return new THREE.ShaderMaterial({
-    uniforms: { ...worldUniforms, uLen: { value: ROAD_LENGTH } },
+    uniforms: { ...worldUniforms, uLen: { value: dashLoopLen } },
     transparent: true,
     depthWrite: false,
     defines: { USE_U: 1 },
@@ -274,44 +343,95 @@ function createInkGroup(geo, colorHex = '#151518', { angle = 24, mat = null, edg
   return g;
 }
 
-function createSignSprite(text, { font = '600 64px Poppins, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false } = {}) {
+function createSignSprite(text, { font = '600 64px Poppins, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false, anisotropy = 1, registry = null } = {}) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const lines = text.split('\n');
   const pxMatch = font.match(/(\d+)px/);
   const fontSize = pxMatch ? parseInt(pxMatch[1], 10) : 64;
-  ctx.font = font;
-  const maxW = Math.max(...lines.map(l => ctx.measureText(l).width), 60);
   const padX = 36;
   const lineH = fontSize * 1.24;
-  canvas.width = Math.ceil(maxW + padX * 2);
-  canvas.height = Math.ceil(lines.length * lineH + 24);
-  ctx.font = font;
-  ctx.fillStyle = color;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  lines.forEach((line, idx) => {
-    const y = (idx + 0.5) * lineH + 12;
-    ctx.fillText(line, canvas.width / 2, y);
-  });
+
+  const paint = () => {
+    ctx.font = font;
+    const maxW = Math.max(...lines.map(l => ctx.measureText(l).width), 60);
+    canvas.width = Math.ceil(maxW + padX * 2);
+    canvas.height = Math.ceil(lines.length * lineH + 24);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = font;
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    lines.forEach((line, idx) => {
+      ctx.fillText(line, canvas.width / 2, (idx + 0.5) * lineH + 12);
+    });
+  };
+
+  paint();
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
-  const aspect = canvas.height / canvas.width;
-  const plane = new THREE.PlaneGeometry(width, width * aspect);
+  tex.anisotropy = Math.min(4, anisotropy);
   const mat = new THREE.MeshBasicMaterial({
     map: tex,
     transparent: true,
     depthWrite: false,
     side: THREE.DoubleSide
   });
-  const mesh = new THREE.Mesh(plane, mat);
-  if (flatGround) {
-    mesh.rotation.x = -Math.PI / 2;
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(width, width * (canvas.height / canvas.width)),
+    mat
+  );
+  if (flatGround) mesh.rotation.x = -Math.PI / 2;
+
+  if (registry) {
+    registry.push(() => {
+      const oldW = canvas.width;
+      const oldH = canvas.height;
+      paint();
+      tex.needsUpdate = true;
+      if (canvas.width !== oldW || canvas.height !== oldH) {
+        mesh.geometry.dispose();
+        mesh.geometry = new THREE.PlaneGeometry(width, width * (canvas.height / canvas.width));
+      }
+    });
   }
   return mesh;
 }
 
-function buildRoadAndScenery(scene, stops) {
+function makeInstancedEdgeMaterial() {
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      uFogNear: worldUniforms.uFogNear,
+      uFogFar: worldUniforms.uFogFar
+    },
+    transparent: true,
+    depthWrite: false,
+    vertexShader: `
+      attribute vec4 iRow0;
+      attribute vec4 iRow1;
+      attribute vec4 iRow2;
+      varying float vDepth;
+      void main() {
+        vec4 p = vec4(position, 1.0);
+        vec3 wp = vec3(dot(iRow0, p), dot(iRow1, p), dot(iRow2, p));
+        vec4 mv = modelViewMatrix * vec4(wp, 1.0);
+        vDepth = -mv.z;
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: `
+      uniform float uFogNear;
+      uniform float uFogFar;
+      varying float vDepth;
+      void main() {
+        vec3 col = mix(vec3(0.631, 0.631, 0.667), vec3(0.0157), smoothstep(uFogNear, uFogFar, vDepth));
+        gl_FragColor = vec4(col, 0.42);
+      }
+    `
+  });
+}
+
+function buildRoadAndScenery(scene, stops, maxAniso = 1) {
   const s = {};
   const roadVerts = [];
   const roadIdx = [];
@@ -319,9 +439,10 @@ function buildRoadAndScenery(scene, stops) {
   const dashUs = [];
   const edgeL = [];
   const edgeR = [];
+  const fontCallbacks = [];
   const prng = createPrng(7);
 
-  const SEGS = 900;
+  const SEGS = 1000;
   for (let i = 0; i <= SEGS; i++) {
     const t = i / SEGS;
     sampleRoad(t, s);
@@ -340,17 +461,22 @@ function buildRoadAndScenery(scene, stops) {
       roadIdx.push(idx, idx + 2, idx + 1, idx + 1, idx + 2, idx + 3);
     }
 
-    const shoulderOff = 0.18;
-    const jitter = () => (prng() - 0.5) * 0.08;
-    edgeL.push(pL.clone().addScaledVector(s.right, shoulderOff + jitter()).setY(y + 0.03));
-    edgeR.push(pR.clone().addScaledVector(s.right, -shoulderOff + jitter()).setY(y + 0.03));
+    if (i === SEGS) {
+      edgeL.push(edgeL[0].clone());
+      edgeR.push(edgeR[0].clone());
+    } else {
+      const shoulderOff = 0.18;
+      const jL = (prng() - 0.5) * 0.08;
+      const jR = (prng() - 0.5) * 0.08;
+      edgeL.push(pL.clone().addScaledVector(s.right, shoulderOff + jL).setY(y + 0.03));
+      edgeR.push(pR.clone().addScaledVector(s.right, -shoulderOff + jR).setY(y + 0.03));
+    }
   }
 
   const roadGeo = new THREE.BufferGeometry();
   roadGeo.setAttribute('position', new THREE.Float32BufferAttribute(roadVerts, 3));
   roadGeo.setIndex(roadIdx);
-  const roadMesh = new THREE.Mesh(roadGeo, makeAsphaltMaterial());
-  scene.add(roadMesh);
+  scene.add(new THREE.Mesh(roadGeo, makeAsphaltMaterial()));
 
   const dashGeo = new THREE.BufferGeometry();
   dashGeo.setAttribute('position', new THREE.Float32BufferAttribute(dashVerts, 3));
@@ -366,8 +492,9 @@ function buildRoadAndScenery(scene, stops) {
   }
 
   const mobile = innerWidth < 760;
+  const mainStops = stops.filter(st => !st.isTail);
 
-  /* Build Portfolio Milestone Sculptures & Flatten Road Pads FIRST */
+  /* Portfolio Landmarks Around Closed 360deg Loop */
   const propsGroup = new THREE.Group();
   scene.add(propsGroup);
   const anchors = {};
@@ -377,10 +504,9 @@ function buildRoadAndScenery(scene, stops) {
 
   const sideOffset = (t, sideSign, latDist, aheadDist = 0) => {
     const r = sampleRoad(t, {});
-    const dir = (Math.sign(r.right.x) || 1) * sideSign;
-    const pos = r.pos.clone().addScaledVector(r.right, dir * latDist).addScaledVector(r.flat, aheadDist);
+    const pos = r.pos.clone().addScaledVector(r.right, sideSign * latDist).addScaledVector(r.flat, aheadDist);
     const yaw = Math.atan2(r.flat.x, r.flat.z);
-    return { p: pos, yaw, right: r.right.clone().multiplyScalar(dir), flat: r.flat.clone(), y: r.pos.y };
+    return { p: pos, yaw, right: r.right.clone().multiplyScalar(sideSign), flat: r.flat.clone(), y: r.pos.y };
   };
 
   const makePad = (pt, w, len) => {
@@ -405,69 +531,90 @@ function buildRoadAndScenery(scene, stops) {
     }
   };
 
-  /* Stop 0: Hero Architectural Portal (t = 0.0) */
+  /* Stop 0: Open Drive-Through Start/Finish Architectural Portal (t = 0.0 == 1.0) */
   {
     sampleRoad(0, s);
     const g = new THREE.Group();
-    const anchor = s.pos.clone().addScaledVector(s.flat, -0.6);
+    const anchor = s.pos.clone();
     g.position.copy(anchor);
-    g.rotation.y = Math.atan2(s.flat.x, s.flat.z);
+    g.rotation.y = Math.atan2(s.flat.x, s.flat.z) + Math.PI;
 
-    const wallGeo = new THREE.BoxGeometry(0.24, 3.2, 8);
-    for (const sx of [-3.5, 3.5]) {
+    const wallGeo = new THREE.BoxGeometry(0.26, 3.2, 7.2);
+    for (const sx of [-4.2, 4.2]) {
       const m = createInkGroup(wallGeo, '#101012');
-      m.position.set(sx, 1.6, -1);
+      m.position.set(sx, 1.6, 0);
       g.add(m);
     }
-    const backWall = createInkGroup(new THREE.BoxGeometry(7.2, 3.2, 0.24), '#101012');
-    backWall.position.set(0, 1.6, -5);
-    g.add(backWall);
 
-    const archPts = [new THREE.Vector3(-3.6, 3.2, 3), new THREE.Vector3(0, 4.7, 3), new THREE.Vector3(3.6, 3.2, 3)];
+    const archPts = [new THREE.Vector3(-4.3, 3.2, 0), new THREE.Vector3(0, 4.9, 0), new THREE.Vector3(4.3, 3.2, 0)];
     const archMat = new THREE.LineBasicMaterial({ color: CHALK, transparent: true, opacity: 0.72 });
-    for (const zOff of [0, -8]) {
+    for (const zOff of [-3.4, 3.4]) {
       const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(archPts), archMat);
       line.position.z = zOff;
       g.add(line);
     }
-    const titleSign = createSignSprite('VAISHNAV DESHMUKH', { font: '600 68px Poppins, sans-serif', width: 5.4, color: '#FFFFFF' });
-    titleSign.position.set(0, 4.3, 0.4);
+
+    const titleSign = createSignSprite('VAISHNAV DESHMUKH', {
+      font: '600 68px Poppins, sans-serif',
+      width: 5.4,
+      color: '#FFFFFF',
+      anisotropy: maxAniso,
+      registry: fontCallbacks
+    });
+    titleSign.position.set(0, 4.9, -3.45);
     g.add(titleSign);
 
-    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', { font: '500 46px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(255,255,255,0.55)', flatGround: true });
-    floorSign.position.set(0, 0.04, -3.5);
+    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', {
+      font: '500 46px "IBM Plex Mono", monospace',
+      width: 4.2,
+      color: 'rgba(255,255,255,0.55)',
+      flatGround: true,
+      anisotropy: maxAniso,
+      registry: fontCallbacks
+    });
+    floorSign.position.set(0, 0.055, -2.2);
     g.add(floorSign);
 
     propsGroup.add(g);
     anchors['garage'] = anchor.clone();
-    addCorridorSpan(anchor.clone().addScaledVector(s.flat, -5), anchor.clone(), 3.8, s.pos.y);
+    addCorridorSpan(
+      anchor.clone().addScaledVector(s.flat, -5),
+      anchor.clone().addScaledVector(s.flat, 5),
+      4.8,
+      s.pos.y
+    );
   }
 
-  /* Subtle Highway Markers along initial climb (t = 0.08..0.15) */
+  /* Subtle Highway Markers along initial corner (t = 0.055..0.125) */
   {
-    const dir = -1;
     const labels = [['01', 'NOTICE'], ['02', 'SIMPLIFY'], ['03', 'VERIFY']];
     labels.forEach(([num, txt], idx) => {
-      const pt = sideOffset(0.08 + idx * 0.035, dir, ROAD_HALF_WIDTH + 1.5);
+      const pt = sideOffset(0.055 + idx * 0.032, 1, ROAD_HALF_WIDTH + 1.7);
       const post = createInkGroup(new THREE.CylinderGeometry(0.08, 0.1, 1.8, 6), '#161618');
       post.position.copy(pt.p).setY(pt.y + 0.9);
       propsGroup.add(post);
 
-      const sign = createSignSprite(`${num} // ${txt}`, { font: '500 44px "IBM Plex Mono", monospace', width: 3.3, color: idx === 2 ? '#FFFFFF' : '#A1A1AA' });
+      const sign = createSignSprite(`${num} // ${txt}`, {
+        font: '500 44px "IBM Plex Mono", monospace',
+        width: 3.3,
+        color: idx === 2 ? '#FFFFFF' : '#A1A1AA',
+        anisotropy: maxAniso,
+        registry: fontCallbacks
+      });
       sign.position.copy(pt.p).add(new THREE.Vector3(pt.right.x * 0.6, 2.2, pt.right.z * 0.6));
-      sign.rotation.y = pt.yaw + (dir > 0 ? Math.PI : 0);
+      sign.rotation.y = pt.yaw + Math.PI;
       propsGroup.add(sign);
     });
   }
 
-  /* Monochrome Highway Gantries for Stops 1..2 */
+  /* Monochrome Highway Gantries for Stops 1..2 (outer side opposite card) */
   const domainSpecs = [
     { id: 'systems', label: 'SYSTEMS & CIVIC', accent: true },
     { id: 'perception', label: 'ATTENTION & CRAFT', accent: false }
   ];
 
   domainSpecs.forEach(spec => {
-    const st = stops.find(x => x.id === spec.id);
+    const st = mainStops.find(x => x.id === spec.id);
     if (!st) return;
     const dir = -st.screen;
     const pt = sideOffset(st.t, dir, ROAD_HALF_WIDTH + 5.8);
@@ -476,7 +623,7 @@ function buildRoadAndScenery(scene, stops) {
 
     const frame = new THREE.Group();
     frame.position.copy(pt.p).setY(pt.y);
-    frame.rotation.y = pt.yaw;
+    frame.rotation.y = pt.yaw + Math.PI;
 
     const colGeo = new THREE.BoxGeometry(0.32, 3.4, 0.32);
     for (const px of [-2.2, 2.2]) {
@@ -501,22 +648,28 @@ function buildRoadAndScenery(scene, stops) {
 
     propsGroup.add(frame);
 
-    const lbl = createSignSprite(spec.label, { font: '600 62px Poppins, sans-serif', width: 4.6, color: '#FFFFFF' });
+    const lbl = createSignSprite(spec.label, {
+      font: '600 62px Poppins, sans-serif',
+      width: 4.6,
+      color: '#FFFFFF',
+      anisotropy: maxAniso,
+      registry: fontCallbacks
+    });
     lbl.position.copy(pt.p).setY(pt.y + 4.3);
-    lbl.rotation.y = pt.yaw + (dir > 0 ? Math.PI : 0);
+    lbl.rotation.y = pt.yaw + Math.PI;
     propsGroup.add(lbl);
   });
 
-  /* Stop 3: Beam & Throttle Sweep Pad (stop-rev) */
-  if (stops.find(st => st.id === 'rev')) {
-    const st = stops.find(x => x.id === 'rev');
+  /* Stop 3: Beam & Throttle Sweep Pad (stop-rev, t = 0.60) */
+  if (mainStops.find(st => st.id === 'rev')) {
+    const st = mainStops.find(x => x.id === 'rev');
     const pt = sideOffset(st.t, -st.screen, ROAD_HALF_WIDTH + 6.4);
     anchors['rev'] = pt.p.clone();
     makePad(pt, 9.2, 9.2);
 
     const dialGroup = new THREE.Group();
     dialGroup.position.copy(pt.p).setY(pt.y + 0.075);
-    dialGroup.rotation.y = pt.yaw;
+    dialGroup.rotation.y = pt.yaw + Math.PI;
 
     const r = 3.4;
     const ringPts = [];
@@ -548,8 +701,15 @@ function buildRoadAndScenery(scene, stops) {
     hub.position.y = 0.04;
     dialGroup.add(hub);
 
-    const testText = createSignSprite('BEAM // PACE', { font: '600 84px "IBM Plex Mono", monospace', width: 2.5, flatGround: true, color: 'rgba(255,255,255,0.75)' });
-    testText.position.set(0, 0.01, 2.0);
+    const testText = createSignSprite('BEAM // PACE', {
+      font: '600 84px "IBM Plex Mono", monospace',
+      width: 2.5,
+      flatGround: true,
+      color: 'rgba(255,255,255,0.75)',
+      anisotropy: maxAniso,
+      registry: fontCallbacks
+    });
+    testText.position.set(0, 0.01, -2.0);
     dialGroup.add(testText);
 
     propsGroup.add(dialGroup);
@@ -558,12 +718,14 @@ function buildRoadAndScenery(scene, stops) {
     dialSweep = sweep;
   }
 
-  /* Stop 4: Final Archive & Inquiries Archway (stop-gate, t = 1.0) */
-  if (stops.find(st => st.id === 'gate')) {
-    sampleRoad(1, s);
+  /* Stop 4: Open Inquiries & Archive Archway (stop-gate, t = 0.80) */
+  {
+    const st = mainStops.find(x => x.id === 'gate');
+    const gateT = st ? st.t : 0.80;
+    sampleRoad(gateT, s);
     const arch = new THREE.Group();
-    arch.position.copy(s.pos).addScaledVector(s.flat, 7.5);
-    arch.rotation.y = Math.atan2(s.flat.x, s.flat.z);
+    arch.position.copy(s.pos);
+    arch.rotation.y = Math.atan2(s.flat.x, s.flat.z) + Math.PI;
 
     const pillarGeo = new THREE.BoxGeometry(0.9, 3.6, 0.9);
     for (const px of [-4.2, 4.2]) {
@@ -578,20 +740,33 @@ function buildRoadAndScenery(scene, stops) {
     propsGroup.add(arch);
     anchors['gate'] = arch.position.clone();
 
-    const gateLbl = createSignSprite('ARCHIVE 16 · CONTACT', { font: '600 68px Poppins, sans-serif', width: 5.2, color: '#FFFFFF' });
+    const gateLbl = createSignSprite('ARCHIVE 16 · CONTACT', {
+      font: '600 68px Poppins, sans-serif',
+      width: 5.2,
+      color: '#FFFFFF',
+      anisotropy: maxAniso,
+      registry: fontCallbacks
+    });
     gateLbl.position.copy(arch.position).add(new THREE.Vector3(0, 5.2, 0));
-    gateLbl.rotation.y = arch.rotation.y + Math.PI;
+    gateLbl.rotation.y = arch.rotation.y;
     propsGroup.add(gateLbl);
 
-    addCorridorSpan(s.pos.clone(), s.pos.clone().addScaledVector(s.flat, 16), 5.0, s.pos.y);
+    addCorridorSpan(
+      s.pos.clone().addScaledVector(s.flat, -6),
+      s.pos.clone().addScaledVector(s.flat, 6),
+      5.0,
+      s.pos.y
+    );
   }
 
-  /* Terraced valley mesh AFTER all pads and bays have carved their corridors */
-  const segX = mobile ? 70 : 105;
-  const segZ = mobile ? 180 : 280;
-  const tGeo = new THREE.PlaneGeometry(190, 520, segX, segZ);
+  /* Bake O(1) Corridor LUT AFTER all road spans & milestone pads are registered */
+  bakeCorridorLUT();
+
+  /* Terraced valley mesh across full 360deg loop basin */
+  const segX = mobile ? 96 : 144;
+  const segZ = mobile ? 96 : 144;
+  const tGeo = new THREE.PlaneGeometry(300, 300, segX, segZ);
   tGeo.rotateX(-Math.PI / 2);
-  tGeo.translate(0, 0, 520 / 2 - 40);
   const tPos = tGeo.attributes.position;
   const tRng = createPrng(3);
   for (let i = 0; i < tPos.count; i++) {
@@ -602,78 +777,114 @@ function buildRoadAndScenery(scene, stops) {
   tGeo.computeVertexNormals();
   scene.add(new THREE.Mesh(tGeo, makeTerrainMaterial()));
 
-  /* Build Forest OUTSIDE cleared corridors */
+  /* GPU Instanced Forest outside cleared road corridors */
   const rng = createPrng(11);
-  const treeFills = [];
-  const treeEdges = [];
-  const treeDefs = [
-    () => {
+  const buildUnitTree = parts => {
+    const fills = [];
+    const edges = [];
+    for (const part of parts) {
+      fills.push(part);
+      edges.push(new THREE.EdgesGeometry(part, 20));
+    }
+    return {
+      fill: mergeGeos(fills),
+      edge: mergeGeos(edges)
+    };
+  };
+
+  const treeArchetypes = [
+    buildUnitTree((() => {
       const c1 = new THREE.ConeGeometry(1.4, 3.2, 5); c1.translate(0, 2.6, 0);
       const c2 = new THREE.ConeGeometry(1.0, 2.4, 5); c2.translate(0, 4.1, 0);
       const trunk = new THREE.CylinderGeometry(0.18, 0.22, 1.2, 4); trunk.translate(0, 0.6, 0);
       return [c1, c2, trunk];
-    },
-    () => {
+    })()),
+    buildUnitTree((() => {
       const top = new THREE.DodecahedronGeometry(1.45, 0); top.translate(0, 2.8, 0);
       const trunk = new THREE.CylinderGeometry(0.16, 0.2, 1.8, 4); trunk.translate(0, 0.9, 0);
       return [top, trunk];
-    },
-    () => {
+    })()),
+    buildUnitTree((() => {
       const spire = new THREE.ConeGeometry(1.0, 4.4, 4); spire.translate(0, 2.9, 0);
       const trunk = new THREE.CylinderGeometry(0.12, 0.16, 1.0, 4); trunk.translate(0, 0.5, 0);
       return [spire, trunk];
-    }
+    })())
   ];
 
-  const avoidPoints = stops.map(st => {
+  const avoidPoints = mainStops.map(st => {
     const p = sampleRoad(st.t, {}).pos;
-    return { x: p.x, z: p.z, r: 17 };
+    return { x: p.x, z: p.z, r: 16.5 };
   });
 
-  const targetTrees = mobile ? 210 : 380;
+  const targetTrees = mobile ? 200 : 360;
+  const buckets = [[], [], []];
   let placed = 0;
   let tries = 0;
   const mat4 = new THREE.Matrix4();
+  const posV = new THREE.Vector3();
   const q = new THREE.Quaternion();
-  const upAx = new THREE.Vector3(0, 1, 0);
   const scaleV = new THREE.Vector3();
 
-  while (placed < targetTrees && tries++ < targetTrees * 12) {
-    const x = (rng() - 0.5) * 170;
-    const z = -30 + rng() * 480;
-    const corr = queryCorridor(x, z, 30);
-    if (corr.d < 4.5 || (corr.d < 9 && rng() < 0.75)) continue;
+  while (placed < targetTrees && tries++ < targetTrees * 14) {
+    const x = (rng() - 0.5) * 265;
+    const z = (rng() - 0.5) * 265;
+    const corr = queryCorridor(x, z);
+    if (corr.d < 4.6 || (corr.d < 9 && rng() < 0.75)) continue;
     if (avoidPoints.some(ap => Math.hypot(ap.x - x, ap.z - z) < ap.r)) continue;
 
     const ty = terrainHeight(x, z);
-    const parts = treeDefs[Math.floor(rng() * treeDefs.length)]();
-    const sc = 0.7 + rng() * 0.85;
-    q.setFromAxisAngle(upAx, rng() * Math.PI * 2);
-    mat4.compose(new THREE.Vector3(x, ty - 0.1, z), q, scaleV.set(sc, sc * (0.85 + rng() * 0.4), sc));
-
-    for (const part of parts) {
-      const clone = part.index ? part.toNonIndexed() : part.clone();
-      clone.deleteAttribute('uv');
-      clone.applyMatrix4(mat4);
-      treeFills.push(clone);
-
-      const edg = new THREE.EdgesGeometry(part, 20);
-      edg.applyMatrix4(mat4);
-      treeEdges.push(edg);
-    }
+    const kind = Math.floor(rng() * treeArchetypes.length);
+    const sc = 0.72 + rng() * 0.85;
+    q.setFromAxisAngle(UP, rng() * Math.PI * 2);
+    mat4.compose(posV.set(x, ty - 0.1, z), q, scaleV.set(sc, sc * (0.85 + rng() * 0.4), sc));
+    buckets[kind].push(mat4.clone());
     placed++;
   }
 
-  if (treeFills.length > 0) {
-    const mergedFill = mergeGeos(treeFills);
-    mergedFill.computeVertexNormals();
-    scene.add(new THREE.Mesh(mergedFill, new THREE.MeshLambertMaterial({ color: '#141519', flatShading: true })));
+  const fillMat = new THREE.MeshLambertMaterial({ color: '#141519', flatShading: true });
+  const edgeMat = makeInstancedEdgeMaterial();
 
-    const mergedLines = mergeGeos(treeEdges);
-    scene.add(new THREE.LineSegments(mergedLines, new THREE.LineBasicMaterial({ color: SILVER, transparent: true, opacity: 0.42 })));
-  }
+  treeArchetypes.forEach((arch, k) => {
+    const mats = buckets[k];
+    const n = mats.length;
+    if (n === 0) return;
 
-  return { anchors, getDial: () => ({ pivot: dialPivot, a0: dialA0, sweep: dialSweep }) };
+    const fillInst = new THREE.InstancedMesh(arch.fill, fillMat, n);
+    fillInst.frustumCulled = false;
+
+    const r0 = new Float32Array(n * 4);
+    const r1 = new Float32Array(n * 4);
+    const r2 = new Float32Array(n * 4);
+
+    for (let i = 0; i < n; i++) {
+      const m = mats[i];
+      fillInst.setMatrixAt(i, m);
+      const e = m.elements;
+      const o = i * 4;
+      r0[o] = e[0]; r0[o + 1] = e[4]; r0[o + 2] = e[8];  r0[o + 3] = e[12];
+      r1[o] = e[1]; r1[o + 1] = e[5]; r1[o + 2] = e[9];  r1[o + 3] = e[13];
+      r2[o] = e[2]; r2[o + 1] = e[6]; r2[o + 2] = e[10]; r2[o + 3] = e[14];
+    }
+    fillInst.instanceMatrix.needsUpdate = true;
+    scene.add(fillInst);
+
+    const edgeInstGeo = new THREE.InstancedBufferGeometry();
+    edgeInstGeo.setAttribute('position', arch.edge.getAttribute('position'));
+    edgeInstGeo.setAttribute('iRow0', new THREE.InstancedBufferAttribute(r0, 4));
+    edgeInstGeo.setAttribute('iRow1', new THREE.InstancedBufferAttribute(r1, 4));
+    edgeInstGeo.setAttribute('iRow2', new THREE.InstancedBufferAttribute(r2, 4));
+    edgeInstGeo.instanceCount = n;
+
+    const edgeInst = new THREE.LineSegments(edgeInstGeo, edgeMat);
+    edgeInst.frustumCulled = false;
+    scene.add(edgeInst);
+  });
+
+  return {
+    anchors,
+    getDial: () => ({ pivot: dialPivot, a0: dialA0, sweep: dialSweep }),
+    rebakeFonts: () => { for (const fn of fontCallbacks) fn(); }
+  };
 }
 
 /* Monochrome Obsidian & Silver Architectural Coupé */
@@ -685,7 +896,7 @@ function extrudeSide(pts, width, bevel = 0.06) {
   return geo;
 }
 
-function createSportsCar() {
+function createSportsCar(maxAniso = 1) {
   const root = new THREE.Group();
   const bodySusp = new THREE.Group();
   root.add(bodySusp);
@@ -767,6 +978,7 @@ function createSportsCar() {
   bCtx.fill();
   const beamTex = new THREE.CanvasTexture(beamCanvas);
   beamTex.colorSpace = THREE.SRGBColorSpace;
+  beamTex.anisotropy = Math.min(8, maxAniso);
   const beamCone = new THREE.Mesh(
     new THREE.PlaneGeometry(7.2, 16),
     new THREE.MeshBasicMaterial({ map: beamTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0 })
@@ -818,17 +1030,24 @@ export function startPortfolioDrive() {
     i: idx,
     el,
     id: el.id.replace('stop-', ''),
+    isTail: el.classList.contains('loop-tail'),
     t: parseFloat(el.dataset.t || '0'),
     screen: el.dataset.side === 'right' ? 1 : -1,
     cam: el.dataset.cam || null,
     card: el.querySelector('.card'),
     on: false,
-    vis: 0
+    vis: -1,
+    lastOp: '',
+    lastTf: ''
   }));
+  const mainStops = stops.filter(st => !st.isTail);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.5 : 2));
+  const maxDpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  let curDpr = maxDpr;
+  renderer.setPixelRatio(curDpr);
   renderer.setClearColor(BG_COLOR);
+  const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 1);
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(BG_COLOR, 50, 120);
@@ -847,23 +1066,36 @@ export function startPortfolioDrive() {
     overview: mobile ? { h: 58, d: 30, ahead: 14 } : { h: 46, d: 26, ahead: 9 }
   };
 
-  const props = buildRoadAndScenery(scene, stops);
-  stops.forEach(st => {
-    const r = sampleRoad(st.t, {}).pos.clone();
+  const props = buildRoadAndScenery(scene, stops, maxAniso);
+  const focusSample = { pos: new THREE.Vector3(), tan: new THREE.Vector3(), flat: new THREE.Vector3(), right: new THREE.Vector3() };
+  mainStops.forEach(st => {
+    const r = sampleRoad(st.t, focusSample).pos.clone();
     const anchor = props.anchors[st.id];
     st.focus = anchor ? r.lerp(anchor, 0.5) : r;
   });
 
-  const car = createSportsCar();
+  const car = createSportsCar(maxAniso);
   scene.add(car.group);
 
   let mode = html.classList.contains('still-mode') ? 'overview' : 'drive';
+  const initModeBtn = document.getElementById('modeToggleBtn');
+  if (initModeBtn) initModeBtn.textContent = mode === 'overview' ? '3D drive' : 'Overview';
   if (mode === 'overview' && ignition) ignition.remove();
   if (mode === 'overview' && takeBtn) takeBtn.hidden = false;
   let scrollBands = [];
   let winH = innerHeight;
+  let wrapSpan = 0;
 
-  function resize() {
+  let rafId = null;
+  let asleep = false;
+  let idleFrames = 0;
+  let wasAsleep = false;
+  let avgFrameMs = 16.6;
+  let activeFrames = 0;
+  let dprCooldown = 0;
+  let prevTime = performance.now();
+
+  function syncRendererSize() {
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
     if (w && h) {
@@ -871,19 +1103,33 @@ export function startPortfolioDrive() {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
     }
+  }
+
+  function wake() {
+    if (mode !== 'drive') return;
+    if (asleep) {
+      asleep = false;
+      wasAsleep = true;
+      prevTime = performance.now();
+    }
+    idleFrames = 0;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  function resize() {
+    syncRendererSize();
     winH = innerHeight;
     if (mode === 'overview') return;
 
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
     const isMob = innerWidth < 760;
     stops.forEach((st, idx) => {
       if (!st.card) return;
       const cardH = st.card.offsetHeight;
       if (isMob) {
-        const stickTop = Math.round(winH * (idx === 0 ? 0.34 : 0.38));
+        const stickTop = Math.round(winH * (idx === 0 || st.isTail ? 0.34 : 0.38));
         const extra = Math.max(0, Math.round(cardH - (winH - stickTop - 18)));
         st.card.style.top = `${Math.max(68, stickTop - extra)}px`;
-        st.el.style.minHeight = extra > 0 ? `calc(${idx === stops.length - 1 ? 150 : 200}vh + ${extra}px)` : '';
+        st.el.style.minHeight = extra > 0 ? `calc(200vh + ${extra}px)` : '';
       } else {
         st.el.style.minHeight = '';
         const idealTop = Math.min(130, Math.max(82, Math.round(winH * 0.12)));
@@ -892,30 +1138,62 @@ export function startPortfolioDrive() {
       }
     });
 
+    const garageEl = document.getElementById('stop-garage');
+    const tailEl = document.getElementById('stop-loop-tail');
+    wrapSpan = garageEl && tailEl ? Math.max(0, tailEl.offsetTop - garageEl.offsetTop) : 0;
+
     const maxScrollAfter = Math.max(1, document.documentElement.scrollHeight - winH);
     scrollBands = stops.map((st, idx) => {
       const top = st.el.offsetTop;
       const hEl = st.el.offsetHeight;
       const center = top + hEl * 0.5 - winH * 0.52;
-      let a = center - winH * 0.30;
-      let b = center + winH * 0.30;
-      if (idx === 0) { a = -1; b = Math.max(winH * 0.14, center - winH * 0.15); }
-      if (idx === stops.length - 1) { a = Math.min(a, maxScrollAfter - winH * 0.55); b = Infinity; }
-      return { a, b, t: st.t, mid: THREE.MathUtils.clamp(idx === 0 ? 0 : center, 0, maxScrollAfter) };
+      if (idx === 0) {
+        return {
+          a: -1,
+          b: Math.max(winH * 0.14, center - winH * 0.15),
+          t: st.t,
+          mid: 0
+        };
+      }
+      if (st.isTail && wrapSpan > 0) {
+        return {
+          a: Math.max(top - winH * 0.35, wrapSpan - winH * 0.18),
+          b: Infinity,
+          t: 1,
+          mid: wrapSpan
+        };
+      }
+      return {
+        a: center - winH * 0.30,
+        b: center + winH * 0.30,
+        t: st.t,
+        mid: THREE.MathUtils.clamp(center, 0, maxScrollAfter)
+      };
     });
+    wake();
   }
   addEventListener('resize', resize);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      props.rebakeFonts();
+      resize();
+      wake();
+    });
+  }
   resize();
 
   /* Auto-drive to focused stop for keyboard accessibility */
   stops.forEach((st, idx) => {
     st.el.addEventListener('focusin', () => {
-      if (mode === 'drive' && !st.on) driveToStop(idx);
+      if (mode === 'drive' && !st.on && !st.isTail) driveToStop(idx);
     });
   });
 
   function progressAtScroll(y) {
+    if (wrapSpan > 0 && y < 0) {
+      const wy = ((y % wrapSpan) + wrapSpan) % wrapSpan;
+      return progressAtScroll(wy) - 1;
+    }
     for (let i = 0; i < scrollBands.length; i++) {
       const band = scrollBands[i];
       if (y <= band.b) {
@@ -936,16 +1214,67 @@ export function startPortfolioDrive() {
     return 1 - linstep(0, winH * 0.42, dist);
   }
 
-  /* Route Navigation Clicks with Deterministic Smooth Glide */
+  /* Route Navigation Clicks & Continuous Loop Wrap */
   let driveAnimId = null;
+  let isWrapping = false;
+  let lapCount = 0;
+  let smoothY = window.scrollY;
+  let smoothT = progressAtScroll(smoothY);
+  let lastY = smoothY;
+
   const cancelDriveAnim = () => {
     if (driveAnimId) {
       cancelAnimationFrame(driveAnimId);
       driveAnimId = null;
     }
   };
-  addEventListener('wheel', cancelDriveAnim, { passive: true });
-  addEventListener('touchstart', cancelDriveAnim, { passive: true });
+
+  function wrapForwardIfNeeded() {
+    if (mode !== 'drive' || isWrapping || wrapSpan <= 0) return false;
+    const y = window.scrollY;
+    if (y < wrapSpan) return false;
+    const laps = Math.floor(y / wrapSpan);
+    const nextY = y - laps * wrapSpan;
+    isWrapping = true;
+    window.scrollTo({ top: nextY, behavior: 'instant' });
+    isWrapping = false;
+    smoothY -= laps * wrapSpan;
+    lastY -= laps * wrapSpan;
+    smoothT -= laps;
+    lapCount += laps;
+    cancelDriveAnim();
+    return true;
+  }
+
+  function wrapBackwardFromTop() {
+    if (mode !== 'drive' || wrapSpan <= 0) return;
+    isWrapping = true;
+    window.scrollTo({ top: wrapSpan - 2, behavior: 'instant' });
+    isWrapping = false;
+    smoothY += wrapSpan;
+    lastY += wrapSpan;
+    smoothT += 1;
+    lapCount -= 1;
+  }
+
+  addEventListener('scroll', () => {
+    if (isWrapping) return;
+    wrapForwardIfNeeded();
+    wake();
+  }, { passive: true });
+
+  addEventListener('wheel', e => {
+    cancelDriveAnim();
+    if (mode === 'drive' && wrapSpan > 0 && window.scrollY <= 1 && e.deltaY < 0
+        && Math.abs(e.deltaY) >= Math.abs(e.deltaX)
+        && !document.querySelector('.modal-backdrop.open')) {
+      wrapBackwardFromTop();
+    }
+    wake();
+  }, { passive: true });
+
+  addEventListener('touchstart', () => { cancelDriveAnim(); wake(); }, { passive: true });
+  addEventListener('touchmove', wake, { passive: true });
 
   function driveToStop(idx) {
     if (mode !== 'drive') {
@@ -954,43 +1283,67 @@ export function startPortfolioDrive() {
     }
     resize();
     if (!scrollBands[idx]) return;
-    const targetY = scrollBands[idx].mid + (idx === 0 ? 0 : winH * 0.02);
+    const targetY = scrollBands[idx].mid + (idx === 0 || stops[idx].isTail ? 0 : winH * 0.02);
     const startY = window.scrollY;
     const delta = targetY - startY;
-    if (Math.abs(delta) < 4) return;
+    if (Math.abs(delta) < 4) {
+      wrapForwardIfNeeded();
+      wake();
+      return;
+    }
     cancelDriveAnim();
+    wake();
     const duration = Math.min(1150, Math.max(520, Math.abs(delta) * 0.14));
     const t0 = performance.now();
     const step = now => {
       const u = Math.min(1, (now - t0) / duration);
       const ease = u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
       window.scrollTo({ top: startY + delta * ease, behavior: 'instant' });
+      wake();
       if (u < 1) {
         driveAnimId = requestAnimationFrame(step);
       } else {
         driveAnimId = null;
+        wrapForwardIfNeeded();
+        wake();
       }
     };
     driveAnimId = requestAnimationFrame(step);
   }
+
   routeLinks.forEach((lnk, idx) => lnk.addEventListener('click', e => {
     e.preventDefault();
-    driveToStop(idx);
+    const curUnit = wrapUnit(smoothT);
+    if (idx === 0 && curUnit > 0.70 && stops[stops.length - 1]?.isTail) {
+      driveToStop(stops.length - 1);
+    } else {
+      driveToStop(idx);
+    }
   }));
 
-  /* Keyboard J/K convenience for quick stop-by-stop driving */
+  /* Keyboard J/K Endless Loop Navigation */
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || mode !== 'drive') return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '')) return;
     if (document.querySelector('.modal-backdrop.open')) return;
     const key = e.key.toLowerCase();
     if (key !== 'j' && key !== 'k') return;
+    e.preventDefault();
     let curIdx = 0;
     stops.forEach((st, idx) => { if (st.on) curIdx = idx; });
-    const nextIdx = Math.max(0, Math.min(stops.length - 1, curIdx + (key === 'j' ? 1 : -1)));
-    if (nextIdx !== curIdx) {
-      e.preventDefault();
+    curIdx = curIdx % mainStops.length;
+    if (key === 'j') {
+      const nextIdx = curIdx === mainStops.length - 1 && stops[stops.length - 1]?.isTail
+        ? stops.length - 1
+        : (curIdx + 1) % mainStops.length;
       driveToStop(nextIdx);
+    } else {
+      if (curIdx === 0 && wrapSpan > 0) {
+        wrapBackwardFromTop();
+        driveToStop(mainStops.length - 1);
+      } else {
+        driveToStop(Math.max(0, curIdx - 1));
+      }
     }
   });
 
@@ -1001,27 +1354,33 @@ export function startPortfolioDrive() {
   const beamReadout = document.getElementById('beamReadout');
   const beamBar = document.getElementById('beamBar');
   if (revBtn) {
-    revBtn.addEventListener('pointerdown', () => { revDown = true; revBtn.classList.add('down'); });
-    addEventListener('pointerup', () => { revDown = false; revBtn.classList.remove('down'); });
-    revBtn.addEventListener('pointercancel', () => { revDown = false; revBtn.classList.remove('down'); });
-    revBtn.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { revDown = true; revBtn.classList.add('down'); } });
-    revBtn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') { revDown = false; revBtn.classList.remove('down'); } });
-    revBtn.addEventListener('blur', () => { revDown = false; revBtn.classList.remove('down'); });
+    const startRev = () => { revDown = true; revBtn.classList.add('down'); wake(); };
+    const stopRev = () => { revDown = false; revBtn.classList.remove('down'); wake(); };
+    revBtn.addEventListener('pointerdown', startRev);
+    addEventListener('pointerup', stopRev);
+    revBtn.addEventListener('pointercancel', stopRev);
+    revBtn.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') startRev(); });
+    revBtn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') stopRev(); });
+    revBtn.addEventListener('blur', stopRev);
   }
 
   function currentOverviewStop() {
     const line = innerHeight * 0.35;
     let found = 0;
-    stops.forEach((st, idx) => {
+    mainStops.forEach((st, idx) => {
       if (st.el.getBoundingClientRect().top <= line) found = idx;
     });
     return found;
   }
 
   /* Mode Switchers: Drive <-> Overview */
+  let lastActiveMainIdx = 0;
+
   function enterOverviewMode() {
     if (mode === 'overview') return;
+    const startIdx = lastActiveMainIdx;
     mode = 'overview';
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
     if (veil) veil.classList.add('on');
     setTimeout(() => {
       html.classList.remove('drive');
@@ -1031,12 +1390,15 @@ export function startPortfolioDrive() {
       if (modeBtn) modeBtn.textContent = '3D drive';
       window.scrollTo({ top: 0, behavior: 'instant' });
       if (veil) veil.classList.remove('on');
+      if (window.focusOverviewSector) window.focusOverviewSector(startIdx, startIdx > 0);
     }, 320);
   }
 
-  function enterDriveMode() {
+  function enterDriveMode(idxOverride = null) {
     if (mode === 'drive') return;
-    const targetIdx = currentOverviewStop();
+    const targetIdx = typeof idxOverride === 'number' && idxOverride >= 0
+      ? idxOverride % mainStops.length
+      : currentOverviewStop();
     if (veil) veil.classList.add('on');
     setTimeout(() => {
       mode = 'drive';
@@ -1053,194 +1415,341 @@ export function startPortfolioDrive() {
       lastY = smoothY;
       firstFrame = true;
       if (veil) veil.classList.remove('on');
+      wake();
     }, 320);
   }
+  window.enterDriveAtSector = idx => enterDriveMode(idx);
 
   if (skipBtn) skipBtn.addEventListener('click', e => { e.preventDefault(); enterOverviewMode(); });
   if (takeBtn) takeBtn.addEventListener('click', () => enterDriveMode());
 
-  /* Expose global switcher & jump helper for header links */
+  /* Expose global switcher, jump helper & perf inspector */
   window.togglePortfolioViewMode = () => {
     if (mode === 'drive') enterOverviewMode();
     else enterDriveMode();
   };
   window.driveToPortfolioStop = idx => driveToStop(idx);
 
-  /* State Loop */
-  let smoothY = window.scrollY;
-  let smoothT = progressAtScroll(smoothY);
-  let lastY = smoothY;
+  /* Zero-Allocation Tick State & Pre-Allocated Scratch Math */
   let started = smoothY > 5;
   let beamStrength = 0.25;
   let lean = 0;
   let firstFrame = true;
 
-  const carSample = {};
+  const carSample = { pos: new THREE.Vector3(), tan: new THREE.Vector3(), flat: new THREE.Vector3(), right: new THREE.Vector3() };
+  const aheadSample = { pos: new THREE.Vector3(), tan: new THREE.Vector3(), flat: new THREE.Vector3(), right: new THREE.Vector3() };
   const lookVec = new THREE.Vector3();
   const camTarget = new THREE.Vector3();
   const camPos = new THREE.Vector3();
+  const idealCam = new THREE.Vector3();
+  const camForward = new THREE.Vector3(1, 0, 0);
+  const camRightVec = new THREE.Vector3(0, 0, 1);
+  const camCfg = { h: 28, d: 18, ahead: 3 };
   const odoDigits = [...document.querySelectorAll('#odo i')];
 
-  let prevTime = performance.now();
+  /* DOM Dirty-Check Cache */
+  let lastPct = -1;
+  let lastBarTf = '';
+  let lastOdo = '';
+  let lastHintGone = null;
+  let lastSkipRight = null;
+  let lastSkipEnd = null;
+  let lastSkipRun = '';
+  const prevRouteHere = routeLinks.map(() => null);
+  const prevRouteDone = routeLinks.map(() => null);
+
+  window.__drivePerf = () => ({
+    mode,
+    asleep,
+    curDpr,
+    maxDpr,
+    avgFrameMs: +avgFrameMs.toFixed(2),
+    smoothT: +wrapUnit(smoothT).toFixed(4),
+    lapCount,
+    wrapSpan
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      asleep = true;
+    } else if (!document.hidden && mode === 'drive') {
+      wake();
+    }
+  });
+
+  function updateAdaptiveDpr(rawDtMs) {
+    if (wasAsleep) {
+      wasAsleep = false;
+      return;
+    }
+    if (rawDtMs < 1 || rawDtMs > 120) return;
+    avgFrameMs = avgFrameMs * 0.88 + rawDtMs * 0.12;
+    activeFrames++;
+    if (dprCooldown > 0) {
+      dprCooldown--;
+      return;
+    }
+    if (avgFrameMs > 22 && curDpr > 1.0 && activeFrames >= 18) {
+      curDpr = curDpr > 1.25 ? 1.25 : 1.0;
+      renderer.setPixelRatio(curDpr);
+      syncRendererSize();
+      activeFrames = 0;
+      dprCooldown = 36;
+    } else if (avgFrameMs <= 14.5 && curDpr < maxDpr && activeFrames >= 45) {
+      curDpr = curDpr < 1.25 && maxDpr >= 1.25 ? 1.25 : maxDpr;
+      renderer.setPixelRatio(curDpr);
+      syncRendererSize();
+      activeFrames = 0;
+      dprCooldown = 48;
+    }
+  }
 
   function tick(now) {
-    const dt = Math.min(0.05, (now - prevTime) / 1000);
+    rafId = null;
+    if (mode !== 'drive') return;
+
+    const rawDtMs = now - prevTime;
+    const dt = Math.min(0.05, Math.max(0.0005, rawDtMs / 1000));
     prevTime = now;
+    updateAdaptiveDpr(rawDtMs);
 
-    if (mode === 'drive') {
-      smoothY = THREE.MathUtils.lerp(smoothY, window.scrollY, expDamp(8.5, dt));
-      const targetT = progressAtScroll(smoothY);
-      smoothT = THREE.MathUtils.lerp(smoothT, targetT, expDamp(6.5, dt));
+    wrapForwardIfNeeded();
+    const targetY = window.scrollY;
+    smoothY = THREE.MathUtils.lerp(smoothY, targetY, expDamp(8.5, dt));
+    const targetT = progressAtScroll(smoothY);
+    smoothT = THREE.MathUtils.lerp(smoothT, targetT, expDamp(6.5, dt));
 
-      const vel = Math.abs(smoothY - lastY) / Math.max(dt, 0.001);
-      lastY = smoothY;
-      if (!started && smoothY > 12) started = true;
+    const vel = Math.abs(smoothY - lastY) / Math.max(dt, 0.001);
+    lastY = smoothY;
+    if (!started && (smoothY > 12 || lapCount > 0)) started = true;
 
-      /* Car Sample on Spline */
-      sampleRoad(smoothT, carSample);
-      car.group.position.copy(carSample.pos);
-      car.group.rotation.y = Math.atan2(carSample.flat.x, carSample.flat.z);
+    /* Car Sample on Closed Spline */
+    const unitT = wrapUnit(smoothT);
+    const totalProgress = Math.max(0, lapCount + smoothT);
+    sampleRoad(unitT, carSample);
+    car.group.position.copy(carSample.pos);
+    car.group.rotation.y = Math.atan2(carSample.flat.x, carSample.flat.z);
 
-      /* Slight cornering lean */
-      const aheadS = sampleRoad(Math.min(1, smoothT + 0.015), {});
-      const yawNow = Math.atan2(carSample.flat.x, carSample.flat.z);
-      const yawAhead = Math.atan2(aheadS.flat.x, aheadS.flat.z);
-      let dYaw = yawAhead - yawNow;
-      while (dYaw > Math.PI) dYaw -= Math.PI * 2;
-      while (dYaw < -Math.PI) dYaw += Math.PI * 2;
-      const targetLean = THREE.MathUtils.clamp(dYaw * 6 * (0.2 + Math.min(1, vel / 800)), -1, 1);
-      lean = THREE.MathUtils.lerp(lean, targetLean, expDamp(5, dt));
+    /* Cornering Body Roll */
+    sampleRoad(unitT + 0.015, aheadSample);
+    const yawNow = Math.atan2(carSample.flat.x, carSample.flat.z);
+    const yawAhead = Math.atan2(aheadSample.flat.x, aheadSample.flat.z);
+    let dYaw = yawAhead - yawNow;
+    while (dYaw > Math.PI) dYaw -= Math.PI * 2;
+    while (dYaw < -Math.PI) dYaw += Math.PI * 2;
+    const targetLean = THREE.MathUtils.clamp(dYaw * 6 * (0.2 + Math.min(1, vel / 800)), -1, 1);
+    lean = THREE.MathUtils.lerp(lean, targetLean, expDamp(5, dt));
 
-      revLevel += ((revDown ? 1 : 0) - revLevel) * Math.min(1, dt * (revDown ? 9 : 4.5));
-      const desiredBeam = (started ? 1.0 : 0.28) + revLevel * 0.55;
-      beamStrength = THREE.MathUtils.lerp(beamStrength, desiredBeam, expDamp(4, dt));
+    revLevel += ((revDown ? 1 : 0) - revLevel) * Math.min(1, dt * (revDown ? 9 : 4.5));
+    const desiredBeam = (started ? 1.0 : 0.28) + revLevel * 0.55;
+    beamStrength = THREE.MathUtils.lerp(beamStrength, desiredBeam, expDamp(4, dt));
 
-      car.update(dt, {
-        distance: smoothT * ROAD_LENGTH,
-        lean,
-        beam: beamStrength,
-        rpm: revLevel,
-        time: now / 1000
-      });
+    car.update(dt, {
+      distance: totalProgress * ROAD_LENGTH,
+      lean,
+      beam: beamStrength,
+      rpm: revLevel,
+      time: now / 1000
+    });
 
-      const dDial = props.getDial();
-      if (dDial.pivot) {
-        dDial.pivot.rotation.y = dDial.a0 - revLevel * 0.906 * dDial.sweep - Math.PI / 2;
+    const dDial = props.getDial();
+    if (dDial.pivot) {
+      dDial.pivot.rotation.y = dDial.a0 - revLevel * 0.906 * dDial.sweep - Math.PI / 2;
+    }
+
+    const pct = Math.min(100, Math.round(revLevel * 100));
+    if (beamReadout && pct !== lastPct) {
+      lastPct = pct;
+      beamReadout.textContent = `${String(pct).padStart(3, '0')}%`;
+    }
+    if (beamBar) {
+      const nextTf = `scaleX(${Math.max(0.02, revLevel).toFixed(3)})`;
+      if (nextTf !== lastBarTf) {
+        lastBarTf = nextTf;
+        beamBar.style.transform = nextTf;
       }
-      const pct = Math.min(100, Math.round(revLevel * 100));
-      if (beamReadout) beamReadout.textContent = `${String(pct).padStart(3, '0')}%`;
-      if (beamBar) beamBar.style.transform = `scaleX(${Math.max(0.02, revLevel).toFixed(3)})`;
+    }
 
-      worldUniforms.uCarPos.value.copy(carSample.pos);
-      worldUniforms.uCarDir.value.copy(carSample.flat);
-      worldUniforms.uBeam.value = beamStrength;
-      worldUniforms.uTime.value = now / 1000;
-      worldUniforms.uProgress.value = smoothT;
+    worldUniforms.uCarPos.value.copy(carSample.pos);
+    worldUniforms.uCarDir.value.copy(carSample.flat);
+    worldUniforms.uBeam.value = beamStrength;
+    worldUniforms.uTime.value = now / 1000;
+    worldUniforms.uProgress.value = unitT;
 
-      /* Update Sticky Waypoint Cards & Determine Active Stop */
-      let activeIdx = 0;
-      let bestVis = -1;
-      stops.forEach((st, idx) => {
-        const vis = cardVisibility(smoothY, idx);
-        st.vis = vis;
-        if (st.card) {
-          st.card.style.opacity = vis.toFixed(3);
-          st.card.style.transform = `translate3d(0, ${((1 - vis) * 26).toFixed(1)}px, 0)`;
-          const isOn = vis > 0.38;
-          if (isOn !== st.on) {
-            st.on = isOn;
-            st.card.classList.toggle('on', isOn);
+    /* Dirty-Checked Sticky Waypoint Updates */
+    let activeIdx = 0;
+    let bestVis = -1;
+    for (let idx = 0; idx < stops.length; idx++) {
+      const st = stops[idx];
+      const vis = cardVisibility(smoothY, idx);
+      st.vis = vis;
+      if (st.card) {
+        const nextOp = vis.toFixed(3);
+        const nextTf = `translate3d(0, ${((1 - vis) * 26).toFixed(1)}px, 0)`;
+        if (nextOp !== st.lastOp) {
+          st.lastOp = nextOp;
+          st.card.style.opacity = nextOp;
+        }
+        if (nextTf !== st.lastTf) {
+          st.lastTf = nextTf;
+          st.card.style.transform = nextTf;
+        }
+        const isOn = vis > 0.38;
+        if (isOn !== st.on) {
+          st.on = isOn;
+          st.card.classList.toggle('on', isOn);
+        }
+      }
+      if (vis > bestVis) {
+        bestVis = vis;
+        activeIdx = idx;
+      }
+    }
+
+    /* Update 5-Dot Route Rail Highlights (Tail mirrors Stop 0) */
+    const routeActive = activeIdx % mainStops.length;
+    lastActiveMainIdx = routeActive;
+    const routeProg = smoothT < 0 ? 0 : unitT;
+    const tailActive = Boolean(stops[stops.length - 1]?.on);
+    for (let idx = 0; idx < routeLinks.length; idx++) {
+      const lnk = routeLinks[idx];
+      const isHere = idx === routeActive;
+      const isDone = !isHere && !tailActive && !(routeActive === 0 && routeProg > 0.7) && stops[idx].t <= routeProg + 0.002;
+      if (isHere !== prevRouteHere[idx]) {
+        prevRouteHere[idx] = isHere;
+        lnk.classList.toggle('here', isHere);
+      }
+      if (isDone !== prevRouteDone[idx]) {
+        prevRouteDone[idx] = isDone;
+        lnk.classList.toggle('done', isDone);
+      }
+    }
+
+    /* Update Scroll Hint & Odometer */
+    if (scrollHint) {
+      const hintGone = smoothY > 40 || lapCount > 0;
+      if (hintGone !== lastHintGone) {
+        lastHintGone = hintGone;
+        scrollHint.classList.toggle('gone', hintGone);
+      }
+    }
+    if (odoDigits.length === 6) {
+      const miles = Math.round(16000 + totalProgress * 48210);
+      const str = String(miles).padStart(6, '0');
+      if (str !== lastOdo) {
+        lastOdo = str;
+        for (let idx = 0; idx < 6; idx++) {
+          if (odoDigits[idx] && odoDigits[idx].textContent !== str[idx]) {
+            odoDigits[idx].textContent = str[idx];
           }
-        }
-        if (vis > bestVis) {
-          bestVis = vis;
-          activeIdx = idx;
-        }
-      });
-
-      /* Update Route Rail Highlights */
-      routeLinks.forEach((lnk, idx) => {
-        lnk.classList.toggle('here', idx === activeIdx);
-        lnk.classList.toggle('done', idx !== activeIdx && stops[idx].t <= smoothT + 0.002);
-      });
-
-      /* Update Odometer & Scroll Hint */
-      if (scrollHint) scrollHint.classList.toggle('gone', smoothY > 40);
-      if (odoDigits.length === 6) {
-        const miles = Math.round(16000 + smoothT * 48210);
-        const chars = String(miles).padStart(6, '0').split('');
-        chars.forEach((ch, idx) => {
-          if (odoDigits[idx] && odoDigits[idx].textContent !== ch) {
-            odoDigits[idx].textContent = ch;
-          }
-        });
-      }
-
-      /* Skip Drive Sign Collision TUCK & End Fade */
-      if (skipBtn) {
-        const activeIsLeft = stops[activeIdx] ? stops[activeIdx].screen < 0 : false;
-        skipBtn.classList.toggle('on-right', !mobile && activeIsLeft);
-        skipBtn.classList.toggle('at-end', activeIdx === stops.length - 1);
-        skipBtn.style.setProperty('--run', smoothT.toFixed(3));
-      }
-
-      /* Dynamic Camera Framing Keeping Car in Opposite Half of Viewport */
-      const camCfg = { ...camConfigs.base };
-      for (const st of stops) {
-        if (!st.cam || !camConfigs[st.cam]) continue;
-        const w = 1 - linstep(0, 0.08, Math.abs(smoothT - st.t));
-        if (w <= 0) continue;
-        for (const k of ['h', 'd', 'ahead']) {
-          camCfg[k] = THREE.MathUtils.lerp(camCfg[k], camConfigs[st.cam][k], w);
-        }
-      }
-
-      const hyp = Math.hypot(camCfg.h, camCfg.d);
-      const visSpan = 2 * hyp * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect;
-      let tx = carSample.pos.x;
-      let tz = carSample.pos.z + camCfg.ahead;
-
-      for (const st of stops) {
-        const f = smoothstep(0, 0.05, 0.05 - Math.abs(smoothT - st.t));
-        if (f > 0 && st.focus) {
-          tx += (st.focus.x - carSample.pos.x) * f;
-          tz += (st.focus.z - carSample.pos.z) * f * 0.55;
-        }
-      }
-
-      const curStop = stops[activeIdx];
-      const curVis = Math.max(0, curStop.vis);
-      const camBias = curStop.cam === 'close' ? 0.22 : 0.19;
-      if (mobile) tz += 4.5 * curVis;
-      else tx += curStop.screen * visSpan * camBias * curVis;
-
-      lookVec.set(tx, carSample.pos.y, tz);
-      if (firstFrame) camTarget.copy(lookVec);
-      else camTarget.lerp(lookVec, expDamp(4.2, dt));
-
-      const idealCam = new THREE.Vector3(camTarget.x, camTarget.y + camCfg.h, camTarget.z + camCfg.d);
-      if (firstFrame) camPos.copy(idealCam);
-      else camPos.lerp(idealCam, expDamp(4.2, dt));
-
-      camera.position.copy(camPos);
-      camera.lookAt(camTarget);
-
-      scene.fog.near = worldUniforms.uFogNear.value = hyp + 14;
-      scene.fog.far = worldUniforms.uFogFar.value = hyp + 65;
-
-      renderer.render(scene, camera);
-
-      if (firstFrame) {
-        firstFrame = false;
-        if (ignition) {
-          ignition.classList.add('done');
-          setTimeout(() => ignition.remove(), 700);
         }
       }
     }
 
-    requestAnimationFrame(tick);
+    /* Optional Skip Sign Tuck */
+    if (skipBtn) {
+      const activeIsLeft = stops[activeIdx] ? stops[activeIdx].screen < 0 : false;
+      const isRight = !mobile && activeIsLeft;
+      const isEnd = activeIdx === stops.length - 1;
+      const runStr = unitT.toFixed(3);
+      if (isRight !== lastSkipRight) { lastSkipRight = isRight; skipBtn.classList.toggle('on-right', isRight); }
+      if (isEnd !== lastSkipEnd) { lastSkipEnd = isEnd; skipBtn.classList.toggle('at-end', isEnd); }
+      if (runStr !== lastSkipRun) { lastSkipRun = runStr; skipBtn.style.setProperty('--run', runStr); }
+    }
+
+    /* Heading-Relative Trailing Chase Camera Around 360deg Loop */
+    if (firstFrame) camForward.copy(carSample.flat);
+    else camForward.lerp(carSample.flat, expDamp(4.8, dt)).normalize();
+    camRightVec.crossVectors(camForward, UP).normalize();
+
+    const baseCfg = camConfigs.base;
+    camCfg.h = baseCfg.h;
+    camCfg.d = baseCfg.d;
+    camCfg.ahead = baseCfg.ahead;
+
+    for (let i = 0; i < mainStops.length; i++) {
+      const st = mainStops[i];
+      if (!st.cam || !camConfigs[st.cam]) continue;
+      const w = 1 - linstep(0, 0.08, loopDist(unitT, st.t));
+      if (w <= 0) continue;
+      const cfg = camConfigs[st.cam];
+      camCfg.h = THREE.MathUtils.lerp(camCfg.h, cfg.h, w);
+      camCfg.d = THREE.MathUtils.lerp(camCfg.d, cfg.d, w);
+      camCfg.ahead = THREE.MathUtils.lerp(camCfg.ahead, cfg.ahead, w);
+    }
+
+    const hyp = Math.hypot(camCfg.h, camCfg.d);
+    const visSpan = 2 * hyp * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect;
+    lookVec.copy(carSample.pos).addScaledVector(camForward, camCfg.ahead);
+
+    for (let i = 0; i < mainStops.length; i++) {
+      const st = mainStops[i];
+      const f = smoothstep(0, 0.05, 0.05 - loopDist(unitT, st.t));
+      if (f > 0 && st.focus) {
+        lookVec.x += (st.focus.x - carSample.pos.x) * f * 0.85;
+        lookVec.y += (st.focus.y - carSample.pos.y) * f * 0.50;
+        lookVec.z += (st.focus.z - carSample.pos.z) * f * 0.85;
+      }
+    }
+
+    const curStop = stops[activeIdx];
+    const curVis = Math.max(0, curStop.vis);
+    const camBias = curStop.cam === 'close' ? 0.22 : 0.19;
+    if (mobile) {
+      lookVec.addScaledVector(camForward, 3.8 * curVis);
+    } else {
+      lookVec.addScaledVector(camRightVec, curStop.screen * visSpan * camBias * curVis);
+    }
+
+    if (firstFrame) camTarget.copy(lookVec);
+    else camTarget.lerp(lookVec, expDamp(4.2, dt));
+
+    idealCam.copy(camTarget).addScaledVector(camForward, -camCfg.d);
+    idealCam.y += camCfg.h;
+    if (firstFrame) camPos.copy(idealCam);
+    else camPos.lerp(idealCam, expDamp(4.2, dt));
+
+    camera.position.copy(camPos);
+    camera.lookAt(camTarget);
+
+    scene.fog.near = worldUniforms.uFogNear.value = hyp + 14;
+    scene.fog.far = worldUniforms.uFogFar.value = hyp + 65;
+
+    renderer.render(scene, camera);
+
+    if (firstFrame) {
+      firstFrame = false;
+      if (ignition) {
+        ignition.classList.add('done');
+        setTimeout(() => ignition.remove(), 700);
+      }
+    }
+
+    /* Sleep WebGL loop cleanly once motion, camera & optics settle */
+    const settled = !driveAnimId
+      && !revDown
+      && revLevel < 0.002
+      && Math.abs(targetY - smoothY) < 0.08
+      && Math.abs(targetT - smoothT) < 1e-4
+      && Math.abs(beamStrength - desiredBeam) < 0.006
+      && Math.abs(lean) < 0.003
+      && camPos.distanceToSquared(idealCam) < 1e-4
+      && camTarget.distanceToSquared(lookVec) < 1e-4;
+
+    if (settled) {
+      idleFrames++;
+      if (idleFrames >= 24) {
+        asleep = true;
+        return;
+      }
+    } else {
+      idleFrames = 0;
+    }
+
+    rafId = requestAnimationFrame(tick);
   }
 
-  requestAnimationFrame(tick);
+  if (mode === 'drive') wake();
 }

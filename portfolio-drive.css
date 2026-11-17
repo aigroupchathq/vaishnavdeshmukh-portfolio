@@ -90,9 +90,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.90);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -180,8 +178,23 @@ button {
 }
 
 @media (max-width: 520px) {
-  #modeToggleBtn {
-    display: none;
+  .top-row {
+    padding: 0 12px;
+    gap: 6px;
+  }
+  .brand {
+    font-size: 12px;
+  }
+  .top-right {
+    gap: 6px;
+  }
+  .hdr-link {
+    font-size: 11px;
+  }
+  .btn.sm {
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 11px;
   }
 }
 
@@ -272,6 +285,7 @@ button {
   position: relative;
   min-height: 205vh;
   padding: 0 clamp(20px, 5vw, 72px);
+  contain: style;
 }
 @media (min-width: 900px) {
   .drive .stop[data-side="right"] {
@@ -280,6 +294,9 @@ button {
 }
 .drive .stop.last {
   min-height: 155vh;
+}
+.drive .stop.loop-tail {
+  min-height: 205vh;
 }
 
 .drive .stop .card {
@@ -307,6 +324,7 @@ button {
 }
 .drive .stop .card.on {
   pointer-events: auto;
+  will-change: transform, opacity;
 }
 .drive .stop .card:not(.on) {
   pointer-events: none;
@@ -323,7 +341,8 @@ button {
   margin-bottom: 12px;
 }
 
-.card h1 {
+.card h1,
+.card .h1-mirror {
   font-family: var(--display);
   font-size: clamp(2.15rem, 4.2vw, 3.6rem);
   font-weight: 600;
@@ -673,30 +692,214 @@ button {
   opacity: 0;
 }
 
-/* ---------- Flat Overview Fallback Mode (.still-mode) ---------- */
+/* ---------- Interactive Map & Survey Atlas Mode (.still-mode) ---------- */
+.drive .circuit-atlas,
+.drive .station-bar {
+  display: none !important;
+}
+.drive .stops-track {
+  position: static;
+  display: block;
+}
+
 .still-mode .world,
 .still-mode .route,
 .still-mode .scroll-hint,
 .still-mode .ignition,
-.still-mode .ghost-peek-wrap {
+.still-mode .ghost-peek-wrap,
+.still-mode .stop.loop-tail {
   display: none !important;
 }
+
 .still-mode main {
-  max-width: 760px;
+  max-width: 1380px;
   margin: 0 auto;
-  padding: 48px 20px 80px;
+  padding: clamp(20px, 3.5vw, 44px) clamp(16px, 3vw, 38px) 84px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+@media (min-width: 980px) {
+  .still-mode main {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: clamp(28px, 3.6vw, 56px);
+  }
+  .still-mode .circuit-atlas {
+    position: sticky;
+    top: 80px;
+  }
+}
+
+.circuit-atlas {
+  background: #040406;
+  border: 1px solid var(--hair2);
+  border-radius: 6px;
+  overflow: hidden;
+  contain: layout style;
+}
+
+.atlas-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hair);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sec);
+}
+.atlas-head strong {
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.atlas-stage {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.03) 0%, transparent 66%),
+    #020203;
+  border-bottom: 1px solid var(--hair);
+  padding: 6px;
+}
+.atlas-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(62vh, 520px);
+  user-select: none;
+}
+
+.atlas-node {
+  cursor: pointer;
+  pointer-events: bounding-box;
+}
+.atlas-node:focus {
+  outline: none;
+}
+.atlas-node:focus-visible .atlas-pin-ring {
+  stroke: #FFFFFF;
+  stroke-width: 2;
+}
+.atlas-pin-ring {
+  fill: #040406;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.4;
+  transition: transform 0.2s var(--ease), fill 0.2s ease, stroke 0.2s ease;
+}
+.atlas-pin-core {
+  fill: rgba(255, 255, 255, 0.72);
+  transition: fill 0.2s ease;
+}
+.atlas-leader {
+  stroke: rgba(255, 255, 255, 0.26);
+  stroke-width: 1;
+  transition: stroke 0.2s ease;
+}
+.atlas-lbl-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  fill: #D4D4D8;
+  letter-spacing: 0.12em;
+  transition: fill 0.2s ease;
+}
+.atlas-lbl-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: #71717A;
+  letter-spacing: 0.08em;
+  transition: fill 0.2s ease;
+}
+.atlas-node:hover .atlas-pin-ring,
+.atlas-node.is-active .atlas-pin-ring {
+  fill: #FFFFFF;
+  stroke: #FFFFFF;
+}
+.atlas-node:hover .atlas-pin-core,
+.atlas-node.is-active .atlas-pin-core {
+  fill: #000000;
+}
+.atlas-node:hover .atlas-leader,
+.atlas-node.is-active .atlas-leader {
+  stroke: rgba(255, 255, 255, 0.75);
+}
+.atlas-node:hover .atlas-lbl-code,
+.atlas-node.is-active .atlas-lbl-code {
+  fill: #FFFFFF;
+}
+.atlas-node:hover .atlas-lbl-sub,
+.atlas-node.is-active .atlas-lbl-sub {
+  fill: #D4D4D8;
+}
+
+.atlas-elev {
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--hair);
+  background: #030305;
+}
+.atlas-elev-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.atlas-elev-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.atlas-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  padding: 12px 16px;
+}
+.atlas-telemetry {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--sec);
+}
+.atlas-telemetry strong {
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* Right-hand Survey Station Dossiers */
+.still-mode .stops-track {
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 18px;
+  min-width: 0;
 }
 .still-mode .stop {
   min-height: 0 !important;
-  padding: 0 0 42px !important;
-  border-bottom: 1px solid var(--hair);
+  padding: 22px clamp(16px, 2.5vw, 26px) 26px !important;
+  border: 1px solid var(--hair);
+  border-left: 2px solid var(--hair2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.014);
+  transition: border-color 0.22s ease, background-color 0.22s ease;
 }
-.still-mode .stop:last-of-type {
-  border-bottom: 0;
-  padding-bottom: 0 !important;
+.still-mode .stop:hover,
+.still-mode .stop.atlas-active {
+  border-color: rgba(255, 255, 255, 0.28);
+  border-left-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.032);
 }
 .still-mode .stop .card {
   position: static !important;
@@ -706,9 +909,59 @@ button {
   pointer-events: auto !important;
   padding: 0 !important;
   text-shadow: none;
+  min-width: 0;
 }
 .still-mode .stop .card::before {
   display: none;
+}
+
+.station-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--hair);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.station-coord {
+  color: var(--sec);
+  text-transform: uppercase;
+}
+.station-jump {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  padding: 4px 10px;
+  border: 1px solid var(--hair2);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.station-jump:hover,
+.station-jump:focus-visible {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+}
+
+.still-mode .card h1 {
+  font-size: clamp(1.75rem, 2.8vw, 2.55rem);
+  overflow-wrap: break-word;
+}
+.still-mode .card h2 {
+  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+  overflow-wrap: break-word;
+}
+.still-mode .ghost-row {
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 /* ---------- Footer ---------- */
@@ -749,9 +1002,7 @@ footer.bottom {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.92);
   display: none;
   align-items: center;
   justify-content: center;
@@ -774,6 +1025,7 @@ footer.bottom {
   display: grid;
   grid-template-columns: 1fr;
   overflow: hidden;
+  contain: layout style;
   transform: translateY(14px);
   transition: transform 0.28s var(--ease);
 }
