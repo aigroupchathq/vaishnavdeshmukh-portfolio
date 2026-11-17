@@ -1058,12 +1058,12 @@ export function startPortfolioDrive() {
 
   const camera = new THREE.PerspectiveCamera(mobile ? 50 : 38, innerWidth / innerHeight, 0.5, 420);
   const camConfigs = {
-    base: mobile ? { h: 35, d: 20, ahead: 8 } : { h: 28, d: 18, ahead: 3 },
-    garage: mobile ? { h: 25, d: 16, ahead: 5 } : { h: 21, d: 15, ahead: 1 },
-    near: mobile ? { h: 32, d: 18, ahead: 7 } : { h: 25, d: 16, ahead: 2 },
-    close: mobile ? { h: 30, d: 17, ahead: 6 } : { h: 25, d: 16, ahead: 1 },
-    gate: mobile ? { h: 34, d: 20, ahead: 8 } : { h: 27, d: 19, ahead: 2 },
-    overview: mobile ? { h: 58, d: 30, ahead: 14 } : { h: 46, d: 26, ahead: 9 }
+    base: mobile ? { h: 25, d: 18, ahead: -4.2 } : { h: 28, d: 18, ahead: 3 },
+    garage: mobile ? { h: 22, d: 16, ahead: -4.4 } : { h: 21, d: 15, ahead: 1 },
+    near: mobile ? { h: 24, d: 17, ahead: -3.8 } : { h: 25, d: 16, ahead: 2 },
+    close: mobile ? { h: 22, d: 16, ahead: -3.2 } : { h: 25, d: 16, ahead: 1 },
+    gate: mobile ? { h: 25, d: 18, ahead: -4.2 } : { h: 27, d: 19, ahead: 2 },
+    overview: mobile ? { h: 52, d: 28, ahead: 0 } : { h: 46, d: 26, ahead: 9 }
   };
 
   const props = buildRoadAndScenery(scene, stops, maxAniso);
@@ -1122,14 +1122,17 @@ export function startPortfolioDrive() {
     if (mode === 'overview') return;
 
     const isMob = innerWidth < 760;
-    stops.forEach((st, idx) => {
+    stops.forEach(st => {
       if (!st.card) return;
       const cardH = st.card.offsetHeight;
       if (isMob) {
-        const stickTop = Math.round(winH * (idx === 0 || st.isTail ? 0.34 : 0.38));
-        const extra = Math.max(0, Math.round(cardH - (winH - stickTop - 18)));
-        st.card.style.top = `${Math.max(68, stickTop - extra)}px`;
-        st.el.style.minHeight = extra > 0 ? `calc(200vh + ${extra}px)` : '';
+        const dockClear = 84;
+        const minTop = Math.max(Math.round(winH * 0.44), 286);
+        const stickTop = Math.max(64, Math.min(Math.round(winH - dockClear - cardH), winH - dockClear - 120));
+        const finalTop = cardH + minTop <= winH - dockClear ? Math.max(minTop, winH - dockClear - cardH) : stickTop;
+        const extra = Math.max(0, Math.round(cardH - (winH - 64 - dockClear)));
+        st.card.style.top = `${Math.round(finalTop)}px`;
+        st.el.style.minHeight = extra > 0 ? `calc(195vh + ${extra}px)` : '';
       } else {
         st.el.style.minHeight = '';
         const idealTop = Math.min(130, Math.max(82, Math.round(winH * 0.12)));
@@ -1365,7 +1368,7 @@ export function startPortfolioDrive() {
   }
 
   function currentOverviewStop() {
-    const line = innerHeight * 0.35;
+    const line = innerWidth < 980 ? Math.min(innerHeight * 0.62, 430) : innerHeight * 0.35;
     let found = 0;
     mainStops.forEach((st, idx) => {
       if (st.el.getBoundingClientRect().top <= line) found = idx;
@@ -1373,14 +1376,32 @@ export function startPortfolioDrive() {
     return found;
   }
 
-  /* Mode Switchers: Drive <-> Overview */
+  /* Mode Switchers: Drive <-> Overview & Mobile Dock Sync */
   let lastActiveMainIdx = 0;
+  const DOCK_LABELS = ['00 · INTRO', '01 · SYSTEMS', '02 · CRAFT', '03 · OPTICS', '04 · GATE'];
+  const dockDriveBtn = document.getElementById('dockModeDrive');
+  const dockMapBtn = document.getElementById('dockModeMap');
+  const dockSectorLbl = document.getElementById('dockSectorLbl');
+
+  function syncDockModeUI(m) {
+    const isOv = m === 'overview';
+    if (dockDriveBtn) {
+      dockDriveBtn.classList.toggle('is-on', !isOv);
+      dockDriveBtn.setAttribute('aria-pressed', String(!isOv));
+    }
+    if (dockMapBtn) {
+      dockMapBtn.classList.toggle('is-on', isOv);
+      dockMapBtn.setAttribute('aria-pressed', String(isOv));
+    }
+  }
+  syncDockModeUI(mode);
 
   function enterOverviewMode() {
     if (mode === 'overview') return;
     const startIdx = lastActiveMainIdx;
     mode = 'overview';
     if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    syncDockModeUI('overview');
     if (veil) veil.classList.add('on');
     setTimeout(() => {
       html.classList.remove('drive');
@@ -1402,6 +1423,7 @@ export function startPortfolioDrive() {
     if (veil) veil.classList.add('on');
     setTimeout(() => {
       mode = 'drive';
+      syncDockModeUI('drive');
       html.classList.remove('still-mode', 'after-drive');
       html.classList.add('drive');
       if (takeBtn) takeBtn.hidden = true;
@@ -1419,6 +1441,33 @@ export function startPortfolioDrive() {
     }, 320);
   }
   window.enterDriveAtSector = idx => enterDriveMode(idx);
+  window.setPortfolioMode = nextMode => {
+    if (nextMode === 'overview') enterOverviewMode();
+    else if (nextMode === 'drive') enterDriveMode();
+  };
+  window.stepPortfolioSector = delta => {
+    if (mode === 'overview') {
+      if (window.focusOverviewSector) {
+        const cur = typeof window.getActiveOverviewSector === 'function' ? window.getActiveOverviewSector() : currentOverviewStop();
+        window.focusOverviewSector(cur + delta, true);
+      }
+      return;
+    }
+    let curIdx = 0;
+    stops.forEach((st, idx) => { if (st.on) curIdx = idx; });
+    curIdx = curIdx % mainStops.length;
+    if (delta > 0) {
+      const nextIdx = curIdx === mainStops.length - 1 && stops[stops.length - 1]?.isTail
+        ? stops.length - 1
+        : (curIdx + 1) % mainStops.length;
+      driveToStop(nextIdx);
+    } else if (curIdx === 0 && wrapSpan > 0) {
+      wrapBackwardFromTop();
+      driveToStop(mainStops.length - 1);
+    } else {
+      driveToStop(Math.max(0, curIdx - 1));
+    }
+  };
 
   if (skipBtn) skipBtn.addEventListener('click', e => { e.preventDefault(); enterOverviewMode(); });
   if (takeBtn) takeBtn.addEventListener('click', () => enterDriveMode());
@@ -1452,6 +1501,7 @@ export function startPortfolioDrive() {
   let lastBarTf = '';
   let lastOdo = '';
   let lastHintGone = null;
+  let lastDockIdx = -1;
   let lastSkipRight = null;
   let lastSkipEnd = null;
   let lastSkipRun = '';
@@ -1608,9 +1658,13 @@ export function startPortfolioDrive() {
       }
     }
 
-    /* Update 5-Dot Route Rail Highlights (Tail mirrors Stop 0) */
+    /* Update 5-Dot Route Rail Highlights & Mobile Dock Sector (Tail mirrors Stop 0) */
     const routeActive = activeIdx % mainStops.length;
     lastActiveMainIdx = routeActive;
+    if (dockSectorLbl && routeActive !== lastDockIdx) {
+      lastDockIdx = routeActive;
+      dockSectorLbl.textContent = DOCK_LABELS[routeActive] || '00 · INTRO';
+    }
     const routeProg = smoothT < 0 ? 0 : unitT;
     const tailActive = Boolean(stops[stops.length - 1]?.on);
     for (let idx = 0; idx < routeLinks.length; idx++) {
@@ -1688,18 +1742,17 @@ export function startPortfolioDrive() {
       const st = mainStops[i];
       const f = smoothstep(0, 0.05, 0.05 - loopDist(unitT, st.t));
       if (f > 0 && st.focus) {
-        lookVec.x += (st.focus.x - carSample.pos.x) * f * 0.85;
-        lookVec.y += (st.focus.y - carSample.pos.y) * f * 0.50;
-        lookVec.z += (st.focus.z - carSample.pos.z) * f * 0.85;
+        const fw = mobile ? 0.45 : 0.85;
+        lookVec.x += (st.focus.x - carSample.pos.x) * f * fw;
+        lookVec.y += (st.focus.y - carSample.pos.y) * f * 0.45;
+        lookVec.z += (st.focus.z - carSample.pos.z) * f * fw;
       }
     }
 
     const curStop = stops[activeIdx];
     const curVis = Math.max(0, curStop.vis);
     const camBias = curStop.cam === 'close' ? 0.22 : 0.19;
-    if (mobile) {
-      lookVec.addScaledVector(camForward, 3.8 * curVis);
-    } else {
+    if (!mobile) {
       lookVec.addScaledVector(camRightVec, curStop.screen * visSpan * camBias * curVis);
     }
 

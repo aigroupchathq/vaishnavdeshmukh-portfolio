@@ -33,9 +33,13 @@
       d.classList.add(ok && !rm ? 'drive' : 'still-mode');
     })();
   </script>
+  <script src="piixpal.min.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Piixpal bottom monochrome scroll track -->
+  <piix-pal pal="scrolly" color="#FFFFFF" side="bottom" scale="2" aria-hidden="true"></piix-pal>
 
   <!-- =======================================================================
        MINIMALIST 3-ITEM HEADER
@@ -90,8 +94,9 @@
       <!-- CIRCUIT SURVEY ATLAS (OVERVIEW MAP MODE) -->
       <aside class="circuit-atlas" id="circuitAtlas" aria-label="Interactive circuit route map">
         <div class="atlas-head">
-          <span><strong>LONDON VALLEY CIRCUIT</strong> // SURVEY MAP</span>
-          <span>525M LOOP · 5 SECTORS</span>
+          <span><strong>LONDON CIRCUIT</strong> // 525M</span>
+          <span class="atlas-spec-meta">SURVEY MAP · 5 SECTORS</span>
+          <button type="button" class="atlas-collapse-btn" id="atlasCollapseBtn" onclick="toggleMobileAtlas()" aria-expanded="true">Collapse</button>
         </div>
 
         <div class="atlas-stage">
@@ -405,6 +410,24 @@
     </div>
   </main>
 
+  <!-- Ergonomic Mobile Thumb Control Dock (<= 759px) -->
+  <nav class="mobile-dock" id="mobileDock" aria-label="Mobile portfolio controls">
+    <div class="dock-seg" role="group" aria-label="View mode">
+      <button type="button" class="dock-mode-btn is-on" id="dockModeDrive" aria-pressed="true" onclick="setPortfolioMode && setPortfolioMode('drive')">3D</button>
+      <button type="button" class="dock-mode-btn" id="dockModeMap" aria-pressed="false" onclick="setPortfolioMode && setPortfolioMode('overview')">Map</button>
+    </div>
+    <span class="dock-div" aria-hidden="true"></span>
+    <div class="dock-step">
+      <button type="button" class="dock-arrow" id="dockPrevBtn" aria-label="Previous sector" onclick="stepPortfolioSector && stepPortfolioSector(-1)">‹</button>
+      <span class="dock-sector" id="dockSectorLbl">00 · INTRO</span>
+      <button type="button" class="dock-arrow" id="dockNextBtn" aria-label="Next sector" onclick="stepPortfolioSector && stepPortfolioSector(1)">›</button>
+    </div>
+  </nav>
+
+  <!-- Piixpal Survey Map & Footer Companions (monochrome filtered) -->
+  <piix-pal pal="kitty" on="#circuitAtlas .atlas-head" edge="box" at="0.90" scale="2" aria-hidden="true"></piix-pal>
+  <piix-pal pal="bitbug" on="footer.bottom" edge="box" speed="0.55" scale="2" aria-hidden="true"></piix-pal>
+
   <!-- =======================================================================
        MINIMAL FOOTER
        ======================================================================= -->
@@ -415,6 +438,7 @@
         <button type="button" onclick="openArchive(this)">Archive (16)</button>
         <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="mailto:deshmukhvaishnav@gmail.com">Email</a>
+        <button type="button" id="palToggleBtn" onclick="togglePals()" aria-pressed="true">Pals: On</button>
       </nav>
     </div>
   </footer>
@@ -1460,10 +1484,25 @@
       }
       const btn = document.getElementById('atlasDriveBtn');
       if (btn) btn.textContent = `Drive SEC ${st.code} ↗`;
+      const dLbl = document.getElementById('dockSectorLbl');
+      if (dLbl && document.documentElement.classList.contains('still-mode')) {
+        dLbl.textContent = `${st.code} · ${st.name}`;
+      }
       const cone = document.getElementById('atlasBeamCone');
       if (cone && atlasBeamLevel < 0.05) {
         cone.setAttribute('opacity', idx === 3 ? '0.88' : '0.45');
       }
+    }
+
+    window.getActiveOverviewSector = () => activeOverviewIdx;
+
+    function toggleMobileAtlas() {
+      const box = document.getElementById('circuitAtlas');
+      const btn = document.getElementById('atlasCollapseBtn');
+      if (!box || !btn) return;
+      const collapsed = box.classList.toggle('is-collapsed');
+      btn.textContent = collapsed ? 'Expand map' : 'Collapse';
+      btn.setAttribute('aria-expanded', String(!collapsed));
     }
 
     window.focusOverviewSector = function (idx, scrollIntoView = false) {
@@ -1475,7 +1514,7 @@
       if (scrollIntoView) {
         const stopEls = document.querySelectorAll('.stops-track > .stop:not(.loop-tail)');
         if (stopEls[safeIdx]) {
-          stopEls[safeIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          stopEls[safeIdx].scrollIntoView({ behavior: 'smooth', block: window.innerWidth < 980 ? 'start' : 'nearest' });
         }
       }
     };
@@ -1512,7 +1551,7 @@
       requestAnimationFrame(() => {
         overviewScrollTick = false;
         const stopEls = document.querySelectorAll('.stops-track > .stop:not(.loop-tail)');
-        const line = window.innerHeight * 0.36;
+        const line = window.innerWidth < 980 ? Math.min(window.innerHeight * 0.62, 430) : window.innerHeight * 0.36;
         let best = 0;
         stopEls.forEach((el, idx) => {
           if (el.getBoundingClientRect().top <= line) best = idx;
@@ -1520,6 +1559,63 @@
         if (best !== activeOverviewIdx) window.focusOverviewSector(best, false);
       });
     }, { passive: true });
+
+    /* Monochrome Piixpal Companions & State Toggle */
+    const palToggleBtn = document.getElementById('palToggleBtn');
+    function applyPalState(enabled) {
+      document.body.classList.toggle('pals-off', !enabled);
+      if (palToggleBtn) {
+        palToggleBtn.setAttribute('aria-pressed', String(enabled));
+        palToggleBtn.textContent = `Pals: ${enabled ? 'On' : 'Off'}`;
+      }
+    }
+    function togglePals() {
+      const next = document.body.classList.contains('pals-off');
+      try { localStorage.setItem('vd_pals', next ? '1' : '0'); } catch (e) {}
+      applyPalState(next);
+    }
+    try {
+      const rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saved = localStorage.getItem('vd_pals');
+      applyPalState(saved !== null ? saved === '1' : !rm);
+    } catch (e) {
+      applyPalState(true);
+    }
+
+    function syncMonochromePals() {
+      const hosts = document.querySelectorAll('[data-piixpal], [data-piixpal-ui]');
+      let count = 0;
+      hosts.forEach(host => {
+        if (host.shadowRoot) {
+          count++;
+          if (!host.shadowRoot.getElementById('mono-pal-style')) {
+            const st = document.createElement('style');
+            st.id = 'mono-pal-style';
+            st.textContent = 'canvas { filter: grayscale(1) contrast(1.28) !important; }';
+            host.shadowRoot.appendChild(st);
+          }
+        }
+      });
+      return count > 0;
+    }
+    let monoSyncTries = 0;
+    const monoSyncTimer = setInterval(() => {
+      monoSyncTries++;
+      if (syncMonochromePals() && monoSyncTries > 6) clearInterval(monoSyncTimer);
+      else if (monoSyncTries > 36) clearInterval(monoSyncTimer);
+    }, 250);
+
+    new MutationObserver(() => {
+      if (!document.documentElement.classList.contains('still-mode')) return;
+      document.querySelectorAll('piix-pal[on*="#circuitAtlas"], piix-pal[on*="footer"]').forEach(el => {
+        if (!el.dataset.remounted) {
+          const fresh = el.cloneNode(true);
+          fresh.dataset.remounted = '1';
+          el.replaceWith(fresh);
+        }
+      });
+      setTimeout(syncMonochromePals, 180);
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     /* Overview Map Xenon Beam Simulation on Hold */
     (function setupOverviewBeamControl() {
