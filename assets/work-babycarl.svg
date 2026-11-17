@@ -2,7 +2,7 @@
   <defs>
     <style>
       text {
-        font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+        font-family: 'Poppins', -apple-system, sans-serif;
       }
       .telemetry {
         font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
@@ -17,9 +17,9 @@
   <rect width="960" height="600" fill="#000000"/>
   <path d="M38 38h884v524H38z" fill="none" stroke="#323232"/>
   <text x="76" y="98" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">HEALTH SYSTEMS / PEDIATRIC CARE</text>
-  <text x="76" y="158" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="38" font-weight="600">Keep the signal in view.</text>
-  <text x="76" y="198" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">A calmer way to bring bedside observations</text>
-  <text x="76" y="225" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">together for a care team.</text>
+  <text x="76" y="158" fill="#ffffff" font-family="'Poppins', -apple-system, sans-serif" font-size="38" font-weight="600">Keep the signal in view.</text>
+  <text x="76" y="198" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">A calmer way to bring bedside observations</text>
+  <text x="76" y="225" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">together for a care team.</text>
   <path d="M76 267h292" stroke="#c5c5c5"/>
   <text x="76" y="300" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">PEDIATRIC TELEMETRY / CONCEPT</text>
   <rect x="407" y="105" width="478" height="370" rx="12" fill="#121212" stroke="#323232"/>
@@ -32,5 +32,5 @@
   <path d="M637 300v-53h92" fill="none" stroke="#A1A1AA" stroke-width="1.5"/>
   <rect x="729" y="225" width="116" height="48" rx="4" fill="#202020"/>
   <text x="744" y="246" fill="#e4e4e4" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12">OBSERVATION</text>
-  <text x="744" y="263" fill="#e4e4e4" font-family="'Inter', -apple-system, sans-serif" font-size="12">review together</text>
+  <text x="744" y="263" fill="#e4e4e4" font-family="'Poppins', -apple-system, sans-serif" font-size="12">review together</text>
 </svg>

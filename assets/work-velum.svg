@@ -2,7 +2,7 @@
   <defs>
     <style>
       text {
-        font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+        font-family: 'Poppins', -apple-system, sans-serif;
       }
       .telemetry {
         font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
@@ -17,9 +17,9 @@
   <rect width="960" height="600" fill="#0a0a0a"/>
   <path d="M38 38h884v524H38z" fill="none" stroke="#262626"/>
   <text x="76" y="98" fill="#a2a2a2" font-family="monospace" font-size="14" letter-spacing="3">COGNITIVE SYSTEMS // COMPATIBILITY DECISION PLATFORM</text>
-  <text x="76" y="160" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="36" font-weight="700">Checkmate (Velum Labs)</text>
-  <text x="76" y="199" fill="#a2a2a2" font-family="'Inter', -apple-system, sans-serif" font-size="17">Reciprocal, explainable relationship decisions</text>
-  <text x="76" y="226" fill="#a2a2a2" font-family="'Inter', -apple-system, sans-serif" font-size="17">focused on values and dealbreakers over swipe mechanics.</text>
+  <text x="76" y="160" fill="#ffffff" font-family="'Poppins', -apple-system, sans-serif" font-size="36" font-weight="700">Checkmate (Velum Labs)</text>
+  <text x="76" y="199" fill="#a2a2a2" font-family="'Poppins', -apple-system, sans-serif" font-size="17">Reciprocal, explainable relationship decisions</text>
+  <text x="76" y="226" fill="#a2a2a2" font-family="'Poppins', -apple-system, sans-serif" font-size="17">focused on values and dealbreakers over swipe mechanics.</text>
   <path d="M76 267h270" stroke="#383838"/>
   <text x="76" y="300" fill="#e4e4e4" font-family="monospace" font-size="13" letter-spacing="2">MUTUALITY // DECISION VECTORS</text>
   

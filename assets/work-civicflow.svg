@@ -2,7 +2,7 @@
   <defs>
     <style>
       text {
-        font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+        font-family: 'Poppins', -apple-system, sans-serif;
       }
       .telemetry {
         font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
@@ -17,9 +17,9 @@
   <rect width="960" height="600" fill="#000000"/>
   <path d="M38 38h884v524H38z" fill="none" stroke="#323232"/>
   <text x="76" y="98" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">CIVIC SYSTEMS / SERVICE DESIGN</text>
-  <text x="76" y="155" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="38" font-weight="600">From reports to a clearer route.</text>
-  <text x="76" y="190" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">A concept for helping public works teams</text>
-  <text x="76" y="216" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">make sense of nearby street reports.</text>
+  <text x="76" y="155" fill="#ffffff" font-family="'Poppins', -apple-system, sans-serif" font-size="38" font-weight="600">From reports to a clearer route.</text>
+  <text x="76" y="190" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">A concept for helping public works teams</text>
+  <text x="76" y="216" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">make sense of nearby street reports.</text>
   <g transform="translate(74 268)" fill="none" stroke="#a3a3a3" stroke-width="2">
     <path d="M18 24 238 0l30 90 210-22 55 151-227 39-29-105-224 23z" fill="#000000"/>
     <path d="m95 26 39 215m92-230 32 184m102-120 40 173m-280-120 324-35"/>
@@ -37,8 +37,8 @@
   <g transform="translate(690 282)">
     <rect width="194" height="142" rx="5" fill="#000000" stroke="#c0c0c0"/>
     <text x="18" y="30" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12" letter-spacing="1.5">NEARBY REPORTS</text>
-    <circle cx="30" cy="62" r="5" fill="#D4D4D8"/><text x="46" y="67" fill="#e4e4e4" font-family="'Inter', -apple-system, sans-serif" font-size="14">Location A</text>
-    <circle cx="30" cy="91" r="5" fill="#D4D4D8"/><text x="46" y="96" fill="#e4e4e4" font-family="'Inter', -apple-system, sans-serif" font-size="14">Location A</text>
-    <circle cx="30" cy="120" r="5" fill="#A1A1AA"/><text x="46" y="125" fill="#e4e4e4" font-family="'Inter', -apple-system, sans-serif" font-size="14">Crew review</text>
+    <circle cx="30" cy="62" r="5" fill="#D4D4D8"/><text x="46" y="67" fill="#e4e4e4" font-family="'Poppins', -apple-system, sans-serif" font-size="14">Location A</text>
+    <circle cx="30" cy="91" r="5" fill="#D4D4D8"/><text x="46" y="96" fill="#e4e4e4" font-family="'Poppins', -apple-system, sans-serif" font-size="14">Location A</text>
+    <circle cx="30" cy="120" r="5" fill="#A1A1AA"/><text x="46" y="125" fill="#e4e4e4" font-family="'Poppins', -apple-system, sans-serif" font-size="14">Crew review</text>
   </g>
 </svg>

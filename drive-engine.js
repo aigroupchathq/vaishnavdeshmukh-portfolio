@@ -274,7 +274,7 @@ function createInkGroup(geo, colorHex = '#151518', { angle = 24, mat = null, edg
   return g;
 }
 
-function createSignSprite(text, { font = '700 68px Archivo, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false } = {}) {
+function createSignSprite(text, { font = '600 64px Poppins, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false } = {}) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const lines = text.split('\n');
@@ -430,11 +430,11 @@ function buildRoadAndScenery(scene, stops) {
       line.position.z = zOff;
       g.add(line);
     }
-    const titleSign = createSignSprite('VAISHNAV DESHMUKH', { font: '800 72px Archivo, sans-serif', width: 5.4, color: '#FFFFFF' });
+    const titleSign = createSignSprite('VAISHNAV DESHMUKH', { font: '600 68px Poppins, sans-serif', width: 5.4, color: '#FFFFFF' });
     titleSign.position.set(0, 4.3, 0.4);
     g.add(titleSign);
 
-    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', { font: '500 50px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(255,255,255,0.58)', flatGround: true });
+    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', { font: '500 46px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(255,255,255,0.55)', flatGround: true });
     floorSign.position.set(0, 0.04, -3.5);
     g.add(floorSign);
 
@@ -443,36 +443,30 @@ function buildRoadAndScenery(scene, stops) {
     addCorridorSpan(anchor.clone().addScaledVector(s.flat, -5), anchor.clone(), 3.8, s.pos.y);
   }
 
-  /* Stop 1: Method Waymarkers (t = 0.13) */
-  if (stops.find(st => st.id === 'ethos')) {
-    const st = stops.find(x => x.id === 'ethos');
-    const dir = -st.screen;
-    const labels = [['01', 'NOTICE FIRST'], ['02', 'CLEAR HIERARCHY'], ['03', 'OFFLINE-FIRST'], ['04', 'SHOW EVIDENCE']];
+  /* Subtle Highway Markers along initial climb (t = 0.08..0.15) */
+  {
+    const dir = -1;
+    const labels = [['01', 'NOTICE'], ['02', 'SIMPLIFY'], ['03', 'VERIFY']];
     labels.forEach(([num, txt], idx) => {
-      const pt = sideOffset(st.t - 0.08 + idx * 0.025, dir, ROAD_HALF_WIDTH + 1.5);
+      const pt = sideOffset(0.08 + idx * 0.035, dir, ROAD_HALF_WIDTH + 1.5);
       const post = createInkGroup(new THREE.CylinderGeometry(0.08, 0.1, 1.8, 6), '#161618');
       post.position.copy(pt.p).setY(pt.y + 0.9);
       propsGroup.add(post);
 
-      const sign = createSignSprite(`${num} // ${txt}`, { font: '600 48px "IBM Plex Mono", monospace', width: 3.6, color: idx === 3 ? '#FFFFFF' : '#D4D4D8' });
+      const sign = createSignSprite(`${num} // ${txt}`, { font: '500 44px "IBM Plex Mono", monospace', width: 3.3, color: idx === 2 ? '#FFFFFF' : '#A1A1AA' });
       sign.position.copy(pt.p).add(new THREE.Vector3(pt.right.x * 0.6, 2.2, pt.right.z * 0.6));
       sign.rotation.y = pt.yaw + (dir > 0 ? Math.PI : 0);
       propsGroup.add(sign);
     });
-    const ptMain = sideOffset(st.t, dir, ROAD_HALF_WIDTH + 5);
-    anchors['ethos'] = ptMain.p.clone();
   }
 
-  /* Dynamic Domain Landmark Props for Stops 2..6 */
+  /* Monochrome Highway Gantries for Stops 1..2 */
   const domainSpecs = [
-    { id: 'health', label: 'CLINICAL & WARD', accent: true },
-    { id: 'cognitive', label: 'ATTENTION LABS', accent: false },
-    { id: 'civic', label: 'CIVIC & ROADS', accent: true },
-    { id: 'automotive', label: 'CARS & PROVENANCE', accent: true },
-    { id: 'studio', label: 'AUDIO & WRITING', accent: false }
+    { id: 'systems', label: 'SYSTEMS & CIVIC', accent: true },
+    { id: 'perception', label: 'ATTENTION & CRAFT', accent: false }
   ];
 
-  domainSpecs.forEach((spec, idx) => {
+  domainSpecs.forEach(spec => {
     const st = stops.find(x => x.id === spec.id);
     if (!st) return;
     const dir = -st.screen;
@@ -494,7 +488,6 @@ function buildRoadAndScenery(scene, stops) {
     headerBar.position.set(0, 3.45, 0);
     frame.add(headerBar);
 
-    /* Monochrome prism marker */
     const beacon = new THREE.Mesh(
       new THREE.OctahedronGeometry(0.55, 0),
       new THREE.MeshBasicMaterial({ color: spec.accent ? CHALK : SILVER, wireframe: true })
@@ -508,13 +501,13 @@ function buildRoadAndScenery(scene, stops) {
 
     propsGroup.add(frame);
 
-    const lbl = createSignSprite(spec.label, { font: '700 66px Archivo, sans-serif', width: 4.5, color: '#FFFFFF' });
+    const lbl = createSignSprite(spec.label, { font: '600 62px Poppins, sans-serif', width: 4.6, color: '#FFFFFF' });
     lbl.position.copy(pt.p).setY(pt.y + 4.3);
     lbl.rotation.y = pt.yaw + (dir > 0 ? Math.PI : 0);
     propsGroup.add(lbl);
   });
 
-  /* Stop 7: Beam & Throttle Sweep Pad (stop-rev / systems test) */
+  /* Stop 3: Beam & Throttle Sweep Pad (stop-rev) */
   if (stops.find(st => st.id === 'rev')) {
     const st = stops.find(x => x.id === 'rev');
     const pt = sideOffset(st.t, -st.screen, ROAD_HALF_WIDTH + 6.4);
@@ -555,7 +548,7 @@ function buildRoadAndScenery(scene, stops) {
     hub.position.y = 0.04;
     dialGroup.add(hub);
 
-    const testText = createSignSprite('BEAM // PACE', { font: '700 84px "IBM Plex Mono", monospace', width: 2.5, flatGround: true, color: 'rgba(255,255,255,0.75)' });
+    const testText = createSignSprite('BEAM // PACE', { font: '600 84px "IBM Plex Mono", monospace', width: 2.5, flatGround: true, color: 'rgba(255,255,255,0.75)' });
     testText.position.set(0, 0.01, 2.0);
     dialGroup.add(testText);
 
@@ -565,7 +558,7 @@ function buildRoadAndScenery(scene, stops) {
     dialSweep = sweep;
   }
 
-  /* Stop 8: Final Archive & Inquiries Archway (stop-gate, t = 1.0) */
+  /* Stop 4: Final Archive & Inquiries Archway (stop-gate, t = 1.0) */
   if (stops.find(st => st.id === 'gate')) {
     sampleRoad(1, s);
     const arch = new THREE.Group();
@@ -585,7 +578,7 @@ function buildRoadAndScenery(scene, stops) {
     propsGroup.add(arch);
     anchors['gate'] = arch.position.clone();
 
-    const gateLbl = createSignSprite('ALL 16 WORKS · CONTACT', { font: '800 76px Archivo, sans-serif', width: 5.4, color: '#FFFFFF' });
+    const gateLbl = createSignSprite('ARCHIVE 16 · CONTACT', { font: '600 68px Poppins, sans-serif', width: 5.2, color: '#FFFFFF' });
     gateLbl.position.copy(arch.position).add(new THREE.Vector3(0, 5.2, 0));
     gateLbl.rotation.y = arch.rotation.y + Math.PI;
     propsGroup.add(gateLbl);
@@ -1005,13 +998,15 @@ export function startPortfolioDrive() {
   let revDown = false;
   let revLevel = 0;
   const revBtn = document.getElementById('instrument-rev');
+  const beamReadout = document.getElementById('beamReadout');
+  const beamBar = document.getElementById('beamBar');
   if (revBtn) {
-    revBtn.addEventListener('pointerdown', () => revDown = true);
-    addEventListener('pointerup', () => revDown = false);
-    revBtn.addEventListener('pointercancel', () => revDown = false);
-    revBtn.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') revDown = true; });
-    revBtn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') revDown = false; });
-    revBtn.addEventListener('blur', () => revDown = false);
+    revBtn.addEventListener('pointerdown', () => { revDown = true; revBtn.classList.add('down'); });
+    addEventListener('pointerup', () => { revDown = false; revBtn.classList.remove('down'); });
+    revBtn.addEventListener('pointercancel', () => { revDown = false; revBtn.classList.remove('down'); });
+    revBtn.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { revDown = true; revBtn.classList.add('down'); } });
+    revBtn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') { revDown = false; revBtn.classList.remove('down'); } });
+    revBtn.addEventListener('blur', () => { revDown = false; revBtn.classList.remove('down'); });
   }
 
   function currentOverviewStop() {
@@ -1023,7 +1018,7 @@ export function startPortfolioDrive() {
     return found;
   }
 
-  /* Mode Switchers: Skip Drive <-> Take Drive */
+  /* Mode Switchers: Drive <-> Overview */
   function enterOverviewMode() {
     if (mode === 'overview') return;
     mode = 'overview';
@@ -1033,7 +1028,7 @@ export function startPortfolioDrive() {
       html.classList.add('still-mode', 'after-drive');
       if (takeBtn) takeBtn.hidden = false;
       const modeBtn = document.getElementById('modeToggleBtn');
-      if (modeBtn) modeBtn.textContent = 'Take the drive';
+      if (modeBtn) modeBtn.textContent = '3D drive';
       window.scrollTo({ top: 0, behavior: 'instant' });
       if (veil) veil.classList.remove('on');
     }, 320);
@@ -1049,7 +1044,7 @@ export function startPortfolioDrive() {
       html.classList.add('drive');
       if (takeBtn) takeBtn.hidden = true;
       const modeBtn = document.getElementById('modeToggleBtn');
-      if (modeBtn) modeBtn.textContent = 'Full page';
+      if (modeBtn) modeBtn.textContent = 'Overview';
       resize();
       const targetY = scrollBands[targetIdx] ? scrollBands[targetIdx].mid : 0;
       window.scrollTo({ top: targetY, behavior: 'instant' });
@@ -1132,6 +1127,9 @@ export function startPortfolioDrive() {
       if (dDial.pivot) {
         dDial.pivot.rotation.y = dDial.a0 - revLevel * 0.906 * dDial.sweep - Math.PI / 2;
       }
+      const pct = Math.min(100, Math.round(revLevel * 100));
+      if (beamReadout) beamReadout.textContent = `${String(pct).padStart(3, '0')}%`;
+      if (beamBar) beamBar.style.transform = `scaleX(${Math.max(0.02, revLevel).toFixed(3)})`;
 
       worldUniforms.uCarPos.value.copy(carSample.pos);
       worldUniforms.uCarDir.value.copy(carSample.flat);

@@ -2,7 +2,7 @@
   <defs>
     <style>
       text {
-        font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+        font-family: 'Poppins', -apple-system, sans-serif;
       }
       .telemetry {
         font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
@@ -17,9 +17,9 @@
   <rect width="960" height="600" fill="#000000"/>
   <path d="M38 38h884v524H38z" fill="none" stroke="#323232"/>
   <text x="76" y="98" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">CIVIC INFRASTRUCTURE / FIELD NOTE</text>
-  <text x="76" y="160" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="38" font-weight="600">See the road as a crew does.</text>
-  <text x="76" y="199" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">A mobile concept for spotting, reviewing</text>
-  <text x="76" y="226" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">and recording surface defects.</text>
+  <text x="76" y="160" fill="#ffffff" font-family="'Poppins', -apple-system, sans-serif" font-size="38" font-weight="600">See the road as a crew does.</text>
+  <text x="76" y="199" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">A mobile concept for spotting, reviewing</text>
+  <text x="76" y="226" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">and recording surface defects.</text>
   <path d="M76 267h270" stroke="#323232"/>
   <text x="76" y="300" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">FIELD CAPTURE / HUMAN REVIEW</text>
   <path d="M400 95h480v402H400z" fill="#1e1e1e"/>

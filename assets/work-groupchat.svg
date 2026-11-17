@@ -2,7 +2,7 @@
   <defs>
     <style>
       text {
-        font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+        font-family: 'Poppins', -apple-system, sans-serif;
       }
       .telemetry {
         font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
@@ -17,9 +17,9 @@
   <rect width="960" height="600" fill="#000000"/>
   <path d="M38 38h884v524H38z" fill="none" stroke="#323232"/>
   <text x="76" y="98" fill="#E4E4E7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="15" letter-spacing="3">COLLABORATION / DECISION SUPPORT</text>
-  <text x="76" y="159" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="38" font-weight="600">Many voices, one next step.</text>
-  <text x="76" y="199" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">A conversation tool for gathering ideas</text>
-  <text x="76" y="226" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="17">and finding the point they share.</text>
+  <text x="76" y="159" fill="#ffffff" font-family="'Poppins', -apple-system, sans-serif" font-size="38" font-weight="600">Many voices, one next step.</text>
+  <text x="76" y="199" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">A conversation tool for gathering ideas</text>
+  <text x="76" y="226" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="17">and finding the point they share.</text>
   <path d="M76 267h278" stroke="#E4E4E7"/>
   <text x="76" y="300" fill="#E4E4E7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">LISTEN / COMPARE / SYNTHESISE</text>
   <g fill="none" stroke="#b3b3b3" stroke-width="2">

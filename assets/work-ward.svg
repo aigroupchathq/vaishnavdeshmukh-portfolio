@@ -2,7 +2,7 @@
   <defs>
     <style>
       text {
-        font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+        font-family: 'Poppins', -apple-system, sans-serif;
       }
       .telemetry {
         font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
@@ -17,9 +17,9 @@
   <rect width="1440" height="590" fill="#000000"/>
   <path d="M52 48h1336v494H52z" fill="none" stroke="#323232"/>
   <text x="88" y="105" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="16" letter-spacing="3">HEALTH SYSTEMS / FIELD STUDY 01</text>
-  <text x="88" y="184" fill="#ffffff" font-family="'Inter', -apple-system, sans-serif" font-size="39" font-weight="600">Find what you need.</text>
-  <text x="88" y="222" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="19">A floor plan shaped around the search</text>
-  <text x="88" y="250" fill="#d4d4d4" font-family="'Inter', -apple-system, sans-serif" font-size="19">for essential mobile equipment.</text>
+  <text x="88" y="184" fill="#ffffff" font-family="'Poppins', -apple-system, sans-serif" font-size="39" font-weight="600">Find what you need.</text>
+  <text x="88" y="222" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="19">A floor plan shaped around the search</text>
+  <text x="88" y="250" fill="#d4d4d4" font-family="'Poppins', -apple-system, sans-serif" font-size="19">for essential mobile equipment.</text>
   <path d="M88 292h320" stroke="#3f3f3f"/>
   <text x="88" y="326" fill="#a2a2a2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="14" letter-spacing="2">SPATIAL WAYFINDING</text>
   <g transform="translate(500 86)" fill="none" stroke="#ffffff" stroke-width="2">

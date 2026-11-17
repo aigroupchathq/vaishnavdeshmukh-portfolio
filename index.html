@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Vaishnav Deshmukh — Product Design &amp; Systems Engineering</title>
-  <meta name="description" content="Personal portfolio of Vaishnav Deshmukh in London. Sixteen software projects and practical studies across clinical tools, attention, civic roads, and car records.">
+  <title>Vaishnav Deshmukh — Product Design &amp; Systems</title>
+  <meta name="description" content="Minimalist interactive portfolio of Vaishnav Deshmukh in London. Sixteen software builds and field studies across clinical systems, perception, civic roads, and automotive history.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/">
   <meta name="theme-color" content="#000000">
 
-  <!-- Fonts: Archivo, Inter, IBM Plex Mono -->
+  <!-- Fonts: IndiGo Web Sans (Poppins) + IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="portfolio-drive.css">
 
   <script>
-    /* Decide mode before first paint: 3D car drive vs calm still page */
+    /* Select 3D Highway Drive vs calm Overview before first paint */
     (function () {
       var d = document.documentElement, ok = false;
       try {
@@ -31,384 +31,213 @@
       d.classList.add(ok && !rm ? 'drive' : 'still-mode');
     })();
   </script>
-
-  <!-- Piixpal custom elements -->
-  <script src="piixpal.min.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- =======================================================================
-       STICKY HEADER NAVIGATION
+       MINIMALIST 3-ITEM HEADER
        ======================================================================= -->
   <header class="top">
-    <div class="wrap top-row">
-      <a class="brand" href="#stop-garage" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(0)">
-        VAISHNAV <small>DESHMUKH</small>
-      </a>
-
-      <nav class="nav nav-desk" aria-label="Primary sections">
-        <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">How I work</a>
-        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Work</a>
-        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Sweep test</a>
-        <button type="button" class="nav-link" onclick="openMatrix(this)">All 16</button>
-        <a href="deck.html">Deck →</a>
-      </nav>
-
+    <div class="top-row">
+      <a class="brand" href="#stop-garage" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(0)">Vaishnav Deshmukh</a>
       <div class="top-right">
-        <button type="button" class="btn ghost sm" id="modeToggleBtn" onclick="togglePortfolioViewMode && togglePortfolioViewMode()">Full page</button>
+        <button type="button" class="hdr-link" id="modeToggleBtn" onclick="togglePortfolioViewMode && togglePortfolioViewMode()">Overview</button>
+        <button type="button" class="hdr-link" onclick="openArchive(this)">Archive (16)</button>
         <a class="btn primary sm" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">Say hello</a>
       </div>
-    </div>
-
-    <div class="nav-row">
-      <nav class="nav" aria-label="Primary sections mobile">
-        <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">How I work</a>
-        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Work</a>
-        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Sweep test</a>
-        <button type="button" class="nav-link" onclick="openMatrix(this)">All 16</button>
-        <a href="deck.html">Deck →</a>
-      </nav>
     </div>
   </header>
 
   <!-- =======================================================================
-       FIXED 3D WORLD CANVAS (WINDING NIGHT ROAD + MONOCHROME COUPÉ)
+       FIXED 3D WORLD CANVAS (MONOCHROME NIGHT ROAD + ARCHITECTURAL COUPÉ)
        ======================================================================= -->
   <div class="world" aria-hidden="true">
     <canvas id="world"></canvas>
-    <div class="grain"></div>
     <div class="vignette"></div>
   </div>
 
   <!-- Ignition Screen & Transition Veil -->
   <div class="ignition" id="ignition" aria-hidden="true">
-    <span>Initializing 3D route</span>
+    <span>Loading 3D route</span>
     <i></i>
   </div>
   <div class="veil" id="veil" aria-hidden="true"></div>
 
-  <!-- Piixpal bottom monochrome scroll track -->
-  <piix-pal pal="scrolly" color="#FFFFFF" side="bottom"></piix-pal>
-
   <!-- =======================================================================
-       RIGHT-SIDE ROUTE RAIL MAP (9 WAYPOINTS)
+       5-DOT MINIMAL ROUTE INDICATOR
        ======================================================================= -->
   <nav class="route" aria-label="Journey route">
-    <a href="#stop-garage" data-i="0"><i></i><span>00 · Start</span></a>
-    <a href="#stop-ethos" data-i="1"><i></i><span>01 · How I work</span></a>
-    <a href="#stop-health" data-i="2"><i></i><span>02 · Clinical</span></a>
-    <a href="#stop-cognitive" data-i="3"><i></i><span>03 · Perception</span></a>
-    <a href="#stop-civic" data-i="4"><i></i><span>04 · Civic roads</span></a>
-    <a href="#stop-automotive" data-i="5"><i></i><span>05 · Automotive</span></a>
-    <a href="#stop-studio" data-i="6"><i></i><span>06 · Audio &amp; AI</span></a>
-    <a href="#stop-rev" data-i="7"><i></i><span>07 · Sweep test</span></a>
-    <a href="#stop-gate" data-i="8"><i></i><span>08 · Say hello</span></a>
+    <a href="#stop-garage" data-i="0"><i></i><span>00 · Intro</span></a>
+    <a href="#stop-systems" data-i="1"><i></i><span>01 · Systems</span></a>
+    <a href="#stop-perception" data-i="2"><i></i><span>02 · Craft</span></a>
+    <a href="#stop-rev" data-i="3"><i></i><span>03 · Optics</span></a>
+    <a href="#stop-gate" data-i="4"><i></i><span>04 · Contact</span></a>
   </nav>
 
-  <!-- Floating View Mode Sign: Full page / 3D Drive -->
-  <a class="skip-drive sign" href="#overview" role="button" aria-label="Switch to flat full page overview">
-    <svg class="sign-art" viewBox="0 0 36 16" width="36" height="16" aria-hidden="true" focusable="false">
-      <rect x="2" y="2" width="14" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/>
-      <rect x="2" y="9" width="14" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/>
-      <path d="M21 8H33M29 4L33 8L29 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Flat overview</span>
-  </a>
-
   <p class="scroll-hint" id="scroll-hint" aria-hidden="true">
-    <span>Scroll to drive</span>
+    <span>Scroll</span>
     <i></i>
   </p>
 
   <!-- =======================================================================
-       MAIN SCROLL-DRIVEN JOURNEY STOPS (9 WAYPOINTS)
+       5 FRAMELESS GHOST CHAPTERS OVER 3D CAR SCROLL
        ======================================================================= -->
   <main id="main" tabindex="-1">
 
-    <button class="take-drive sign" type="button" hidden>
-      <svg class="sign-art" viewBox="0 0 36 16" width="36" height="16" aria-hidden="true" focusable="false">
-        <path d="M2 13L11 3L21 13" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23 8H34M30 4L34 8L30 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>Return to 3D drive</span>
-    </button>
-
-    <!-- STOP 0: START / HERO -->
+    <!-- STOP 0: INTRO -->
     <section class="stop" id="stop-garage" data-t="0.0" data-side="left" data-cam="garage">
-      <div class="card hero-card">
-        <span class="label">Vaishnav Deshmukh · London, UK</span>
-        <h1>
-          Good software<br>
-          <span class="c">starts with noticing.</span>
-        </h1>
-        <p class="value">MSc Logistics · Product design · Working prototypes</p>
-        <p class="lede">
-          I’m drawn to the small frictions people learn to live with: a misplaced piece of hospital equipment, a confusing council form, or a tool that asks too much. Scroll to drive through sixteen projects and studies.
-        </p>
-
-        <div class="hero-index-strip" aria-label="Portfolio index summary">
-          <span><strong>16</strong> Works</span>
-          <span><strong>11</strong> Live Links</span>
-          <span><strong>05</strong> Design Studies</span>
-          <span><strong>09</strong> Chapters</span>
-        </div>
-
-        <div class="cta">
-          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(2)">Explore the work ↓</button>
-          <button type="button" class="btn ghost" onclick="openMatrix(this)">Browse all 16</button>
-          <a class="btn ghost" href="deck.html">Card Deck ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOP 1: HOW I WORK -->
-    <section class="stop" id="stop-ethos" data-t="0.125" data-side="right" data-cam="near">
-      <div class="card wide">
-        <span class="label">01 · How I work</span>
-        <h2>Honest status on every project. What runs live, and what stays a study.</h2>
-        <p class="lede sm">
-          Notice the real constraint first, cut out extra steps, make sure it survives offline without dropping state, and mark live code separately from design studies.
-        </p>
-
-        <div class="states">
-          <div class="state">
-            <span class="tag live"><i></i>11 Live projects</span>
-            <ul>
-              <li>Running browser demos and public codebases (Datum Atelier, CivicFlow, iTHINK, Rulers Language, Velum Labs, Vedic Tree OS).</li>
-            </ul>
-          </div>
-          <div class="state">
-            <span class="tag">5 Design studies</span>
-            <ul>
-              <li>Prototypes built around messy offline settings where network connections fail (Ward Logistics, RoadTriage, BabyCarl, GroupChat HQ).</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="method-note">Notice the bottleneck · Subtract clutter · Ship honest state</p>
-      </div>
-    </section>
-
-    <!-- STOP 2: CLINICAL & WARD TOOLS -->
-    <section class="stop" id="stop-health" data-t="0.25" data-side="left">
-      <div class="card wide">
-        <span class="label">02 · Clinical &amp; Ward Tools</span>
-        <h2>Equipment wayfinding and quiet bedside logging.</h2>
-        <p class="lede sm">Shaped around hospital floor plans and night shifts, avoiding bright screens and basement Wi-Fi dead zones.</p>
-
-        <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('ward', this)">
-        <div class="door-top">
-          <h3>Predictive Ward Logistics Engine</h3>
-          <span class="door-status">Study</span>
-        </div>
-        <p>Offline-first floorplan tool for tracing hospital infusion pumps in basement corridors without cloud reliance.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('babycarl', this)">
-        <div class="door-top">
-          <h3>BabyCarl: Circadian Telemetry</h3>
-          <span class="door-status">Study</span>
-        </div>
-        <p>Gentle newborn feed and sleep tracker shaped for tired parents with dim night contrast and zero alert spam.</p>
-      </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOP 3: ATTENTION & PERCEPTION -->
-    <section class="stop" id="stop-cognitive" data-t="0.375" data-side="right">
-      <div class="card wide">
-        <span class="label">03 · Attention &amp; Perception</span>
-        <h2>Browser experiments on sight, focus, and reflection.</h2>
-        <p class="lede sm">Small interactive pages using canvas motion, spatial models, and simple Web Audio tones to explore how we pay attention.</p>
-
-        <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('consciousness', this)">
-        <div class="door-top">
-          <h3>The Unexplored Interior</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Self-guided visual awareness and attention demos inspired by theories of perception.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('ithink', this)">
-        <div class="door-top">
-          <h3>iTHINK: Attention & Flow Lab</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Browser prototype combining interactive 3D brain models with paced attention exercises and reflection prompts.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('itsyou', this)">
-        <div class="door-top">
-          <h3>The Observer: Thought & Awareness</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.</p>
-      </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOP 4: CIVIC & ROAD MAINTENANCE -->
-    <section class="stop" id="stop-civic" data-t="0.50" data-side="left">
-      <div class="card wide">
-        <span class="label">04 · Civic &amp; Road Maintenance</span>
-        <h2>Grouping duplicate street reports and logging road damage offline.</h2>
-        <p class="lede sm">Practical municipal tools to stop dispatch teams sorting twenty reports for the same pothole.</p>
-
-        <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('civicflow', this)">
-        <div class="door-top">
-          <h3>CivicFlow: Highways Triage Engine</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Spatial clustering demo that groups duplicate public pothole reports on council maps before dispatch.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('roadtriage', this)">
-        <div class="door-top">
-          <h3>RoadTriage: Edge Defect Scanner</h3>
-          <span class="door-status">Study</span>
-        </div>
-        <p>Mobile inspection concept for tagging road surface defects offline while checking routes.</p>
-      </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOP 5: CARS, DRIVING & RECORDS -->
-    <section class="stop" id="stop-automotive" data-t="0.625" data-side="right">
-      <div class="card wide">
-        <span class="label">05 · Cars, Safety &amp; Records</span>
-        <h2>Service histories that stay with the car, plus browser safety tests.</h2>
-        <p class="lede sm">Including Datum Atelier, built to keep invoices and work records with the vehicle through every change of owner.</p>
-
-        <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('datumatelier', this)">
-        <div class="door-top">
-          <h3>Datum Atelier</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Independent car record keeping invoices, workshop entries, and notes with the vehicle across keepers.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('datumadas', this)">
-        <div class="door-top">
-          <h3>Datum ADAS</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Browser safety interface exploring low-clutter following distance cues and peripheral hazard awareness.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('driver', this)">
-        <div class="door-top">
-          <h3>The Driver of God</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.</p>
-      </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOP 6: WRITING, AUDIO & OPERATIONS -->
-    <section class="stop" id="stop-studio" data-t="0.75" data-side="left">
-      <div class="card wide">
-        <span class="label">06 · Audio, Writing &amp; Tools</span>
-        <h2>Six focused tools across pacing, writing, matching, and school operations.</h2>
-        <p class="lede sm">Bilingual lyric timing, script-linked audio tracks, shared team decisions, and multi-campus attendance ledgers.</p>
-
-        <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('vision', this)">
-        <div class="door-top">
-          <h3>Rulers Language</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Practical guide to working with AI: pick a path, shape clear instructions, verify outputs, and cut fluff.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('scriptstudio', this)">
-        <div class="door-top">
-          <h3>AI Script Studio: Multi-Track DAW</h3>
-          <span class="door-status">Study</span>
-        </div>
-        <p>Browser script and sound editor connecting written lines directly to pacing blocks on an audio timeline.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('hiddenleaf', this)">
-        <div class="door-top">
-          <h3>Hidden Leaf Studio</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Hindi–English lyric writing workspace counting Hindi matras, rhyme flows, and built-in beat loops.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('groupchat', this)">
-        <div class="door-top">
-          <h3>GroupChat HQ: Consensus Engine</h3>
-          <span class="door-status">Study</span>
-        </div>
-        <p>Concept turning busy group chat threads into a clear map of open questions and agreed decisions.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('velum', this)">
-        <div class="door-top">
-          <h3>Checkmate (Velum Labs)</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Structured compatibility tool comparing practical expectations and core values clearly, without swipe tricks.</p>
-      </button>
-<button type="button" class="door" onclick="openProjectDossier('vtsystem', this)">
-        <div class="door-top">
-          <h3>Vedic Tree OS</h3>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <p>Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.</p>
-      </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOP 7: DRIVE & BEAM SWEEP TEST -->
-    <section class="stop" id="stop-rev" data-t="0.875" data-side="right" data-cam="close">
       <div class="card">
-        <span class="label">07 · Sweep Test</span>
-        <h2>Beam &amp; Pace Control.</h2>
-        <p class="lede sm">
-          Hold to sweep the monochrome beam across the highway grid and push output toward 100%. Cycles stay local to this browser.
+        <span class="label">London · Systems &amp; Product Design</span>
+        <h1>Software shaped around how things break.</h1>
+        <p class="lede">
+          Sixteen builds and field studies across clinical wards, human attention, civic roads, and vehicle provenance.
         </p>
+        <div class="cta">
+          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(1)">Drive through work ↓</button>
+          <button type="button" class="btn ghost" onclick="openArchive(this)">Archive (16)</button>
+        </div>
+      </div>
+    </section>
 
-        <div class="instrument" id="instrument">
-          <div class="instrument-stage">
-            <div class="instrument-dial">
-              <canvas id="instrument-canvas" role="img" aria-label="Monochrome beam output dial"></canvas>
-            </div>
-            <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to sweep beam output">HOLD TO SWEEP</button>
+    <!-- STOP 1: SYSTEMS & CIVIC FLAGSHIPS (3 ROWS + HOVER WIREFRAME PEEK) -->
+    <section class="stop" id="stop-systems" data-t="0.25" data-side="right" data-cam="near">
+      <div class="card" onmouseleave="clearGhostPeek('systems')">
+        <span class="label">01 · Flagship Systems</span>
+        <h2>Clinical wards, civic roads, and car histories.</h2>
+        <div class="ghost-list">
+          <button type="button" class="ghost-row"
+        onmouseenter="setGhostPeek('systems', 'datumatelier')"
+        onfocus="setGhostPeek('systems', 'datumatelier')"
+        onclick="openSplitInspector('datumatelier', this)">
+        <div class="ghost-row-top">
+          <span class="ghost-title-group">
+            <span class="ghost-num">01</span>
+            <span class="ghost-title">Datum Atelier</span>
+          </span>
+          <span class="ghost-status is-live">Live ↗</span>
+        </div>
+        <span class="ghost-desc">Vehicle service records chained permanently across owners.</span>
+      </button>
+<button type="button" class="ghost-row"
+        onmouseenter="setGhostPeek('systems', 'ward')"
+        onfocus="setGhostPeek('systems', 'ward')"
+        onclick="openSplitInspector('ward', this)">
+        <div class="ghost-row-top">
+          <span class="ghost-title-group">
+            <span class="ghost-num">02</span>
+            <span class="ghost-title">Predictive Ward Logistics Engine</span>
+          </span>
+          <span class="ghost-status">Study</span>
+        </div>
+        <span class="ghost-desc">Offline hospital pump wayfinding through basement dead zones.</span>
+      </button>
+<button type="button" class="ghost-row"
+        onmouseenter="setGhostPeek('systems', 'civicflow')"
+        onfocus="setGhostPeek('systems', 'civicflow')"
+        onclick="openSplitInspector('civicflow', this)">
+        <div class="ghost-row-top">
+          <span class="ghost-title-group">
+            <span class="ghost-num">03</span>
+            <span class="ghost-title">CivicFlow: Highways Triage Engine</span>
+          </span>
+          <span class="ghost-status is-live">Live ↗</span>
+        </div>
+        <span class="ghost-desc">Groups duplicate street pothole reports before dispatch.</span>
+      </button>
+        </div>
+        <div class="ghost-peek-wrap" id="peek-systems" aria-hidden="true">
+          <div class="ghost-peek-thumb"><img id="peek-img-systems" src="assets/work-datumatelier.svg" alt="" /></div>
+          <div class="ghost-peek-caption" id="peek-cap-systems"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 2: ATTENTION & STUDIO FLAGSHIPS (3 ROWS + HOVER WIREFRAME PEEK) -->
+    <section class="stop" id="stop-perception" data-t="0.50" data-side="left" data-cam="near">
+      <div class="card" onmouseleave="clearGhostPeek('perception')">
+        <span class="label">02 · Perception &amp; Studio</span>
+        <h2>Quiet tools for focus, pacing, and audio scripts.</h2>
+        <div class="ghost-list">
+          <button type="button" class="ghost-row"
+        onmouseenter="setGhostPeek('perception', 'itsyou')"
+        onfocus="setGhostPeek('perception', 'itsyou')"
+        onclick="openSplitInspector('itsyou', this)">
+        <div class="ghost-row-top">
+          <span class="ghost-title-group">
+            <span class="ghost-num">04</span>
+            <span class="ghost-title">The Observer: Thought & Awareness</span>
+          </span>
+          <span class="ghost-status is-live">Live ↗</span>
+        </div>
+        <span class="ghost-desc">Quiet pause-and-notice prompt without habit streak traps.</span>
+      </button>
+<button type="button" class="ghost-row"
+        onmouseenter="setGhostPeek('perception', 'ithink')"
+        onfocus="setGhostPeek('perception', 'ithink')"
+        onclick="openSplitInspector('ithink', this)">
+        <div class="ghost-row-top">
+          <span class="ghost-title-group">
+            <span class="ghost-num">05</span>
+            <span class="ghost-title">iTHINK: Attention & Flow Lab</span>
+          </span>
+          <span class="ghost-status is-live">Live ↗</span>
+        </div>
+        <span class="ghost-desc">Browser lab pairing 3D brain models with attention pacing.</span>
+      </button>
+<button type="button" class="ghost-row"
+        onmouseenter="setGhostPeek('perception', 'scriptstudio')"
+        onfocus="setGhostPeek('perception', 'scriptstudio')"
+        onclick="openSplitInspector('scriptstudio', this)">
+        <div class="ghost-row-top">
+          <span class="ghost-title-group">
+            <span class="ghost-num">06</span>
+            <span class="ghost-title">AI Script Studio: Multi-Track DAW</span>
+          </span>
+          <span class="ghost-status">Study</span>
+        </div>
+        <span class="ghost-desc">Written script lines locked directly to an audio timeline.</span>
+      </button>
+        </div>
+        <div class="ghost-peek-wrap" id="peek-perception" aria-hidden="true">
+          <div class="ghost-peek-thumb"><img id="peek-img-perception" src="assets/work-observer.svg" alt="" /></div>
+          <div class="ghost-peek-caption" id="peek-cap-perception"></div>
+        </div>
+        <button type="button" class="ghost-archive-link" onclick="openArchive(this)">+ Remaining 10 builds in Archive (16) →</button>
+      </div>
+    </section>
+
+    <!-- STOP 3: HIGHWAY OPTICS INTERLUDE -->
+    <section class="stop" id="stop-rev" data-t="0.78" data-side="right" data-cam="close">
+      <div class="card">
+        <span class="label">03 · Highway Optics</span>
+        <h2>Beam &amp; Pace Control.</h2>
+        <p class="lede">
+          Hold to flare the monochrome xenon beams across the night highway grid and sweep the ground dial.
+        </p>
+        <div class="beam-sweep">
+          <div class="beam-row">
+            <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to flare high beams">HOLD · HIGH BEAM</button>
+            <span class="beam-readout" id="beamReadout">000%</span>
+          </div>
+          <div class="beam-track" aria-hidden="true">
+            <div class="beam-fill" id="beamBar"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STOP 8: CONTACT -->
+    <!-- STOP 4: END OF ROAD & INQUIRIES -->
     <section class="stop last" id="stop-gate" data-t="1.0" data-side="left" data-cam="gate">
-      <div class="card wide">
-        <span class="label">08 · End of the road</span>
-        <h2>Got an awkward product friction worth simplifying?</h2>
-        <p class="lede sm">
-          Based in Greater London, UK. Happy to talk through product engineering roles, early prototypes, or field problems.
+      <div class="card">
+        <span class="label">04 · Inquiries</span>
+        <h2>Working on a thorny interface?</h2>
+        <p class="lede">
+          London, UK. Happy to discuss product engineering roles, early prototypes, or messy field problems directly.
         </p>
-
-        <div class="trio">
-          <div>
-            <h3>See all 16</h3>
-            <p>Search the full index of sixteen projects and design studies.</p>
-          </div>
-          <div>
-            <h3>Read the code</h3>
-            <p>Public codebases and commits live on GitHub under @aigroupchathq.</p>
-          </div>
-          <div>
-            <h3>Write directly</h3>
-            <p>No forms or funnels — reach me straight at deshmukhvaishnav@gmail.com.</p>
-          </div>
-        </div>
-
         <div class="cta">
-          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">deshmukhvaishnav@gmail.com →</a>
-          <button type="button" class="btn ghost" onclick="openMatrix(this)">Browse all 16</button>
+          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">deshmukhvaishnav@gmail.com ↗</a>
+          <button type="button" class="btn ghost" onclick="openArchive(this)">Archive (16)</button>
           <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </div>
       </div>
@@ -417,316 +246,273 @@
   </main>
 
   <!-- =======================================================================
-       FOOTER
+       MINIMAL FOOTER
        ======================================================================= -->
   <footer class="bottom">
-    <div class="wrap">
-      <div class="footer-pal-perch">
-        <piix-pal pal="bitbug" edge="box" speed="0.65" aria-hidden="true"></piix-pal>
-      </div>
-      <div class="foot">
-        <div>
-          <a class="brand" href="#stop-garage">VAISHNAV <small>DESHMUKH</small></a>
-          <p style="margin-top: 10px;">
-            Product design &amp; engineering · London, UK · <span class="mono tabular" id="londonClock">--:--:-- GMT</span>
-          </p>
-          <p class="note">Sixteen honest projects and studies. Live links open working demos; design studies are clearly labelled as studies.</p>
-        </div>
-        <div>
-          <nav class="foot-links" aria-label="Footer navigation">
-            <button type="button" onclick="openMatrix(this)">All 16 works</button>
-            <a href="deck.html">Card Deck</a>
-            <a href="showroom.html">Design Lab</a>
-            <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="mailto:deshmukhvaishnav@gmail.com">Email</a>
-            <button type="button" id="palToggleBtn" aria-pressed="true" onclick="togglePals()">Companion: On</button>
-          </nav>
-          <p class="mono" style="margin-top: 14px; font-size: 12px; color: var(--muted);">
-            &copy; 2026 Vaishnav Deshmukh
-          </p>
-        </div>
-      </div>
+    <div class="foot-inner">
+      <span>Vaishnav Deshmukh · London, UK</span>
+      <nav class="foot-links" aria-label="Footer navigation">
+        <button type="button" onclick="openArchive(this)">Archive (16)</button>
+        <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:deshmukhvaishnav@gmail.com">Email</a>
+      </nav>
     </div>
   </footer>
 
   <!-- =======================================================================
-       TABBED PROJECT DOSSIER INSPECTOR MODAL
+       UNIFIED 50/50 ARCHITECTURAL SPLIT INSPECTOR (SINGLE MODAL SHELL)
        ======================================================================= -->
-  <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeProjectDossier()">
-    <div class="modal-panel" onclick="event.stopPropagation()">
-      <div class="modal-drag-bar"></div>
+  <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeSplitInspector()">
+    <div class="split-sheet" onclick="event.stopPropagation()">
 
-      <div class="drawer-topbar">
-        <div class="drawer-crumb-group">
-          <button type="button" id="drawerBackToMatrixBtn" class="drawer-mini-btn" onclick="switchDossierToMatrix()">← All 16</button>
-          <span id="modalCategory" class="label" style="margin-bottom: 0;">#01 · Domain</span>
+      <!-- Static Left Visual & Metadata Stage (zero layout shift across tabs) -->
+      <div class="split-left">
+        <div class="split-left-meta">
+          <span id="modalCategory">#01 · DOMAIN</span>
+          <strong id="modalStatusBadge">Study</strong>
         </div>
-        <div class="drawer-step-group">
-          <button type="button" id="drawerPrevBtn" class="drawer-mini-btn" onclick="stepProject(-1)" aria-label="Previous project">← Prev</button>
-          <span class="drawer-pos" id="drawerPosLbl">01 / 16</span>
-          <button type="button" id="drawerNextBtn" class="drawer-mini-btn" onclick="stepProject(1)" aria-label="Next project">Next →</button>
-          <button type="button" id="modalCloseBtn" class="drawer-mini-btn" onclick="closeProjectDossier()" aria-label="Close project notes">✕</button>
-        </div>
-      </div>
 
-      <!-- Chapter Sibling Project Switcher Tabs -->
-      <div class="drawer-siblings" id="drawerSiblingTabs" role="tablist" aria-label="Chapter sibling projects"></div>
-
-      <div class="modal-head">
-        <div>
-          <h2 id="modalTitle" style="font-size: clamp(1.3rem, 2.4vw, 1.85rem);">Project Title</h2>
-          <p id="modalSubtitle" class="lede sm" style="margin-top: 6px; max-width: 62ch;"></p>
+        <div class="modal-visual">
+          <img id="modalImage" src="assets/work-datumatelier.svg" alt="" />
         </div>
-        <span class="tag" id="modalStatusBadge">Study</span>
-      </div>
 
-      <!-- Structured Section Tabs inside the Popup -->
-      <div class="dossier-tabs" role="tablist" aria-label="Case study sections">
-        <button type="button" class="dossier-tab" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" onclick="switchDossierTab('overview')">01 · Overview</button>
-        <button type="button" class="dossier-tab" id="tab-architecture" role="tab" aria-selected="false" aria-controls="panel-architecture" onclick="switchDossierTab('architecture')">02 · How it works</button>
-        <button type="button" class="dossier-tab" id="tab-specs" role="tab" aria-selected="false" aria-controls="panel-specs" onclick="switchDossierTab('specs')">03 · Stack &amp; specs</button>
-      </div>
-
-      <!-- Tab 1: Overview & Monochrome Wireframe -->
-      <div id="panel-overview" class="dossier-tabpanel" role="tabpanel" aria-labelledby="tab-overview">
-        <div class="dossier-overview-grid">
-          <div class="modal-visual">
-            <img id="modalImage" src="assets/work-ward.svg" alt="" />
-          </div>
-          <div class="dossier-overview-copy">
-            <div>
-              <span class="modal-sec-lbl">The problem</span>
-              <p id="modalProblem" class="modal-box"></p>
-            </div>
-            <div id="modalLinksOverview" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 2: System Mechanics & Technical Notes -->
-      <div id="panel-architecture" class="dossier-tabpanel" role="tabpanel" aria-labelledby="tab-architecture" hidden>
-        <div>
-          <span class="modal-sec-lbl">How it works</span>
-          <p id="modalSolution" class="modal-box"></p>
-        </div>
-        <div id="modalDecisionsWrap">
-          <span class="modal-sec-lbl">Design &amp; technical notes</span>
-          <ul id="modalDecisions" class="modal-decisions"></ul>
-        </div>
-      </div>
-
-      <!-- Tab 3: Specs, Tags & Links -->
-      <div id="panel-specs" class="dossier-tabpanel" role="tabpanel" aria-labelledby="tab-specs" hidden>
-        <div class="dossier-spec-grid">
-          <div class="dossier-spec-cell">
-            <span class="modal-sec-lbl" style="margin-bottom: 2px;">Status</span>
-            <strong id="modalStatusLabel">Design Study</strong>
-          </div>
-          <div class="dossier-spec-cell">
-            <span class="modal-sec-lbl" style="margin-bottom: 2px;">Domain</span>
-            <strong id="modalDomainName">Systems</strong>
-          </div>
-          <div class="dossier-spec-cell">
-            <span class="modal-sec-lbl" style="margin-bottom: 2px;">Index Code</span>
-            <strong id="modalCodeText" class="mono">WORK-01</strong>
-          </div>
-        </div>
-        <div>
-          <span class="modal-sec-lbl">Built with</span>
+        <div class="split-left-foot">
+          <p id="modalLeftDesc" style="font-size: 13px; color: var(--sec); line-height: 1.5;"></p>
           <div id="modalStack" class="spec-tags"></div>
         </div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--hair); padding-top: 12px;">
-          <div id="modalLinksSpecs" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-          <button type="button" class="drawer-mini-btn" id="copyDossierLinkBtn" onclick="copyCurrentProjectLink()">Copy project link</button>
+      </div>
+
+      <!-- Right Tabbed Narrative & Integrated Archive (16) Ledger -->
+      <div class="split-right">
+        <div class="split-tabs-head">
+          <div class="split-tablist" role="tablist" aria-label="Project details and archive">
+            <button type="button" class="split-tab" id="tab-brief" role="tab" aria-selected="true" aria-controls="panel-brief" onclick="switchSplitTab('brief')">Brief</button>
+            <button type="button" class="split-tab" id="tab-arch" role="tab" aria-selected="false" aria-controls="panel-arch" onclick="switchSplitTab('arch')">How it works</button>
+            <button type="button" class="split-tab" id="tab-archive" role="tab" aria-selected="false" aria-controls="panel-archive" onclick="switchSplitTab('archive')">Archive (16)</button>
+          </div>
+          <button type="button" id="modalCloseBtn" class="split-close-btn" onclick="closeSplitInspector()" aria-label="Close inspector">Esc ✕</button>
+        </div>
+
+        <div class="split-body">
+          <!-- Tab 1: Brief -->
+          <div id="panel-brief" class="split-panel" role="tabpanel" aria-labelledby="tab-brief">
+            <h2 id="modalTitle" class="split-title">Project Title</h2>
+            <div>
+              <span class="split-sec-lbl">The problem</span>
+              <p id="modalProblem" class="split-copy"></p>
+            </div>
+            <div class="cta" style="margin-top: 4px;" id="modalLinksBrief"></div>
+          </div>
+
+          <!-- Tab 2: How it works & Technical Notes -->
+          <div id="panel-arch" class="split-panel" role="tabpanel" aria-labelledby="tab-arch" hidden>
+            <div>
+              <span class="split-sec-lbl">Architecture &amp; approach</span>
+              <p id="modalSolution" class="split-copy"></p>
+            </div>
+            <div id="modalDecisionsWrap">
+              <span class="split-sec-lbl">Technical notes</span>
+              <ul id="modalDecisions" class="modal-decisions"></ul>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--hair); padding-top: 14px;">
+              <div id="modalLinksArch" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+              <button type="button" class="step-btn" id="copyDossierLinkBtn" onclick="copyCurrentProjectLink()">Copy link</button>
+            </div>
+          </div>
+
+          <!-- Tab 3: Built-in Minimalist Archive (16) Ledger -->
+          <div id="panel-archive" class="split-panel" role="tabpanel" aria-labelledby="tab-archive" hidden>
+            <div class="archive-controls">
+              <div class="archive-filters" role="group" aria-label="Filter archive">
+                <button type="button" class="filter-btn active" onclick="filterArchive('all', this)">All (16)</button>
+                <button type="button" class="filter-btn" onclick="filterArchive('live', this)">Live (11)</button>
+                <button type="button" class="filter-btn" onclick="filterArchive('concept', this)">Studies (5)</button>
+              </div>
+              <input type="text" class="search-input" id="archiveSearchInput" placeholder="Filter 16 works by title or stack..." oninput="searchArchive(this.value)">
+            </div>
+            <div class="archive-ledger" id="archiveLedger">
+              <button type="button" class="archive-row" data-pid="ward" data-status="concept" data-domain="health"
+        onmouseenter="previewProjectOnLeft('ward')"
+        onfocus="previewProjectOnLeft('ward')"
+        onclick="selectProjectInSplit('ward')">
+        <span class="archive-row-left">
+          <span class="archive-idx">01</span>
+          <span class="archive-title">Predictive Ward Logistics Engine</span>
+        </span>
+        <span class="archive-meta">Study</span>
+      </button>
+<button type="button" class="archive-row" data-pid="consciousness" data-status="live" data-domain="cognitive"
+        onmouseenter="previewProjectOnLeft('consciousness')"
+        onfocus="previewProjectOnLeft('consciousness')"
+        onclick="selectProjectInSplit('consciousness')">
+        <span class="archive-row-left">
+          <span class="archive-idx">02</span>
+          <span class="archive-title">The Unexplored Interior</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="ithink" data-status="live" data-domain="cognitive"
+        onmouseenter="previewProjectOnLeft('ithink')"
+        onfocus="previewProjectOnLeft('ithink')"
+        onclick="selectProjectInSplit('ithink')">
+        <span class="archive-row-left">
+          <span class="archive-idx">03</span>
+          <span class="archive-title">iTHINK: Attention & Flow Lab</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="civicflow" data-status="live" data-domain="civic"
+        onmouseenter="previewProjectOnLeft('civicflow')"
+        onfocus="previewProjectOnLeft('civicflow')"
+        onclick="selectProjectInSplit('civicflow')">
+        <span class="archive-row-left">
+          <span class="archive-idx">04</span>
+          <span class="archive-title">CivicFlow: Highways Triage Engine</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="scriptstudio" data-status="concept" data-domain="creative"
+        onmouseenter="previewProjectOnLeft('scriptstudio')"
+        onfocus="previewProjectOnLeft('scriptstudio')"
+        onclick="selectProjectInSplit('scriptstudio')">
+        <span class="archive-row-left">
+          <span class="archive-idx">05</span>
+          <span class="archive-title">AI Script Studio: Multi-Track DAW</span>
+        </span>
+        <span class="archive-meta">Study</span>
+      </button>
+<button type="button" class="archive-row" data-pid="roadtriage" data-status="concept" data-domain="civic"
+        onmouseenter="previewProjectOnLeft('roadtriage')"
+        onfocus="previewProjectOnLeft('roadtriage')"
+        onclick="selectProjectInSplit('roadtriage')">
+        <span class="archive-row-left">
+          <span class="archive-idx">06</span>
+          <span class="archive-title">RoadTriage: Edge Defect Scanner</span>
+        </span>
+        <span class="archive-meta">Study</span>
+      </button>
+<button type="button" class="archive-row" data-pid="itsyou" data-status="live" data-domain="cognitive"
+        onmouseenter="previewProjectOnLeft('itsyou')"
+        onfocus="previewProjectOnLeft('itsyou')"
+        onclick="selectProjectInSplit('itsyou')">
+        <span class="archive-row-left">
+          <span class="archive-idx">07</span>
+          <span class="archive-title">The Observer: Thought & Awareness</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="babycarl" data-status="concept" data-domain="health"
+        onmouseenter="previewProjectOnLeft('babycarl')"
+        onfocus="previewProjectOnLeft('babycarl')"
+        onclick="selectProjectInSplit('babycarl')">
+        <span class="archive-row-left">
+          <span class="archive-idx">08</span>
+          <span class="archive-title">BabyCarl: Circadian Telemetry</span>
+        </span>
+        <span class="archive-meta">Study</span>
+      </button>
+<button type="button" class="archive-row" data-pid="groupchat" data-status="concept" data-domain="creative"
+        onmouseenter="previewProjectOnLeft('groupchat')"
+        onfocus="previewProjectOnLeft('groupchat')"
+        onclick="selectProjectInSplit('groupchat')">
+        <span class="archive-row-left">
+          <span class="archive-idx">09</span>
+          <span class="archive-title">GroupChat HQ: Consensus Engine</span>
+        </span>
+        <span class="archive-meta">Study</span>
+      </button>
+<button type="button" class="archive-row" data-pid="vision" data-status="live" data-domain="creative"
+        onmouseenter="previewProjectOnLeft('vision')"
+        onfocus="previewProjectOnLeft('vision')"
+        onclick="selectProjectInSplit('vision')">
+        <span class="archive-row-left">
+          <span class="archive-idx">10</span>
+          <span class="archive-title">Rulers Language</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="datumadas" data-status="live" data-domain="automotive"
+        onmouseenter="previewProjectOnLeft('datumadas')"
+        onfocus="previewProjectOnLeft('datumadas')"
+        onclick="selectProjectInSplit('datumadas')">
+        <span class="archive-row-left">
+          <span class="archive-idx">11</span>
+          <span class="archive-title">Datum ADAS</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="velum" data-status="live" data-domain="creative"
+        onmouseenter="previewProjectOnLeft('velum')"
+        onfocus="previewProjectOnLeft('velum')"
+        onclick="selectProjectInSplit('velum')">
+        <span class="archive-row-left">
+          <span class="archive-idx">12</span>
+          <span class="archive-title">Checkmate (Velum Labs)</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="vtsystem" data-status="live" data-domain="creative"
+        onmouseenter="previewProjectOnLeft('vtsystem')"
+        onfocus="previewProjectOnLeft('vtsystem')"
+        onclick="selectProjectInSplit('vtsystem')">
+        <span class="archive-row-left">
+          <span class="archive-idx">13</span>
+          <span class="archive-title">Vedic Tree OS</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="driver" data-status="live" data-domain="automotive"
+        onmouseenter="previewProjectOnLeft('driver')"
+        onfocus="previewProjectOnLeft('driver')"
+        onclick="selectProjectInSplit('driver')">
+        <span class="archive-row-left">
+          <span class="archive-idx">14</span>
+          <span class="archive-title">The Driver of God</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="hiddenleaf" data-status="live" data-domain="creative"
+        onmouseenter="previewProjectOnLeft('hiddenleaf')"
+        onfocus="previewProjectOnLeft('hiddenleaf')"
+        onclick="selectProjectInSplit('hiddenleaf')">
+        <span class="archive-row-left">
+          <span class="archive-idx">15</span>
+          <span class="archive-title">Hidden Leaf Studio</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+<button type="button" class="archive-row" data-pid="datumatelier" data-status="live" data-domain="automotive"
+        onmouseenter="previewProjectOnLeft('datumatelier')"
+        onfocus="previewProjectOnLeft('datumatelier')"
+        onclick="selectProjectInSplit('datumatelier')">
+        <span class="archive-row-left">
+          <span class="archive-idx">16</span>
+          <span class="archive-title">Datum Atelier</span>
+        </span>
+        <span class="archive-meta">Live ↗</span>
+      </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-foot">
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="step-btn" onclick="stepProject(-1)" aria-label="Previous work">← Prev</button>
+            <button type="button" class="step-btn" onclick="stepProject(1)" aria-label="Next work">Next →</button>
+          </div>
+          <span id="splitPosLbl">01 / 16</span>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- =======================================================================
-       ALL 16 PROJECTS SEARCHABLE INDEX MODAL
-       ======================================================================= -->
-  <div id="matrixModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="matrixTitle" onclick="closeMatrix()">
-    <div class="modal-panel wide" onclick="event.stopPropagation()">
-      <div class="modal-drag-bar"></div>
-
-      <div class="modal-head">
-        <div>
-          <span class="label" style="margin-bottom: 4px;">Complete Index</span>
-          <h2 id="matrixTitle" style="font-size: 1.6rem;">All 16 Projects &amp; Studies</h2>
-        </div>
-        <button type="button" id="matrixCloseBtn" class="btn ghost sm" onclick="closeMatrix()" aria-label="Close project list">✕</button>
-      </div>
-
-      <div class="matrix-controls">
-        <div class="filter-strip" role="tablist" aria-label="Filter projects by status or domain">
-          <button type="button" class="filter-btn active" role="tab" aria-selected="true" onclick="filterMatrix('all', this)">All (16)</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('live', this)">Live (11)</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('concept', this)">Studies (5)</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('health', this)">Clinical</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('cognitive', this)">Perception</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('civic', this)">Civic</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('automotive', this)">Automotive</button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" onclick="filterMatrix('creative', this)">Audio &amp; AI</button>
-        </div>
-        <input type="text" class="search-input" id="matrixSearchInput" placeholder="Filter by title, domain, or stack..." oninput="searchMatrix(this.value)">
-      </div>
-
-      <div class="matrix-grid" id="matrixGrid">
-        <button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="openProjectFromMatrix('ward')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#01 · Healthcare Concept Study</span>
-          <span class="door-status">Study</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Predictive Ward Logistics Engine</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Offline-first floorplan tool for tracing hospital infusion pumps in basement corridors without cloud reliance.</p>
-        <div class="spec-tags"><span class="spec-tag">HL7 FHIR</span> <span class="spec-tag">GS1-128</span> <span class="spec-tag">IndexedDB</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="openProjectFromMatrix('consciousness')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#02 · Cognitive Science Interactive</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">The Unexplored Interior</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Self-guided visual awareness and attention demos inspired by theories of perception.</p>
-        <div class="spec-tags"><span class="spec-tag">HTML Canvas</span> <span class="spec-tag">Web Audio</span> <span class="spec-tag">Vanilla JS</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="openProjectFromMatrix('ithink')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#03 · Cognitive Practice 3D Lab</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">iTHINK: Attention & Flow Lab</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser prototype combining interactive 3D brain models with paced attention exercises and reflection prompts.</p>
-        <div class="spec-tags"><span class="spec-tag">Three.js</span> <span class="spec-tag">WebGL</span> <span class="spec-tag">TypeScript</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="civic" data-status="live" onclick="openProjectFromMatrix('civicflow')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#04 · Civic Infrastructure Road Triage</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">CivicFlow: Highways Triage Engine</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Spatial clustering demo that groups duplicate public pothole reports on council maps before dispatch.</p>
-        <div class="spec-tags"><span class="spec-tag">DBSCAN</span> <span class="spec-tag">GeoJSON</span> <span class="spec-tag">Turf.js</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="openProjectFromMatrix('scriptstudio')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#05 · Audio & Writing Study</span>
-          <span class="door-status">Study</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">AI Script Studio: Multi-Track DAW</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser script and sound editor connecting written lines directly to pacing blocks on an audio timeline.</p>
-        <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Canvas Timeline</span> <span class="spec-tag">TypeScript</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="civic" data-status="concept" onclick="openProjectFromMatrix('roadtriage')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#06 · Civic Infrastructure Field Capture</span>
-          <span class="door-status">Study</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">RoadTriage: Edge Defect Scanner</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Mobile inspection concept for tagging road surface defects offline while checking routes.</p>
-        <div class="spec-tags"><span class="spec-tag">Field Vision</span> <span class="spec-tag">TensorFlow.js</span> <span class="spec-tag">IndexedDB</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="openProjectFromMatrix('itsyou')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#07 · Interactive Reflection Live</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">The Observer: Thought & Awareness</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.</p>
-        <div class="spec-tags"><span class="spec-tag">Interactive UI</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Vanilla JS</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="openProjectFromMatrix('babycarl')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#08 · Pediatric Health Concept Study</span>
-          <span class="door-status">Study</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">BabyCarl: Circadian Telemetry</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Gentle newborn feed and sleep tracker shaped for tired parents with dim night contrast and zero alert spam.</p>
-        <div class="spec-tags"><span class="spec-tag">Circadian Log</span> <span class="spec-tag">Local Storage</span> <span class="spec-tag">Mobile UX</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="openProjectFromMatrix('groupchat')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#09 · Collaboration Study</span>
-          <span class="door-status">Study</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">GroupChat HQ: Consensus Engine</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Concept turning busy group chat threads into a clear map of open questions and agreed decisions.</p>
-        <div class="spec-tags"><span class="spec-tag">Decision Map</span> <span class="spec-tag">Semantic Sync</span> <span class="spec-tag">CRDT State</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('vision')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#10 · AI Guidance Prompt Studio</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Rulers Language</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Practical guide to working with AI: pick a path, shape clear instructions, verify outputs, and cut fluff.</p>
-        <div class="spec-tags"><span class="spec-tag">Mission Paths</span> <span class="spec-tag">Prompt Studio</span> <span class="spec-tag">Illustrations</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="openProjectFromMatrix('datumadas')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#11 · Automotive Driver Safety</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Datum ADAS</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser safety interface exploring low-clutter following distance cues and peripheral hazard awareness.</p>
-        <div class="spec-tags"><span class="spec-tag">Driver UI</span> <span class="spec-tag">Kinematics</span> <span class="spec-tag">Browser Demo</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('velum')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#12 · Decisions Compatibility</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Checkmate (Velum Labs)</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Structured compatibility tool comparing practical expectations and core values clearly, without swipe tricks.</p>
-        <div class="spec-tags"><span class="spec-tag">React</span> <span class="spec-tag">TypeScript</span> <span class="spec-tag">Decision UI</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('vtsystem')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#13 · Education Operations OS</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Vedic Tree OS</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.</p>
-        <div class="spec-tags"><span class="spec-tag">Multi-Tenant</span> <span class="spec-tag">RBAC</span> <span class="spec-tag">TypeScript</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="openProjectFromMatrix('driver')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#14 · Interactive Audio Inquiry</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">The Driver of God</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.</p>
-        <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Inquiry</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="openProjectFromMatrix('hiddenleaf')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#15 · Creative Tools Bilingual Studio</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Hidden Leaf Studio</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Hindi–English lyric writing workspace counting Hindi matras, rhyme flows, and built-in beat loops.</p>
-        <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Syllable Parser</span> <span class="spec-tag">Lyric Studio</span></div>
-      </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="openProjectFromMatrix('datumatelier')">
-        <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--muted);">#16 · Automotive Service Records</span>
-          <span class="door-status is-live">Live</span>
-        </div>
-        <h3 style="font-size: 1.05rem;">Datum Atelier</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Independent car record keeping invoices, workshop entries, and notes with the vehicle across keepers.</p>
-        <div class="spec-tags"><span class="spec-tag">Vehicle Records</span> <span class="spec-tag">Evidence Grades</span> <span class="spec-tag">Offline-First</span></div>
-      </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Client Interaction Logic -->
+  <!-- Minimalist Split Inspector + Hover Preview Logic -->
   <script>
     const PROJECT_DOSSIERS = {
   "ward": {
     "index": "01",
-    "code": "WORK-01 // WARD",
+    "code": "WORK-01",
     "title": "Predictive Ward Logistics Engine",
     "category": "Healthcare Concept Study",
     "domain": "health",
@@ -754,7 +540,7 @@
   },
   "consciousness": {
     "index": "02",
-    "code": "WORK-02 // CONSCIOUSNESS",
+    "code": "WORK-02",
     "title": "The Unexplored Interior",
     "category": "Cognitive Science Interactive",
     "domain": "cognitive",
@@ -782,7 +568,7 @@
   },
   "ithink": {
     "index": "03",
-    "code": "WORK-03 // ITHINK",
+    "code": "WORK-03",
     "title": "iTHINK: Attention & Flow Lab",
     "category": "Cognitive Practice 3D Lab",
     "domain": "cognitive",
@@ -814,7 +600,7 @@
   },
   "civicflow": {
     "index": "04",
-    "code": "WORK-04 // CIVICFLOW",
+    "code": "WORK-04",
     "title": "CivicFlow: Highways Triage Engine",
     "category": "Civic Infrastructure Road Triage",
     "domain": "civic",
@@ -846,7 +632,7 @@
   },
   "scriptstudio": {
     "index": "05",
-    "code": "WORK-05 // SCRIPTSTUDIO",
+    "code": "WORK-05",
     "title": "AI Script Studio: Multi-Track DAW",
     "category": "Audio & Writing Study",
     "domain": "creative",
@@ -874,7 +660,7 @@
   },
   "roadtriage": {
     "index": "06",
-    "code": "WORK-06 // ROADTRIAGE",
+    "code": "WORK-06",
     "title": "RoadTriage: Edge Defect Scanner",
     "category": "Civic Infrastructure Field Capture",
     "domain": "civic",
@@ -902,7 +688,7 @@
   },
   "itsyou": {
     "index": "07",
-    "code": "WORK-07 // ITSYOU",
+    "code": "WORK-07",
     "title": "The Observer: Thought & Awareness",
     "category": "Interactive Reflection Live",
     "domain": "cognitive",
@@ -934,7 +720,7 @@
   },
   "babycarl": {
     "index": "08",
-    "code": "WORK-08 // BABYCARL",
+    "code": "WORK-08",
     "title": "BabyCarl: Circadian Telemetry",
     "category": "Pediatric Health Concept Study",
     "domain": "health",
@@ -962,7 +748,7 @@
   },
   "groupchat": {
     "index": "09",
-    "code": "WORK-09 // GROUPCHAT",
+    "code": "WORK-09",
     "title": "GroupChat HQ: Consensus Engine",
     "category": "Collaboration Study",
     "domain": "creative",
@@ -990,7 +776,7 @@
   },
   "vision": {
     "index": "10",
-    "code": "WORK-10 // VISION",
+    "code": "WORK-10",
     "title": "Rulers Language",
     "category": "AI Guidance Prompt Studio",
     "domain": "creative",
@@ -1022,7 +808,7 @@
   },
   "datumadas": {
     "index": "11",
-    "code": "WORK-11 // DATUMADAS",
+    "code": "WORK-11",
     "title": "Datum ADAS",
     "category": "Automotive Driver Safety",
     "domain": "automotive",
@@ -1054,7 +840,7 @@
   },
   "velum": {
     "index": "12",
-    "code": "WORK-12 // VELUM",
+    "code": "WORK-12",
     "title": "Checkmate (Velum Labs)",
     "category": "Decisions Compatibility",
     "domain": "creative",
@@ -1086,7 +872,7 @@
   },
   "vtsystem": {
     "index": "13",
-    "code": "WORK-13 // VTSYSTEM",
+    "code": "WORK-13",
     "title": "Vedic Tree OS",
     "category": "Education Operations OS",
     "domain": "creative",
@@ -1118,7 +904,7 @@
   },
   "driver": {
     "index": "14",
-    "code": "WORK-14 // DRIVER",
+    "code": "WORK-14",
     "title": "The Driver of God",
     "category": "Interactive Audio Inquiry",
     "domain": "automotive",
@@ -1150,7 +936,7 @@
   },
   "hiddenleaf": {
     "index": "15",
-    "code": "WORK-15 // HIDDENLEAF",
+    "code": "WORK-15",
     "title": "Hidden Leaf Studio",
     "category": "Creative Tools Bilingual Studio",
     "domain": "creative",
@@ -1182,7 +968,7 @@
   },
   "datumatelier": {
     "index": "16",
-    "code": "WORK-16 // DATUMATELIER",
+    "code": "WORK-16",
     "title": "Datum Atelier",
     "category": "Automotive Service Records",
     "domain": "automotive",
@@ -1214,147 +1000,65 @@
   }
 };
     const PROJECT_ORDER = Object.keys(PROJECT_DOSSIERS);
-    const CHAPTER_GROUPS = {
-      health: ['ward', 'babycarl'],
-      cognitive: ['consciousness', 'ithink', 'itsyou'],
-      civic: ['civicflow', 'roadtriage'],
-      automotive: ['datumatelier', 'datumadas', 'driver'],
-      creative: ['vision', 'scriptstudio', 'hiddenleaf', 'groupchat', 'velum', 'vtsystem']
-    };
 
-    /* Live London Clock */
-    const londonClock = document.getElementById('londonClock');
-    const timeFmt = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/London',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
-    });
-    function tickClock() {
-      if (londonClock) londonClock.textContent = timeFmt.format(new Date()) + ' GMT';
-    }
-    setInterval(tickClock, 1000);
-    tickClock();
+    let lastFocusedBeforeInspector = null;
+    let currentProjectId = 'datumatelier';
+    let currentSplitTab = 'brief';
+    let activeArchiveFilter = 'all';
+    let archiveQuery = '';
 
-    /* Piixpal Toggle */
-    const palToggleBtn = document.getElementById('palToggleBtn');
-    function applyPalState(enabled) {
-      document.body.classList.toggle('pals-off', !enabled);
-      if (palToggleBtn) {
-        palToggleBtn.setAttribute('aria-pressed', String(enabled));
-        palToggleBtn.textContent = `Companion: ${enabled ? 'On' : 'Off'}`;
-      }
-    }
-    function togglePals() {
-      const next = document.body.classList.contains('pals-off');
-      try { localStorage.setItem('vd_pals', next ? '1' : '0'); } catch (e) {}
-      applyPalState(next);
-    }
-    try {
-      if (localStorage.getItem('vd_pals') === '0') applyPalState(false);
-    } catch (e) {}
-
-    /* Remount footer companion once footer becomes visible in Full page mode */
-    new MutationObserver(() => {
-      if (!document.documentElement.classList.contains('still-mode')) return;
-      const perch = document.querySelector('.footer-pal-perch');
-      const oldPal = perch ? perch.querySelector('piix-pal') : null;
-      if (perch && oldPal && !oldPal.dataset.remounted) {
-        const fresh = oldPal.cloneNode(true);
-        fresh.dataset.remounted = '1';
-        oldPal.replaceWith(fresh);
-      }
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-
-    /* Keep Piixpal runner & companion strictly monochrome inside their shadow roots */
-    function syncMonochromePals() {
-      const hosts = document.querySelectorAll('[data-piixpal], [data-piixpal-ui]');
-      let found = 0;
-      hosts.forEach(host => {
-        if (host.shadowRoot) {
-          found++;
-          if (!host.shadowRoot.getElementById('mono-pal-style')) {
-            const st = document.createElement('style');
-            st.id = 'mono-pal-style';
-            st.textContent = 'canvas { filter: grayscale(1) contrast(1.25) !important; }';
-            host.shadowRoot.appendChild(st);
-          }
-        }
-      });
-      return found > 0;
-    }
-    if (!syncMonochromePals()) {
-      const palObs = new MutationObserver(() => {
-        syncMonochromePals();
-      });
-      palObs.observe(document.body, { childList: true });
+    /* Ghost HUD Hover Monochrome Preview */
+    function setGhostPeek(group, pid) {
+      const d = PROJECT_DOSSIERS[pid];
+      const wrap = document.getElementById(`peek-${group}`);
+      const img = document.getElementById(`peek-img-${group}`);
+      const cap = document.getElementById(`peek-cap-${group}`);
+      if (!d || !wrap || !img || !cap) return;
+      img.src = d.img;
+      cap.textContent = `${d.index} // ${d.tags.slice(0, 3).join(' · ')}`;
+      wrap.classList.add('on');
     }
 
-    /* Tabbed Dossier Inspector + Focus Return */
-    let lastFocusedBeforeDossier = null;
-    let lastFocusedBeforeMatrix = null;
-    let currentDossierId = PROJECT_ORDER[0];
-    let currentDossierTab = 'overview';
-
-    function switchDossierTab(tabName) {
-      currentDossierTab = tabName;
-      ['overview', 'architecture', 'specs'].forEach(t => {
-        const btn = document.getElementById(`tab-${t}`);
-        const panel = document.getElementById(`panel-${t}`);
-        const active = t === tabName;
-        if (btn) btn.setAttribute('aria-selected', String(active));
-        if (panel) panel.hidden = !active;
-      });
+    function clearGhostPeek(group) {
+      const wrap = document.getElementById(`peek-${group}`);
+      if (wrap) wrap.classList.remove('on');
     }
 
-    function renderChapterSiblingTabs(activePid, domainKey) {
-      const wrap = document.getElementById('drawerSiblingTabs');
-      if (!wrap) return;
-      const list = CHAPTER_GROUPS[domainKey] || PROJECT_ORDER;
-      wrap.innerHTML = '';
-      list.forEach(sid => {
-        const sd = PROJECT_DOSSIERS[sid];
-        if (!sd) return;
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'drawer-sibling-tab';
-        b.setAttribute('role', 'tab');
-        b.setAttribute('aria-selected', String(sid === activePid));
-        b.textContent = `#${sd.index} ${sd.title}`;
-        b.onclick = () => openProjectDossier(sid, null, true);
-        wrap.appendChild(b);
-      });
-    }
-
-    function openProjectDossier(pid, triggerEl, keepTab = false) {
+    /* Populate Static Left Stage cleanly */
+    function syncLeftStage(pid) {
       const d = PROJECT_DOSSIERS[pid];
       if (!d) return;
-      currentDossierId = pid;
-      if (triggerEl && !document.getElementById('matrixModalBackdrop').classList.contains('open')) {
-        lastFocusedBeforeDossier = triggerEl;
-      }
-
-      const posIdx = PROJECT_ORDER.indexOf(pid);
-      document.getElementById('drawerPosLbl').textContent = `${String(posIdx + 1).padStart(2, '0')} / ${PROJECT_ORDER.length}`;
       document.getElementById('modalCategory').textContent = `#${d.index} · ${d.category}`;
-      document.getElementById('modalTitle').textContent = d.title;
-      document.getElementById('modalSubtitle').textContent = d.desc;
+      document.getElementById('modalStatusBadge').textContent = d.status === 'live' ? 'Live' : 'Study';
       document.getElementById('modalImage').src = d.img;
       document.getElementById('modalImage').alt = d.title;
+      document.getElementById('modalLeftDesc').textContent = d.desc;
+
+      const stackWrap = document.getElementById('modalStack');
+      stackWrap.innerHTML = '';
+      (d.tags || []).forEach(tag => {
+        const s = document.createElement('span');
+        s.className = 'spec-tag';
+        s.textContent = tag;
+        stackWrap.appendChild(s);
+      });
+    }
+
+    function previewProjectOnLeft(pid) {
+      if (PROJECT_DOSSIERS[pid]) syncLeftStage(pid);
+    }
+
+    function renderProjectData(pid) {
+      const d = PROJECT_DOSSIERS[pid];
+      if (!d) return;
+      currentProjectId = pid;
+      syncLeftStage(pid);
+
+      const posIdx = PROJECT_ORDER.indexOf(pid);
+      document.getElementById('splitPosLbl').textContent = `${String(posIdx + 1).padStart(2, '0')} / ${PROJECT_ORDER.length}`;
+      document.getElementById('modalTitle').textContent = d.title;
       document.getElementById('modalProblem').textContent = d.problem;
       document.getElementById('modalSolution').textContent = d.solution;
-      document.getElementById('modalDomainName').textContent = d.category;
-      document.getElementById('modalCodeText').textContent = d.code;
-      document.getElementById('modalStatusLabel').textContent = d.status === 'live' ? 'Live working link' : 'Design study';
-
-      const statusBadge = document.getElementById('modalStatusBadge');
-      if (statusBadge) {
-        statusBadge.className = d.status === 'live' ? 'tag live' : 'tag';
-        statusBadge.innerHTML = d.status === 'live' ? '<i></i>Live' : 'Study';
-      }
-
-      renderChapterSiblingTabs(pid, d.domain);
 
       const decWrap = document.getElementById('modalDecisionsWrap');
       const decList = document.getElementById('modalDecisions');
@@ -1370,19 +1074,10 @@
         decWrap.style.display = 'none';
       }
 
-      const stackWrap = document.getElementById('modalStack');
-      stackWrap.innerHTML = '';
-      (d.tags || []).forEach(tag => {
-        const s = document.createElement('span');
-        s.className = 'spec-tag';
-        s.textContent = tag;
-        stackWrap.appendChild(s);
-      });
-
-      ['modalLinksOverview', 'modalLinksSpecs'].forEach(containerId => {
-        const linksWrap = document.getElementById(containerId);
-        if (!linksWrap) return;
-        linksWrap.innerHTML = '';
+      ['modalLinksBrief', 'modalLinksArch'].forEach(containerId => {
+        const wrap = document.getElementById(containerId);
+        if (!wrap) return;
+        wrap.innerHTML = '';
         (d.links || []).forEach((lnk, idx) => {
           const a = document.createElement('a');
           a.href = lnk.href || '#';
@@ -1390,53 +1085,109 @@
           a.rel = 'noopener noreferrer';
           a.className = idx === 0 ? 'btn primary sm' : 'btn ghost sm';
           a.textContent = `${lnk.label || 'Open'} ↗`;
-          linksWrap.appendChild(a);
+          wrap.appendChild(a);
         });
-        if (containerId === 'modalLinksOverview') {
-          const archBtn = document.createElement('button');
-          archBtn.type = 'button';
-          archBtn.className = 'btn ghost sm';
-          archBtn.textContent = 'How it works →';
-          archBtn.onclick = () => switchDossierTab('architecture');
-          linksWrap.appendChild(archBtn);
+        if (containerId === 'modalLinksBrief') {
+          const nextTabBtn = document.createElement('button');
+          nextTabBtn.type = 'button';
+          nextTabBtn.className = 'btn ghost sm';
+          nextTabBtn.textContent = 'How it works →';
+          nextTabBtn.onclick = () => switchSplitTab('arch');
+          wrap.appendChild(nextTabBtn);
         }
       });
 
-      if (!keepTab) switchDossierTab('overview');
-      const copyBtn = document.getElementById('copyDossierLinkBtn');
-      if (copyBtn) copyBtn.textContent = 'Copy project link';
+      document.querySelectorAll('.archive-row').forEach(r => {
+        r.classList.toggle('is-current', r.dataset.pid === pid);
+      });
 
+      const copyBtn = document.getElementById('copyDossierLinkBtn');
+      if (copyBtn) copyBtn.textContent = 'Copy link';
+    }
+
+    function switchSplitTab(tabName) {
+      currentSplitTab = tabName;
+      ['brief', 'arch', 'archive'].forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        const panel = document.getElementById(`panel-${t}`);
+        const on = t === tabName;
+        if (btn) btn.setAttribute('aria-selected', String(on));
+        if (panel) panel.hidden = !on;
+      });
+      if (tabName === 'archive') {
+        const search = document.getElementById('archiveSearchInput');
+        if (search) search.focus();
+      }
+    }
+
+    function openSplitInspector(pid, triggerEl, initialTab = 'brief') {
+      if (triggerEl) lastFocusedBeforeInspector = triggerEl;
+      renderProjectData(pid || currentProjectId);
+      switchSplitTab(initialTab);
       const backdrop = document.getElementById('caseStudyModalBackdrop');
-      const wasOpen = backdrop.classList.contains('open');
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
-      if (!wasOpen) {
+      if (initialTab !== 'archive') {
         const closeBtn = document.getElementById('modalCloseBtn');
         if (closeBtn) closeBtn.focus();
       }
     }
 
+    function openArchive(triggerEl) {
+      openSplitInspector(currentProjectId, triggerEl, 'archive');
+    }
+
+    function selectProjectInSplit(pid) {
+      renderProjectData(pid);
+      switchSplitTab('brief');
+    }
+
     function stepProject(delta) {
-      const idx = PROJECT_ORDER.indexOf(currentDossierId);
+      const idx = PROJECT_ORDER.indexOf(currentProjectId);
       const nextIdx = (idx + delta + PROJECT_ORDER.length) % PROJECT_ORDER.length;
-      openProjectDossier(PROJECT_ORDER[nextIdx], null, true);
+      renderProjectData(PROJECT_ORDER[nextIdx]);
+      if (currentSplitTab === 'archive') switchSplitTab('brief');
     }
 
-    function openProjectFromMatrix(pid) {
-      const m = document.getElementById('matrixModalBackdrop');
-      if (m) m.classList.remove('open');
-      lastFocusedBeforeDossier = lastFocusedBeforeMatrix;
-      openProjectDossier(pid, null, false);
-    }
-
-    function switchDossierToMatrix() {
+    function closeSplitInspector() {
       const backdrop = document.getElementById('caseStudyModalBackdrop');
-      if (backdrop) backdrop.classList.remove('open');
-      openMatrix(lastFocusedBeforeDossier);
+      if (!backdrop || !backdrop.classList.contains('open')) return;
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastFocusedBeforeInspector && typeof lastFocusedBeforeInspector.focus === 'function') {
+        lastFocusedBeforeInspector.focus();
+        lastFocusedBeforeInspector = null;
+      }
+    }
+
+    function filterArchive(mode, btn) {
+      activeArchiveFilter = mode;
+      document.querySelectorAll('.archive-filters .filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      applyArchiveFilters();
+    }
+
+    function searchArchive(q) {
+      archiveQuery = q.toLowerCase().trim();
+      applyArchiveFilters();
+    }
+
+    function applyArchiveFilters() {
+      document.querySelectorAll('.archive-row').forEach(row => {
+        const st = row.dataset.status || '';
+        const txt = row.textContent.toLowerCase();
+        const pid = row.dataset.pid || '';
+        const tagsTxt = ((PROJECT_DOSSIERS[pid] && PROJECT_DOSSIERS[pid].tags) || []).join(' ').toLowerCase();
+        const okMode = activeArchiveFilter === 'all'
+          || (activeArchiveFilter === 'live' && st === 'live')
+          || (activeArchiveFilter === 'concept' && st !== 'live');
+        const okQuery = archiveQuery === '' || txt.includes(archiveQuery) || tagsTxt.includes(archiveQuery);
+        row.style.display = (okMode && okQuery) ? '' : 'none';
+      });
     }
 
     function copyCurrentProjectLink() {
-      const url = `${location.origin}${location.pathname}#work-${currentDossierId}`;
+      const url = `${location.origin}${location.pathname}#work-${currentProjectId}`;
       const btn = document.getElementById('copyDossierLinkBtn');
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(() => {
@@ -1445,103 +1196,30 @@
       }
     }
 
-    function closeProjectDossier() {
-      const backdrop = document.getElementById('caseStudyModalBackdrop');
-      if (!backdrop || !backdrop.classList.contains('open')) return;
-      backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-      const restoreEl = lastFocusedBeforeDossier || lastFocusedBeforeMatrix;
-      lastFocusedBeforeDossier = null;
-      lastFocusedBeforeMatrix = null;
-      if (restoreEl && typeof restoreEl.focus === 'function') {
-        restoreEl.focus();
-      }
-    }
-
-    let activeMatrixCat = 'all';
-    let matrixQuery = '';
-
-    function openMatrix(triggerEl) {
-      lastFocusedBeforeMatrix = triggerEl || document.activeElement;
-      const backdrop = document.getElementById('matrixModalBackdrop');
-      if (backdrop) backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      const search = document.getElementById('matrixSearchInput');
-      if (search) search.focus();
-    }
-
-    function closeMatrix() {
-      const backdrop = document.getElementById('matrixModalBackdrop');
-      if (!backdrop || !backdrop.classList.contains('open')) return;
-      backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-      if (!document.getElementById('caseStudyModalBackdrop').classList.contains('open')) {
-        if (lastFocusedBeforeMatrix && typeof lastFocusedBeforeMatrix.focus === 'function') {
-          lastFocusedBeforeMatrix.focus();
-          lastFocusedBeforeMatrix = null;
-        }
-      }
-    }
-
-    function filterMatrix(cat, btn) {
-      activeMatrixCat = cat;
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      if (btn) {
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-      }
-      applyMatrixFilters();
-    }
-
-    function searchMatrix(q) {
-      matrixQuery = q.toLowerCase().trim();
-      applyMatrixFilters();
-    }
-
-    function applyMatrixFilters() {
-      document.querySelectorAll('.matrix-card').forEach(card => {
-        const dom = card.dataset.domain || '';
-        const st = card.dataset.status || '';
-        const txt = card.textContent.toLowerCase();
-
-        let okCat = true;
-        if (activeMatrixCat === 'live') okCat = st === 'live';
-        else if (activeMatrixCat === 'concept') okCat = st !== 'live';
-        else if (activeMatrixCat !== 'all') okCat = dom.includes(activeMatrixCat);
-
-        const okQuery = matrixQuery === '' || txt.includes(matrixQuery);
-        card.style.display = (okCat && okQuery) ? '' : 'none';
-      });
-    }
-
     window.addEventListener('keydown', e => {
-      const dossierOpen = document.getElementById('caseStudyModalBackdrop').classList.contains('open');
+      const open = document.getElementById('caseStudyModalBackdrop').classList.contains('open');
+      if (!open) return;
       const activeTag = document.activeElement ? document.activeElement.tagName : '';
       if (e.key === 'Escape') {
-        closeProjectDossier();
-        closeMatrix();
+        closeSplitInspector();
         return;
       }
-      if (dossierOpen && activeTag !== 'INPUT' && activeTag !== 'TEXTAREA') {
+      if (activeTag !== 'INPUT' && activeTag !== 'TEXTAREA') {
         if (e.key === 'ArrowLeft') { e.preventDefault(); stepProject(-1); }
         else if (e.key === 'ArrowRight') { e.preventDefault(); stepProject(1); }
-        else if (e.key === '1') switchDossierTab('overview');
-        else if (e.key === '2') switchDossierTab('architecture');
-        else if (e.key === '3') switchDossierTab('specs');
+        else if (e.key === '1') switchSplitTab('brief');
+        else if (e.key === '2') switchSplitTab('arch');
+        else if (e.key === '3') switchSplitTab('archive');
       }
     });
 
     if (location.hash && location.hash.startsWith('#work-')) {
       const targetId = location.hash.replace('#work-', '');
-      if (PROJECT_DOSSIERS[targetId]) openProjectDossier(targetId, null);
+      if (PROJECT_DOSSIERS[targetId]) openSplitInspector(targetId, null, 'brief');
     }
   </script>
 
-  <!-- Monochrome Sweep Instrument + 3D Highway Drive Engine -->
-  <script src="instrument.js" defer></script>
+  <!-- 3D Monochrome Car Scroll Engine -->
   <script type="module">
     import { startPortfolioDrive } from './drive-engine.js';
     startPortfolioDrive();
