@@ -38,9 +38,6 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Piixpal bottom monochrome scroll track -->
-  <piix-pal pal="scrolly" color="#FFFFFF" side="bottom" scale="2" aria-hidden="true"></piix-pal>
-
   <!-- =======================================================================
        MINIMALIST 3-ITEM HEADER
        ======================================================================= -->
@@ -424,16 +421,20 @@
     </div>
   </nav>
 
-  <!-- Piixpal Survey Map & Footer Companions (monochrome filtered) -->
-  <piix-pal pal="kitty" on="#circuitAtlas .atlas-head" edge="box" at="0.90" scale="2" aria-hidden="true"></piix-pal>
-  <piix-pal pal="bitbug" on="footer.bottom" edge="box" speed="0.55" scale="2" aria-hidden="true"></piix-pal>
+  <!-- Piixpal Monochrome Companions (Survey Map + Stop 02 + Garage Floor) -->
+  <piix-pal pal="penguin" on="#circuitAtlas .atlas-head" edge="box" scale="2" aria-hidden="true"></piix-pal>
+  <piix-pal pal="lurk" on="#stop-perception" at="0.88" scale="2" aria-hidden="true"></piix-pal>
+  <piix-pal pal="roomba" on="footer.bottom" edge="box" scale="2" aria-hidden="true"></piix-pal>
 
   <!-- =======================================================================
        MINIMAL FOOTER
        ======================================================================= -->
   <footer class="bottom">
     <div class="foot-inner">
-      <span>Vaishnav Deshmukh · London, UK</span>
+      <span class="foot-brand">
+        <piix-sprite name="loaf" render="dots" size="38" look="mouse" sleep-after="20" aria-hidden="true" title="Loaf"></piix-sprite>
+        <span>Vaishnav Deshmukh · London, UK</span>
+      </span>
       <nav class="foot-links" aria-label="Footer navigation">
         <button type="button" onclick="openArchive(this)">Archive (16)</button>
         <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -446,7 +447,7 @@
   <!-- =======================================================================
        UNIFIED 50/50 ARCHITECTURAL SPLIT INSPECTOR (SINGLE MODAL SHELL)
        ======================================================================= -->
-  <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeSplitInspector()">
+  <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle" onclick="closeSplitInspector()">
     <div class="split-sheet" onclick="event.stopPropagation()">
 
       <!-- Static Left Visual & Metadata Stage (zero layout shift across tabs) -->
@@ -680,9 +681,10 @@
         </div>
 
         <div class="split-foot">
-          <div style="display: flex; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
             <button type="button" class="step-btn" onclick="stepProject(-1)" aria-label="Previous work">← Prev</button>
             <button type="button" class="step-btn" onclick="stepProject(1)" aria-label="Next work">Next →</button>
+            <piix-sprite name="keycap" render="dots" color="#e4e4e7" size="30" look="mouse" sleep-after="25" onclick="stepProject(1)" title="Tap keycap for next work" aria-hidden="true"></piix-sprite>
           </div>
           <span id="splitPosLbl">01 / 16</span>
         </div>
@@ -1300,7 +1302,7 @@
       });
       if (tabName === 'archive') {
         const search = document.getElementById('archiveSearchInput');
-        if (search) search.focus();
+        if (search) requestAnimationFrame(() => search.focus({ preventScroll: true }));
       }
     }
 
@@ -1309,11 +1311,12 @@
       renderProjectData(pid || currentProjectId);
       switchSplitTab(initialTab);
       const backdrop = document.getElementById('caseStudyModalBackdrop');
+      backdrop.setAttribute('aria-hidden', 'false');
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
       if (initialTab !== 'archive') {
         const closeBtn = document.getElementById('modalCloseBtn');
-        if (closeBtn) closeBtn.focus();
+        if (closeBtn) requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
       }
     }
 
@@ -1337,6 +1340,7 @@
       const backdrop = document.getElementById('caseStudyModalBackdrop');
       if (!backdrop || !backdrop.classList.contains('open')) return;
       backdrop.classList.remove('open');
+      backdrop.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       if (lastFocusedBeforeInspector && typeof lastFocusedBeforeInspector.focus === 'function') {
         lastFocusedBeforeInspector.focus();
@@ -1505,6 +1509,8 @@
       btn.setAttribute('aria-expanded', String(!collapsed));
     }
 
+    let suppressScrollSyncUntil = 0;
+
     window.focusOverviewSector = function (idx, scrollIntoView = false) {
       const count = ATLAS_MAP.stops.length;
       const safeIdx = ((idx % count) + count) % count;
@@ -1512,6 +1518,7 @@
       targetAtlasT = ATLAS_MAP.stops[safeIdx].t;
       if (!atlasRaf) atlasRaf = requestAnimationFrame(stepAtlasGlide);
       if (scrollIntoView) {
+        suppressScrollSyncUntil = performance.now() + 720;
         const stopEls = document.querySelectorAll('.stops-track > .stop:not(.loop-tail)');
         if (stopEls[safeIdx]) {
           stopEls[safeIdx].scrollIntoView({ behavior: 'smooth', block: window.innerWidth < 980 ? 'start' : 'nearest' });
@@ -1547,6 +1554,7 @@
     let overviewScrollTick = false;
     window.addEventListener('scroll', () => {
       if (!document.documentElement.classList.contains('still-mode') || overviewScrollTick) return;
+      if (performance.now() < suppressScrollSyncUntil) return;
       overviewScrollTick = true;
       requestAnimationFrame(() => {
         overviewScrollTick = false;
@@ -1560,7 +1568,21 @@
       });
     }, { passive: true });
 
-    /* Monochrome Piixpal Companions & State Toggle */
+    /* Pre-decode flagship hover thumbnails so preview swap has zero frame flicker */
+    (function preloadFlagshipSvgs() {
+      const srcs = ['datumatelier', 'ward', 'civicflow', 'observer', 'ithink', 'scriptstudio']
+        .map(id => `assets/work-${id}.svg`);
+      const warm = () => srcs.forEach(src => {
+        const im = new Image();
+        im.decoding = 'async';
+        im.src = src;
+        if (im.decode) im.decode().catch(() => {});
+      });
+      if (window.requestIdleCallback) window.requestIdleCallback(warm, { timeout: 1500 });
+      else setTimeout(warm, 600);
+    })();
+
+    /* Monochrome Piixpal Companions & Viewport Guard */
     const palToggleBtn = document.getElementById('palToggleBtn');
     function applyPalState(enabled) {
       document.body.classList.toggle('pals-off', !enabled);
@@ -1583,7 +1605,7 @@
     }
 
     function syncMonochromePals() {
-      const hosts = document.querySelectorAll('[data-piixpal], [data-piixpal-ui]');
+      const hosts = document.querySelectorAll('[data-piixpal], [data-piixpal-ui], piix-sprite');
       let count = 0;
       hosts.forEach(host => {
         if (host.shadowRoot) {
@@ -1591,23 +1613,58 @@
           if (!host.shadowRoot.getElementById('mono-pal-style')) {
             const st = document.createElement('style');
             st.id = 'mono-pal-style';
-            st.textContent = 'canvas { filter: grayscale(1) contrast(1.28) !important; }';
+            st.textContent = 'canvas { filter: grayscale(1) contrast(1.25) !important; }';
             host.shadowRoot.appendChild(st);
           }
         }
       });
       return count > 0;
     }
+
+    /* Desktop-only edge companions keep mobile dock 100% clear */
+    function syncDesktopOnlyPals() {
+      const desk = window.innerWidth >= 760;
+      let scrolly = document.getElementById('deskScrollyPal');
+      let pip = document.getElementById('deskPipPal');
+      if (desk) {
+        if (!scrolly) {
+          scrolly = document.createElement('piix-pal');
+          scrolly.id = 'deskScrollyPal';
+          scrolly.setAttribute('pal', 'scrolly');
+          scrolly.setAttribute('color', '#FFFFFF');
+          scrolly.setAttribute('side', 'bottom');
+          scrolly.setAttribute('scale', '2');
+          scrolly.setAttribute('aria-hidden', 'true');
+          document.body.appendChild(scrolly);
+        }
+        if (!pip) {
+          pip = document.createElement('piix-pal');
+          pip.id = 'deskPipPal';
+          pip.setAttribute('pal', 'pip');
+          pip.setAttribute('on', '#stop-garage .cta .btn.primary');
+          pip.setAttribute('scale', '2');
+          pip.setAttribute('aria-hidden', 'true');
+          document.body.appendChild(pip);
+        }
+      } else {
+        if (scrolly) scrolly.remove();
+        if (pip) pip.remove();
+      }
+      setTimeout(syncMonochromePals, 180);
+    }
+    syncDesktopOnlyPals();
+    window.addEventListener('resize', syncDesktopOnlyPals);
+
     let monoSyncTries = 0;
     const monoSyncTimer = setInterval(() => {
       monoSyncTries++;
-      if (syncMonochromePals() && monoSyncTries > 6) clearInterval(monoSyncTimer);
-      else if (monoSyncTries > 36) clearInterval(monoSyncTimer);
+      if (syncMonochromePals() && monoSyncTries > 8) clearInterval(monoSyncTimer);
+      else if (monoSyncTries > 40) clearInterval(monoSyncTimer);
     }, 250);
 
     new MutationObserver(() => {
       if (!document.documentElement.classList.contains('still-mode')) return;
-      document.querySelectorAll('piix-pal[on*="#circuitAtlas"], piix-pal[on*="footer"]').forEach(el => {
+      document.querySelectorAll('piix-pal[on*="#circuitAtlas"], piix-pal[on*="#stop-perception"], piix-pal[on*="footer"]').forEach(el => {
         if (!el.dataset.remounted) {
           const fresh = el.cloneNode(true);
           fresh.dataset.remounted = '1';

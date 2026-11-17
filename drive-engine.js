@@ -1410,9 +1410,11 @@ export function startPortfolioDrive() {
       const modeBtn = document.getElementById('modeToggleBtn');
       if (modeBtn) modeBtn.textContent = '3D drive';
       window.scrollTo({ top: 0, behavior: 'instant' });
-      if (veil) veil.classList.remove('on');
       if (window.focusOverviewSector) window.focusOverviewSector(startIdx, startIdx > 0);
-    }, 320);
+      requestAnimationFrame(() => {
+        if (veil) veil.classList.remove('on');
+      });
+    }, 180);
   }
 
   function enterDriveMode(idxOverride = null) {
@@ -1436,9 +1438,13 @@ export function startPortfolioDrive() {
       smoothT = progressAtScroll(smoothY);
       lastY = smoothY;
       firstFrame = true;
-      if (veil) veil.classList.remove('on');
-      wake();
-    }, 320);
+      prevTime = performance.now();
+      tick(prevTime);
+      requestAnimationFrame(() => {
+        if (veil) veil.classList.remove('on');
+        wake();
+      });
+    }, 180);
   }
   window.enterDriveAtSector = idx => enterDriveMode(idx);
   window.setPortfolioMode = nextMode => {
