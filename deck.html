@@ -464,12 +464,15 @@
           <a href="#ideology" id="nav-ideology" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">About</a>
           <a href="#capabilities" id="nav-capabilities" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Practice</a>
           <a href="#experience" id="nav-experience" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Experience</a>
-          <a href="#roadmap" id="nav-roadmap" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Field notes</a>
+          <a href="#roadmap" id="nav-roadmap" class="px-2.5 py-1.5 rounded-md whitespace-nowrap hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Field notes</a>
           <a href="#connect" id="nav-connect" class="px-3 py-1.5 rounded-md hover:text-zinc-100 hover:bg-canvas-elevated transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">Contact</a>
         </nav>
 
         <!-- Direct Actions -->
         <div class="flex items-center gap-2 sm:gap-3">
+          <a href="./" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C8102E] bg-[#B3122E]/20 hover:bg-[#B3122E] text-xs font-mono text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white" title="Switch back to 3D Interactive Highway Drive">
+            <span>← 3D Drive</span>
+          </a>
           <button id="audioToggleBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-canvas-border-mid bg-canvas-surface text-xs font-mono text-zinc-400 hover:text-zinc-100 hover:border-canvas-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent cursor-pointer" title="Toggle tactile procedural web audio (synthesized micro-cues)" aria-pressed="false">
             <i data-lucide="volume-x" id="audioToggleIcon" class="w-3.5 h-3.5 text-zinc-500"></i>
             <span id="audioToggleText">Audio: Off</span>
@@ -482,7 +485,7 @@
             <i data-lucide="copy" class="w-3.5 h-3.5 text-canvas-accent"></i>
             <span id="copyEmailTopText">Copy email</span>
           </button>
-          <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white text-black font-semibold text-xs font-mono font-bold hover:bg-canvas-red-hover transition-transform hover:-translate-y-0.5 shadow-[0_8px_24px_rgba(238,234,225,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
+          <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white text-black font-semibold text-xs font-mono font-bold hover:bg-zinc-200 transition-transform hover:-translate-y-0.5 shadow-[0_8px_24px_rgba(238,234,225,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent">
             <span>Say hello</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
@@ -3213,19 +3216,19 @@
           </div>
 
           <h2 id="ideology-heading" class="text-2xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight mb-8">
-            Interdependent Systems: <span class="font-serif italic font-normal text-zinc-400">Flow, Ergonomics &amp; Tactile Feedback.</span>
+            How I think about software: <span class="font-serif italic font-normal text-zinc-300">context, flow, and quiet UI.</span>
           </h2>
 
           <!-- Full Authentic Manifesto -->
           <div class="mb-10 p-6 sm:p-8 rounded-xl bg-canvas-base/80 border border-canvas-border-mid space-y-4 text-base sm:text-lg text-zinc-200 leading-relaxed font-sans shadow-inner">
             <p>
-              I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a supply chain, and the cognitive load on a human mind.
+              My MSc in logistics trained me to pay attention to bottlenecks, handoffs, and the awkward workarounds people rely on every day.
             </p>
             <p>
-              With a master’s in logistics and a foundation in market behavior, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations. But mechanical efficiency means nothing if the interaction feels hostile. Guided by psychology, design fundamentals, and practical philosophy, I care deeply about how an interface feels in human hands—its cadence, clarity, and tactile feedback.
+              Efficiency on paper does not matter much if a tool feels confusing, loud, or tiring to use at speed. Informed by behavioral economics and practical design fundamentals, I spend time simplifying screens down to what genuinely helps in the moment.
             </p>
             <p class="text-zinc-100 font-medium pt-1">
-              I spend my time building working prototypes and architectural case studies. My goal is to create responsive, quiet tools that respect human attention, absorb operational friction, and give genuine value back to the community.
+              These sixteen pieces range from live web applications to offline-first studies—built to absorb friction rather than create more of it.
             </p>
           </div>
 
@@ -3235,15 +3238,15 @@
               <div>
                 <div class="flex items-center gap-2 text-canvas-accent font-bold mb-2">
                   <i data-lucide="cpu" class="w-4 h-4"></i>
-                  <span>01. PHYSICAL TOLERANCES</span>
+                  <span>01. CONTEXT & FLOW</span>
                 </div>
-                <h3 class="text-sm font-bold text-zinc-100 font-sans mb-2">Engine Mechanics &amp; Supply Chains</h3>
+                <h3 class="text-sm font-bold text-zinc-100 font-sans mb-2">Bottlenecks &amp; Edge Constraints</h3>
                 <p class="text-zinc-400 font-sans text-xs leading-relaxed">
-                  Software cannot operate in theoretical isolation. Grounded in a master's in logistics, every architecture starts by mapping raw operational throughput, bottlenecks, physical hardware bounds, and offline edge conditions.
+                  Good tools fit their real environment: hospital Wi-Fi dead zones, dim cabins at night, or one-handed screens in the rain.
                 </p>
               </div>
               <div class="mt-4 pt-3 border-t border-canvas-border text-[11px] text-zinc-500">
-                Applied in: Ward 4B BLE Telemetry, PostGIS Triage
+                Examples: Ward Logistics, RoadTriage
               </div>
             </div>
 
@@ -3251,15 +3254,15 @@
               <div>
                 <div class="flex items-center gap-2 text-canvas-blue font-bold mb-2">
                   <i data-lucide="activity" class="w-4 h-4"></i>
-                  <span>02. COGNITIVE ERGONOMICS</span>
+                  <span>02. VISUAL CALM</span>
                 </div>
-                <h3 class="text-sm font-bold text-zinc-100 font-sans mb-2">Cadence, Clarity &amp; Tactile Feel</h3>
+                <h3 class="text-sm font-bold text-zinc-100 font-sans mb-2">Plain Hierarchy &amp; Rhythm</h3>
                 <p class="text-zinc-400 font-sans text-xs leading-relaxed">
-                  Mechanical throughput is futile if the experience feels hostile. Informed by psychology and practical philosophy, interfaces must possess calm cadence, zero fluff, immediate tactile feedback, and respect for human cognitive bandwidth.
+                  Cutting out unnecessary alerts, decorative chrome, and confusing jargon so the next action is immediately clear.
                 </p>
               </div>
               <div class="mt-4 pt-3 border-t border-canvas-border text-[11px] text-zinc-500">
-                Applied in: WCAG 2.2 AAA, AudioWorklet DAW, iTHINK
+                Examples: BabyCarl, The Observer, iTHINK
               </div>
             </div>
 
@@ -3267,15 +3270,15 @@
               <div>
                 <div class="flex items-center gap-2 text-canvas-purple font-bold mb-2">
                   <i data-lucide="sparkles" class="w-4 h-4"></i>
-                  <span>03. WORKING PROTOTYPES</span>
+                  <span>03. HONEST SCOPE</span>
                 </div>
-                <h3 class="text-sm font-bold text-zinc-100 font-sans mb-2">Absorbing Friction &amp; Returning Value</h3>
+                <h3 class="text-sm font-bold text-zinc-100 font-sans mb-2">Working Code &amp; Labelled Studies</h3>
                 <p class="text-zinc-400 font-sans text-xs leading-relaxed">
-                  Ideas prove themselves in code that works. I build working prototypes that absorb friction from messy real-world systems and give genuine, verifiable utility back to clinicians, crews, and communities.
+                  Building real browser demos where possible, and labelling speculative design studies plainly without hiding gaps.
                 </p>
               </div>
               <div class="mt-4 pt-3 border-t border-canvas-border text-[11px] text-zinc-500">
-                Applied in: The Observer, Civic Infrastructure Triage
+                Examples: Datum Atelier, CivicFlow, Rulers Language
               </div>
             </div>
           </div>
@@ -3286,16 +3289,16 @@
               <div>
                 <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-400 uppercase tracking-widest mb-1">
                   <i data-lucide="sliders" class="w-3.5 h-3.5 text-canvas-accent"></i>
-                  <span>Interactive Philosophy · Systems Simulator</span>
+                  <span>Interface Behavior Demo</span>
                 </div>
                 <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">
-                  Resilience &amp; Cognitive Ergonomics in Action
+                  Offline state, density, and audio test controls
                 </h3>
               </div>
               <div class="flex items-center gap-2 font-mono text-xs text-zinc-400">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800">
                   <span id="simulatorStatusDot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span id="simulatorStatusLabel">Live Engine: Nominal</span>
+                  <span id="simulatorStatusLabel">Interactive Ready</span>
                 </span>
               </div>
             </div>
@@ -3305,11 +3308,11 @@
               <div class="p-4 rounded-lg bg-[#0c0c0c] border border-[#222222] flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-2">
-                    <span class="font-mono text-[11px] text-zinc-400 uppercase font-semibold">01 · Edge Resilience</span>
+                    <span class="font-mono text-[11px] text-zinc-400 uppercase font-semibold">01 · Offline Queue</span>
                     <span id="simNetworkBadge" class="font-mono text-[10px] px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">Socket Online</span>
                   </div>
                   <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                    Simulate instantaneous hospital basement or road tunnel connection loss. Tests offline-first local persistence.
+                    Test switching off network connectivity to queue actions locally instead of dropping work.
                   </p>
                 </div>
                 <div>
@@ -3319,7 +3322,7 @@
                   </button>
                   <div class="mt-2 text-[10px] font-mono text-zinc-500 flex justify-between">
                     <span>Buffer: <span id="simBufferCount" class="text-zinc-300">0 events</span></span>
-                    <span>Loss: <span class="text-emerald-400">0.00%</span></span>
+                    <span>Mode: <span class="text-emerald-400">Local Queue</span></span>
                   </div>
                 </div>
               </div>
@@ -3328,11 +3331,11 @@
               <div class="p-4 rounded-lg bg-[#0c0c0c] border border-[#222222] flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-2">
-                    <span class="font-mono text-[11px] text-zinc-400 uppercase font-semibold">02 · Cognitive Density</span>
+                    <span class="font-mono text-[11px] text-zinc-400 uppercase font-semibold">02 · Visual Density</span>
                     <span id="simCognitiveBadge" class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">Balanced Flow</span>
                   </div>
                   <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                    Filter out ambient interface noise to protect mental bandwidth. Demonstrates high-density vs calm ergonomics.
+                    Compare compact multi-row density against calmer single-focus reading spacing.
                   </p>
                 </div>
                 <div>
@@ -3342,8 +3345,8 @@
                     <button type="button" class="sim-density-btn flex-1 py-1 text-center rounded text-zinc-400 hover:text-white transition-all cursor-pointer" data-density="focus">Zen Focus</button>
                   </div>
                   <div class="mt-2 text-[10px] font-mono text-zinc-500 flex justify-between">
-                    <span>Clutter Score: <span id="simClutterScore" class="text-zinc-300">24%</span></span>
-                    <span>Scanning Speed: <span id="simScanSpeed" class="text-canvas-accent">+45%</span></span>
+                    <span>Preset: <span id="simClutterScore" class="text-zinc-300">Balanced</span></span>
+                    <span>Layout: <span id="simScanSpeed" class="text-canvas-accent">Clear</span></span>
                   </div>
                 </div>
               </div>
@@ -3352,21 +3355,21 @@
               <div class="p-4 rounded-lg bg-[#0c0c0c] border border-[#222222] flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-2">
-                    <span class="font-mono text-[11px] text-zinc-400 uppercase font-semibold">03 · Tactile Verification</span>
-                    <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Sub-1ms Haptic</span>
+                    <span class="font-mono text-[11px] text-zinc-400 uppercase font-semibold">03 · Audio Feedback</span>
+                    <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Web Audio API</span>
                   </div>
                   <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                    Trigger a deterministic sub-millisecond acoustic pulse proving immediate physical response and zero UI lag.
+                    Play a short synthesized Web Audio tone without loading external sound files.
                   </p>
                 </div>
                 <div>
                   <button id="simHapticTriggerBtn" type="button" class="w-full py-2 px-3 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-[#2e2e2e] font-mono text-xs flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95">
                     <i data-lucide="zap" class="w-3.5 h-3.5 text-purple-400"></i>
-                    <span>Emit Tactile Pulse</span>
+                    <span>Play Soft Tone</span>
                   </button>
                   <div class="mt-2 text-[10px] font-mono text-zinc-500 flex justify-between">
                     <span>Synthesizer: <span class="text-zinc-300">WebAudio Sine</span></span>
-                    <span>Response: <span class="text-emerald-400">&lt;1.2ms</span></span>
+                    <span>Audio: <span class="text-emerald-400">Browser Synth</span></span>
                   </div>
                 </div>
               </div>
@@ -3380,10 +3383,10 @@
         <div class="mb-10">
           <div class="font-mono text-xs font-semibold text-canvas-accent uppercase tracking-widest mb-1.5 flex items-center gap-2">
             <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
-            <span>Technical Capabilities &amp; Arsenal</span>
+            <span>Technical Practice &amp; Tools</span>
           </div>
           <h2 id="capabilities-heading" class="text-3xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
-            How I build: <span class="font-serif italic font-normal text-zinc-400">rigorous systems, conscious interfaces.</span>
+            How I build: <span class="font-serif italic font-normal text-zinc-300">practical code, calm interfaces.</span>
           </h2>
           <p class="text-xs font-mono text-zinc-500 mt-2">
             Tip: Click any skill below to filter corresponding projects in the 3D Deck.
@@ -3396,7 +3399,7 @@
             <div>
               <div class="flex items-center gap-2.5 text-canvas-accent font-bold text-sm mb-4 pb-3 border-b border-canvas-border">
                 <i data-lucide="code-2" class="w-4 h-4"></i>
-                <span>01. RESILIENT SYSTEMS</span>
+                <span>01. CORE ENGINEERING</span>
               </div>
               <ul class="space-y-1.5 text-xs text-zinc-300">
                 <li class="capability-item flex items-center justify-between p-2 rounded-lg bg-black/40 border border-transparent hover:border-[#333333] hover:bg-black/90 transition-all cursor-pointer group" data-capability="typescript" title="Filter projects using TypeScript">
@@ -4114,7 +4117,7 @@
                 <i data-lucide="copy" class="w-4 h-4 text-canvas-accent"></i>
                 <span id="copyEmailFooterText">deshmukhvaishnav@gmail.com</span>
               </button>
-              <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-black font-bold hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-[0_10px_30px_rgba(238,234,225,0.13)]">
+              <a href="mailto:deshmukhvaishnav@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-black font-bold hover:bg-zinc-200 transition-all transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-canvas-accent shadow-[0_10px_30px_rgba(238,234,225,0.13)]">
                 <span>Send an email</span>
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </a>
@@ -4150,7 +4153,7 @@
                 <button type="button" class="brief-tag-btn px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated text-zinc-300 text-xs transition-all hover:border-canvas-purple cursor-pointer" data-tag="Privacy-aware product design">
                   Privacy-aware product design
                 </button>
-                <button type="button" class="brief-tag-btn px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated text-zinc-300 text-xs transition-all hover:border-canvas-blue cursor-pointer" data-tag="Lead UX Architecture & Design Systems">
+                <button type="button" class="brief-tag-btn px-3 py-1.5 rounded-lg border border-canvas-border bg-canvas-elevated text-zinc-300 text-xs transition-all hover:border-canvas-blue cursor-pointer" data-tag="Product Design & Front-End Systems">
                   Lead UX &amp; Design Systems
                 </button>
               </div>
@@ -4180,7 +4183,7 @@
 
             <!-- Actions -->
             <div class="flex flex-wrap items-center gap-3">
-              <button type="button" id="launchBriefEmailBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-black font-bold text-xs hover:bg-canvas-red-hover transition-all transform hover:-translate-y-0.5 shadow-[0_10px_30px_rgba(238,234,225,0.13)] cursor-pointer">
+              <button type="button" id="launchBriefEmailBtn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-black font-bold text-xs hover:bg-zinc-200 transition-all transform hover:-translate-y-0.5 shadow-[0_10px_30px_rgba(238,234,225,0.13)] cursor-pointer">
                 <span>Launch Email with Brief</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </button>
@@ -4213,7 +4216,7 @@
     </main>
 
     <!-- CASE STUDY DEEP-DIVE ARCHITECTURE MODAL -->
-    <div id="caseStudyModalBackdrop" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden transition-all duration-300 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+    <div id="caseStudyModalBackdrop" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
       <div class="relative max-w-4xl w-full max-h-[90vh] bg-canvas-surface border border-canvas-border-mid rounded-2xl shadow-2xl overflow-hidden flex flex-col font-sans">
         <!-- Modal Header with Navigation Controls -->
         <div class="px-5 py-3 border-b border-canvas-border bg-canvas-base/90 flex items-center justify-between font-mono text-xs">
@@ -4302,7 +4305,7 @@
             <!-- Injected via JS if live URL exists -->
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" id="modalStartBriefBtn" class="px-4 py-2 rounded-lg bg-white text-black font-bold hover:bg-canvas-red-hover transition-colors flex items-center gap-1.5 cursor-pointer">
+            <button type="button" id="modalStartBriefBtn" class="px-4 py-2 rounded-lg bg-white text-black font-bold hover:bg-zinc-200 transition-colors flex items-center gap-1.5 cursor-pointer">
               <span>Build Project Brief</span>
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
             </button>
@@ -4323,13 +4326,13 @@
     </div>
 
     <!-- PROFILE & CV SUMMARY MODAL -->
-    <div id="profileModalBackdrop" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden transition-all duration-300 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+    <div id="profileModalBackdrop" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
       <div class="relative max-w-3xl w-full max-h-[90vh] bg-canvas-surface border border-canvas-border-mid rounded-2xl shadow-2xl overflow-hidden flex flex-col font-sans">
         <!-- Header -->
         <div class="px-5 py-3.5 border-b border-canvas-border bg-canvas-base/90 flex items-center justify-between font-mono text-xs">
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-canvas-accent telemetry-pulse"></span>
-            <span class="text-zinc-200 font-bold tracking-wide">Executive Profile &amp; CV Summary</span>
+            <span class="text-zinc-200 font-bold tracking-wide">About &amp; Background</span>
           </div>
           <button id="closeProfileModalBtn" class="p-1 rounded-lg hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer" aria-label="Close profile modal">
             <i data-lucide="x" class="w-5 h-5"></i>
@@ -4339,7 +4342,7 @@
         <!-- Body -->
         <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
           <div>
-            <div class="font-mono text-xs text-canvas-accent uppercase tracking-wider mb-1">Independent Product Systems Engineer &amp; Lead UX Architect</div>
+            <div class="font-mono text-xs text-canvas-accent uppercase tracking-wider mb-1">Product Designer &amp; Systems Engineer</div>
             <h2 id="profileModalTitle" class="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight mb-2">
               Vaishnav Deshmukh
             </h2>
@@ -4350,31 +4353,31 @@
 
           <div class="p-5 sm:p-6 rounded-xl bg-canvas-base border border-canvas-border font-sans text-sm sm:text-base text-zinc-200 leading-relaxed space-y-3.5 shadow-inner">
             <p>
-              I view software through the lens of interdependent systems: the physical tolerances of an engine, the throughput of a supply chain, and the cognitive load on a human mind.
+              My MSc in logistics trained me to pay attention to bottlenecks, handoffs, and the awkward workarounds people rely on every day.
             </p>
             <p>
-              With a master’s in logistics and a foundation in market behavior, my work begins by observing flow, bottlenecks, and the unwritten patterns of daily operations. But mechanical efficiency means nothing if the interaction feels hostile. Guided by psychology, design fundamentals, and practical philosophy, I care deeply about how an interface feels in human hands—its cadence, clarity, and tactile feedback.
+              Efficiency on paper does not help if an interface feels loud, cluttered, or tiring under real conditions. I focus on quiet contrast, clear states, and keeping tools working offline.
             </p>
             <p class="text-zinc-100 font-medium">
-              I spend my time building working prototypes and architectural case studies. My goal is to create responsive, quiet tools that respect human attention, absorb operational friction, and give genuine value back to the community.
+              Most of this portfolio shows working prototypes and honest design studies grounded in real ward, workshop, and civic workflows.
             </p>
           </div>
 
           <!-- Core Competencies -->
           <div class="space-y-2">
-            <h4 class="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider">Core Competencies &amp; Foundation</h4>
+            <h4 class="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider">Core Skills &amp; Approach</h4>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
               <div class="p-3.5 rounded-lg bg-canvas-base border border-canvas-border">
                 <span class="text-canvas-accent font-bold block mb-1">Systems Architecture &amp; Logistics</span>
-                <span class="text-zinc-400 font-sans text-xs">MSc Logistics &amp; market behavior foundation, flow &amp; bottleneck analysis, HL7 FHIR v4.3, offline-first IndexedDB, sub-second operational throughput.</span>
+                <span class="text-zinc-400 font-sans text-xs">MSc in logistics and operational flow; offline-first IndexedDB storage, GeoJSON mapping, and healthcare HL7 FHIR / GS1 workflows.</span>
               </div>
               <div class="p-3.5 rounded-lg bg-canvas-base border border-canvas-border">
-                <span class="text-canvas-blue font-bold block mb-1">Cognitive Ergonomics &amp; UX Architecture</span>
-                <span class="text-zinc-400 font-sans text-xs">Cadence, clarity, tactile feedback, WCAG 2.2 AAA accessibility, high-density telemetry dashboards, absorbing clinical/civic operational friction.</span>
+                <span class="text-canvas-blue font-bold block mb-1">Interface Clarity &amp; Accessibility</span>
+                <span class="text-zinc-400 font-sans text-xs">Readable contrast, uncluttered layouts, keyboard ergonomics, and low-glare interfaces built for demanding work settings.</span>
               </div>
               <div class="p-3.5 rounded-lg bg-canvas-base border border-canvas-border">
-                <span class="text-canvas-purple font-bold block mb-1">Spatial 3D &amp; Working Prototypes</span>
-                <span class="text-zinc-400 font-sans text-xs">Three.js WebGL 60 FPS shaders, GLTF dissection, Web Audio multi-track DSP Worklets, edge computer vision.</span>
+                <span class="text-canvas-purple font-bold block mb-1">Interactive Code &amp; Sound</span>
+                <span class="text-zinc-400 font-sans text-xs">Three.js 3D browser models, HTML Canvas shaders, Web Audio procedural tones, and timeline editing interfaces.</span>
               </div>
               <div class="p-3.5 rounded-lg bg-canvas-base border border-canvas-border">
                 <span class="text-canvas-amber font-bold block mb-1">Privacy-aware Product Design</span>
@@ -4385,19 +4388,19 @@
 
           <!-- Engineering Benchmarks & Prototype Targets -->
           <div class="space-y-2">
-            <h4 class="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider">Engineering Benchmarks &amp; Prototype Targets</h4>
+            <h4 class="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider">Portfolio Focus &amp; Summary</h4>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-center">
               <div class="p-3 rounded bg-canvas-base border border-canvas-border">
-                <span class="text-xl font-bold text-canvas-accent block">&lt;9s</span>
-                <span class="text-[10px] text-zinc-400">Ward target locate speed</span>
+                <span class="text-xl font-bold text-canvas-accent block">Offline</span>
+                <span class="text-[10px] text-zinc-400">IndexedDB &amp; local-first focus</span>
               </div>
               <div class="p-3 rounded bg-canvas-base border border-canvas-border">
-                <span class="text-xl font-bold text-canvas-blue block">Sub-sec</span>
-                <span class="text-[10px] text-zinc-400">DBSCAN spatial triage time</span>
+                <span class="text-xl font-bold text-canvas-blue block">GeoJSON</span>
+                <span class="text-[10px] text-zinc-400">DBSCAN civic triage mapping</span>
               </div>
               <div class="p-3 rounded bg-canvas-base border border-canvas-border">
-                <span class="text-xl font-bold text-canvas-purple block">60 FPS</span>
-                <span class="text-[10px] text-zinc-400">WebGL 3D render cadence</span>
+                <span class="text-xl font-bold text-canvas-purple block">Canvas</span>
+                <span class="text-[10px] text-zinc-400">Three.js &amp; Web Audio UI</span>
               </div>
               <div class="p-3 rounded bg-canvas-base border border-canvas-border">
                 <span class="text-xl font-bold text-canvas-amber block">16</span>
@@ -4415,7 +4418,7 @@
               <i data-lucide="printer" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Print / Save Dossier</span>
             </button>
-            <a href="mailto:deshmukhvaishnav@gmail.com" class="px-4 py-2 rounded-lg bg-white text-black font-bold hover:bg-canvas-red-hover transition-colors flex items-center gap-1.5">
+            <a href="mailto:deshmukhvaishnav@gmail.com" class="px-4 py-2 rounded-lg bg-white text-black font-bold hover:bg-zinc-200 transition-colors flex items-center gap-1.5">
               <span>Send Inquiry</span>
               <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
             </a>
@@ -4492,7 +4495,7 @@
         setInterval(updateClock, 1000);
 
         // =====================================================================
-        // CRAZY HYPER-DIMENSIONAL SYSTEM BOOT SPLASH SCREEN ENGINE
+        // PORTFOLIO INTRO SPLASH CANVAS
         // =====================================================================
         const splashOverlay = document.getElementById("splashOverlay");
         const splashCanvas = document.getElementById("splashCanvas");
@@ -4580,7 +4583,7 @@
           const width = window.innerWidth;
           const height = window.innerHeight;
 
-          // 1. Generate Quantum Particle Nodes
+          // 1. Generate Animated Grid Nodes
           particles = [];
           const count = width < 768 ? 85 : 160;
           for (let i = 0; i < count; i++) {
@@ -4861,7 +4864,7 @@
             canvasCtx.restore();
           }
 
-          // 2. Render Quantum Particles
+          // 2. Render Ambient Grid Nodes
           for (let i = 0; i < particles.length; i++) {
             const p = particles[i];
 
@@ -6279,7 +6282,7 @@
               simNetworkIcon.setAttribute("data-lucide", "wifi");
               simNetworkIcon.className = "w-3.5 h-3.5 text-emerald-400";
               simNetworkBtnText.textContent = "Simulate Network Drop";
-              simulatorStatusLabel.textContent = "Live Engine: Nominal";
+              simulatorStatusLabel.textContent = "Interactive Ready";
               if (simulatorStatusDot) simulatorStatusDot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse";
 
               clearInterval(simBufferInterval);
@@ -6309,16 +6312,16 @@
 
             if (density === "dense") {
               if (simCognitiveBadge) simCognitiveBadge.textContent = "Full Telemetry";
-              if (simClutterScore) simClutterScore.textContent = "68%";
-              if (simScanSpeed) simScanSpeed.textContent = "+15%";
+              if (simClutterScore) simClutterScore.textContent = "Dense Table";
+              if (simScanSpeed) simScanSpeed.textContent = "Compact";
             } else if (density === "balanced") {
               if (simCognitiveBadge) simCognitiveBadge.textContent = "Balanced Flow";
-              if (simClutterScore) simClutterScore.textContent = "24%";
-              if (simScanSpeed) simScanSpeed.textContent = "+45%";
+              if (simClutterScore) simClutterScore.textContent = "Balanced";
+              if (simScanSpeed) simScanSpeed.textContent = "Clear";
             } else {
               if (simCognitiveBadge) simCognitiveBadge.textContent = "Zen Focus";
-              if (simClutterScore) simClutterScore.textContent = "4%";
-              if (simScanSpeed) simScanSpeed.textContent = "+82%";
+              if (simClutterScore) simClutterScore.textContent = "Minimal";
+              if (simScanSpeed) simScanSpeed.textContent = "Focused";
             }
           });
         });
@@ -6543,7 +6546,7 @@
             title: "Predictive Ward Logistics Engine",
             domain: "Health Systems Architecture · Concept Study",
             previewImg: "assets/project-ward.svg",
-            badges: ["Offline-First Prototype", "HL7 FHIR v4 Schema", "Scan4Safety GS1-128", "Sub-9s Locating Target"],
+            badges: ["Offline-First Prototype", "HL7 FHIR v4 Schema", "Scan4Safety GS1-128", "Fast Ward Lookup Goal"],
             problem: "Acute hospital wards manage hundreds of mobile infusion pumps, syringe drivers, and telemetry monitors that shift constantly between rooms and utility racks. When traditional network locators drop in basement corridors, clinical staff spend excessive time physically searching for misplaced equipment.",
             solution: "An offline-first spatial telemetry prototype combining Bluetooth Low Energy triangulation concepts with GS1 DataMatrix verification and local IndexedDB cache, exploring how to deliver sub-meter localization without cloud reliance.",
             stack: ["HL7 FHIR v4 Protocol", "Bluetooth Low Energy RSSI", "GS1-128 DataMatrix", "Offline-First IndexedDB", "Web Bluetooth API", "WCAG 2.2 AA Contrast"],
@@ -6667,7 +6670,7 @@
             impact: "An audio-workstation concept study exploring tactile, browser-based audio creation. No public product or benchmark is claimed.",
             liveUrl: "",
             liveLabel: "",
-            briefTag: "Lead UX Architecture & Design Systems"
+            briefTag: "Product Design & Front-End Systems"
           },
           roadtriage: {
             title: "RoadTriage: Automated Pavement Distress Vision",
@@ -6719,7 +6722,7 @@
             impact: "A collaboration concept study exploring how semantic grouping might make team decisions easier to find.",
             liveUrl: "",
             liveLabel: "",
-            briefTag: "Lead UX Architecture & Design Systems"
+            briefTag: "Product Design & Front-End Systems"
           },
           vision: {
             title: "Rulers Language: Clear AI Direction",
@@ -6792,7 +6795,7 @@
             previewImg: "assets/work-hiddenleaf.svg",
             badges: ["Multi-Track WebAudio", "Hindi-English Phoneme Grid", "Pitch Contour Tracking", "Cadence Visualizer"],
             problem: "Bilingual rap writers and lyricists juggling Hindi and English have no dedicated tool that analyzes cross-lingual syllable meter, matra alignment, and vocal pitch contours simultaneously.",
-            solution: "A bespoke browser-based DAW and lyric workspace engineered for Hindi-English rap writing, featuring phoneme rhyme mapping, beat synchronization, and real-time pitch feedback.",
+            solution: "A Hindi–English lyric and rhythm studio built around matra syllable counts, beat loops, and vocal timing cues.",
             stack: ["Web Audio API", "Phoneme Alignment Parser", "Devanagari Metrical Engine", "Canvas Spectrogram", "TypeScript"],
             impact: "A specialized studio tool bridging South Asian poetic meters with modern hip-hop rhythm analysis.",
             liveUrl: "https://aigroupchathq.github.io/hidden-leaf-studio/",
@@ -6800,14 +6803,14 @@
             briefTag: "Spatial Interfaces & 3D WebGL (Three.js)"
           },
           datumatelier: {
-            title: "Datum Atelier: High-Society Vehicle Provenance",
-            domain: "Automotive Systems · Cryptographic Ownership",
+            title: "Datum Atelier: Vehicle Custodianship Record",
+            domain: "Automotive · Service Records",
             previewImg: "assets/work-datumatelier.svg",
-            badges: ["Cryptographic Passport", "Owner-Controlled Records", "Offline Vault", "Zero Data Brokerage"],
-            problem: "Collector cars and high-society vehicles suffer from fragmented paper histories, broker fraud, and intrusive centralized platforms that monetize private owner telemetry.",
-            solution: "An independent automotive provenance platform providing tamper-evident, owner-controlled vehicle histories, digital handover protocols, and offline-first encrypted records.",
-            stack: ["TypeScript", "Offline-First Local Storage", "Cryptographic Hash Seals", "Responsive Luxury UI", "Canvas Engine"],
-            impact: "Setting a new privacy-centric benchmark for automotive handover, vehicle heritage, and private ownership records.",
+            badges: ["Signed Ramp Entries", "Owner-Controlled Records", "Offline Vault", "Zero Data Brokerage"],
+            problem: "Paper service books go missing and workshop receipts scatter across owners, leaving buyers guessing what maintenance was actually done.",
+            solution: "An independent record keeping maintenance invoices, workshop entries, and photos with the vehicle through every change of keeper.",
+            stack: ["TypeScript", "Offline-First Local Storage", "Evidence Grades", "Tactile Dark UI", "Canvas Engine"],
+            impact: "Keeps the car's history intact with both evidence and gaps clearly shown.",
             liveUrl: "https://datumatelier.uk/",
             liveLabel: "Visit Datum Atelier",
             briefTag: "Automotive Systems & ADAS"
@@ -7015,7 +7018,7 @@
           caseStudyModal?.classList.remove("print-dossier");
         });
 
-        // Seamless "Build Project Brief" trigger inside modal
+        // Direct inquiry action inside project modal
         if (modalStartBriefBtn) {
           modalStartBriefBtn.addEventListener("click", () => {
             const curKey = caseStudyKeys[currentCaseStudyIndex] || "ward";
@@ -7086,8 +7089,8 @@
         // 06. PROFILE & CV MODAL CONTROLLER
         // =====================================================================
         const profileModal = document.getElementById("profileModalBackdrop");
-        const openProfileModalBtn = document.getElementById("openProfileModalBtn");
-        const openHeroProfileBtn = document.getElementById("openHeroProfileBtn");
+        const openProfileModalBtn = document.getElementById("openProfileBtn");
+        const openHeroProfileBtn = document.getElementById("heroOpenProfileBtn");
         const closeProfileModalBtn = document.getElementById("closeProfileModalBtn");
         const closeProfileModalFooterBtn = document.getElementById("closeProfileModalFooterBtn");
         const printProfileModalBtn = document.getElementById("printProfileModalBtn");
@@ -7115,7 +7118,7 @@
         }
 
         if (openProfileModalBtn) openProfileModalBtn.addEventListener("click", openProfileModal);
-        if (openHeroProfileBtn) openHeroProfileBtn.addEventListener("click", openHeroProfileBtn);
+        if (openHeroProfileBtn) openHeroProfileBtn.addEventListener("click", openProfileModal);
         if (closeProfileModalBtn) closeProfileModalBtn.addEventListener("click", closeProfileModal);
         if (closeProfileModalFooterBtn) closeProfileModalFooterBtn.addEventListener("click", closeProfileModal);
         if (printProfileModalBtn) {

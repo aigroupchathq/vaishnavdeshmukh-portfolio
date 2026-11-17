@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Vaishnav Deshmukh — Systems Architecture &amp; Interactive Portfolio Drive</title>
-  <meta name="description" content="Personal portfolio of Vaishnav Deshmukh. Scroll-driven 3D highway journey through 16 systems architecture artifacts across healthcare, cognition, civic infrastructure, and automotive provenance.">
+  <title>Vaishnav Deshmukh — Product Design &amp; Systems Engineering</title>
+  <meta name="description" content="Personal portfolio of Vaishnav Deshmukh in London. Sixteen software projects and practical studies across clinical tools, attention, civic roads, and car records.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aigroupchathq.github.io/vaishnavdeshmukh-portfolio/">
   <meta name="theme-color" content="#050505">
 
-  <!-- Fonts matching Datum Atelier: Archivo, Inter, IBM Plex Mono, Caveat -->
+  <!-- Fonts: Archivo, Inter, IBM Plex Mono, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Caveat:wght@500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="portfolio-drive.css">
 
   <script>
-    /* Decide mode before first paint: 3D car scroll drive vs calm overview mode */
+    /* Decide mode before first paint: 3D car drive vs calm still page */
     (function () {
       var d = document.documentElement, ok = false;
       try {
@@ -32,7 +32,7 @@
     })();
   </script>
 
-  <!-- Latest Piixpal Web Components (from diiviikk5/Piixpal) -->
+  <!-- Piixpal custom elements -->
   <script src="piixpal.min.js"></script>
 </head>
 <body>
@@ -45,45 +45,35 @@
     <div class="wrap top-row">
       <a class="brand" href="#stop-garage" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(0)">
         VAISHNAV <small>DESHMUKH</small>
-        <piix-pal pal="bitbug" edge="text" speed="0.75"></piix-pal>
       </a>
 
       <nav class="nav nav-desk" aria-label="Primary sections">
-        <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">Ethos</a>
-        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Health</a>
-        <a href="#stop-cognitive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(3)">Cognitive</a>
-        <a href="#stop-civic" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(4)">Civic</a>
-        <a href="#stop-automotive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(5)">Automotive</a>
-        <a href="#stop-studio" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(6)">AI &amp; Studio</a>
-        <button type="button" class="nav-link" onclick="openMatrix()">All 16 Works</button>
-        <a href="deck.html">3D Deck →</a>
+        <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">How I work</a>
+        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Work</a>
+        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Hold REV</a>
+        <button type="button" class="nav-link" onclick="openMatrix(this)">All 16</button>
+        <a href="deck.html">Deck →</a>
       </nav>
 
       <div class="top-right">
-        <span class="status tabular" id="londonClock">--:--:-- GMT</span>
-        <button type="button" class="pal-toggle" id="palToggleBtn" aria-pressed="true" title="Toggle Piixpal pixel companions" onclick="togglePals()">
-          <span>Pals: On</span>
-        </button>
-        <button type="button" class="btn ghost sm" id="modeToggleBtn" onclick="togglePortfolioViewMode && togglePortfolioViewMode()">Overview</button>
-        <a class="btn primary sm" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">Start a brief</a>
+        <button type="button" class="btn ghost sm" id="modeToggleBtn" onclick="togglePortfolioViewMode && togglePortfolioViewMode()">Full page</button>
+        <a class="btn primary sm" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">Say hello</a>
       </div>
     </div>
 
     <div class="nav-row">
       <nav class="nav" aria-label="Primary sections mobile">
-        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Health</a>
-        <a href="#stop-cognitive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(3)">Cognitive</a>
-        <a href="#stop-civic" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(4)">Civic</a>
-        <a href="#stop-automotive" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(5)">Automotive</a>
-        <a href="#stop-studio" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(6)">Studio</a>
-        <button type="button" class="nav-link" onclick="openMatrix()">All 16 Works</button>
-        <a href="deck.html">3D Deck</a>
+        <a href="#stop-ethos" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(1)">How I work</a>
+        <a href="#stop-health" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(2)">Work</a>
+        <a href="#stop-rev" onclick="event.preventDefault(); driveToPortfolioStop && driveToPortfolioStop(7)">Hold REV</a>
+        <button type="button" class="nav-link" onclick="openMatrix(this)">All 16</button>
+        <a href="deck.html">Deck →</a>
       </nav>
     </div>
   </header>
 
   <!-- =======================================================================
-       FIXED 3D WORLD CANVAS (WINDING NIGHT ROAD + CODED 3D COUPÉ)
+       FIXED 3D WORLD CANVAS (WINDING NIGHT ROAD + 3D COUPÉ)
        ======================================================================= -->
   <div class="world" aria-hidden="true">
     <canvas id="world"></canvas>
@@ -98,27 +88,26 @@
   </div>
   <div class="veil" id="veil" aria-hidden="true"></div>
 
-  <!-- Piixpal Cursor Halo & Scroll Runner -->
-  <piix-cursor kind="glow" palette="#050505,#4a0d18,#C8102E,#E9E3D3" size="0.8" pixel="3"></piix-cursor>
+  <!-- Piixpal bottom hairline scroll runner -->
   <piix-pal pal="scrolly" color="#C8102E" side="bottom"></piix-pal>
 
   <!-- =======================================================================
        RIGHT-SIDE ROUTE RAIL MAP (9 WAYPOINTS)
        ======================================================================= -->
-  <nav class="route" aria-label="Portfolio journey route">
+  <nav class="route" aria-label="Journey route">
     <a href="#stop-garage" data-i="0"><i></i><span>00 · Start</span></a>
-    <a href="#stop-ethos" data-i="1"><i></i><span>01 · Ethos</span></a>
-    <a href="#stop-health" data-i="2"><i></i><span>02 · Health Systems</span></a>
-    <a href="#stop-cognitive" data-i="3"><i></i><span>03 · Cognitive Labs</span></a>
-    <a href="#stop-civic" data-i="4"><i></i><span>04 · Civic Spatial</span></a>
-    <a href="#stop-automotive" data-i="5"><i></i><span>05 · Automotive &amp; ADAS</span></a>
-    <a href="#stop-studio" data-i="6"><i></i><span>06 · AI &amp; Creative</span></a>
+    <a href="#stop-ethos" data-i="1"><i></i><span>01 · How I work</span></a>
+    <a href="#stop-health" data-i="2"><i></i><span>02 · Clinical</span></a>
+    <a href="#stop-cognitive" data-i="3"><i></i><span>03 · Perception</span></a>
+    <a href="#stop-civic" data-i="4"><i></i><span>04 · Civic roads</span></a>
+    <a href="#stop-automotive" data-i="5"><i></i><span>05 · Automotive</span></a>
+    <a href="#stop-studio" data-i="6"><i></i><span>06 · Audio &amp; AI</span></a>
     <a href="#stop-rev" data-i="7"><i></i><span>07 · Hold REV</span></a>
-    <a href="#stop-gate" data-i="8"><i></i><span>08 · Inquiries</span></a>
+    <a href="#stop-gate" data-i="8"><i></i><span>08 · Say hello</span></a>
   </nav>
 
-  <!-- Floating Car Road Sign: Skip the drive / Take the drive -->
-  <a class="skip-drive sign" href="#overview" role="button" aria-label="Skip the 3D drive and view full overview">
+  <!-- Floating Road Sign: Skip the drive / Take the drive -->
+  <a class="skip-drive sign" href="#overview" role="button" aria-label="Skip the 3D drive and view full page">
     <svg class="sign-art" viewBox="0 0 48 18" width="64" height="24" aria-hidden="true" focusable="false">
       <path class="road" d="M2 14H37"/>
       <path class="life" d="M2 14H37" pathLength="1"/>
@@ -155,52 +144,52 @@
       <span>Take the drive</span>
     </button>
 
-    <!-- STOP 0: GARAGE / HERO -->
+    <!-- STOP 0: START / HERO -->
     <section class="stop" id="stop-garage" data-t="0.0" data-side="left" data-cam="garage">
       <div class="card hero-card">
-        <span class="label">Vaishnav Deshmukh · Greater London, UK</span>
+        <span class="label">Vaishnav Deshmukh · London, UK</span>
         <h1>
-          Software breaks.<br>
-          <span class="c"><piix-text effect="scan" palette="#E9E3D3,#F0566A,#C8102E">Interdependent</piix-text> systems hold.</span>
+          Good software<br>
+          <span class="c">starts with noticing.</span>
         </h1>
-        <p class="value">A portfolio that tells you what's built, and what's proven.</p>
+        <p class="value">MSc Logistics · Product design · Working prototypes</p>
         <p class="lede">
-          With a master's in logistics, I approach software through physical tolerances, supply chain flow, and the cognitive load on human attention. Scroll to drive through all 16 verified systems artifacts.
+          I’m drawn to the small frictions people learn to live with: a misplaced piece of hospital equipment, a confusing council form, or a tool that asks too much. Scroll to drive through sixteen projects and studies.
         </p>
 
-        <div class="odo" id="odo" aria-label="Journey odometer reading in miles">
+        <div class="odo" id="odo" aria-label="Journey distance in miles">
           <i>0</i><i>1</i><i>6</i><i>0</i><i>0</i><i class="last">0</i>
-          <b>mi // 16 systems indexed</b>
+          <b>mi // sixteen projects</b>
         </div>
 
         <div class="cta">
-          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(2)">Start driving to the works ↓</button>
-          <button type="button" class="btn ghost" onclick="openMatrix()">Browse all 16 in index</button>
-          <a class="btn ghost" href="deck.html">3D Card Deck ↗</a>
+          <button type="button" class="btn primary" onclick="driveToPortfolioStop && driveToPortfolioStop(2)">Drive to the work ↓</button>
+          <button type="button" class="btn ghost" onclick="openMatrix(this)">See all 16 at once</button>
+          <a class="btn ghost" href="deck.html">Card Deck ↗</a>
         </div>
       </div>
     </section>
 
-    <!-- STOP 1: ENGINEERING ETHOS & DOCUMENTARY PROOF -->
+    <!-- STOP 1: HOW I WORK -->
     <section class="stop" id="stop-ethos" data-t="0.125" data-side="right" data-cam="near">
       <div class="card wide">
-        <span class="label">Stop 01 · Engineering Ethos</span>
-        <h2>Every artifact on this road is marked, like an entry in a chassis record.</h2>
+        <span class="label">01 · How I work</span>
+        <h2>Honest status on every project. What runs live, and what stays a study.</h2>
         <p class="lede sm">
-          I build from the physical edge backward: basement hospital wards without signal, rain-soaked highway carriageways, and offline browser environments where unreliable cloud roundtrips are unacceptable.
+          Notice the real constraint first, cut out extra steps, make sure it survives offline without dropping state, and mark live code separately from design studies.
         </p>
 
         <div class="states">
           <div class="state">
-            <span class="tag live"><i></i>11 Live Artifacts</span>
+            <span class="tag live"><i></i>11 Live projects</span>
             <ul>
-              <li>Deployed web applications &amp; interactive labs (Datum Atelier, CivicFlow, iTHINK, Rulers Language, Velum Labs, VTSystem)</li>
+              <li>Running browser demos and public codebases (Datum Atelier, CivicFlow, iTHINK, Rulers Language, Velum Labs, Vedic Tree OS).</li>
             </ul>
           </div>
           <div class="state">
-            <span class="tag">5 Prototypes &amp; Studies</span>
+            <span class="tag">5 Design studies</span>
             <ul>
-              <li>Architectural systems prototypes exploring hard physical/offline constraints (Ward Logistics, RoadTriage, GroupChat HQ, BabyCarl)</li>
+              <li>Prototypes built around messy offline settings where network connections fail (Ward Logistics, RoadTriage, BabyCarl, GroupChat HQ).</li>
             </ul>
           </div>
         </div>
@@ -209,259 +198,226 @@
       </div>
     </section>
 
-    <!-- STOP 2: CLINICAL & HEALTHCARE SYSTEMS -->
+    <!-- STOP 2: CLINICAL & WARD TOOLS -->
     <section class="stop" id="stop-health" data-t="0.25" data-side="left">
       <div class="card wide">
-        <span class="label">Stop 02 · Healthcare Telemetry</span>
-        <h2>Zero-latency tools for clinical floors and basement corridors.</h2>
-        <p class="lede sm">Designed around ward bottlenecks, infusion pump wayfinding, and quiet newborn vital trends without cloud latency.</p>
+        <span class="label">02 · Clinical &amp; Ward Tools</span>
+        <h2>Equipment wayfinding and quiet bedside logging.</h2>
+        <p class="lede sm">Shaped around hospital floor plans and night shifts, avoiding bright screens and basement Wi-Fi dead zones.</p>
 
         <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('ward')">
+          <button type="button" class="door" onclick="openProjectDossier('ward', this)">
         <div class="door-top">
-          <span class="who">#01 · HEALTH</span>
-          <span class="tag">Specimen</span>
+          <h3>Predictive Ward Logistics Engine</h3>
+          <span class="door-status">Study</span>
         </div>
-        <h3>Predictive Ward Logistics Engine</h3>
-        <p>An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Offline-first floorplan tool for tracing hospital infusion pumps in basement corridors without cloud reliance.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('babycarl')">
+<button type="button" class="door" onclick="openProjectDossier('babycarl', this)">
         <div class="door-top">
-          <span class="who">#08 · HEALTH</span>
-          <span class="tag">Specimen</span>
+          <h3>BabyCarl: Circadian Telemetry</h3>
+          <span class="door-status">Study</span>
         </div>
-        <h3>BabyCarl: Circadian Telemetry</h3>
-        <p>A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Gentle newborn feed and sleep tracker shaped for tired parents with dim night contrast and zero alert spam.</p>
       </button>
         </div>
       </div>
     </section>
 
-    <!-- STOP 3: COGNITIVE & PERCEPTION LABS -->
+    <!-- STOP 3: ATTENTION & PERCEPTION -->
     <section class="stop" id="stop-cognitive" data-t="0.375" data-side="right">
       <div class="card wide">
-        <span class="label">Stop 03 · Cognitive &amp; Perception Labs</span>
-        <h2>Respecting the physical bandwidth of human attention.</h2>
-        <p class="lede sm">Volumetric 3D neuroscience slicers, generative awareness shaders, and quiet psychological self-reflection engines.</p>
+        <span class="label">03 · Attention &amp; Perception</span>
+        <h2>Browser experiments on sight, focus, and reflection.</h2>
+        <p class="lede sm">Small interactive pages using canvas motion, spatial models, and simple Web Audio tones to explore how we pay attention.</p>
 
         <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('consciousness')">
+          <button type="button" class="door" onclick="openProjectDossier('consciousness', this)">
         <div class="door-top">
-          <span class="who">#02 · COGNITIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>The Unexplored Interior</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>The Unexplored Interior</h3>
-        <p>An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Self-guided visual awareness and attention demos inspired by theories of perception.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('ithink')">
+<button type="button" class="door" onclick="openProjectDossier('ithink', this)">
         <div class="door-top">
-          <span class="who">#03 · COGNITIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>iTHINK: Attention & Flow Lab</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>iTHINK: Attention & Flow Lab</h3>
-        <p>An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Browser prototype combining interactive 3D brain models with paced attention exercises and reflection prompts.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('itsyou')">
+<button type="button" class="door" onclick="openProjectDossier('itsyou', this)">
         <div class="door-top">
-          <span class="who">#07 · COGNITIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>The Observer: Thought & Awareness</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>The Observer: Thought & Awareness</h3>
-        <p>An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.</p>
       </button>
         </div>
       </div>
     </section>
 
-    <!-- STOP 4: CIVIC & SPATIAL INFRASTRUCTURE -->
+    <!-- STOP 4: CIVIC & ROAD MAINTENANCE -->
     <section class="stop" id="stop-civic" data-t="0.50" data-side="left">
       <div class="card wide">
-        <span class="label">Stop 04 · Civic Infrastructure</span>
-        <h2>Spatial deduplication and edge computer vision for public roads.</h2>
-        <p class="lede sm">Eliminating redundant dispatch contractor callouts via DBSCAN geospatial batching and offline WebGPU hazard scanning.</p>
+        <span class="label">04 · Civic &amp; Road Maintenance</span>
+        <h2>Grouping duplicate street reports and logging road damage offline.</h2>
+        <p class="lede sm">Practical municipal tools to stop dispatch teams sorting twenty reports for the same pothole.</p>
 
         <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('civicflow')">
+          <button type="button" class="door" onclick="openProjectDossier('civicflow', this)">
         <div class="door-top">
-          <span class="who">#04 · CIVIC</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>CivicFlow: Highways Triage Engine</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>CivicFlow: Highways Triage Engine</h3>
-        <p>A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Spatial clustering demo that groups duplicate public pothole reports on council maps before dispatch.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('roadtriage')">
+<button type="button" class="door" onclick="openProjectDossier('roadtriage', this)">
         <div class="door-top">
-          <span class="who">#06 · CIVIC</span>
-          <span class="tag">Specimen</span>
+          <h3>RoadTriage: Edge Defect Scanner</h3>
+          <span class="door-status">Study</span>
         </div>
-        <h3>RoadTriage: Edge Defect Scanner</h3>
-        <p>An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Mobile inspection concept for tagging road surface defects offline while checking routes.</p>
       </button>
         </div>
       </div>
     </section>
 
-    <!-- STOP 5: AUTOMOTIVE PROVENANCE & ADAS -->
+    <!-- STOP 5: CARS, DRIVING & RECORDS -->
     <section class="stop" id="stop-automotive" data-t="0.625" data-side="right">
       <div class="card wide">
-        <span class="label">Stop 05 · Automotive &amp; Provenance</span>
-        <h2>High-society vehicle stewardship, ADAS fusion &amp; driving philosophy.</h2>
-        <p class="lede sm">Including Datum Atelier itself — keeping a car's work, evidence and people together through every change of keeper.</p>
+        <span class="label">05 · Cars, Safety &amp; Records</span>
+        <h2>Service histories that stay with the car, plus browser safety tests.</h2>
+        <p class="lede sm">Including Datum Atelier, built to keep invoices and work records with the vehicle through every change of owner.</p>
 
         <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('datumatelier')">
+          <button type="button" class="door" onclick="openProjectDossier('datumatelier', this)">
         <div class="door-top">
-          <span class="who">#16 · AUTOMOTIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>Datum Atelier</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>Datum Atelier</h3>
-        <p>An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Independent car record keeping invoices, workshop entries, and notes with the vehicle across keepers.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('datumadas')">
+<button type="button" class="door" onclick="openProjectDossier('datumadas', this)">
         <div class="door-top">
-          <span class="who">#11 · AUTOMOTIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>Datum ADAS</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>Datum ADAS</h3>
-        <p>An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Browser safety interface exploring low-clutter following distance cues and peripheral hazard awareness.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('driver')">
+<button type="button" class="door" onclick="openProjectDossier('driver', this)">
         <div class="door-top">
-          <span class="who">#14 · CREATIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>The Driver of God</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>The Driver of God</h3>
-        <p>An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.</p>
       </button>
         </div>
       </div>
     </section>
 
-    <!-- STOP 6: AI, AUDIO STUDIO & COLLABORATIVE TOOLS -->
+    <!-- STOP 6: WRITING, AUDIO & OPERATIONS -->
     <section class="stop" id="stop-studio" data-t="0.75" data-side="left">
       <div class="card wide">
-        <span class="label">Stop 06 · AI, Audio DAWs &amp; Systems Suite</span>
-        <h2>Six tools for language precision, rhythm, consensus &amp; institutional scale.</h2>
-        <p class="lede sm">Multi-track Web Audio workspaces, prompt design languages, semantic group consensus graphs, and educational operating systems.</p>
+        <span class="label">06 · Audio, Writing &amp; Tools</span>
+        <h2>Six focused tools across pacing, writing, matching, and school operations.</h2>
+        <p class="lede sm">Bilingual lyric timing, script-linked audio tracks, shared team decisions, and multi-campus attendance ledgers.</p>
 
         <div class="doors">
-          <button type="button" class="door" onclick="openProjectDossier('vision')">
+          <button type="button" class="door" onclick="openProjectDossier('vision', this)">
         <div class="door-top">
-          <span class="who">#10 · CREATIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>Rulers Language</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>Rulers Language</h3>
-        <p>A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Practical guide to working with AI: pick a path, shape clear instructions, verify outputs, and cut fluff.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('scriptstudio')">
+<button type="button" class="door" onclick="openProjectDossier('scriptstudio', this)">
         <div class="door-top">
-          <span class="who">#05 · CREATIVE</span>
-          <span class="tag">Specimen</span>
+          <h3>AI Script Studio: Multi-Track DAW</h3>
+          <span class="door-status">Study</span>
         </div>
-        <h3>AI Script Studio: Multi-Track DAW</h3>
-        <p>A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Browser script and sound editor connecting written lines directly to pacing blocks on an audio timeline.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('hiddenleaf')">
+<button type="button" class="door" onclick="openProjectDossier('hiddenleaf', this)">
         <div class="door-top">
-          <span class="who">#15 · CREATIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>Hidden Leaf Studio</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>Hidden Leaf Studio</h3>
-        <p>A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Hindi–English lyric writing workspace counting Hindi matras, rhyme flows, and built-in beat loops.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('groupchat')">
+<button type="button" class="door" onclick="openProjectDossier('groupchat', this)">
         <div class="door-top">
-          <span class="who">#09 · CREATIVE</span>
-          <span class="tag">Specimen</span>
+          <h3>GroupChat HQ: Consensus Engine</h3>
+          <span class="door-status">Study</span>
         </div>
-        <h3>GroupChat HQ: Consensus Engine</h3>
-        <p>A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Concept turning busy group chat threads into a clear map of open questions and agreed decisions.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('velum')">
+<button type="button" class="door" onclick="openProjectDossier('velum', this)">
         <div class="door-top">
-          <span class="who">#12 · CREATIVE</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>Checkmate (Velum Labs)</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>Checkmate (Velum Labs)</h3>
-        <p>A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Structured compatibility tool comparing practical expectations and core values clearly, without swipe tricks.</p>
       </button>
-<button type="button" class="door" onclick="openProjectDossier('vtsystem')">
+<button type="button" class="door" onclick="openProjectDossier('vtsystem', this)">
         <div class="door-top">
-          <span class="who">#13 · EDUCATION</span>
-          <span class="tag live"><i></i>Live</span>
+          <h3>Vedic Tree OS</h3>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3>Vedic Tree OS</h3>
-        <p>An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
-        <span class="go">Inspect dossier →</span>
+        <p>Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.</p>
       </button>
         </div>
       </div>
     </section>
 
-    <!-- STOP 7: TACTICAL INTERLUDE (HOLD REV) -->
+    <!-- STOP 7: INTERLUDE (HOLD REV) -->
     <section class="stop" id="stop-rev" data-t="0.875" data-side="right" data-cam="close">
       <div class="card">
-        <span class="label">Stop 07 · Systems Interlude</span>
+        <span class="label">07 · An interlude</span>
         <h2>Hold REV.</h2>
         <p class="lede sm">
-          Notice the 3D ground tachometer painted beside the coupé on the tarmac: holding REV sweeps both instruments in real time.
+          The needle answers and settles back on its own. Your drive count lives on this device only.
         </p>
 
         <div class="instrument" id="instrument">
           <div class="instrument-stage">
             <div class="instrument-dial">
-              <canvas id="instrument-canvas" role="img" aria-label="Systems tachometer dial with session odometer"></canvas>
+              <canvas id="instrument-canvas" role="img" aria-label="Rev counter dial"></canvas>
             </div>
             <button type="button" class="instrument-rev" id="instrument-rev" aria-label="Hold to rev the engine">REV</button>
-            <piix-pal pal="pip" edge="box" speed="0.9"></piix-pal>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STOP 8: ARRIVAL GATE & INQUIRIES -->
+    <!-- STOP 8: CONTACT -->
     <section class="stop last" id="stop-gate" data-t="1.0" data-side="left" data-cam="gate">
       <div class="card wide">
-        <span class="label">Stop 08 · End of the Drive &amp; Inquiries</span>
-        <h2>Start a conversation, inspect the full matrix, or request a brief.</h2>
+        <span class="label">08 · End of the road</span>
+        <h2>Got an awkward product friction worth simplifying?</h2>
         <p class="lede sm">
-          Greater London, UK · Available for advisory, systems architecture reviews, and high-integrity product engineering.
+          Based in Greater London, UK. Happy to talk through product engineering roles, early prototypes, or field problems.
         </p>
 
         <div class="trio">
           <div>
-            <h3>Full 16-Work Index</h3>
-            <p>Search and filter all 16 systems with full problem diagnosis and architecture specs.</p>
+            <h3>See all 16</h3>
+            <p>Search the full index of sixteen projects and design studies.</p>
           </div>
           <div>
-            <h3>Source &amp; Repositories</h3>
-            <p>Explore public repositories and commits directly on GitHub under @aigroupchathq.</p>
+            <h3>Read the code</h3>
+            <p>Public codebases and commits live on GitHub under @aigroupchathq.</p>
           </div>
           <div>
-            <h3>Direct Correspondence</h3>
-            <p>Reach out directly to discuss roles, prototypes, or systems engineering problems.</p>
+            <h3>Write directly</h3>
+            <p>No forms or funnels — reach me straight at deshmukhvaishnav@gmail.com.</p>
           </div>
         </div>
 
         <div class="cta">
-          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Project%20Brief">deshmukhvaishnav@gmail.com →</a>
-          <button type="button" class="btn ghost" onclick="openMatrix()">Open All 16 Index</button>
-          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
+          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">deshmukhvaishnav@gmail.com →</a>
+          <button type="button" class="btn ghost" onclick="openMatrix(this)">Browse all 16</button>
+          <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </div>
       </div>
     </section>
@@ -472,31 +428,37 @@
        FOOTER
        ======================================================================= -->
   <footer class="bottom">
-    <div class="wrap foot">
-      <div>
-        <a class="brand" href="#stop-garage">VAISHNAV <small>DESHMUKH</small></a>
-        <p style="margin-top: 10px;">
-          Product, Design &amp; Systems Architecture · Greater London, UK. Built with Three.js procedural driving physics and Piixpal open-source components.
-        </p>
-        <p class="note">Documentary truth strictly enforced: all 16 case studies correspond to authored repositories, studies, and prototypes.</p>
+    <div class="wrap">
+      <div class="footer-pal-perch">
+        <piix-pal pal="bitbug" edge="box" speed="0.65" aria-hidden="true"></piix-pal>
       </div>
-      <div>
-        <nav class="foot-links" aria-label="Footer navigation">
-          <button type="button" onclick="openMatrix()">All 16 Systems</button>
-          <a href="deck.html">3D Card Deck</a>
-          <a href="showroom.html">Design Showroom</a>
-          <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="mailto:deshmukhvaishnav@gmail.com">Email</a>
-        </nav>
-        <p class="mono" style="margin-top: 14px; font-size: 12px; color: var(--muted);">
-          &copy; 2026 Vaishnav Deshmukh · Driven by systems &amp; logistics
-        </p>
+      <div class="foot">
+        <div>
+          <a class="brand" href="#stop-garage">VAISHNAV <small>DESHMUKH</small></a>
+          <p style="margin-top: 10px;">
+            Product design &amp; engineering · London, UK · <span class="mono tabular" id="londonClock">--:--:-- GMT</span>
+          </p>
+          <p class="note">Sixteen honest projects and studies. Live links open working demos; design studies are clearly labelled as studies.</p>
+        </div>
+        <div>
+          <nav class="foot-links" aria-label="Footer navigation">
+            <button type="button" onclick="openMatrix(this)">All 16 works</button>
+            <a href="deck.html">Card Deck</a>
+            <a href="showroom.html">Design Lab</a>
+            <a href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:deshmukhvaishnav@gmail.com">Email</a>
+            <button type="button" id="palToggleBtn" aria-pressed="true" onclick="togglePals()">Companion: On</button>
+          </nav>
+          <p class="mono" style="margin-top: 14px; font-size: 12px; color: var(--muted);">
+            &copy; 2026 Vaishnav Deshmukh
+          </p>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- =======================================================================
-       DEEP PROJECT DOSSIER MODAL DRAWER
+       DEEP PROJECT NOTES MODAL
        ======================================================================= -->
   <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeProjectDossier()">
     <div class="modal-panel" onclick="event.stopPropagation()">
@@ -506,11 +468,8 @@
         <div>
           <span id="modalCategory" class="label" style="margin-bottom: 4px;">Domain</span>
           <h2 id="modalTitle" style="font-size: clamp(1.35rem, 2.5vw, 1.9rem);">Project Title</h2>
-          <div style="margin-top: 10px;">
-            <piix-flap id="modalFlapCode" text="SYSTEM DOSSIER" theme="dark" style="font-size: 14px;"></piix-flap>
-          </div>
         </div>
-        <button type="button" class="btn ghost sm" onclick="closeProjectDossier()" aria-label="Close dossier">✕</button>
+        <button type="button" id="modalCloseBtn" class="btn ghost sm" onclick="closeProjectDossier()" aria-label="Close project notes">✕</button>
       </div>
 
       <div class="modal-visual">
@@ -518,34 +477,34 @@
       </div>
 
       <div>
-        <span class="modal-sec-lbl">Problem Diagnosis</span>
+        <span class="modal-sec-lbl">The problem</span>
         <p id="modalProblem" class="modal-box"></p>
       </div>
 
       <div>
-        <span class="modal-sec-lbl">Architectural Intervention</span>
+        <span class="modal-sec-lbl">How it works</span>
         <p id="modalSolution" class="modal-box"></p>
       </div>
 
       <div id="modalDecisionsWrap">
-        <span class="modal-sec-lbl">Key Engineering Decisions</span>
+        <span class="modal-sec-lbl">Design &amp; technical notes</span>
         <ul id="modalDecisions" class="modal-decisions"></ul>
       </div>
 
       <div>
-        <span class="modal-sec-lbl">Core Tech Stack</span>
+        <span class="modal-sec-lbl">Built with</span>
         <div id="modalStack" class="spec-tags"></div>
       </div>
 
       <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--hair); padding-top: 16px;">
-        <span class="mono" style="font-size: 11px; color: var(--muted);">DOCUMENTARY TRUTH VERIFIED</span>
+        <span class="mono" id="modalStatusLabel" style="font-size: 11px; color: var(--muted);">PROJECT STATUS</span>
         <div id="modalLinks" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
       </div>
     </div>
   </div>
 
   <!-- =======================================================================
-       ALL 16 ARTIFACTS SEARCHABLE MATRIX MODAL
+       ALL 16 PROJECTS SEARCHABLE INDEX MODAL
        ======================================================================= -->
   <div id="matrixModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="matrixTitle" onclick="closeMatrix()">
     <div class="modal-panel wide" onclick="event.stopPropagation()">
@@ -553,197 +512,195 @@
 
       <div class="modal-head">
         <div>
-          <span class="label" style="margin-bottom: 4px;">Complete Custodianship Index</span>
-          <h2 id="matrixTitle" style="font-size: 1.65rem;">All 16 Verified Systems Artifacts</h2>
+          <span class="label" style="margin-bottom: 4px;">Complete List</span>
+          <h2 id="matrixTitle" style="font-size: 1.65rem;">All 16 Projects &amp; Studies</h2>
         </div>
-        <button type="button" class="btn ghost sm" onclick="closeMatrix()" aria-label="Close matrix">✕</button>
+        <button type="button" id="matrixCloseBtn" class="btn ghost sm" onclick="closeMatrix()" aria-label="Close project list">✕</button>
       </div>
 
       <div class="matrix-controls">
         <div class="filter-strip">
           <button type="button" class="filter-btn active" onclick="filterMatrix('all', this)">All (16)</button>
           <button type="button" class="filter-btn" onclick="filterMatrix('live', this)">Live (11)</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('concept', this)">Concept (5)</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('health', this)">Health</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('cognitive', this)">Cognitive</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('concept', this)">Studies (5)</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('health', this)">Clinical</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('cognitive', this)">Perception</button>
           <button type="button" class="filter-btn" onclick="filterMatrix('civic', this)">Civic</button>
           <button type="button" class="filter-btn" onclick="filterMatrix('automotive', this)">Automotive</button>
-          <button type="button" class="filter-btn" onclick="filterMatrix('creative', this)">AI &amp; Studio</button>
+          <button type="button" class="filter-btn" onclick="filterMatrix('creative', this)">Audio &amp; AI</button>
         </div>
-        <input type="text" class="search-input" id="matrixSearchInput" placeholder="Search by project title, domain, or stack..." oninput="searchMatrix(this.value)">
+        <input type="text" class="search-input" id="matrixSearchInput" placeholder="Filter by title, domain, or stack..." oninput="searchMatrix(this.value)">
       </div>
 
       <div class="matrix-grid" id="matrixGrid">
-        <button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('ward')">
+        <button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('ward', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#01 · Healthcare Logistics · Concept Study</span>
-          <span class="tag">Specimen</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#01 · Healthcare Concept Study</span>
+          <span class="door-status">Study</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Predictive Ward Logistics Engine</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.</p>
-        <div class="spec-tags"><span class="spec-tag">HL7 FHIR v4</span> <span class="spec-tag">GS1-128</span> <span class="spec-tag">IndexedDB</span></div>
+        <h3 style="font-size: 1.05rem;">Predictive Ward Logistics Engine</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Offline-first floorplan tool for tracing hospital infusion pumps in basement corridors without cloud reliance.</p>
+        <div class="spec-tags"><span class="spec-tag">HL7 FHIR</span> <span class="spec-tag">GS1-128</span> <span class="spec-tag">IndexedDB</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('consciousness')">
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('consciousness', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#02 · Cognitive Science · Interactive Inquiry</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#02 · Cognitive Science Interactive</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">The Unexplored Interior</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.</p>
-        <div class="spec-tags"><span class="spec-tag">HTML Canvas</span> <span class="spec-tag">Web Audio API</span> <span class="spec-tag">Vanilla JS</span></div>
+        <h3 style="font-size: 1.05rem;">The Unexplored Interior</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Self-guided visual awareness and attention demos inspired by theories of perception.</p>
+        <div class="spec-tags"><span class="spec-tag">HTML Canvas</span> <span class="spec-tag">Web Audio</span> <span class="spec-tag">Vanilla JS</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('ithink')">
+<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('ithink', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#03 · Cognitive Practice · Neuroscience Lab</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#03 · Cognitive Practice 3D Lab</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">iTHINK: Attention & Flow Lab</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.</p>
+        <h3 style="font-size: 1.05rem;">iTHINK: Attention & Flow Lab</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser prototype combining interactive 3D brain models with paced attention exercises and reflection prompts.</p>
         <div class="spec-tags"><span class="spec-tag">Three.js</span> <span class="spec-tag">WebGL</span> <span class="spec-tag">TypeScript</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="civic" data-status="live" onclick="closeMatrix(); openProjectDossier('civicflow')">
+<button type="button" class="matrix-card" data-domain="civic" data-status="live" onclick="closeMatrix(); openProjectDossier('civicflow', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#04 · Civic Infrastructure · Municipal Triage</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#04 · Civic Infrastructure Road Triage</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">CivicFlow: Highways Triage Engine</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.</p>
-        <div class="spec-tags"><span class="spec-tag">DBSCAN Spatial</span> <span class="spec-tag">GeoJSON</span> <span class="spec-tag">Turf.js</span></div>
+        <h3 style="font-size: 1.05rem;">CivicFlow: Highways Triage Engine</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Spatial clustering demo that groups duplicate public pothole reports on council maps before dispatch.</p>
+        <div class="spec-tags"><span class="spec-tag">DBSCAN</span> <span class="spec-tag">GeoJSON</span> <span class="spec-tag">Turf.js</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('scriptstudio')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('scriptstudio', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#05 · Creative Technology · Generative Audio</span>
-          <span class="tag">Specimen</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#05 · Audio & Writing Study</span>
+          <span class="door-status">Study</span>
         </div>
-        <h3 style="font-size: 1.08rem;">AI Script Studio: Multi-Track DAW</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.</p>
-        <div class="spec-tags"><span class="spec-tag">Web Audio API</span> <span class="spec-tag">Canvas Timeline</span> <span class="spec-tag">TypeScript</span></div>
+        <h3 style="font-size: 1.05rem;">AI Script Studio: Multi-Track DAW</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser script and sound editor connecting written lines directly to pacing blocks on an audio timeline.</p>
+        <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Canvas Timeline</span> <span class="spec-tag">TypeScript</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="civic" data-status="concept" onclick="closeMatrix(); openProjectDossier('roadtriage')">
+<button type="button" class="matrix-card" data-domain="civic" data-status="concept" onclick="closeMatrix(); openProjectDossier('roadtriage', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#06 · Civic Infrastructure · Edge Vision</span>
-          <span class="tag">Specimen</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#06 · Civic Infrastructure Field Capture</span>
+          <span class="door-status">Study</span>
         </div>
-        <h3 style="font-size: 1.08rem;">RoadTriage: Edge Defect Scanner</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.</p>
-        <div class="spec-tags"><span class="spec-tag">Computer Vision</span> <span class="spec-tag">TensorFlow.js</span> <span class="spec-tag">IndexedDB</span></div>
+        <h3 style="font-size: 1.05rem;">RoadTriage: Edge Defect Scanner</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Mobile inspection concept for tagging road surface defects offline while checking routes.</p>
+        <div class="spec-tags"><span class="spec-tag">Field Vision</span> <span class="spec-tag">TensorFlow.js</span> <span class="spec-tag">IndexedDB</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="cognitive" data-status="live" onclick="closeMatrix(); openProjectDossier('itsyou')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('itsyou', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#07 · Cognitive Science · Metacognition</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#07 · Interactive Reflection Live</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">The Observer: Thought & Awareness</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An interactive reflection interface examining mental models, decision-making habits, and attention patterns.</p>
-        <div class="spec-tags"><span class="spec-tag">Interactive Narrative</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Vanilla JS</span></div>
+        <h3 style="font-size: 1.05rem;">The Observer: Thought & Awareness</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.</p>
+        <div class="spec-tags"><span class="spec-tag">Interactive UI</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Vanilla JS</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('babycarl')">
+<button type="button" class="matrix-card" data-domain="health" data-status="concept" onclick="closeMatrix(); openProjectDossier('babycarl', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#08 · Pediatric Health · Circadian Telemetry</span>
-          <span class="tag">Specimen</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#08 · Pediatric Health Concept Study</span>
+          <span class="door-status">Study</span>
         </div>
-        <h3 style="font-size: 1.08rem;">BabyCarl: Circadian Telemetry</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.</p>
-        <div class="spec-tags"><span class="spec-tag">Circadian Telemetry</span> <span class="spec-tag">Local Storage</span> <span class="spec-tag">Tactile UX</span></div>
+        <h3 style="font-size: 1.05rem;">BabyCarl: Circadian Telemetry</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Gentle newborn feed and sleep tracker shaped for tired parents with dim night contrast and zero alert spam.</p>
+        <div class="spec-tags"><span class="spec-tag">Circadian Log</span> <span class="spec-tag">Local Storage</span> <span class="spec-tag">Mobile UX</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('groupchat')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="concept" onclick="closeMatrix(); openProjectDossier('groupchat', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#09 · Collaboration Systems · Semantic Sync</span>
-          <span class="tag">Specimen</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#09 · Collaboration Study</span>
+          <span class="door-status">Study</span>
         </div>
-        <h3 style="font-size: 1.08rem;">GroupChat HQ: Consensus Engine</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.</p>
-        <div class="spec-tags"><span class="spec-tag">Vector Embeddings</span> <span class="spec-tag">Semantic Graphs</span> <span class="spec-tag">CRDT State</span></div>
+        <h3 style="font-size: 1.05rem;">GroupChat HQ: Consensus Engine</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Concept turning busy group chat threads into a clear map of open questions and agreed decisions.</p>
+        <div class="spec-tags"><span class="spec-tag">Decision Map</span> <span class="spec-tag">Semantic Sync</span> <span class="spec-tag">CRDT State</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('vision')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('vision', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#10 · AI Guidance · Prompt Studio</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#10 · AI Guidance Prompt Studio</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Rulers Language</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.</p>
-        <div class="spec-tags"><span class="spec-tag">Mission Paths</span> <span class="spec-tag">Prompt Studio</span> <span class="spec-tag">Original Illustrations</span></div>
+        <h3 style="font-size: 1.05rem;">Rulers Language</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Practical guide to working with AI: pick a path, shape clear instructions, verify outputs, and cut fluff.</p>
+        <div class="spec-tags"><span class="spec-tag">Mission Paths</span> <span class="spec-tag">Prompt Studio</span> <span class="spec-tag">Illustrations</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumadas')">
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumadas', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#11 · Automotive Systems · Perception</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#11 · Automotive Driver Safety</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Datum ADAS</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.</p>
-        <div class="spec-tags"><span class="spec-tag">Computer Vision</span> <span class="spec-tag">On-Device</span> <span class="spec-tag">Kinematics</span></div>
+        <h3 style="font-size: 1.05rem;">Datum ADAS</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Browser safety interface exploring low-clutter following distance cues and peripheral hazard awareness.</p>
+        <div class="spec-tags"><span class="spec-tag">Driver UI</span> <span class="spec-tag">Kinematics</span> <span class="spec-tag">Browser Demo</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('velum')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('velum', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#12 · Human Decisions · Compatibility</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#12 · Decisions Compatibility</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Checkmate (Velum Labs)</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.</p>
-        <div class="spec-tags"><span class="spec-tag">Explainable Matching</span> <span class="spec-tag">React 19</span> <span class="spec-tag">TypeScript</span></div>
+        <h3 style="font-size: 1.05rem;">Checkmate (Velum Labs)</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Structured compatibility tool comparing practical expectations and core values clearly, without swipe tricks.</p>
+        <div class="spec-tags"><span class="spec-tag">React</span> <span class="spec-tag">TypeScript</span> <span class="spec-tag">Decision UI</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="education" data-status="live" onclick="closeMatrix(); openProjectDossier('vtsystem')">
+<button type="button" class="matrix-card" data-domain="education" data-status="live" onclick="closeMatrix(); openProjectDossier('vtsystem', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#13 · Education Systems · Institutional OS</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#13 · Education Operations OS</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Vedic Tree OS</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.</p>
-        <div class="spec-tags"><span class="spec-tag">Multi-Tenant</span> <span class="spec-tag">RBAC Security</span> <span class="spec-tag">TypeScript</span></div>
+        <h3 style="font-size: 1.05rem;">Vedic Tree OS</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.</p>
+        <div class="spec-tags"><span class="spec-tag">Multi-Tenant</span> <span class="spec-tag">RBAC</span> <span class="spec-tag">TypeScript</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('driver')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('driver', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#14 · Interactive Philosophy · Audio</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#14 · Interactive Audio Inquiry</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">The Driver of God</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.</p>
-        <div class="spec-tags"><span class="spec-tag">Web Audio API</span> <span class="spec-tag">Interactive Philosophy</span> <span class="spec-tag">Canvas 2D</span></div>
+        <h3 style="font-size: 1.05rem;">The Driver of God</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.</p>
+        <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Canvas 2D</span> <span class="spec-tag">Inquiry</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('hiddenleaf')">
+<button type="button" class="matrix-card" data-domain="creative" data-status="live" onclick="closeMatrix(); openProjectDossier('hiddenleaf', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#15 · Creative Tools · Bilingual Studio</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#15 · Creative Tools Bilingual Studio</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Hidden Leaf Studio</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">A Hindi–English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.</p>
-        <div class="spec-tags"><span class="spec-tag">Web Audio API</span> <span class="spec-tag">Phoneme Parser</span> <span class="spec-tag">Rhythm Studio</span></div>
+        <h3 style="font-size: 1.05rem;">Hidden Leaf Studio</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Hindi–English lyric writing workspace counting Hindi matras, rhyme flows, and built-in beat loops.</p>
+        <div class="spec-tags"><span class="spec-tag">Web Audio</span> <span class="spec-tag">Syllable Parser</span> <span class="spec-tag">Lyric Studio</span></div>
       </button>
-<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumatelier')">
+<button type="button" class="matrix-card" data-domain="automotive" data-status="live" onclick="closeMatrix(); openProjectDossier('datumatelier', this)">
         <div class="door-top" style="width: 100%;">
-          <span class="mono" style="font-size: 11px; color: var(--c-text);">#16 · Automotive Systems · Provenance</span>
-          <span class="tag live"><i></i>Live</span>
+          <span class="mono" style="font-size: 11px; color: var(--muted);">#16 · Automotive Service Records</span>
+          <span class="door-status is-live">Live</span>
         </div>
-        <h3 style="font-size: 1.08rem;">Datum Atelier</h3>
-        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.</p>
-        <div class="spec-tags"><span class="spec-tag">Vehicle Provenance</span> <span class="spec-tag">Owner Records</span> <span class="spec-tag">Offline-First</span></div>
+        <h3 style="font-size: 1.05rem;">Datum Atelier</h3>
+        <p style="font-size: 13px; color: var(--sec); line-height: 1.5;">Independent car record keeping invoices, workshop entries, and notes with the vehicle across keepers.</p>
+        <div class="spec-tags"><span class="spec-tag">Vehicle Records</span> <span class="spec-tag">Evidence Grades</span> <span class="spec-tag">Offline-First</span></div>
       </button>
       </div>
     </div>
   </div>
 
-  <!-- =======================================================================
-       UI STATE & INTERACTION ENGINE
-       ======================================================================= -->
+  <!-- Client Interaction Logic -->
   <script>
     const PROJECT_DOSSIERS = {
   "ward": {
     "index": "01",
-    "code": "SYS-01 // WARD",
+    "code": "WORK-01 // WARD",
     "title": "Predictive Ward Logistics Engine",
-    "category": "Healthcare Logistics \u00b7 Concept Study",
+    "category": "Healthcare Concept Study",
     "domain": "health",
     "status": "concept",
-    "desc": "An offline-first hospital telemetry prototype to locate critical infusion pumps in basement corridors without cloud reliance.",
-    "problem": "Nurses in acute hospital wards spend up to 45 minutes every shift hunting for infusion pumps and telemetry monitors. When devices go missing, critical medication is delayed.",
-    "solution": "An offline-first progressive web application combining BLE beacon signal triangulation with local-first IndexedDB syncing. Caches NHS Trust floorplans and serializes telemetry into HL7 FHIR DeviceMetric resources.",
+    "desc": "Offline-first floorplan tool for tracing hospital infusion pumps in basement corridors without cloud reliance.",
+    "problem": "On busy ward shifts, staff lose time searching across floors and dead-zone corridors for shared infusion pumps and telemetry monitors.",
+    "solution": "Stores trust floorplans locally in IndexedDB alongside Scan4Safety GS1-128 barcode parsing and proximity estimates so teams log equipment even offline.",
     "decisions": [
-      "Local-First IndexedDB persistence to withstand hospital steel and concrete Wi-Fi dead zones.",
-      "Scan4Safety GS1-128 barcode parsing supporting GTIN, Serial, and Expiration data identifiers.",
-      "Cryptographic state reconciliation syncing local device telemetry when network connectivity is restored."
+      "Local IndexedDB storage designed for hospital Wi-Fi dead zones",
+      "Scan4Safety GS1-128 barcode parsing for GTIN, serial, and expiry fields",
+      "Queue-based sync once connectivity is restored"
     ],
     "tags": [
-      "HL7 FHIR v4",
+      "HL7 FHIR",
       "GS1-128",
       "IndexedDB"
     ],
@@ -757,22 +714,22 @@
   },
   "consciousness": {
     "index": "02",
-    "code": "SYS-02 // CONSCIOUSNESS",
+    "code": "WORK-02 // CONSCIOUSNESS",
     "title": "The Unexplored Interior",
-    "category": "Cognitive Science \u00b7 Interactive Inquiry",
+    "category": "Cognitive Science Interactive",
     "domain": "cognitive",
     "status": "live",
-    "desc": "An interactive, self-guided exploration of visual awareness, perception, and attention inspired by cognitive theories.",
-    "problem": "Abstract models of conscious attention, optical illusion, and sensory thresholding are difficult to grasp without interactive participatory visual experiments.",
-    "solution": "A suite of generative canvas shaders and synchronized Web Audio oscillators modeling focal attention, blind-spot phenomena, and optical saccade suppression.",
+    "desc": "Self-guided visual awareness and attention demos inspired by theories of perception.",
+    "problem": "Ideas around visual attention, blind spots, and perceptual thresholds are hard to experience through static textbook diagrams alone.",
+    "solution": "Five interactive HTML Canvas visual studies paired with Web Audio cues you adjust directly in the browser.",
     "decisions": [
-      "Procedural sound generation mapped directly to user gaze and cursor coordinates.",
-      "Lightweight mathematical matrix calculations for real-time luminance field distortion.",
-      "Minimalist monochromatic design language inspired by Dieter Rams and Japanese editorial aesthetics."
+      "Five self-paced visual experiments on one lightweight static page",
+      "Cursor-linked procedural sound cues using the Web Audio API",
+      "Clean, uncluttered monochromatic layout"
     ],
     "tags": [
       "HTML Canvas",
-      "Web Audio API",
+      "Web Audio",
       "Vanilla JS"
     ],
     "links": [
@@ -785,18 +742,18 @@
   },
   "ithink": {
     "index": "03",
-    "code": "SYS-03 // ITHINK",
+    "code": "WORK-03 // ITHINK",
     "title": "iTHINK: Attention & Flow Lab",
-    "category": "Cognitive Practice \u00b7 Neuroscience Lab",
+    "category": "Cognitive Practice 3D Lab",
     "domain": "cognitive",
     "status": "live",
-    "desc": "An educational browser prototype combining interactive 3D brain models, scripted attention exercises, and flow reflection.",
-    "problem": "Neuroscience models and cognitive attention theory are typically locked in static textbook diagrams or clunky academic software that fails to communicate volumetric relationships.",
-    "solution": "A hardware-accelerated 3D exploration interface using Three.js and custom GLSL vertex shaders, allowing users to slice through cortical layers, inspect neurotransmitter pathways, and engage in scripted focus exercises.",
+    "desc": "Browser prototype combining interactive 3D brain models with paced attention exercises and reflection prompts.",
+    "problem": "Most cognitive focus apps treat attention exercises and spatial brain anatomy separately, or bury them behind dense menus.",
+    "solution": "Combines an interactive Three.js cortical model, cross-section depth views, and guided written reflection exercises in the browser.",
     "decisions": [
-      "Draco-compressed GLTF 2.0 assets loaded over Web Workers to preserve fluid 60 FPS interactions.",
-      "Dynamic spatial clipping planes exposing deep limbic structures in real time.",
-      "Zero-dependency audio cues using Web Audio API synthesis for meditative tactile feedback."
+      "Interactive Three.js anatomical views with layer slicing",
+      "Structured breathing and reflection exercises beside the model",
+      "Web Audio cues generated locally without audio files"
     ],
     "tags": [
       "Three.js",
@@ -817,21 +774,21 @@
   },
   "civicflow": {
     "index": "04",
-    "code": "SYS-04 // CIVICFLOW",
+    "code": "WORK-04 // CIVICFLOW",
     "title": "CivicFlow: Highways Triage Engine",
-    "category": "Civic Infrastructure \u00b7 Municipal Triage",
+    "category": "Civic Infrastructure Road Triage",
     "domain": "civic",
     "status": "live",
-    "desc": "A spatial defect clustering and routing engine designed to group municipal road reports and eliminate duplicate triage dispatch.",
-    "problem": "Local councils receive hundreds of duplicate citizen reports for the same pothole or broken streetlight, overwhelming dispatch coordinators and causing wasted contractor callouts.",
-    "solution": "Geographic clustering engine utilizing the DBSCAN algorithm over Turf.js and PostGIS coordinates to group nearby defect reports within a 15-meter radius and generate batch maintenance manifests.",
+    "desc": "Spatial clustering demo that groups duplicate public pothole reports on council maps before dispatch.",
+    "problem": "Local highway teams routinely receive dozens of separate citizen reports for the same pothole, kerb defect, or broken streetlight.",
+    "solution": "Clusters nearby coordinates on interactive GeoJSON maps with DBSCAN so coordinators review grouped photos and dispatch one batch together.",
     "decisions": [
-      "Automated spatial deduplication reducing council manual triage workload by over 60%.",
-      "High-density responsive data grid allowing operators to inspect photos and approve batches in seconds.",
-      "Integrated lawpt legal explainer engine clarifying citizen rights under the Highways Act 1980."
+      "Spatial coordinate clustering over GeoJSON routes using Turf.js",
+      "High-contrast review grid built for quick batch inspection",
+      "Built-in plain-English summary of Highways Act 1980 duties"
     ],
     "tags": [
-      "DBSCAN Spatial",
+      "DBSCAN",
       "GeoJSON",
       "Turf.js"
     ],
@@ -849,21 +806,21 @@
   },
   "scriptstudio": {
     "index": "05",
-    "code": "SYS-05 // SCRIPTSTUDIO",
+    "code": "WORK-05 // SCRIPTSTUDIO",
     "title": "AI Script Studio: Multi-Track DAW",
-    "category": "Creative Technology \u00b7 Generative Audio",
+    "category": "Audio & Writing Study",
     "domain": "creative",
     "status": "concept",
-    "desc": "A browser-based multi-track audio workstation exploring synchronous script generation, vocal timing, and timeline arrangement.",
-    "problem": "Video creators and podcasters waste hours jumping between text script editors and bloated desktop digital audio workstations (DAWs) to pace vocal delivery and sound design.",
-    "solution": "A unified browser-based audio workstation where text script blocks are directly linked to audio tracks on an interactive 60 FPS HTML5 Canvas timeline.",
+    "desc": "Browser script and sound editor connecting written lines directly to pacing blocks on an audio timeline.",
+    "problem": "Podcasters and video creators waste time switching between text docs and timeline editors just to balance spoken delivery and sound cues.",
+    "solution": "Places editable script lines alongside Web Audio tracks on a canvas timeline so pauses, beats, and cues stay lined up.",
     "decisions": [
-      "AudioWorklet thread processing ensuring glitch-free playback even during intensive UI redraws.",
-      "Custom zoomable and pannable waveform canvas capable of rendering hours of audio stems.",
-      "Script-to-timeline synchronization automatically mapping word count to target speaker cadence."
+      "Timeline canvas linking written blocks directly to audio clips",
+      "Multi-track waveform scrubbing via the Web Audio API",
+      "Zoomable playhead centered on spoken rhythm and timing"
     ],
     "tags": [
-      "Web Audio API",
+      "Web Audio",
       "Canvas Timeline",
       "TypeScript"
     ],
@@ -877,21 +834,21 @@
   },
   "roadtriage": {
     "index": "06",
-    "code": "SYS-06 // ROADTRIAGE",
+    "code": "WORK-06 // ROADTRIAGE",
     "title": "RoadTriage: Edge Defect Scanner",
-    "category": "Civic Infrastructure \u00b7 Edge Vision",
+    "category": "Civic Infrastructure Field Capture",
     "domain": "civic",
     "status": "concept",
-    "desc": "An on-device mobile concept for scanning and reviewing road surface defects in real-time with offline municipal caching.",
-    "problem": "Highway maintenance inspectors driving rural and council roads often lose 4G/5G signal, preventing standard cloud-dependent defect logging and photo analysis.",
-    "solution": "Mobile-first progressive web application leveraging client-side TensorFlow.js to classify road cracks and potholes locally from vehicle dashboard mounts, storing geotagged evidence in IndexedDB.",
+    "desc": "Mobile inspection concept for tagging road surface defects offline while checking routes.",
+    "problem": "Highway inspectors lose mobile signal along country lanes and trunk roads just when capturing road damage photos.",
+    "solution": "Saves geo-tagged photo reports in local IndexedDB storage with lightweight TensorFlow.js frame checks until the depot syncs.",
     "decisions": [
-      "Quantized MobileNet classification running at 24+ FPS on standard smartphone browsers.",
-      "Offline-first store-and-forward architecture queuing GPS-stamped road defects until Wi-Fi dock.",
-      "Strict privacy preservation: automated on-device blurring of pedestrian faces and vehicle license plates."
+      "On-device IndexedDB capture queue bridging signal dead zones",
+      "Simple frame-clarity checks before saving images",
+      "High-contrast outdoor mobile interface"
     ],
     "tags": [
-      "Computer Vision",
+      "Field Vision",
       "TensorFlow.js",
       "IndexedDB"
     ],
@@ -905,21 +862,21 @@
   },
   "itsyou": {
     "index": "07",
-    "code": "SYS-07 // ITSYOU",
+    "code": "WORK-07 // ITSYOU",
     "title": "The Observer: Thought & Awareness",
-    "category": "Cognitive Science \u00b7 Metacognition",
-    "domain": "cognitive",
+    "category": "Interactive Reflection Live",
+    "domain": "creative",
     "status": "live",
-    "desc": "An interactive reflection interface examining mental models, decision-making habits, and attention patterns.",
-    "problem": "People rarely observe their own cognitive biases, default reactive loops, or mental conditioning in everyday software interactions.",
-    "solution": "A self-guided contemplative narrative powered by pure Canvas 2D particle dynamics that mirror user input pacing, pauses, and cursor hesitation to foster self-awareness.",
+    "desc": "Quiet, step-by-step reflection interface for slowing down automatic habits and noticing attention.",
+    "problem": "Habit and reflection apps frequently rely on gamified streaks and push alerts instead of leaving room to pause and think.",
+    "solution": "Presents one unhurried question at a time across a dark page with soft canvas motion and local browser state.",
     "decisions": [
-      "Zero external dependencies for instant sub-100ms cold start performance.",
-      "Dynamic typography that scales and shifts based on user typing cadence and dwell time.",
-      "Non-coercive UX architecture designed to calm cognitive load rather than capture screen-time."
+      "Sequential reflection flow free of counters and streak pressure",
+      "Single-focus page keeping distractions off screen",
+      "Runs locally in the browser with no account required"
     ],
     "tags": [
-      "Interactive Narrative",
+      "Interactive UI",
       "Canvas 2D",
       "Vanilla JS"
     ],
@@ -937,23 +894,23 @@
   },
   "babycarl": {
     "index": "08",
-    "code": "SYS-08 // BABYCARL",
+    "code": "WORK-08 // BABYCARL",
     "title": "BabyCarl: Circadian Telemetry",
-    "category": "Pediatric Health \u00b7 Circadian Telemetry",
+    "category": "Pediatric Health Concept Study",
     "domain": "health",
     "status": "concept",
-    "desc": "A quiet biometric rhythm and sleep tracker designed for newborn parents with zero notification anxiety and local storage.",
-    "problem": "Modern baby monitors bombard exhausted new parents with high-friction push notifications, anxiety-inducing graphs, and invasive cloud video streaming.",
-    "solution": "A gentle ambient telemetry interface that visualizes newborn sleep cycles, feeding intervals, and temperature trends through calm tactile typography and local-only SQLite/IndexedDB persistence.",
+    "desc": "Gentle newborn feed and sleep tracker shaped for tired parents with dim night contrast and zero alert spam.",
+    "problem": "Bright hospital-white tracking apps and constant notification badges add unnecessary fatigue during late-night feeds.",
+    "solution": "Shows 24-hour newborn sleep and feeding rhythms locally in warm dim contrast with large one-handed mobile controls.",
     "decisions": [
-      "Zero notification anxiety policy: ambient glanceable UI rather than alarming sounds.",
-      "100% on-device data storage protecting sensitive infant biometric telemetry.",
-      "Circadian color adaptation: screen luminescence scales with nighttime ambient light."
+      "Low-glare warm dark palette protecting night vision",
+      "Large tap targets sized for one-handed phone use",
+      "Local browser storage with no sign-up walls"
     ],
     "tags": [
-      "Circadian Telemetry",
+      "Circadian Log",
       "Local Storage",
-      "Tactile UX"
+      "Mobile UX"
     ],
     "links": [
       {
@@ -965,22 +922,22 @@
   },
   "groupchat": {
     "index": "09",
-    "code": "SYS-09 // GROUPCHAT",
+    "code": "WORK-09 // GROUPCHAT",
     "title": "GroupChat HQ: Consensus Engine",
-    "category": "Collaboration Systems \u00b7 Semantic Sync",
+    "category": "Collaboration Study",
     "domain": "creative",
     "status": "concept",
-    "desc": "A prototype exploring semantic vector embeddings to map unstructured chat discussions into structured consensus graphs.",
-    "problem": "Most AI tutorials remain superficial prompt demonstrations without addressing state synchronization, consensus verification, or real-world software engineering constraints.",
-    "solution": "An educational laboratory and media channel creating production-grade multi-agent prototypes, exploring vector embeddings, consensus synthesis graphs, and developer workflows.",
+    "desc": "Concept turning busy group chat threads into a clear map of open questions and agreed decisions.",
+    "problem": "Useful project decisions get buried inside casual group chat messages, leaving teammates scrolling back to check what was agreed.",
+    "solution": "Extracts key topics beside the conversation stream so agreed decisions stand separately from passing side talk.",
     "decisions": [
-      "Engineered reproducible code harnesses for multi-model benchmark evaluation.",
-      "Produced editorial video content breaking down cognitive ergonomics and systems thinking.",
-      "Built an active developer community centered on privacy-first local AI architectures."
+      "Structured decision summary view paired beside live messages",
+      "Visual grouping of open versus resolved topics",
+      "Designed for small working project teams"
     ],
     "tags": [
-      "Vector Embeddings",
-      "Semantic Graphs",
+      "Decision Map",
+      "Semantic Sync",
       "CRDT State"
     ],
     "links": [
@@ -993,23 +950,23 @@
   },
   "vision": {
     "index": "10",
-    "code": "SYS-10 // VISION",
+    "code": "WORK-10 // VISION",
     "title": "Rulers Language",
-    "category": "AI Guidance \u00b7 Prompt Studio",
+    "category": "AI Guidance Prompt Studio",
     "domain": "creative",
     "status": "live",
-    "desc": "A mission-first guide to AI work: choose a path, shape a prompt, pick a tool, and verify the result.",
-    "problem": "Users struggle with unguided LLM prompting, relying on conversational politeness or vague adjectives that produce hallucinated code and unverified assumptions.",
-    "solution": "A three-phase prompt methodology (Design, Implementation, Verification) that enforces strict negative boundaries, observable success metrics, and structured evidence capture.",
+    "desc": "Practical guide to working with AI: pick a path, shape clear instructions, verify outputs, and cut fluff.",
+    "problem": "Prompt galleries tend to share brittle trick phrases rather than helping people frame clear goals or verify AI claims.",
+    "solution": "Breaks AI tasks into straightforward paths with practical prompt builders, verification checklists, and custom line illustrations.",
     "decisions": [
-      "Separates exploration from code generation, preventing uncontrolled file modifications.",
-      "Includes browser-local lesson logging to track prompt drift and output regression.",
-      "Minimalist, zero-latency static interface deployed globally with instant accessibility."
+      "Goal-first workflows replacing unsorted prompt dumps",
+      "Practical verification prompts to check accuracy before shipping",
+      "Custom monochrome editorial illustrations"
     ],
     "tags": [
       "Mission Paths",
       "Prompt Studio",
-      "Original Illustrations"
+      "Illustrations"
     ],
     "links": [
       {
@@ -1025,23 +982,23 @@
   },
   "datumadas": {
     "index": "11",
-    "code": "SYS-11 // DATUMADAS",
+    "code": "WORK-11 // DATUMADAS",
     "title": "Datum ADAS",
-    "category": "Automotive Systems \u00b7 Perception",
+    "category": "Automotive Driver Safety",
     "domain": "automotive",
     "status": "live",
-    "desc": "An on-device automotive perception concept exploring forward-collision awareness, lane context, and kinematic safety.",
-    "problem": "Modern vehicular safety suites depend on centralized cloud telemetry or high-latency processing, making edge response times sluggish under poor network connectivity.",
-    "solution": "Client-side perception pipeline running quantized neural object detection models in-browser with WebGL/WebGPU acceleration, calculating Time-to-Collision (TTC) and lane divergence locally.",
+    "desc": "Browser safety interface exploring low-clutter following distance cues and peripheral hazard awareness.",
+    "problem": "Dense vehicle clusters flash scores of competing icons and chimes at the exact moment a driver needs calm road focus.",
+    "solution": "Tests restrained directional distance bars and uncluttered warning hierarchy designed for peripheral glances.",
     "decisions": [
-      "Quantized real-time inference delivering consistent 30+ FPS directly in the browser viewport.",
-      "Kinematic safety algorithms calculating distance vectors and closing speed differentials.",
-      "Stark, distraction-free HUD interface optimized for rapid driver scanning."
+      "Uncluttered forward-distance cues instead of icon overload",
+      "Simulated lane and speed headway scenarios in browser",
+      "Calm hierarchy separating urgent cautions from ambient state"
     ],
     "tags": [
-      "Computer Vision",
-      "On-Device",
-      "Kinematics"
+      "Driver UI",
+      "Kinematics",
+      "Browser Demo"
     ],
     "links": [
       {
@@ -1057,23 +1014,23 @@
   },
   "velum": {
     "index": "12",
-    "code": "SYS-12 // VELUM",
+    "code": "WORK-12 // VELUM",
     "title": "Checkmate (Velum Labs)",
-    "category": "Human Decisions \u00b7 Compatibility",
+    "category": "Decisions Compatibility",
     "domain": "creative",
     "status": "live",
-    "desc": "A reciprocal, explainable compatibility platform for making grounded relationship decisions based on shared values.",
-    "problem": "Dating and relationship applications exploit addictive slot-machine gamification, opaque algorithmic sorting, and superficial image swiping that degrades long-term decision making.",
-    "solution": "An explainable matching engine that evaluates mutual alignment across core ethical values, financial goals, and conflict resolution models with full algorithmic transparency.",
+    "desc": "Structured compatibility tool comparing practical expectations and core values clearly, without swipe tricks.",
+    "problem": "Modern dating platforms lean on rapid swiping and hidden match scores instead of clear conversation around shared life goals.",
+    "solution": "Places practical preferences side by side across finances, family, and habits so compatibility differences appear transparently.",
     "decisions": [
-      "Built on React 19 with optimistic state transitions and accessible focus ergonomics.",
-      "Zero-knowledge preference comparison preserving sensitive personal disclosures.",
-      "Explainability matrix visually detailing why two profiles match or diverge on critical values."
+      "Direct side-by-side comparison without opaque ranking feeds",
+      "Clear written prompts focused on real-life priorities",
+      "Clean, distraction-free React interface"
     ],
     "tags": [
-      "Explainable Matching",
-      "React 19",
-      "TypeScript"
+      "React",
+      "TypeScript",
+      "Decision UI"
     ],
     "links": [
       {
@@ -1089,22 +1046,22 @@
   },
   "vtsystem": {
     "index": "13",
-    "code": "SYS-13 // VTSYSTEM",
+    "code": "WORK-13 // VTSYSTEM",
     "title": "Vedic Tree OS",
-    "category": "Education Systems \u00b7 Institutional OS",
+    "category": "Education Operations OS",
     "domain": "education",
     "status": "live",
-    "desc": "An institutional education operating system combining multi-campus administrative governance with human-centred student progress tracking.",
-    "problem": "Multi-campus educational institutions endure fractured administrative tools: attendance sheets in spreadsheets, fees in clunky ERPs, and learning logs lost across disconnected apps.",
-    "solution": "A cohesive institutional operating system with multi-tenant role-based access control (RBAC), unifying fee reconciliation, attendance metrics, and qualitative student portfolios.",
+    "desc": "Multi-campus school portal unifying attendance logs, fee tracking, and student progress notes.",
+    "problem": "Multi-branch schools manage operations across scattered spreadsheets, manual fee ledgers, and ad-hoc parent message groups.",
+    "solution": "Organizes role-specific workflows across branch principals, teachers, accountants, and parents in one clear portal.",
     "decisions": [
-      "Strict role hierarchy separating campus branch managers, faculty, accountants, and guardians.",
-      "Real-time operational dashboard visualizing student attendance drop-off and fee collections.",
-      "Designed with high-density tabular ergonomics allowing bulk actions without modal fatigue."
+      "Scoped role access tailored per staff responsibility",
+      "Readable attendance and fee tables avoiding deep nested modals",
+      "Built to stay quick on modest office connections"
     ],
     "tags": [
       "Multi-Tenant",
-      "RBAC Security",
+      "RBAC",
       "TypeScript"
     ],
     "links": [
@@ -1121,23 +1078,23 @@
   },
   "driver": {
     "index": "14",
-    "code": "SYS-14 // DRIVER",
+    "code": "WORK-14 // DRIVER",
     "title": "The Driver of God",
-    "category": "Interactive Philosophy \u00b7 Audio",
+    "category": "Interactive Audio Inquiry",
     "domain": "creative",
     "status": "live",
-    "desc": "An audiovisual interactive inquiry into self-will, attention, and surrender, bringing contemplative questions together with procedural sound.",
-    "problem": "Digital interactions are overwhelmingly transactional, designed for compulsion and urgency rather than introspection, attention restoration, and philosophical contemplation.",
-    "solution": "An experimental meditative web interface where user mouse deceleration triggers procedural binaural audio harmonics and subtle geometric canvas distortions exploring agency and control.",
+    "desc": "Audiovisual piece pairing slowing cursor motion with contemplative questions and generative Web Audio chords.",
+    "problem": "Most interfaces reward constant clicking and speed instead of offering quiet space to slow down.",
+    "solution": "Follows pointer stillness to shift procedural Web Audio harmonics and geometric motion across a calm dark canvas.",
     "decisions": [
-      "Real-time procedural additive synthesis using Web Audio API polyphonic oscillators.",
-      "Calculated friction and inertia physics modeling the illusion of free-will and resistance.",
-      "Monastic, calm visual styling stripping away all gamified user interfaces."
+      "Live procedural tones synthesized with the Web Audio API",
+      "Cursor deceleration physics shaping sound and pace",
+      "Calm minimal layout free of scores or badges"
     ],
     "tags": [
-      "Web Audio API",
-      "Interactive Philosophy",
-      "Canvas 2D"
+      "Web Audio",
+      "Canvas 2D",
+      "Inquiry"
     ],
     "links": [
       {
@@ -1153,23 +1110,23 @@
   },
   "hiddenleaf": {
     "index": "15",
-    "code": "SYS-15 // HIDDENLEAF",
+    "code": "WORK-15 // HIDDENLEAF",
     "title": "Hidden Leaf Studio",
-    "category": "Creative Tools \u00b7 Bilingual Studio",
+    "category": "Creative Tools Bilingual Studio",
     "domain": "creative",
     "status": "live",
-    "desc": "A Hindi\u2013English rap-writing workspace exploring syllable meter, rhythm, matra alignment, and vocal pitch contours.",
-    "problem": "South Asian hip-hop lyricists blending Hindi, Urdu, and English struggle with conventional Western songwriting tools that fail to parse matra weight, conjunct consonants, or Devanagari meter.",
-    "solution": "An intelligent metronome and rhyme matrix parser that computes syllable weights across Hindi and English phonemes, matching rhyme cadences against customizable BPM drum loops.",
+    "desc": "Hindi\u2013English lyric writing workspace counting Hindi matras, rhyme flows, and built-in beat loops.",
+    "problem": "Bilingual writers mixing Hindi, Urdu, and English find Western songwriting tools miss Hindi matra weights and rhyme schemes.",
+    "solution": "Combines a clean lyric editor with BPM beat loops and phoneme syllable highlighting tuned for bilingual cadence.",
     "decisions": [
-      "Custom bilingual syllable syllabification engine handling Devanagari conjuncts and slang transliterations.",
-      "Low-latency Web Audio API beat synthesizer with micro-timing swing controls.",
-      "Distraction-free dark mode lyric editor with real-time rhyme scheme highlighting."
+      "Counts Hindi matra patterns alongside English syllables",
+      "Built-in Web Audio metronome and pocket rhythm loop",
+      "Focused dark lyric canvas highlighting rhyme anchors"
     ],
     "tags": [
-      "Web Audio API",
-      "Phoneme Parser",
-      "Rhythm Studio"
+      "Web Audio",
+      "Syllable Parser",
+      "Lyric Studio"
     ],
     "links": [
       {
@@ -1185,22 +1142,22 @@
   },
   "datumatelier": {
     "index": "16",
-    "code": "SYS-16 // DATUMATELIER",
+    "code": "WORK-16 // DATUMATELIER",
     "title": "Datum Atelier",
-    "category": "Automotive Systems \u00b7 Provenance",
+    "category": "Automotive Service Records",
     "domain": "automotive",
     "status": "live",
-    "desc": "An independent platform exploring private, durable vehicle histories with owner-controlled records, digital handover, and offline-first storage.",
-    "problem": "Vehicle service and maintenance histories are fragmented across proprietary dealer silos, vulnerable to odometer fraud, lost paper invoices, and unauthorized personal data aggregation.",
-    "solution": "A decentralized vehicle provenance ledger where vehicle owners maintain sovereign control over maintenance records, diagnostic telemetry, and ownership transfer. Designed offline-first using client-side encryption and local IndexedDB caching with digital certificate verification.",
+    "desc": "Independent car record keeping invoices, workshop entries, and notes with the vehicle across keepers.",
+    "problem": "Paper service books go missing and workshop receipts scatter across owners, leaving buyers guessing what maintenance was actually done.",
+    "solution": "Organizes chronological job records alongside photographs and evidence grades so both work and gaps sit clearly in view.",
     "decisions": [
-      "Offline-first client architecture using IndexedDB for private records without continuous cloud dependency.",
-      "Cryptographic ownership transfer ensuring tamper-evident digital vehicle handovers.",
-      "High-contrast tactile dashboard design for automotive workshops and enthusiast collectors."
+      "Offline-capable client record layout without vendor lock-in",
+      "Clear evidence tags separating workshop invoices from keeper notes",
+      "Digital handover pack transferring history cleanly to the next keeper"
     ],
     "tags": [
-      "Vehicle Provenance",
-      "Owner Records",
+      "Vehicle Records",
+      "Evidence Grades",
       "Offline-First"
     ],
     "links": [
@@ -1232,13 +1189,13 @@
     setInterval(tickClock, 1000);
     tickClock();
 
-    /* Piixpal Toggle Persistence */
+    /* Piixpal Toggle */
     const palToggleBtn = document.getElementById('palToggleBtn');
     function applyPalState(enabled) {
       document.body.classList.toggle('pals-off', !enabled);
       if (palToggleBtn) {
         palToggleBtn.setAttribute('aria-pressed', String(enabled));
-        palToggleBtn.innerHTML = `<span>Pals: ${enabled ? 'On' : 'Off'}</span>`;
+        palToggleBtn.textContent = `Companion: ${enabled ? 'On' : 'Off'}`;
       }
     }
     function togglePals() {
@@ -1250,19 +1207,35 @@
       if (localStorage.getItem('vd_pals') === '0') applyPalState(false);
     } catch (e) {}
 
-    /* Project Dossier Modal Handlers */
-    function openProjectDossier(pid) {
+    /* Remount footer companion once footer becomes visible in Full page mode */
+    new MutationObserver(() => {
+      if (!document.documentElement.classList.contains('still-mode')) return;
+      const perch = document.querySelector('.footer-pal-perch');
+      const oldPal = perch ? perch.querySelector('piix-pal') : null;
+      if (perch && oldPal && !oldPal.dataset.remounted) {
+        const fresh = oldPal.cloneNode(true);
+        fresh.dataset.remounted = '1';
+        oldPal.replaceWith(fresh);
+      }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    /* Focus Return Tracking for Accessible Modals */
+    let lastFocusedBeforeDossier = null;
+    let lastFocusedBeforeMatrix = null;
+
+    function openProjectDossier(pid, triggerEl) {
       const d = PROJECT_DOSSIERS[pid];
       if (!d) return;
+      if (!document.getElementById('matrixModalBackdrop').classList.contains('open')) {
+        lastFocusedBeforeDossier = triggerEl || document.activeElement;
+      }
       document.getElementById('modalCategory').textContent = `#${d.index} · ${d.category}`;
       document.getElementById('modalTitle').textContent = d.title;
       document.getElementById('modalImage').src = d.img;
       document.getElementById('modalImage').alt = d.title;
       document.getElementById('modalProblem').textContent = d.problem;
       document.getElementById('modalSolution').textContent = d.solution;
-
-      const flap = document.getElementById('modalFlapCode');
-      if (flap) flap.setAttribute('text', d.code);
+      document.getElementById('modalStatusLabel').textContent = d.status === 'live' ? 'STATUS: LIVE WORKING LINK' : 'STATUS: DESIGN STUDY';
 
       const decWrap = document.getElementById('modalDecisionsWrap');
       const decList = document.getElementById('modalDecisions');
@@ -1302,28 +1275,44 @@
       const backdrop = document.getElementById('caseStudyModalBackdrop');
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
+      const closeBtn = document.getElementById('modalCloseBtn');
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeProjectDossier() {
       const backdrop = document.getElementById('caseStudyModalBackdrop');
-      if (backdrop) backdrop.classList.remove('open');
+      if (!backdrop || !backdrop.classList.contains('open')) return;
+      backdrop.classList.remove('open');
       document.body.style.overflow = '';
+      if (lastFocusedBeforeDossier && typeof lastFocusedBeforeDossier.focus === 'function') {
+        lastFocusedBeforeDossier.focus();
+        lastFocusedBeforeDossier = null;
+      }
     }
 
-    /* All 16 Matrix Modal Handlers */
     let activeMatrixCat = 'all';
     let matrixQuery = '';
 
-    function openMatrix() {
+    function openMatrix(triggerEl) {
+      lastFocusedBeforeMatrix = triggerEl || document.activeElement;
       const backdrop = document.getElementById('matrixModalBackdrop');
       if (backdrop) backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
+      const search = document.getElementById('matrixSearchInput');
+      if (search) search.focus();
     }
 
     function closeMatrix() {
       const backdrop = document.getElementById('matrixModalBackdrop');
-      if (backdrop) backdrop.classList.remove('open');
+      if (!backdrop || !backdrop.classList.contains('open')) return;
+      backdrop.classList.remove('open');
       document.body.style.overflow = '';
+      if (!document.getElementById('caseStudyModalBackdrop').classList.contains('open')) {
+        if (lastFocusedBeforeMatrix && typeof lastFocusedBeforeMatrix.focus === 'function') {
+          lastFocusedBeforeMatrix.focus();
+          lastFocusedBeforeMatrix = null;
+        }
+      }
     }
 
     function filterMatrix(cat, btn) {
@@ -1362,7 +1351,7 @@
     });
   </script>
 
-  <!-- Datum REV Instrument Dial + 3D Highway Drive Engine -->
+  <!-- Datum REV Instrument + 3D Highway Drive Engine -->
   <script src="instrument.js" defer></script>
   <script type="module">
     import { startPortfolioDrive } from './drive-engine.js';

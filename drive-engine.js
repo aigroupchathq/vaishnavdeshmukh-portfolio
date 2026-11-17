@@ -365,24 +365,9 @@ function buildRoadAndScenery(scene, stops) {
     scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat));
   }
 
-  /* Terraced valley mesh */
   const mobile = innerWidth < 760;
-  const segX = mobile ? 70 : 105;
-  const segZ = mobile ? 180 : 280;
-  const tGeo = new THREE.PlaneGeometry(190, 520, segX, segZ);
-  tGeo.rotateX(-Math.PI / 2);
-  tGeo.translate(0, 0, 520 / 2 - 40);
-  const tPos = tGeo.attributes.position;
-  const tRng = createPrng(3);
-  for (let i = 0; i < tPos.count; i++) {
-    const x = tPos.getX(i) + (tRng() - 0.5) * 0.9;
-    const z = tPos.getZ(i) + (tRng() - 0.5) * 0.9;
-    tPos.setXYZ(i, x, terrainHeight(x, z), z);
-  }
-  tGeo.computeVertexNormals();
-  scene.add(new THREE.Mesh(tGeo, makeTerrainMaterial()));
 
-  /* Build Portfolio Milestone Sculptures along the spline */
+  /* Build Portfolio Milestone Sculptures & Flatten Road Pads FIRST */
   const propsGroup = new THREE.Group();
   scene.add(propsGroup);
   const anchors = {};
@@ -401,19 +386,23 @@ function buildRoadAndScenery(scene, stops) {
   const makePad = (pt, w, len) => {
     const pad = new THREE.Mesh(new THREE.PlaneGeometry(w, len), makeAsphaltMaterial());
     pad.rotation.x = -Math.PI / 2;
-    pad.position.copy(pt.p).setY(pt.y + 0.015);
+    pad.position.copy(pt.p).setY(pt.y + 0.045);
     pad.rotation.z = pt.yaw;
     propsGroup.add(pad);
     const outline = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.PlaneGeometry(w, len), 1),
-      new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.65 })
+      new THREE.LineBasicMaterial({ color: PARCHMENT, transparent: true, opacity: 0.55 })
     );
     outline.rotation.copy(pad.rotation);
-    outline.position.copy(pad.position).setY(pt.y + 0.028);
+    outline.position.copy(pad.position).setY(pt.y + 0.055);
     propsGroup.add(outline);
     const fwd = new THREE.Vector3(Math.sin(pt.yaw), 0, Math.cos(pt.yaw));
-    const half = Math.min(w, len) / 2;
-    addCorridorSpan(pt.p.clone().addScaledVector(fwd, -(len / 2 - half)), pt.p.clone().addScaledVector(fwd, len / 2 - half), half + 0.6, pt.y);
+    const lat = new THREE.Vector3(Math.cos(pt.yaw), 0, -Math.sin(pt.yaw));
+    const half = Math.max(w, len) * 0.45;
+    for (const off of [-w * 0.32, 0, w * 0.32]) {
+      const mid = pt.p.clone().addScaledVector(lat, off);
+      addCorridorSpan(mid.clone().addScaledVector(fwd, -len * 0.45), mid.clone().addScaledVector(fwd, len * 0.45), half * 0.65 + 1.2, pt.y);
+    }
   };
 
   /* Stop 0: Hero Garage Atelier Portal (t = 0.0) */
@@ -441,11 +430,11 @@ function buildRoadAndScenery(scene, stops) {
       line.position.z = zOff;
       g.add(line);
     }
-    const titleSign = createSignSprite('DESHMUKH ATELIER', { font: '800 72px Archivo, sans-serif', width: 5.4 });
+    const titleSign = createSignSprite('VAISHNAV DESHMUKH', { font: '800 72px Archivo, sans-serif', width: 5.4 });
     titleSign.position.set(0, 4.3, 0.4);
     g.add(titleSign);
 
-    const floorSign = createSignSprite('SYSTEMS & LOGISTICS · LONDON', { font: '500 50px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(233,227,211,0.6)', flatGround: true });
+    const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', { font: '500 50px "IBM Plex Mono", monospace', width: 4.2, color: 'rgba(233,227,211,0.6)', flatGround: true });
     floorSign.position.set(0, 0.04, -3.5);
     g.add(floorSign);
 
@@ -458,7 +447,7 @@ function buildRoadAndScenery(scene, stops) {
   if (stops.find(st => st.id === 'ethos')) {
     const st = stops.find(x => x.id === 'ethos');
     const dir = -st.screen;
-    const labels = [['01', 'FLOW & THROUGHPUT'], ['02', 'PHYSICAL TOLERANCES'], ['03', 'COGNITIVE LOAD'], ['04', 'OFFLINE-FIRST']];
+    const labels = [['01', 'NOTICE FIRST'], ['02', 'CLEAR HIERARCHY'], ['03', 'OFFLINE-FIRST'], ['04', 'SHOW EVIDENCE']];
     labels.forEach(([num, txt], idx) => {
       const pt = sideOffset(st.t - 0.08 + idx * 0.025, dir, ROAD_HALF_WIDTH + 1.5);
       const post = createInkGroup(new THREE.CylinderGeometry(0.08, 0.1, 1.8, 6), '#18181d');
@@ -474,13 +463,13 @@ function buildRoadAndScenery(scene, stops) {
     anchors['ethos'] = ptMain.p.clone();
   }
 
-  /* Dynamic Domain Landmark Props for Stops 2..6 (Health, Cognitive, Civic, Automotive, Studio) */
+  /* Dynamic Domain Landmark Props for Stops 2..6 */
   const domainSpecs = [
-    { id: 'health', label: 'HEALTHCARE TELEMETRY', accent: true },
-    { id: 'cognitive', label: 'COGNITIVE & PERCEPTION', accent: false },
-    { id: 'civic', label: 'CIVIC SPATIAL TRIAGE', accent: true },
-    { id: 'automotive', label: 'PROVENANCE & ADAS', accent: true },
-    { id: 'studio', label: 'AI & AUDIO SYSTEMS', accent: false }
+    { id: 'health', label: 'CLINICAL & WARD', accent: true },
+    { id: 'cognitive', label: 'ATTENTION LABS', accent: false },
+    { id: 'civic', label: 'CIVIC & ROADS', accent: true },
+    { id: 'automotive', label: 'CARS & PROVENANCE', accent: true },
+    { id: 'studio', label: 'AUDIO & WRITING', accent: false }
   ];
 
   domainSpecs.forEach((spec, idx) => {
@@ -533,7 +522,7 @@ function buildRoadAndScenery(scene, stops) {
     makePad(pt, 9.2, 9.2);
 
     const dialGroup = new THREE.Group();
-    dialGroup.position.copy(pt.p).setY(pt.y + 0.03);
+    dialGroup.position.copy(pt.p).setY(pt.y + 0.075);
     dialGroup.rotation.y = pt.yaw;
 
     const r = 3.4;
@@ -596,13 +585,29 @@ function buildRoadAndScenery(scene, stops) {
     propsGroup.add(arch);
     anchors['gate'] = arch.position.clone();
 
-    const gateLbl = createSignSprite('16 ARTIFACTS · INQUIRIES', { font: '800 76px Archivo, sans-serif', width: 5.4, color: '#E9E3D3' });
+    const gateLbl = createSignSprite('ALL 16 WORKS · CONTACT', { font: '800 76px Archivo, sans-serif', width: 5.4, color: '#E9E3D3' });
     gateLbl.position.copy(arch.position).add(new THREE.Vector3(0, 5.2, 0));
     gateLbl.rotation.y = arch.rotation.y + Math.PI;
     propsGroup.add(gateLbl);
 
     addCorridorSpan(s.pos.clone(), s.pos.clone().addScaledVector(s.flat, 16), 5.0, s.pos.y);
   }
+
+  /* Terraced valley mesh AFTER all pads and bays have carved their corridors */
+  const segX = mobile ? 70 : 105;
+  const segZ = mobile ? 180 : 280;
+  const tGeo = new THREE.PlaneGeometry(190, 520, segX, segZ);
+  tGeo.rotateX(-Math.PI / 2);
+  tGeo.translate(0, 0, 520 / 2 - 40);
+  const tPos = tGeo.attributes.position;
+  const tRng = createPrng(3);
+  for (let i = 0; i < tPos.count; i++) {
+    const x = tPos.getX(i) + (tRng() - 0.5) * 0.9;
+    const z = tPos.getZ(i) + (tRng() - 0.5) * 0.9;
+    tPos.setXYZ(i, x, terrainHeight(x, z), z);
+  }
+  tGeo.computeVertexNormals();
+  scene.add(new THREE.Mesh(tGeo, makeTerrainMaterial()));
 
   /* Build Forest OUTSIDE cleared corridors */
   const rng = createPrng(11);
@@ -779,22 +784,6 @@ function createSportsCar() {
   shadowPlane.renderOrder = 1;
   root.add(shadowPlane);
 
-  /* Exhaust puffs */
-  const puffs = [];
-  const puffGeo = new THREE.DodecahedronGeometry(0.22, 0);
-  for (let i = 0; i < 10; i++) {
-    const p = new THREE.Group();
-    const l = new THREE.LineSegments(new THREE.EdgesGeometry(puffGeo), new THREE.LineBasicMaterial({ color: '#E9E3D3', transparent: true, opacity: 0 }));
-    p.add(l);
-    p.visible = false;
-    p.userData = { life: 0, v: new THREE.Vector3(), mat: l.material };
-    root.add(p);
-    puffs.push(p);
-  }
-
-  let puffTimer = 0;
-  let totalRoll = 0;
-
   return {
     group: root,
     update(dt, { distance, lean, beam, rpm, time }) {
@@ -806,32 +795,6 @@ function createSportsCar() {
       lights.forEach(l => l.intensity = 10 * beam);
       beamCone.material.opacity = 0.38 * beam;
       tailMat.color.setHex(rpm > 0.2 ? 0xff4254 : 0xc8102e);
-
-      puffTimer += dt * (rpm > 0.25 ? 12 : 3.5);
-      if (puffTimer > 1) {
-        puffTimer = 0;
-        const p = puffs.find(x => !x.visible);
-        if (p) {
-          p.visible = true;
-          p.position.set((Math.random() - 0.5) * 0.3, 0.34, -2.35);
-          p.scale.setScalar(0.5);
-          p.userData.life = 1.0;
-          p.userData.v.set((Math.random() - 0.5) * 0.4, 0.4 + Math.random() * 0.4, -1.6 - rpm * 2.0);
-        }
-      }
-
-      for (const p of puffs) {
-        if (!p.visible) continue;
-        p.userData.life -= dt * 1.4;
-        if (p.userData.life <= 0) {
-          p.visible = false;
-        } else {
-          p.position.addScaledVector(p.userData.v, dt);
-          const sc = 0.5 + (1 - p.userData.life) * 1.6;
-          p.scale.setScalar(sc);
-          p.userData.mat.opacity = p.userData.life * 0.38;
-        }
-      }
     }
   };
 }
@@ -910,6 +873,24 @@ export function startPortfolioDrive() {
     if (mode === 'overview') return;
 
     const maxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
+    const isMob = innerWidth < 760;
+    stops.forEach((st, idx) => {
+      if (!st.card) return;
+      const cardH = st.card.offsetHeight;
+      if (isMob) {
+        const stickTop = Math.round(winH * (idx === 0 ? 0.34 : 0.38));
+        const extra = Math.max(0, Math.round(cardH - (winH - stickTop - 18)));
+        st.card.style.top = `${Math.max(68, stickTop - extra)}px`;
+        st.el.style.minHeight = extra > 0 ? `calc(${idx === stops.length - 1 ? 150 : 200}vh + ${extra}px)` : '';
+      } else {
+        st.el.style.minHeight = '';
+        const idealTop = Math.min(130, Math.max(82, Math.round(winH * 0.12)));
+        const fitTop = cardH + idealTop > winH - 20 ? Math.max(72, winH - cardH - 20) : idealTop;
+        st.card.style.top = `${Math.round(fitTop)}px`;
+      }
+    });
+
+    const maxScrollAfter = Math.max(1, document.documentElement.scrollHeight - winH);
     scrollBands = stops.map((st, idx) => {
       const top = st.el.offsetTop;
       const hEl = st.el.offsetHeight;
@@ -917,11 +898,12 @@ export function startPortfolioDrive() {
       let a = center - winH * 0.30;
       let b = center + winH * 0.30;
       if (idx === 0) { a = -1; b = Math.max(winH * 0.14, center - winH * 0.15); }
-      if (idx === stops.length - 1) { a = Math.min(a, maxScroll - winH * 0.55); b = Infinity; }
-      return { a, b, t: st.t, mid: THREE.MathUtils.clamp(idx === 0 ? 0 : center, 0, maxScroll) };
+      if (idx === stops.length - 1) { a = Math.min(a, maxScrollAfter - winH * 0.55); b = Infinity; }
+      return { a, b, t: st.t, mid: THREE.MathUtils.clamp(idx === 0 ? 0 : center, 0, maxScrollAfter) };
     });
   }
   addEventListener('resize', resize);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
   resize();
 
   /* Auto-drive to focused stop for keyboard accessibility */
@@ -994,6 +976,22 @@ export function startPortfolioDrive() {
     driveToStop(idx);
   }));
 
+  /* Keyboard J/K convenience for quick stop-by-stop driving */
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey || mode !== 'drive') return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '')) return;
+    if (document.querySelector('.modal-backdrop.open')) return;
+    const key = e.key.toLowerCase();
+    if (key !== 'j' && key !== 'k') return;
+    let curIdx = 0;
+    stops.forEach((st, idx) => { if (st.on) curIdx = idx; });
+    const nextIdx = Math.max(0, Math.min(stops.length - 1, curIdx + (key === 'j' ? 1 : -1)));
+    if (nextIdx !== curIdx) {
+      e.preventDefault();
+      driveToStop(nextIdx);
+    }
+  });
+
   /* Rev Button Link */
   let revDown = false;
   let revLevel = 0;
@@ -1042,7 +1040,7 @@ export function startPortfolioDrive() {
       html.classList.add('drive');
       if (takeBtn) takeBtn.hidden = true;
       const modeBtn = document.getElementById('modeToggleBtn');
-      if (modeBtn) modeBtn.textContent = 'Overview';
+      if (modeBtn) modeBtn.textContent = 'Full page';
       resize();
       const targetY = scrollBands[targetIdx] ? scrollBands[targetIdx].mid : 0;
       window.scrollTo({ top: targetY, behavior: 'instant' });
@@ -1173,6 +1171,8 @@ export function startPortfolioDrive() {
 
       /* Skip Drive Sign Collision TUCK & End Fade */
       if (skipBtn) {
+        const activeIsLeft = stops[activeIdx] ? stops[activeIdx].screen < 0 : false;
+        skipBtn.classList.toggle('on-right', !mobile && activeIsLeft);
         skipBtn.classList.toggle('at-end', activeIdx === stops.length - 1);
         skipBtn.style.setProperty('--run', smoothT.toFixed(3));
       }
@@ -1203,8 +1203,9 @@ export function startPortfolioDrive() {
 
       const curStop = stops[activeIdx];
       const curVis = Math.max(0, curStop.vis);
+      const camBias = curStop.cam === 'close' ? 0.22 : 0.19;
       if (mobile) tz += 4.5 * curVis;
-      else tx += curStop.screen * visSpan * 0.19 * curVis;
+      else tx += curStop.screen * visSpan * camBias * curVis;
 
       lookVec.set(tx, carSample.pos.y, tz);
       if (firstFrame) camTarget.copy(lookVec);

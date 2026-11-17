@@ -147,9 +147,6 @@
       this.cv = canvas;
       this.ctx = canvas.getContext('2d');
       this.cfg = cfg;
-      this.face = document.createElement('canvas');
-      this.overlay = document.createElement('canvas');
-      this.ring = document.createElement('canvas');   // rotating chapter ring
       this.ringAngle = 0;
       this.size = 0; this.dpr = 1;
       this.val = cfg.start;   // displayed (spring) value
@@ -179,16 +176,12 @@
       var w = this.cv.clientWidth || (this.cv.parentElement && this.cv.parentElement.clientWidth) || 300;
       var s = Math.max(120, Math.round(w));
       var dpr = Math.min(2, window.devicePixelRatio || 1);
-      if (s === this.size && dpr === this.dpr) return;
-      this.size = s; this.dpr = dpr;
       var px = Math.round(s * dpr);
-      [this.cv, this.face, this.overlay, this.ring].forEach(function (c) {
-        c.width = px; c.height = px;
-      });
+      if (s === this.size && dpr === this.dpr && this.cv.width === px) return;
+      this.size = s; this.dpr = dpr;
+      this.cv.width = px;
+      this.cv.height = px;
       this.geom();
-      this.buildFace();
-      this.buildOverlay();
-      this.buildRing();
     };
 
     Gauge.prototype.geom = function () {
@@ -215,14 +208,10 @@
     var DISPLAY = '"Archivo", system-ui, sans-serif';
     var FIGURES = '"IBM Plex Mono", ui-monospace, monospace';
 
-    Gauge.prototype.buildFace = function () {
-      var f = this.face.getContext('2d');
+    Gauge.prototype.buildFace = function (f) {
       var S = this.S, cx = this.cx, cy = this.cy;
       var outerR = this.outerR, faceR = this.faceR, cfg = this.cfg;
       this.th = THEMES[themeKey];
-
-      f.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-      f.clearRect(0, 0, S, S);
 
       // rim and face: two flat discs and two hairlines
       f.beginPath(); f.arc(cx, cy, outerR, 0, TAU); f.fillStyle = SP.rim; f.fill();
@@ -272,11 +261,8 @@
     };
 
     /* ---- hub: one flat disc with a gold centre ---- */
-    Gauge.prototype.buildOverlay = function () {
-      var o = this.overlay.getContext('2d');
-      var S = this.S, cx = this.cx, cy = this.cy, faceR = this.faceR;
-      o.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-      o.clearRect(0, 0, S, S);
+    Gauge.prototype.buildOverlay = function (o) {
+      var cx = this.cx, cy = this.cy, faceR = this.faceR;
       var r = faceR * 0.085;
       o.beginPath(); o.arc(cx, cy, r, 0, TAU); o.fillStyle = SP.tile; o.fill();
       o.lineWidth = 1; o.strokeStyle = SP.hair2; o.stroke();
@@ -284,13 +270,14 @@
     };
 
     /* ---- rotating chapter ring: hairline minute ticks ---- */
-    Gauge.prototype.buildRing = function () {
-      var r = this.ring.getContext('2d');
-      var S = this.S, cx = this.cx, cy = this.cy, faceR = this.faceR, cfg = this.cfg;
-      r.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-      r.clearRect(0, 0, S, S);
+    Gauge.prototype.buildRing = function (r) {
+      var cx = this.cx, cy = this.cy, faceR = this.faceR, cfg = this.cfg;
       if (!cfg.mantraK) return;
       var rad = faceR * cfg.mantraK;
+      r.save();
+      r.translate(cx, cy);
+      r.rotate(this.ringAngle);
+      r.translate(-cx, -cy);
       r.lineCap = 'butt';
       for (var d = 0; d < 360; d += 3) {
         var ta = d2r(d), maj = (d % 30 === 0);
@@ -300,6 +287,7 @@
         r.lineTo(cx + Math.cos(ta) * t1, cy + Math.sin(ta) * t1);
         r.strokeStyle = maj ? SP.muted : SP.hair2; r.lineWidth = 1; r.stroke();
       }
+      r.restore();
     };
 
     /* ---- odometer: separate digit tiles, leading zeros muted, the newest digit inverted ---- */
@@ -371,22 +359,15 @@
     };
 
     Gauge.prototype.render = function (odoValue, odoTest) {
-      var ctx = this.ctx, S = this.S, cx = this.cx, cy = this.cy;
+      if (!this.size || !this.cv.width) this.resize();
+      var ctx = this.ctx, S = this.S;
       ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       ctx.clearRect(0, 0, S, S);
-      ctx.drawImage(this.face, 0, 0, S, S);
-      // rotating chapter ring (text-free), under the needle
-      if (this.cfg.mantraK) {
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(this.ringAngle);
-        ctx.translate(-cx, -cy);
-        ctx.drawImage(this.ring, 0, 0, S, S);
-        ctx.restore();
-      }
+      this.buildFace(ctx);
+      this.buildRing(ctx);
       if (this.cfg.odometer) this.drawOdometer(ctx, odoValue);
       this.drawNeedle(ctx);
-      ctx.drawImage(this.overlay, 0, 0, S, S);
+      this.buildOverlay(ctx);
     };
 
   /* ================================================================
@@ -509,13 +490,13 @@
   /* Keep the floating back-to-top key off the instrument face. */
   var card = document.getElementById('instrument');
   var topBtn = document.getElementById('top');
-  if (card && topBtn && typeof IntersectionObserver !== 'undefined') {
+  if (card && typeof IntersectionObserver !== 'undefined') {
     new IntersectionObserver(function (entries) {
       var visible = entries[0].isIntersecting;
       if (visible && !cardVisible) paint();
       cardVisible = visible;
-      topBtn.classList.toggle('instrument-near', visible);
-    }, { threshold: 0.35 }).observe(card);
+      if (topBtn) topBtn.classList.toggle('instrument-near', visible);
+    }, { threshold: 0.15 }).observe(card);
   }
 
   document.addEventListener('visibilitychange', function () {
