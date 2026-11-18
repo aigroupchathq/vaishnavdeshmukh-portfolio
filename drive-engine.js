@@ -374,7 +374,7 @@ function createInkGroup(geo, colorHex = '#151518', { angle = 24, mat = null, edg
   return g;
 }
 
-function createSignSprite(text, { font = '600 64px Poppins, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false, anisotropy = 1, registry = null } = {}) {
+function createSignSprite(text, { font = '700 64px Comfortaa, Poppins, sans-serif', color = '#FFFFFF', width = 4.2, flatGround = false, anisotropy = 1, registry = null } = {}) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const lines = text.split('\n');
@@ -593,7 +593,7 @@ function buildRoadAndScenery(scene, stops, maxAniso = 1) {
     }
 
     const titleSign = createSignSprite('VAISHNAV DESHMUKH', {
-      font: '600 68px Poppins, sans-serif',
+      font: '700 66px Comfortaa, Poppins, sans-serif',
       width: 5.4,
       color: '#FFFFFF',
       anisotropy: maxAniso,
@@ -603,8 +603,8 @@ function buildRoadAndScenery(scene, stops, maxAniso = 1) {
     g.add(titleSign);
 
     const floorSign = createSignSprite('LONDON · DESIGN & SYSTEMS', {
-      font: '500 50px Poppins, sans-serif',
-      width: 4.4,
+      font: '600 46px Comfortaa, Poppins, sans-serif',
+      width: 4.5,
       color: 'rgba(255,255,255,0.62)',
       flatGround: true,
       anisotropy: maxAniso,
@@ -687,8 +687,8 @@ function buildRoadAndScenery(scene, stops, maxAniso = 1) {
     propsGroup.add(frame);
 
     const lbl = createSignSprite(spec.label, {
-      font: '600 62px Poppins, sans-serif',
-      width: 4.6,
+      font: '700 60px Comfortaa, Poppins, sans-serif',
+      width: 4.7,
       color: '#FFFFFF',
       anisotropy: maxAniso,
       registry: fontCallbacks
@@ -779,8 +779,8 @@ function buildRoadAndScenery(scene, stops, maxAniso = 1) {
     anchors['gate'] = arch.position.clone();
 
     const gateLbl = createSignSprite('ARCHIVE 16 · CONTACT', {
-      font: '600 68px Poppins, sans-serif',
-      width: 5.2,
+      font: '700 64px Comfortaa, Poppins, sans-serif',
+      width: 5.3,
       color: '#FFFFFF',
       anisotropy: maxAniso,
       registry: fontCallbacks

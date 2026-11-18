@@ -7,8 +7,9 @@
   --text: #FFFFFF;
   --sec: #A1A1AA;
   --muted: #71717A;
-  --display: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Comfortaa", "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Comfortaa", "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --r: 10px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -21,9 +22,14 @@
 .pals-off [data-piixpal] {
   display: none !important;
 }
+piix-pal,
+[data-piixpal],
+[data-piixpal-ui],
+piix-sprite {
+  filter: grayscale(1) contrast(1.22);
+}
 piix-sprite {
   display: inline-block;
-  filter: grayscale(1) contrast(1.22);
   vertical-align: middle;
   flex-shrink: 0;
   cursor: pointer;
@@ -131,9 +137,9 @@ button {
 
 .brand {
   font-family: var(--display);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: 14.5px;
+  letter-spacing: -0.02em;
   color: #FFFFFF;
   white-space: nowrap;
 }
@@ -389,26 +395,27 @@ button {
 .card h1,
 .card .h1-mirror {
   font-family: var(--display);
-  font-size: clamp(2.15rem, 4.2vw, 3.6rem);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.05rem, 4.0vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: #FFFFFF;
 }
 
 .card h2 {
   font-family: var(--display);
-  font-size: clamp(1.45rem, 2.5vw, 2.05rem);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.012em;
+  font-size: clamp(1.38rem, 2.35vw, 1.92rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   color: #FFFFFF;
   margin-bottom: 10px;
 }
 
 .lede {
   margin-top: 14px;
-  font-size: 15px;
+  font-family: var(--body);
+  font-size: 14.5px;
   font-weight: 400;
   color: #D4D4D8;
   line-height: 1.62;
@@ -443,16 +450,16 @@ button {
   }
   .label {
     font-size: 10.5px;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.06em;
     margin-bottom: 5px;
   }
   .card h1 {
-    font-size: clamp(1.48rem, 6.2vw, 1.85rem);
-    line-height: 1.12;
+    font-size: clamp(1.36rem, 5.6vw, 1.72rem);
+    line-height: 1.16;
   }
   .card h2 {
-    font-size: clamp(1.12rem, 4.7vw, 1.38rem);
-    line-height: 1.18;
+    font-size: clamp(1.06rem, 4.3vw, 1.3rem);
+    line-height: 1.22;
     margin-bottom: 4px;
   }
   .lede {
@@ -467,7 +474,7 @@ button {
   .cta .btn {
     min-height: 40px;
     padding: 0 15px;
-    font-size: 12.5px;
+    font-size: 12px;
   }
   .ghost-list {
     margin-top: 8px;
@@ -477,8 +484,8 @@ button {
     gap: 2px;
   }
   .ghost-title {
-    font-size: 14.5px;
-    line-height: 1.24;
+    font-size: 13.5px;
+    line-height: 1.26;
   }
   .ghost-desc {
     font-size: 11.5px;
@@ -495,7 +502,7 @@ button {
     inset: -14px -16px -18px -16px;
   }
   .card h2 {
-    font-size: 1.08rem;
+    font-size: 1.02rem;
   }
   .ghost-list {
     margin-top: 6px;
@@ -556,9 +563,9 @@ button {
 
 .ghost-title {
   font-family: var(--display);
-  font-size: clamp(1.04rem, 1.5vw, 1.18rem);
-  font-weight: 600;
-  letter-spacing: -0.008em;
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: #FFFFFF;
   transition: transform 0.2s var(--ease);
 }
@@ -587,7 +594,8 @@ button {
 
 .ghost-desc {
   padding-left: 26px;
-  font-size: 13px;
+  font-family: var(--body);
+  font-size: 12.5px;
   color: var(--sec);
   line-height: 1.45;
   opacity: 0.78;
@@ -1550,14 +1558,15 @@ footer.bottom {
 
 .split-title {
   font-family: var(--display);
-  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
-  font-weight: 600;
-  letter-spacing: -0.012em;
-  line-height: 1.18;
+  font-size: clamp(1.3rem, 2.1vw, 1.78rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
   color: #FFFFFF;
 }
 
 .split-copy {
+  font-family: var(--body);
   font-size: 14px;
   color: #D4D4D8;
   line-height: 1.65;
@@ -1581,6 +1590,7 @@ footer.bottom {
   gap: 8px;
 }
 .modal-decisions li {
+  font-family: var(--body);
   font-size: 13.5px;
   color: #D4D4D8;
   padding-left: 18px;
@@ -1680,6 +1690,7 @@ footer.bottom {
   flex-shrink: 0;
 }
 .archive-title {
+  font-family: var(--body);
   font-size: 13.5px;
   font-weight: 500;
   color: #FFFFFF;
