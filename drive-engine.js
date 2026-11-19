@@ -945,7 +945,7 @@ function createSportsCar(maxAniso = 1) {
   ], 1.72, 0.07, 3);
   bodySusp.add(createInkGroup(bodyGeo, '#18181b', {
     angle: 20,
-    mat: new THREE.MeshLambertMaterial({ color: '#1d1e24', flatShading: true }),
+    mat: new THREE.MeshStandardMaterial({ color: '#14151b', roughness: 0.28, metalness: 0.62, flatShading: true }),
     edgeHex: '#FFFFFF',
     edgeOpacity: 0.92
   }));
@@ -970,7 +970,7 @@ function createSportsCar(maxAniso = 1) {
   const cabinGeo = extrudeSide([[0.64, 0.86], [-0.04, 1.33], [-0.98, 1.36], [-1.64, 0.91]], 1.44, 0.05, 2);
   bodySusp.add(createInkGroup(cabinGeo, '#050507', {
     angle: 20,
-    mat: new THREE.MeshLambertMaterial({ color: '#07080b', flatShading: true }),
+    mat: new THREE.MeshStandardMaterial({ color: '#06070a', roughness: 0.14, metalness: 0.85, flatShading: true }),
     edgeHex: '#E4E4E7',
     edgeOpacity: 0.85
   }));
@@ -1088,6 +1088,28 @@ function createSportsCar(maxAniso = 1) {
   beamCone.renderOrder = 3;
   root.add(beamCone);
 
+  /* Monochrome Optic Brake Reflection Halo Behind Diffuser */
+  const brakeCanvas = document.createElement('canvas');
+  brakeCanvas.width = 64;
+  brakeCanvas.height = 64;
+  const brCtx = brakeCanvas.getContext('2d');
+  const brGrad = brCtx.createRadialGradient(32, 16, 2, 32, 24, 30);
+  brGrad.addColorStop(0, 'rgba(255, 255, 255, 0.72)');
+  brGrad.addColorStop(0.45, 'rgba(228, 228, 231, 0.24)');
+  brGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+  brCtx.fillStyle = brGrad;
+  brCtx.fillRect(0, 0, 64, 64);
+  const brakeTex = new THREE.CanvasTexture(brakeCanvas);
+  brakeTex.colorSpace = THREE.SRGBColorSpace;
+  const brakeHalo = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.7, 2.3),
+    new THREE.MeshBasicMaterial({ map: brakeTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.08 })
+  );
+  brakeHalo.rotation.x = -Math.PI / 2;
+  brakeHalo.position.set(0, 0.055, -3.15);
+  brakeHalo.renderOrder = 3;
+  root.add(brakeHalo);
+
   /* Contact Shadow Underchassis */
   const shadowPlane = new THREE.Mesh(
     new THREE.PlaneGeometry(2.3, 4.9),
@@ -1098,16 +1120,22 @@ function createSportsCar(maxAniso = 1) {
   shadowPlane.renderOrder = 1;
   root.add(shadowPlane);
 
+  const tailRest = new THREE.Color('#8e8e98');
+  const tailHot = new THREE.Color('#ffffff');
+
   return {
     group: root,
-    update(dt, { distance, lean, beam, rpm, time }) {
+    update(dt, { distance, lean, beam, rpm, brake = 0, time }) {
       for (const w of wheels) w.node.rotation.x = distance / w.r;
 
       bodySusp.rotation.z = lean * 0.06;
+      bodySusp.rotation.x = brake * 0.018;
       bodySusp.position.y = Math.sin(time * (14 + rpm * 16)) * 0.008 * (0.3 + rpm);
       lights.forEach(l => l.intensity = 10 * beam);
       beamCone.material.opacity = 0.38 * beam;
-      tailMat.color.setHex(rpm > 0.2 ? 0xffffff : 0xa1a1aa);
+      const tailFlare = Math.min(1, Math.max(brake, rpm > 0.2 ? 0.85 : 0));
+      tailMat.color.copy(tailRest).lerp(tailHot, tailFlare);
+      brakeHalo.material.opacity = 0.06 + tailFlare * 0.34;
     }
   };
 }
@@ -1160,10 +1188,11 @@ export function startPortfolioDrive() {
   rimLight.position.set(28, 22, 34);
   scene.add(rimLight);
 
-  const camera = new THREE.PerspectiveCamera(mobile ? 44 : 38, innerWidth / innerHeight, 0.5, 420);
+  const baseFov = mobile ? 44 : 38;
+  const camera = new THREE.PerspectiveCamera(baseFov, innerWidth / innerHeight, 0.5, 420);
   const camConfigs = {
     base: mobile ? { h: 12.0, d: 14.2, ahead: -2.4, lat: 2.3 } : { h: 28, d: 18, ahead: 3, lat: 0 },
-    garage: mobile ? { h: 13.0, d: 15.8, ahead: -1.6, lat: 2.3 } : { h: 21, d: 15, ahead: 1, lat: 0 },
+    garage: mobile ? { h: 13.6, d: 16.4, ahead: -0.7, lat: 2.2 } : { h: 21, d: 15, ahead: 1, lat: 0 },
     near: mobile ? { h: 12.2, d: 14.4, ahead: -4.1, lat: 2.1 } : { h: 25, d: 16, ahead: 2, lat: 0 },
     close: mobile ? { h: 14.5, d: 16.5, ahead: -1.8, lat: 2.0 } : { h: 25, d: 16, ahead: 1, lat: 0 },
     gate: mobile ? { h: 11.8, d: 14.0, ahead: -2.6, lat: 2.3 } : { h: 27, d: 19, ahead: 2, lat: 0 },
@@ -1514,7 +1543,7 @@ export function startPortfolioDrive() {
       const modeBtn = document.getElementById('modeToggleBtn');
       if (modeBtn) modeBtn.textContent = '3D drive';
       window.scrollTo({ top: 0, behavior: 'instant' });
-      if (window.focusOverviewSector) window.focusOverviewSector(startIdx, startIdx > 0);
+      if (window.focusOverviewSector) window.focusOverviewSector(startIdx, startIdx > 0, true);
       requestAnimationFrame(() => {
         if (veil) veil.classList.remove('on');
       });
@@ -1593,6 +1622,8 @@ export function startPortfolioDrive() {
   let started = smoothY > 5;
   let beamStrength = 0.25;
   let lean = 0;
+  let smoothVel = 0;
+  let brakeLevel = 0;
   let firstFrame = true;
 
   const carSample = { pos: new THREE.Vector3(), tan: new THREE.Vector3(), flat: new THREE.Vector3(), right: new THREE.Vector3() };
@@ -1682,6 +1713,12 @@ export function startPortfolioDrive() {
     smoothT = THREE.MathUtils.lerp(smoothT, targetT, expDamp(6.5, dt));
 
     const vel = Math.abs(smoothY - lastY) / Math.max(dt, 0.001);
+    const prevVel = smoothVel;
+    smoothVel = THREE.MathUtils.lerp(smoothVel, vel, expDamp(8, dt));
+    const decel = Math.max(0, prevVel - smoothVel);
+    const targetBrake = decel > 28 && prevVel > 120 ? Math.min(1, decel / 420) : 0;
+    brakeLevel = THREE.MathUtils.lerp(brakeLevel, targetBrake, expDamp(targetBrake > brakeLevel ? 14 : 4.2, dt));
+    if (brakeLevel < 0.004 && targetBrake === 0) brakeLevel = 0;
     lastY = smoothY;
     if (!started && (smoothY > 12 || lapCount > 0)) started = true;
 
@@ -1711,6 +1748,7 @@ export function startPortfolioDrive() {
       lean,
       beam: beamStrength,
       rpm: revLevel,
+      brake: brakeLevel,
       time: now / 1000
     });
 
@@ -1784,6 +1822,8 @@ export function startPortfolioDrive() {
       if (isHere !== prevRouteHere[idx]) {
         prevRouteHere[idx] = isHere;
         lnk.classList.toggle('here', isHere);
+        if (isHere) lnk.setAttribute('aria-current', 'location');
+        else lnk.removeAttribute('aria-current');
       }
       if (isDone !== prevRouteDone[idx]) {
         prevRouteDone[idx] = isDone;
@@ -1883,6 +1923,13 @@ export function startPortfolioDrive() {
     camera.position.copy(camPos);
     camera.lookAt(camTarget);
 
+    const targetFov = baseFov + Math.min(1, smoothVel / 1800) * 2.3 + revLevel * 0.9;
+    const nextFov = firstFrame ? targetFov : THREE.MathUtils.lerp(camera.fov, targetFov, expDamp(6, dt));
+    if (Math.abs(nextFov - camera.fov) > 0.01) {
+      camera.fov = nextFov;
+      camera.updateProjectionMatrix();
+    }
+
     scene.fog.near = worldUniforms.uFogNear.value = hyp + 14;
     scene.fog.far = worldUniforms.uFogFar.value = hyp + 65;
 
@@ -1890,7 +1937,8 @@ export function startPortfolioDrive() {
 
     if (firstFrame) {
       firstFrame = false;
-      if (ignition) {
+      const holdSplash = new URLSearchParams(location.search).get('splash') === '1';
+      if (ignition && !holdSplash) {
         ignition.classList.add('done');
         setTimeout(() => ignition.remove(), 700);
       }
@@ -1900,6 +1948,8 @@ export function startPortfolioDrive() {
     const settled = !driveAnimId
       && !revDown
       && revLevel < 0.002
+      && brakeLevel < 0.008
+      && Math.abs(camera.fov - baseFov) < 0.02
       && Math.abs(targetY - smoothY) < 0.08
       && Math.abs(targetT - smoothT) < 1e-4
       && Math.abs(beamStrength - desiredBeam) < 0.006

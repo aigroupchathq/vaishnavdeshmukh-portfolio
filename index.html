@@ -47,7 +47,21 @@
       <div class="top-right">
         <button type="button" class="hdr-link" id="modeToggleBtn" onclick="togglePortfolioViewMode && togglePortfolioViewMode()">Overview</button>
         <button type="button" class="hdr-link" onclick="openArchive(this)">Archive (16)</button>
-        <a class="btn primary sm" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">Say hello</a>
+        <div class="contact-wrap">
+          <button type="button" class="btn primary sm" id="contactPopoverBtn" aria-expanded="false" aria-controls="contactPopover" onclick="toggleContactPopover(event)">Say hello</button>
+          <div class="contact-popover" id="contactPopover" role="region" aria-label="Direct contact" aria-hidden="true">
+            <div class="contact-pop-head">
+              <span class="contact-pop-lbl">Direct · London, UK</span>
+              <piix-sprite name="loti" render="dots" size="22" look="mouse" sleep-after="20" aria-hidden="true" title="Loti"></piix-sprite>
+            </div>
+            <div class="contact-pop-addr">deshmukhvaishnav@gmail.com</div>
+            <div class="contact-pop-actions">
+              <button type="button" class="btn primary" onclick="copyEmailAddress(this)">Copy email</button>
+              <a class="btn ghost" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav" onclick="closeContactPopover()">Mail app ↗</a>
+              <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer" onclick="closeContactPopover()">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -62,8 +76,19 @@
 
   <!-- Ignition Screen & Transition Veil -->
   <div class="ignition" id="ignition" aria-hidden="true">
-    <span>Loading 3D route</span>
-    <i></i>
+    <span class="ignition-corner tl"></span>
+    <span class="ignition-corner tr"></span>
+    <span class="ignition-corner bl"></span>
+    <span class="ignition-corner br"></span>
+    <div class="ignition-core">
+      <svg class="ignition-circuit" viewBox="146 66 308 428" width="84" height="116" fill="none" aria-hidden="true">
+        <path class="ignition-track-base" d="M 306 86.5 L 332.3 80.4 L 359.1 82.4 L 384 92.9 L 403.6 111.3 L 416.7 134.9 L 422.5 165.8 L 419.9 197.2 L 411.2 227.5 L 402.7 262.4 L 412.8 292 L 427.6 324.9 L 436.1 360 L 434.4 400.4 L 419.1 437.7 L 394.2 463.6 L 356.8 478.7 L 316.5 477.2 L 279.1 461.9 L 244.2 433.9 L 213.6 395.2 L 187.6 353 L 168.9 312.1 L 163.1 277 L 170.5 238 L 190.5 203.1 L 218.3 167.6 L 248.9 128.9 L 278.5 101.6 Z" stroke="rgba(255,255,255,0.14)" stroke-width="2.4" stroke-linejoin="round"/>
+        <path class="ignition-track-trace" d="M 306 86.5 L 332.3 80.4 L 359.1 82.4 L 384 92.9 L 403.6 111.3 L 416.7 134.9 L 422.5 165.8 L 419.9 197.2 L 411.2 227.5 L 402.7 262.4 L 412.8 292 L 427.6 324.9 L 436.1 360 L 434.4 400.4 L 419.1 437.7 L 394.2 463.6 L 356.8 478.7 L 316.5 477.2 L 279.1 461.9 L 244.2 433.9 L 213.6 395.2 L 187.6 353 L 168.9 312.1 L 163.1 277 L 170.5 238 L 190.5 203.1 L 218.3 167.6 L 248.9 128.9 L 278.5 101.6 Z" pathLength="1000" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="302" y1="74" x2="310" y2="99" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
+      </svg>
+      <span class="ignition-brand">Vaishnav Deshmukh</span>
+      <span class="ignition-meta">51.5°N · LONDON · 525M</span>
+    </div>
   </div>
   <div class="veil" id="veil" aria-hidden="true"></div>
 
@@ -71,11 +96,11 @@
        5-DOT MINIMAL ROUTE INDICATOR
        ======================================================================= -->
   <nav class="route" aria-label="Journey route">
-    <a href="#stop-garage" data-i="0"><i></i><span>00 · Intro</span></a>
-    <a href="#stop-systems" data-i="1"><i></i><span>01 · Systems</span></a>
-    <a href="#stop-perception" data-i="2"><i></i><span>02 · Craft</span></a>
-    <a href="#stop-rev" data-i="3"><i></i><span>03 · Optics</span></a>
-    <a href="#stop-gate" data-i="4"><i></i><span>04 · Contact</span></a>
+    <a href="#stop-garage" data-i="0" aria-label="Jump to 00 Intro" aria-current="location"><i></i><span>00 · Intro</span></a>
+    <a href="#stop-systems" data-i="1" aria-label="Jump to 01 Systems"><i></i><span>01 · Systems</span></a>
+    <a href="#stop-perception" data-i="2" aria-label="Jump to 02 Craft"><i></i><span>02 · Craft</span></a>
+    <a href="#stop-rev" data-i="3" aria-label="Jump to 03 Optics"><i></i><span>03 · Optics</span></a>
+    <a href="#stop-gate" data-i="4" aria-label="Jump to 04 Contact"><i></i><span>04 · Contact</span></a>
   </nav>
 
   <p class="scroll-hint" id="scroll-hint" aria-hidden="true">
@@ -91,7 +116,7 @@
       <!-- CIRCUIT SURVEY ATLAS (OVERVIEW MAP MODE) -->
       <aside class="circuit-atlas" id="circuitAtlas" aria-label="Interactive circuit route map">
         <div class="atlas-head">
-          <span><strong>LONDON CIRCUIT</strong> // 525M</span>
+          <span class="atlas-title-wrap"><piix-sprite name="fluff" render="dots" size="20" look="mouse" sleep-after="20" aria-hidden="true" title="Fluff"></piix-sprite><span><strong>LONDON CIRCUIT</strong> // 525M</span></span>
           <span class="atlas-spec-meta">SURVEY MAP · 5 SECTORS</span>
           <button type="button" class="atlas-collapse-btn" id="atlasCollapseBtn" onclick="toggleMobileAtlas()" aria-expanded="true">Collapse</button>
         </div>
@@ -229,8 +254,8 @@
     <!-- STOP 0: INTRO -->
     <section class="stop" id="stop-garage" data-t="0.0" data-side="left" data-cam="garage">
       <div class="card">
-        <div class="station-bar"><span class="station-coord">SEC 00 // t=0.00 · 000M · EL +1.8M · HDG 071°</span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(0)">Drive sector ↗</button></div>
-        <span class="label">London · Systems &amp; Product Design</span>
+        <div class="station-bar"><span class="station-coord">SEC 00 · 000M · +1.8M<span class="coord-extra"> · HDG 071°</span></span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(0)">Drive 00 ↗</button></div>
+        <span class="label label-with-pal">London · Systems &amp; Product Design <piix-sprite name="mochi" render="dots" size="22" look="mouse" sleep-after="20" aria-hidden="true" title="Mochi"></piix-sprite></span>
         <h1>Software shaped around how things break.</h1>
         <p class="lede">
           Sixteen builds and field studies across clinical wards, human attention, civic roads, and vehicle provenance.
@@ -245,8 +270,8 @@
     <!-- STOP 1: SYSTEMS & CIVIC FLAGSHIPS (3 ROWS + HOVER WIREFRAME PEEK) -->
     <section class="stop" id="stop-systems" data-t="0.20" data-side="right" data-cam="near">
       <div class="card" onmouseleave="clearGhostPeek('systems')">
-        <div class="station-bar"><span class="station-coord">SEC 01 // t=0.20 · 105M · EL +1.0M · HDG 196°</span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(1)">Drive sector ↗</button></div>
-        <span class="label">01 · Flagship Systems</span>
+        <div class="station-bar"><span class="station-coord">SEC 01 · 105M · +1.0M<span class="coord-extra"> · HDG 196°</span></span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(1)">Drive 01 ↗</button></div>
+        <span class="label label-with-pal">01 · Flagship Systems <piix-sprite name="robo" render="dots" size="22" look="mouse" sleep-after="20" aria-hidden="true" title="Robo"></piix-sprite></span>
         <h2>Clinical wards, civic roads, and car histories.</h2>
         <div class="ghost-list">
           <button type="button" class="ghost-row"
@@ -299,8 +324,8 @@
     <!-- STOP 2: ATTENTION & STUDIO FLAGSHIPS (3 ROWS + HOVER WIREFRAME PEEK) -->
     <section class="stop" id="stop-perception" data-t="0.40" data-side="left" data-cam="near">
       <div class="card" onmouseleave="clearGhostPeek('perception')">
-        <div class="station-bar"><span class="station-coord">SEC 02 // t=0.40 · 210M · EL -2.8M · HDG 204°</span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(2)">Drive sector ↗</button></div>
-        <span class="label">02 · Perception &amp; Studio</span>
+        <div class="station-bar"><span class="station-coord">SEC 02 · 210M · -2.8M<span class="coord-extra"> · HDG 204°</span></span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(2)">Drive 02 ↗</button></div>
+        <span class="label label-with-pal">02 · Perception &amp; Studio <piix-sprite name="coffee" render="dots" size="22" look="mouse" sleep-after="20" aria-hidden="true" title="Coffee"></piix-sprite></span>
         <h2>Quiet tools for focus, pacing, and audio scripts.</h2>
         <div class="ghost-list">
           <button type="button" class="ghost-row"
@@ -354,8 +379,8 @@
     <!-- STOP 3: HIGHWAY OPTICS INTERLUDE -->
     <section class="stop" id="stop-rev" data-t="0.60" data-side="right" data-cam="close">
       <div class="card">
-        <div class="station-bar"><span class="station-coord">SEC 03 // t=0.60 · 315M · EL +1.2M · HDG 315°</span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(3)">Drive sector ↗</button></div>
-        <span class="label">03 · Highway Optics</span>
+        <div class="station-bar"><span class="station-coord">SEC 03 · 315M · +1.2M<span class="coord-extra"> · HDG 315°</span></span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(3)">Drive 03 ↗</button></div>
+        <span class="label label-with-pal">03 · Highway Optics <piix-sprite name="ufo" render="dots" size="22" look="mouse" sleep-after="20" aria-hidden="true" title="UFO"></piix-sprite></span>
         <h2>Beam &amp; Pace Control.</h2>
         <p class="lede">
           Hold to flare the monochrome xenon beams across the night highway grid and sweep the ground dial.
@@ -375,14 +400,15 @@
     <!-- STOP 4: INQUIRIES & LOOP GATE -->
     <section class="stop" id="stop-gate" data-t="0.80" data-side="left" data-cam="gate">
       <div class="card">
-        <div class="station-bar"><span class="station-coord">SEC 04 // t=0.80 · 420M · EL -1.7M · HDG 017°</span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(4)">Drive sector ↗</button></div>
-        <span class="label">04 · Inquiries</span>
+        <div class="station-bar"><span class="station-coord">SEC 04 · 420M · -1.7M<span class="coord-extra"> · HDG 017°</span></span><button type="button" class="station-jump" onclick="drivePortfolioFromOverview(4)">Drive 04 ↗</button></div>
+        <span class="label label-with-pal">04 · Inquiries <piix-sprite name="mumu" render="dots" size="22" look="mouse" sleep-after="20" aria-hidden="true" title="Mumu"></piix-sprite></span>
         <h2>Working on a thorny interface?</h2>
         <p class="lede">
           London, UK. Happy to discuss product engineering roles, early prototypes, or messy field problems directly.
         </p>
         <div class="cta">
-          <a class="btn primary" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">deshmukhvaishnav@gmail.com ↗</a>
+          <button type="button" class="btn primary" onclick="copyEmailAddress(this)">Copy email</button>
+          <a class="btn ghost" href="mailto:deshmukhvaishnav@gmail.com?subject=Hello%20Vaishnav">Mail app ↗</a>
           <button type="button" class="btn ghost" onclick="openArchive(this)">Archive (16)</button>
           <a class="btn ghost" href="https://github.com/aigroupchathq" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </div>
@@ -421,10 +447,7 @@
     </div>
   </nav>
 
-  <!-- Piixpal Monochrome Companions (Survey Map + Stop 02 + Garage Floor) -->
-  <piix-pal pal="penguin" on="#circuitAtlas .atlas-foot" edge="box" scale="1.75" aria-hidden="true"></piix-pal>
-  <piix-pal pal="lurk" on="#stop-perception" at="0.88" scale="2" aria-hidden="true"></piix-pal>
-  <piix-pal pal="roomba" on="footer.bottom" edge="box" scale="2" aria-hidden="true"></piix-pal>
+  <!-- Curated Monochrome Piixpal: footer Loaf sprite + desktop edge Scrolly (zero map/CTA overlap) -->
 
   <!-- =======================================================================
        MINIMAL FOOTER
@@ -447,8 +470,8 @@
   <!-- =======================================================================
        UNIFIED 50/50 ARCHITECTURAL SPLIT INSPECTOR (SINGLE MODAL SHELL)
        ======================================================================= -->
-  <div id="caseStudyModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle" onclick="closeSplitInspector()">
-    <div class="split-sheet" onclick="event.stopPropagation()">
+  <div id="caseStudyModalBackdrop" class="modal-backdrop" aria-hidden="true" onclick="closeSplitInspector()">
+    <div class="split-sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="event.stopPropagation()">
 
       <!-- Static Left Visual & Metadata Stage (zero layout shift across tabs) -->
       <div class="split-left">
@@ -471,26 +494,20 @@
       <div class="split-right">
         <div class="split-tabs-head">
           <div class="split-tablist" role="tablist" aria-label="Project details and archive">
-            <button type="button" class="split-tab" id="tab-brief" role="tab" aria-selected="true" aria-controls="panel-brief" onclick="switchSplitTab('brief')">Brief</button>
-            <button type="button" class="split-tab" id="tab-arch" role="tab" aria-selected="false" aria-controls="panel-arch" onclick="switchSplitTab('arch')">How it works</button>
+            <button type="button" class="split-tab" id="tab-brief" role="tab" aria-selected="true" aria-controls="panel-brief" onclick="switchSplitTab('brief')">Dossier</button>
             <button type="button" class="split-tab" id="tab-archive" role="tab" aria-selected="false" aria-controls="panel-archive" onclick="switchSplitTab('archive')">Archive (16)</button>
           </div>
           <button type="button" id="modalCloseBtn" class="split-close-btn" onclick="closeSplitInspector()" aria-label="Close inspector"><span class="esc-hint" aria-hidden="true">Esc</span> <span aria-hidden="true">✕</span></button>
         </div>
 
         <div class="split-body">
-          <!-- Tab 1: Brief -->
+          <!-- Tab 1: Unified Dossier (Problem + Approach + Technical Notes + Actions) -->
           <div id="panel-brief" class="split-panel" role="tabpanel" aria-labelledby="tab-brief">
             <h2 id="modalTitle" class="split-title">Project Title</h2>
             <div>
               <span class="split-sec-lbl">The problem</span>
               <p id="modalProblem" class="split-copy"></p>
             </div>
-            <div class="cta" style="margin-top: 4px;" id="modalLinksBrief"></div>
-          </div>
-
-          <!-- Tab 2: How it works & Technical Notes -->
-          <div id="panel-arch" class="split-panel" role="tabpanel" aria-labelledby="tab-arch" hidden>
             <div>
               <span class="split-sec-lbl">Architecture &amp; approach</span>
               <p id="modalSolution" class="split-copy"></p>
@@ -499,13 +516,13 @@
               <span class="split-sec-lbl">Technical notes</span>
               <ul id="modalDecisions" class="modal-decisions"></ul>
             </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--hair); padding-top: 14px;">
-              <div id="modalLinksArch" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+            <div class="split-actions-bar">
+              <div id="modalLinksBrief" class="split-links-group"></div>
               <button type="button" class="step-btn" id="copyDossierLinkBtn" onclick="copyCurrentProjectLink()">Copy link</button>
             </div>
           </div>
 
-          <!-- Tab 3: Built-in Minimalist Archive (16) Ledger -->
+          <!-- Tab 2: Built-in Minimalist Archive (16) Ledger -->
           <div id="panel-archive" class="split-panel" role="tabpanel" aria-labelledby="tab-archive" hidden>
             <div class="archive-controls">
               <div class="archive-filters" role="group" aria-label="Filter archive">
@@ -684,9 +701,11 @@
           <div style="display: flex; align-items: center; gap: 10px;">
             <button type="button" class="step-btn" onclick="stepProject(-1)" aria-label="Previous work">← Prev</button>
             <button type="button" class="step-btn" onclick="stepProject(1)" aria-label="Next work">Next →</button>
-            <piix-sprite name="keycap" render="dots" color="#e4e4e7" size="30" look="mouse" sleep-after="25" onclick="stepProject(1)" title="Tap keycap for next work" aria-hidden="true"></piix-sprite>
           </div>
-          <span id="splitPosLbl">01 / 16</span>
+          <span class="split-pos-wrap">
+            <piix-sprite name="keycap" render="dots" color="#e4e4e7" size="22" look="mouse" sleep-after="25" onclick="stepProject(1)" title="Tap keycap for next work" aria-hidden="true"></piix-sprite>
+            <span id="splitPosLbl">01 / 16</span>
+          </span>
         </div>
       </div>
 
@@ -1260,10 +1279,9 @@
         decWrap.style.display = 'none';
       }
 
-      ['modalLinksBrief', 'modalLinksArch'].forEach(containerId => {
-        const wrap = document.getElementById(containerId);
-        if (!wrap) return;
-        wrap.innerHTML = '';
+      const briefLinksWrap = document.getElementById('modalLinksBrief');
+      if (briefLinksWrap) {
+        briefLinksWrap.innerHTML = '';
         (d.links || []).forEach((lnk, idx) => {
           const a = document.createElement('a');
           a.href = lnk.href || '#';
@@ -1271,17 +1289,9 @@
           a.rel = 'noopener noreferrer';
           a.className = idx === 0 ? 'btn primary sm' : 'btn ghost sm';
           a.textContent = `${lnk.label || 'Open'} ↗`;
-          wrap.appendChild(a);
+          briefLinksWrap.appendChild(a);
         });
-        if (containerId === 'modalLinksBrief') {
-          const nextTabBtn = document.createElement('button');
-          nextTabBtn.type = 'button';
-          nextTabBtn.className = 'btn ghost sm';
-          nextTabBtn.textContent = 'How it works →';
-          nextTabBtn.onclick = () => switchSplitTab('arch');
-          wrap.appendChild(nextTabBtn);
-        }
-      });
+      }
 
       document.querySelectorAll('.archive-row').forEach(r => {
         r.classList.toggle('is-current', r.dataset.pid === pid);
@@ -1292,17 +1302,18 @@
     }
 
     function switchSplitTab(tabName) {
-      currentSplitTab = tabName;
+      const normalized = tabName === 'archive' ? 'archive' : 'brief';
+      currentSplitTab = normalized;
       const bd = document.getElementById('caseStudyModalBackdrop');
-      if (bd) bd.dataset.tab = tabName;
-      ['brief', 'arch', 'archive'].forEach(t => {
+      if (bd) bd.dataset.tab = normalized;
+      ['brief', 'archive'].forEach(t => {
         const btn = document.getElementById(`tab-${t}`);
         const panel = document.getElementById(`panel-${t}`);
-        const on = t === tabName;
+        const on = t === normalized;
         if (btn) btn.setAttribute('aria-selected', String(on));
         if (panel) panel.hidden = !on;
       });
-      if (tabName === 'archive') {
+      if (normalized === 'archive') {
         const search = document.getElementById('archiveSearchInput');
         if (search) requestAnimationFrame(() => search.focus({ preventScroll: true }));
       }
@@ -1388,7 +1399,60 @@
       }
     }
 
+    /* Frictionless Contact Popover & Copy Email */
+    function closeContactPopover() {
+      const pop = document.getElementById('contactPopover');
+      const btn = document.getElementById('contactPopoverBtn');
+      if (!pop || !pop.classList.contains('open')) return;
+      pop.classList.remove('open');
+      pop.setAttribute('aria-hidden', 'true');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+    function toggleContactPopover(e) {
+      if (e) e.stopPropagation();
+      const pop = document.getElementById('contactPopover');
+      const btn = document.getElementById('contactPopoverBtn');
+      if (!pop || !btn) return;
+      const opening = !pop.classList.contains('open');
+      pop.classList.toggle('open', opening);
+      pop.setAttribute('aria-hidden', String(!opening));
+      btn.setAttribute('aria-expanded', String(opening));
+    }
+    function copyEmailAddress(btn) {
+      const email = 'deshmukhvaishnav@gmail.com';
+      const orig = btn ? btn.textContent : '';
+      const confirmCopied = () => {
+        if (!btn) return;
+        btn.textContent = 'Copied ✓';
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => { btn.textContent = orig || 'Copy email'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(confirmCopied).catch(() => {
+          const ta = document.createElement('textarea');
+          ta.value = email;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); confirmCopied(); } catch (err) {}
+          ta.remove();
+        });
+      } else {
+        confirmCopied();
+      }
+    }
+    document.addEventListener('click', e => {
+      const pop = document.getElementById('contactPopover');
+      if (pop && pop.classList.contains('open') && !e.target.closest('.contact-wrap')) {
+        closeContactPopover();
+      }
+    });
+
     window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeContactPopover();
+      }
       const open = document.getElementById('caseStudyModalBackdrop').classList.contains('open');
       if (!open) return;
       const activeTag = document.activeElement ? document.activeElement.tagName : '';
@@ -1400,8 +1464,7 @@
         if (e.key === 'ArrowLeft') { e.preventDefault(); stepProject(-1); }
         else if (e.key === 'ArrowRight') { e.preventDefault(); stepProject(1); }
         else if (e.key === '1') switchSplitTab('brief');
-        else if (e.key === '2') switchSplitTab('arch');
-        else if (e.key === '3') switchSplitTab('archive');
+        else if (e.key === '2' || e.key === '3') switchSplitTab('archive');
       }
     });
 
@@ -1515,17 +1578,22 @@
 
     let suppressScrollSyncUntil = 0;
 
-    window.focusOverviewSector = function (idx, scrollIntoView = false) {
+    window.focusOverviewSector = function (idx, scrollIntoView = false, instant = false) {
       const count = ATLAS_MAP.stops.length;
       const safeIdx = ((idx % count) + count) % count;
       highlightAtlasUI(safeIdx);
       targetAtlasT = ATLAS_MAP.stops[safeIdx].t;
-      if (!atlasRaf) atlasRaf = requestAnimationFrame(stepAtlasGlide);
+      if (instant) {
+        curAtlasT = targetAtlasT;
+        renderAtlasFrame(curAtlasT);
+      } else if (!atlasRaf) {
+        atlasRaf = requestAnimationFrame(stepAtlasGlide);
+      }
       if (scrollIntoView) {
-        suppressScrollSyncUntil = performance.now() + 720;
+        suppressScrollSyncUntil = performance.now() + (instant ? 320 : 720);
         const stopEls = document.querySelectorAll('.stops-track > .stop:not(.loop-tail)');
         if (stopEls[safeIdx]) {
-          stopEls[safeIdx].scrollIntoView({ behavior: 'smooth', block: window.innerWidth < 980 ? 'start' : 'nearest' });
+          stopEls[safeIdx].scrollIntoView({ behavior: instant ? 'instant' : 'smooth', block: 'start' });
         }
       }
     };
@@ -1626,11 +1694,10 @@
       return count > 0;
     }
 
-    /* Desktop-only edge companions keep mobile dock 100% clear */
+    /* Desktop-only edge companion keeps mobile dock and primary CTAs 100% clear */
     function syncDesktopOnlyPals() {
       const desk = window.innerWidth >= 760;
       let scrolly = document.getElementById('deskScrollyPal');
-      let pip = document.getElementById('deskPipPal');
       if (desk) {
         if (!scrolly) {
           scrolly = document.createElement('piix-pal');
@@ -1638,22 +1705,12 @@
           scrolly.setAttribute('pal', 'scrolly');
           scrolly.setAttribute('color', '#FFFFFF');
           scrolly.setAttribute('side', 'bottom');
-          scrolly.setAttribute('scale', '2');
+          scrolly.setAttribute('scale', '1.85');
           scrolly.setAttribute('aria-hidden', 'true');
           document.body.appendChild(scrolly);
         }
-        if (!pip) {
-          pip = document.createElement('piix-pal');
-          pip.id = 'deskPipPal';
-          pip.setAttribute('pal', 'pip');
-          pip.setAttribute('on', '#stop-garage .cta .btn.primary');
-          pip.setAttribute('scale', '2');
-          pip.setAttribute('aria-hidden', 'true');
-          document.body.appendChild(pip);
-        }
       } else {
         if (scrolly) scrolly.remove();
-        if (pip) pip.remove();
       }
       setTimeout(syncMonochromePals, 180);
     }
@@ -1669,7 +1726,7 @@
 
     new MutationObserver(() => {
       if (!document.documentElement.classList.contains('still-mode')) return;
-      document.querySelectorAll('piix-pal[on*="#circuitAtlas"], piix-pal[on*="#stop-perception"], piix-pal[on*="footer"]').forEach(el => {
+      document.querySelectorAll('piix-pal[on]').forEach(el => {
         if (!el.dataset.remounted) {
           const fresh = el.cloneNode(true);
           fresh.dataset.remounted = '1';

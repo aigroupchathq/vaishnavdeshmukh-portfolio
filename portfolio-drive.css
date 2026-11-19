@@ -6,9 +6,9 @@
   --hair2: rgba(255, 255, 255, 0.28);
   --text: #FFFFFF;
   --sec: #A1A1AA;
-  --muted: #71717A;
+  --muted: #8E8E98;
   --display: "Comfortaa", "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --sans: "Comfortaa", "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --r: 10px;
@@ -121,7 +121,13 @@ button {
   top: 0;
   z-index: 60;
   background: rgba(0, 0, 0, 0.90);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.still-mode .top {
+  background: #000000;
+  border-bottom-color: rgba(255, 255, 255, 0.11);
 }
 
 .top-row {
@@ -133,15 +139,19 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  position: relative;
 }
 
 .brand {
   font-family: var(--display);
   font-weight: 700;
   font-size: 14.5px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: #FFFFFF;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .top-right {
@@ -157,7 +167,10 @@ button {
   color: var(--sec);
   cursor: pointer;
   white-space: nowrap;
-  padding: 6px 2px;
+  padding: 6px 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   transition: color 0.18s ease;
 }
 .hdr-link:hover {
@@ -169,7 +182,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 18px;
   border-radius: 999px;
   font-family: var(--sans);
@@ -203,16 +216,81 @@ button {
   background: rgba(255, 255, 255, 0.06);
 }
 .btn.sm {
-  min-height: 34px;
-  padding: 0 14px;
+  min-height: 36px;
+  padding: 0 15px;
   font-size: 12.5px;
+}
+
+/* Anchored Contact Popover (Copy Email + Mailto + GitHub) */
+.contact-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.contact-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(296px, calc(100vw - 24px));
+  background: #070709;
+  border: 1px solid var(--hair2);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.92), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.22s var(--ease), visibility 0s linear 0.18s;
+}
+.contact-popover.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity 0.18s ease, transform 0.22s var(--ease), visibility 0s linear 0s;
+}
+.contact-pop-lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.contact-pop-addr {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #FFFFFF;
+  padding: 8px 10px;
+  background: #000000;
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: all;
+}
+.contact-pop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.contact-pop-actions .btn {
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 12px;
 }
 
 @media (max-width: 759px) {
   .top-row {
-    min-height: 52px;
-    padding: 0 16px;
-    gap: 10px;
+    min-height: 56px;
+    padding: 0 14px;
+    gap: 8px;
   }
   .brand {
     font-size: 13.5px;
@@ -221,7 +299,7 @@ button {
     text-overflow: ellipsis;
   }
   .top-right {
-    gap: 12px;
+    gap: 8px;
     flex-shrink: 0;
   }
   #modeToggleBtn {
@@ -229,11 +307,21 @@ button {
   }
   .hdr-link {
     font-size: 12.5px;
+    padding: 0 6px;
   }
   .btn.sm {
-    min-height: 32px;
-    padding: 0 13px;
+    min-height: 44px;
+    padding: 0 14px;
     font-size: 12px;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+  }
+  .btn.ghost.sm {
+    border: 1px solid var(--hair2);
+    background-clip: border-box;
+  }
+  .contact-pop-actions .btn {
+    min-height: 44px;
   }
 }
 
@@ -269,44 +357,115 @@ button {
   }
 }
 
-/* ---------- Ignition Curtain & Transition Veil ---------- */
+/* ---------- Architectural Circuit Ignition Curtain ---------- */
 .ignition {
   position: fixed;
   inset: 0;
   z-index: 120;
-  background: #000000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transition: opacity 0.56s var(--ease);
+}
+.ignition-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(255, 255, 255, 0.18);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+  transition: opacity 0.36s ease;
+}
+.ignition-corner.tl {
+  top: clamp(16px, 3vw, 32px);
+  left: clamp(16px, 3vw, 32px);
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.ignition-corner.tr {
+  top: clamp(16px, 3vw, 32px);
+  right: clamp(16px, 3vw, 32px);
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+.ignition-corner.bl {
+  bottom: clamp(16px, 3vw, 32px);
+  left: clamp(16px, 3vw, 32px);
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+.ignition-corner.br {
+  bottom: clamp(16px, 3vw, 32px);
+  right: clamp(16px, 3vw, 32px);
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+.ignition-core {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  font: 500 11px/1 var(--mono);
-  letter-spacing: 0.22em;
+  gap: 16px;
+  transition: transform 0.52s var(--ease), opacity 0.42s ease;
+}
+.ignition-circuit {
+  display: block;
+  width: 76px;
+  height: 106px;
+  overflow: visible;
+}
+.ignition-track-trace {
+  stroke-dasharray: 240 760;
+  stroke-dashoffset: 0;
+  animation: circuitLap 1.7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+@keyframes circuitLap {
+  to { stroke-dashoffset: -1000; }
+}
+.ignition-brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2vw, 1.24rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.ignition-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--sec);
-  transition: opacity 0.55s ease;
-}
-.ignition i {
-  width: 110px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.16);
-  position: relative;
-  overflow: hidden;
-}
-.ignition i::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #FFFFFF;
-  transform: translateX(-100%);
-  animation: loadSweep 1s ease-in-out infinite;
-}
-@keyframes loadSweep {
-  to { transform: translateX(100%); }
+  color: var(--muted);
+  margin-top: -8px;
 }
 .ignition.done {
   opacity: 0;
   pointer-events: none;
+}
+.ignition.done .ignition-core {
+  opacity: 0;
+  transform: translate3d(0, -10px, 0) scale(0.975);
+}
+.ignition.done .ignition-corner {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ignition-track-trace {
+    stroke-dasharray: none;
+    animation: none;
+    stroke-opacity: 0.72;
+  }
+  .ignition,
+  .ignition-core,
+  .ignition-corner {
+    transition-duration: 0.16s;
+  }
+  .ignition.done .ignition-core {
+    transform: none;
+  }
 }
 
 .veil {
@@ -340,7 +499,7 @@ button {
 }
 @media (min-width: 900px) {
   .drive .stop[data-side="right"] {
-    padding-right: clamp(96px, 9.5vw, 175px);
+    padding-right: clamp(152px, 13vw, 220px);
   }
 }
 .drive .stop.last {
@@ -391,14 +550,35 @@ button {
   color: var(--sec);
   margin-bottom: 10px;
 }
+.label.label-with-pal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.atlas-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.contact-pop-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.split-pos-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .card h1,
 .card .h1-mirror {
   font-family: var(--display);
   font-size: clamp(2.05rem, 4.0vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.14;
+  letter-spacing: -0.028em;
   color: #FFFFFF;
 }
 
@@ -406,8 +586,8 @@ button {
   font-family: var(--display);
   font-size: clamp(1.38rem, 2.35vw, 1.92rem);
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
   color: #FFFFFF;
   margin-bottom: 10px;
 }
@@ -438,12 +618,12 @@ button {
   }
   .drive .stop .card {
     width: 100%;
-    top: 48svh;
+    top: 50svh;
     padding: 4px 0;
   }
   .drive .stop .card::before {
-    inset: -20px -16px -24px -16px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.92) 38%, rgba(0, 0, 0, 0.96) 100%);
+    inset: -26px -16px -24px -16px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.78) 16%, rgba(0, 0, 0, 0.94) 44%, #000000 100%);
   }
   .drive .stop[data-side="right"] .card {
     margin-left: 0;
@@ -472,9 +652,9 @@ button {
     gap: 8px 10px;
   }
   .cta .btn {
-    min-height: 40px;
-    padding: 0 15px;
-    font-size: 12px;
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 12.5px;
   }
   .ghost-list {
     margin-top: 8px;
@@ -743,7 +923,8 @@ button {
   flex-direction: row-reverse;
   align-items: center;
   gap: 10px;
-  min-height: 22px;
+  min-height: 32px;
+  padding: 4px 2px;
   font-family: var(--mono);
   font-size: 11px;
   color: var(--sec);
@@ -796,21 +977,36 @@ button {
   display: none;
 }
 @media (max-width: 759px) {
+  body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(78px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 22%, rgba(0, 0, 0, 0.56) 64%, transparent 100%);
+    pointer-events: none;
+    z-index: 70;
+    transition: opacity 0.2s ease;
+  }
+  body.sheet-open::after {
+    opacity: 0;
+  }
   .mobile-dock {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    bottom: max(12px, env(safe-area-inset-bottom));
+    bottom: max(10px, env(safe-area-inset-bottom));
     z-index: 75;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 4px;
-    max-width: calc(100vw - 16px);
+    gap: 4px;
+    padding: 3px;
+    max-width: calc(100vw - 12px);
     background: #08080B;
     border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: 999px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.88);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.90);
     transition: opacity 0.2s ease, transform 0.22s var(--ease);
   }
   body.sheet-open .mobile-dock {
@@ -826,8 +1022,9 @@ button {
     padding: 2px;
   }
   .dock-mode-btn {
-    min-height: 36px;
-    padding: 0 13px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 12px;
     border-radius: 999px;
     font-family: var(--sans);
     font-size: 12px;
@@ -852,19 +1049,19 @@ button {
   .dock-step {
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: 0;
     min-width: 0;
   }
   .dock-arrow {
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 999px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
     font-family: var(--sans);
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.15s ease;
@@ -873,13 +1070,13 @@ button {
     background: rgba(255, 255, 255, 0.14);
   }
   .dock-sector {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 600;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
     letter-spacing: 0.04em;
     color: #FFFFFF;
     white-space: nowrap;
-    padding: 0 3px;
+    padding: 0 2px;
   }
 }
 
@@ -946,7 +1143,30 @@ button {
   }
   .still-mode .circuit-atlas {
     position: sticky;
-    top: 80px;
+    top: 76px;
+    max-height: calc(100dvh - 94px);
+    display: flex;
+    flex-direction: column;
+  }
+  .still-mode .atlas-head,
+  .still-mode .atlas-elev,
+  .still-mode .atlas-foot {
+    flex-shrink: 0;
+  }
+  .still-mode .atlas-stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .still-mode .atlas-svg {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+  .still-mode .stop {
+    scroll-margin-top: 76px;
   }
 }
 
@@ -1035,7 +1255,7 @@ button {
 .atlas-lbl-sub {
   font-family: var(--mono);
   font-size: 9px;
-  fill: #71717A;
+  fill: #8E8E98;
   letter-spacing: 0.08em;
   transition: fill 0.2s ease;
 }
@@ -1062,7 +1282,7 @@ button {
 }
 
 .atlas-elev {
-  padding: 10px 14px 8px;
+  padding: 8px 14px 6px;
   border-bottom: 1px solid var(--hair);
   background: #030305;
 }
@@ -1087,15 +1307,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px 14px;
-  padding: 12px 16px;
+  padding: 10px 16px;
 }
 .atlas-telemetry {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--sec);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 .atlas-telemetry strong {
   color: #FFFFFF;
@@ -1142,18 +1366,25 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   padding-bottom: 12px;
   margin-bottom: 14px;
   border-bottom: 1px solid var(--hair);
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
   color: var(--muted);
 }
 .station-coord {
   color: var(--sec);
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.station-coord .coord-extra {
+  color: var(--muted);
 }
 .station-jump {
   font-family: var(--sans);
@@ -1161,11 +1392,13 @@ button {
   font-weight: 500;
   letter-spacing: 0.01em;
   color: #FFFFFF;
-  padding: 5px 12px;
+  padding: 6px 12px;
+  min-height: 32px;
   border: 1px solid var(--hair2);
   border-radius: 999px;
   cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 .station-jump:hover,
@@ -1184,7 +1417,7 @@ button {
   overflow-wrap: break-word;
 }
 .still-mode .stop {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 76px;
 }
 .still-mode .ghost-row {
   padding-left: 4px;
@@ -1196,20 +1429,20 @@ button {
     background: #000000;
   }
   .still-mode main {
-    padding: 10px 14px 32px;
+    padding: 10px 14px calc(96px + env(safe-area-inset-bottom));
     gap: 16px;
   }
   .still-mode .circuit-atlas {
     position: sticky;
-    top: 52px;
+    top: 56px;
     z-index: 45;
   }
   .atlas-collapse-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 36px;
-    padding: 0 13px;
+    min-height: 44px;
+    padding: 0 14px;
     border: 1px solid var(--hair2);
     border-radius: 999px;
     font-family: var(--sans);
@@ -1223,14 +1456,14 @@ button {
     display: none;
   }
   .atlas-head {
-    padding: 6px 12px;
+    padding: 4px 12px;
     font-size: 11px;
   }
   .atlas-stage {
     padding: 2px;
   }
   .atlas-svg {
-    max-height: 180px;
+    max-height: 170px;
   }
   .atlas-lbl-code {
     font-size: 14.5px;
@@ -1243,7 +1476,7 @@ button {
     display: none;
   }
   .atlas-foot {
-    padding: 7px 12px;
+    padding: 6px 12px;
     flex-wrap: nowrap;
     gap: 8px;
   }
@@ -1266,16 +1499,25 @@ button {
   }
   .still-mode .stop {
     padding: 14px 14px 18px !important;
-    scroll-margin-top: 332px;
+    scroll-margin-top: 326px;
   }
   .station-bar {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     margin-bottom: 10px;
   }
   .station-coord {
     font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  .station-coord .coord-extra {
+    display: none;
+  }
+  .station-jump {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 11px;
   }
 }
 
@@ -1335,17 +1577,19 @@ footer.bottom {
 }
 @media (max-width: 759px) {
   .foot-inner {
-    padding: 24px 16px calc(92px + env(safe-area-inset-bottom));
+    padding: 24px 16px calc(96px + env(safe-area-inset-bottom));
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
   .foot-links {
-    gap: 8px 18px;
+    gap: 4px 14px;
   }
   .foot-links a,
   .foot-links button {
-    min-height: 36px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 4px;
     display: inline-flex;
     align-items: center;
   }
@@ -1545,6 +1789,26 @@ footer.bottom {
   min-height: 0;
   overflow-y: auto;
   padding: clamp(18px, 2.5vw, 30px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+.split-body::-webkit-scrollbar {
+  width: 6px;
+}
+.split-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.split-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.20);
+  border-radius: 999px;
+}
+.split-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.36);
+}
+.modal-backdrop[data-tab="archive"] .split-body {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%);
+  padding-bottom: 34px;
 }
 
 .split-panel {
@@ -1560,9 +1824,25 @@ footer.bottom {
   font-family: var(--display);
   font-size: clamp(1.3rem, 2.1vw, 1.78rem);
   font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
   color: #FFFFFF;
+}
+
+.split-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--hair);
+  padding-top: 14px;
+  margin-top: 4px;
+}
+.split-links-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .split-copy {
@@ -1807,7 +2087,7 @@ footer.bottom {
   }
   .split-close-btn {
     min-width: 44px;
-    min-height: 40px;
+    min-height: 44px;
     padding: 0 12px;
     justify-content: center;
   }
@@ -1824,7 +2104,11 @@ footer.bottom {
     padding: 10px 16px calc(12px + env(safe-area-inset-bottom));
   }
   .step-btn {
-    min-height: 40px;
+    min-height: 44px;
     padding: 0 14px;
+  }
+  .filter-btn {
+    min-height: 40px;
+    padding: 0 13px;
   }
 }
